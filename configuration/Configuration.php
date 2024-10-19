@@ -5,9 +5,6 @@ include_once("helper/IncludeFilePresenter.php");
 include_once("helper/Router.php");
 include_once("helper/MustachePresenter.php");
 
-include_once("model/PokedexModel.php");
-include_once("controller/PokedexController.php");
-
 include_once("controller/UsuarioController.php");
 include_once("model/UsuarioModel.php");
 
@@ -19,18 +16,18 @@ class Configuration
     {
     }
 
-    public function getPokedexController(){
+    /*public function getPokedexController(){
         return new PokedexController($this->getPokedexModel(), $this->getPresenter());
-    }
+    }*/
 
     public function getUsuarioController(){
         return new UsuarioController($this->getUsuarioModel(), $this->getPresenter());
     }
 
-    private function getPokedexModel()
+    /*private function getPokedexModel()
     {
         return new PokedexModel($this->getDatabase());
-    }
+    }*/
 
 
     private function getPresenter()
@@ -53,7 +50,7 @@ class Configuration
 
     public function getRouter()
     {
-        return new Router($this, "getPokedexController", "list");
+        return new Router($this, "getUsuarioController", "mostrarRegisterView");
     }
 
     private function getUsuarioModel()
