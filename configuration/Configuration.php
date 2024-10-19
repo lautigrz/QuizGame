@@ -53,7 +53,7 @@ class Configuration
 
     public function getRouter()
     {
-        return new Router($this, "getPokedexController", "list");
+        return new Router($this, "getUsuarioController", "login");
     }
 
     private function getUsuarioModel()

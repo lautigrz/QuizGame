@@ -2,7 +2,6 @@
 
 class UsuarioController
 {
-
     private $model;
     private $presenter;
 
@@ -11,19 +10,40 @@ class UsuarioController
         $this->model = $model;
         $this->presenter = $presenter;
     }
+    public function login()
+    {
+        $data = [];
+        $this->setDatosError($data);
+        $this->presenter->show('login', $data);
+    }
 
     public function auth()
-    {
-        $user = $_POST['username'];
-        $pass = $_POST['password'];
+{
+    $user = $_POST['email'];
+    $pass = $_POST['password'];
 
-        $validation = $this->model->validate($user, $pass);
-
-        if ($validation) {
-            $_SESSION['user'] = $user;
+    $usuario = $this->model->validate($user, $pass);
+    var_dump($usuario);
+    if ($usuario) {
+        if($usuario[0]['estado'] == 1){
+            $_SESSION['user'] = $usuario;
+            header('Location: /quizgame/pokedex/list');
+            exit();
+        } else {
+            $_SESSION['error'] = "Verifica tu bandeja de correo y verifica tu cuenta";
+            header('Location: /quizgame/login');
+            exit();
         }
-
-        header('location: /pokedex');
-        exit();
+    } else {
+        $_SESSION['error'] = "Usuario o contraseña no encontrado";
+        header('Location: /quizgame/login');
+        exit();  
     }
+}
+public function setDatosError(&$data){
+    if(!empty($_SESSION['error'])){
+        $data["error"] = $_SESSION['error'];
+        unset( $_SESSION['error']);
+    }
+}
 }

@@ -11,14 +11,14 @@ class UsuarioModel
 
     public function validate($user, $pass)
     {
-        $sql = "SELECT 1 
+        $sql = "SELECT *
                 FROM usuario 
-                WHERE username = '" . $user. "' 
+                WHERE email = '" . $user. "' 
                 AND password = '" . $pass . "'";
 
         $usuario = $this->database->query($sql);
 
-        return sizeof($usuario) == 1;
+        return $usuario;
     }
 
 }
