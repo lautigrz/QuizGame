@@ -12,21 +12,6 @@ class UsuarioController
         $this->presenter = $presenter;
     }
 
-    public function auth()
-    {
-        $user = $_POST['username'];
-        $pass = $_POST['password'];
-
-        $validation = $this->model->validate($user, $pass);
-
-        if ($validation) {
-            $_SESSION['user'] = $user;
-        }
-
-        header('location: /pokedex');
-        exit();
-    }
-
     public function mostrarRegisterView()
     {
         $this->presenter->show('register', "");
@@ -42,16 +27,13 @@ class UsuarioController
         $usuario = $_POST['usuario'];
         $genero = $_POST['genero'];
         $email = $_POST['email'];
+        $seRegistro = $this->model->registrarUsuario($nombre, $apellido, $usuario, $genero, $email, $pass, 0,0);
         $pass = $_POST['password'];
-        $token = rand(100000, 999999);
-
-        $this->model->registrarUsuario($nombre, $apellido, $usuario, $genero, $email, $pass, 0, $token);
-        $this->crearArchivoConToken($token);
-
-
-
-        $this->presenter->show('validacionToken', "");
-        exit();
+        if($seRegistro == true){
+            $this->model->enviarCorreoVerificacion($email,$nombre,$usuario);
+           # $this->presenter->show('validacionToken', "");
+        
+        }
     }
 
 
@@ -61,14 +43,16 @@ class UsuarioController
         fwrite($archivo," - " . $token);
         fclose($archivo);
     }
-    public function validarToken(){
 
-        $token = $_GET['token'];
-        if ($token === $_SESSION['token']) {
-            echo "Cuenta verificada";
-            return $this->presenter->show('login', "");
+    public function auth()
+    {
+        if(isset($_GET['token']) && isset($_GET['usuario'])){
+            $token = $_GET['token'];
+            $usuario = $_GET['usuario'];
+            $this->model->activarUsuario($usuario,$token);
+            echo "activado";
+        } else {  
         }
-
     }
 
 }

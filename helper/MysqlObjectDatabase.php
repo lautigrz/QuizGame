@@ -6,24 +6,29 @@ class MysqlObjectDatabase
     {
         $this->conn = new mysqli($host, $username, $password, $database, $port);
     }
-    /*class MysqlObjectDatabase {
-    private $connection;
 
-    public function __construct($host, $user, $password, $database) {
-        $this->connection = new mysqli($host, $user, $password, $database);
-
-        if ($this->connection->connect_error) {
-            die("Connection failed: " . $this->connection->connect_error);
-        }
-    }
-
-
-}*/
-
-    public function query($sql){
+    public function query($sql) {
         $result = $this->conn->query($sql);
-        return $result;
+        if ($result === false) {
+            return false; 
+        }
+    
+        if (preg_match('/^SELECT/i', $sql)) {
+            $data = [];
+            while ($row = $result->fetch_assoc()) {
+                $data[] = $row;
+            }
+            return $data;
+        }
+    
+        if (preg_match('/^INSERT/i', $sql)) {
+            return $this->conn->insert_id;
+        }
+    
+        
+        return true;
     }
+    
 
 
     public function execute($sql){

@@ -1,4 +1,7 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 include_once("helper/MysqlDatabase.php");
 include_once("helper/MysqlObjectDatabase.php");
 include_once("helper/IncludeFilePresenter.php");
@@ -9,6 +12,10 @@ include_once("controller/UsuarioController.php");
 include_once("model/UsuarioModel.php");
 
 include_once('vendor/mustache/src/Mustache/Autoloader.php');
+include_once('vendor/PHPMailer/src/Exception.php');
+include_once('vendor/PHPMailer/src/PHPMailer.php');
+include_once('vendor/PHPMailer/src/SMTP.php');
+
 
 class Configuration
 {
@@ -21,7 +28,8 @@ class Configuration
     }*/
 
     public function getUsuarioController(){
-        return new UsuarioController($this->getUsuarioModel(), $this->getPresenter());
+        $model = new UsuarioModel($this->getDatabase(), $this->getMailer());
+        return new UsuarioController($model, $this->getPresenter());
     }
 
     /*private function getPokedexModel()
@@ -55,6 +63,21 @@ class Configuration
 
     private function getUsuarioModel()
     {
-        return new UsuarioModel($this->getDatabase());
+        return new UsuarioModel($this->getDatabase(), $this->getMailer());
+    }
+
+    public function getMailer(){
+        $config = parse_ini_file('configuration/config.ini');
+        $mail = new PHPMailer(true);
+        $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+        $mail->isSMTP();                                            //Send using SMTP
+        $mail->Host       = $config['mailerhost'];                     //Set the SMTP server to send through
+        $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+        $mail->Username   = $config['mailerusername'];                     //SMTP username
+        $mail->Password   = $config['mailerpassword'];                               //SMTP password
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+        $mail->Port       = $config['mailerport'];
+
+        return $mail;
     }
 }
