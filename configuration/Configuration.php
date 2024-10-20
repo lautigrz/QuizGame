@@ -70,7 +70,7 @@ class Configuration
     public function getMailer(){
         $config = parse_ini_file('configuration/config.ini');
         $mail = new PHPMailer(true);
-        $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+        $mail->SMTPDebug = 0;                      //Enable verbose debug output
         $mail->isSMTP();                                            //Send using SMTP
         $mail->Host       = $config['mailerhost'];                     //Set the SMTP server to send through
         $mail->SMTPAuth   = true;                                   //Enable SMTP authentication

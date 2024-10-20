@@ -21,10 +21,6 @@ class UsuarioController
     {
         $this->presenter->show('register', "");
     }
-    public function mostrarValidacionView()
-    {
-        $this->presenter->show('validacionToken', "");
-    }
     public function register(){
 
         $nombre = $_POST['nombre'];
@@ -32,13 +28,21 @@ class UsuarioController
         $usuario = $_POST['usuario'];
         $genero = $_POST['genero'];
         $email = $_POST['email'];
-        $seRegistro = $this->model->registrarUsuario($nombre, $apellido, $usuario, $genero, $email, $pass, 0,0);
         $pass = $_POST['password'];
-        if($seRegistro == true){
-            $this->model->enviarCorreoVerificacion($email,$nombre,$usuario);
-           # $this->presenter->show('validacionToken', "");
+
+        $usurioExistente = $this->model->buscarUsuario($usuario);
         
+        if($usuarioExistente){
+            $_SESSION['error'] = "Usuario existente";
         }
+        else{
+            $seRegistro = $this->model->registrarUsuario($nombre, $apellido, $usuario, $genero, $email, $pass, 0,0);
+            $this->model->enviarCorreoVerificacion($email,$nombre,$usuario);
+            $_SESSION['error'] = "Te hemos enviado un correo para verificar tu cuenta";
+            header('Location: /quizgame/login');
+            exit();
+        }
+      
     }
 
 
@@ -55,9 +59,41 @@ class UsuarioController
             $token = $_GET['token'];
             $usuario = $_GET['usuario'];
             $this->model->activarUsuario($usuario,$token);
-            echo "activado";
+            header('Location: /quizgame/login');
+            exit();
         } else {  
         }
     }
 
-}
+    public function procesarUsuario(){
+        $user = $_POST['email'];
+        $pass = $_POST['password'];
+    
+        $usuario = $this->model->validate($user, $pass);
+        if ($usuario) {
+            if($usuario[0]['estado'] == 1){
+                $_SESSION['user'] = $usuario;
+                header('Location: /quizgame/pokedex/list');
+                exit();
+            } else {
+                $_SESSION['error'] = "Verifica tu bandeja de correo y verifica tu cuenta";
+                header('Location: /quizgame/login');
+                exit();
+            }
+        } else {
+            $_SESSION['error'] = "Usuario o contraseña no encontrado";
+            header('Location: /quizgame/login');
+            exit();  
+        }
+    }
+    
+    public function setDatosError(&$data){
+        if(!empty($_SESSION['error'])){
+            $data["error"] = $_SESSION['error'];
+            unset( $_SESSION['error']);
+        }
+    }
+  
+    }
+
+
