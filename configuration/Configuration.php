@@ -23,19 +23,10 @@ class Configuration
     {
     }
 
-    /*public function getPokedexController(){
-        return new PokedexController($this->getPokedexModel(), $this->getPresenter());
-    }*/
-
     public function getUsuarioController(){
         $model = new UsuarioModel($this->getDatabase(), $this->getMailer());
         return new UsuarioController($model, $this->getPresenter());
     }
-
-    /*private function getPokedexModel()
-    {
-        return new PokedexModel($this->getDatabase());
-    }*/
 
 
     private function getPresenter()
