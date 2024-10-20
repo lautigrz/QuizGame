@@ -2,7 +2,6 @@
 
 class UsuarioController
 {
-
     private $model;
     private $presenter;
 
@@ -10,6 +9,12 @@ class UsuarioController
     {
         $this->model = $model;
         $this->presenter = $presenter;
+    }
+    public function login()
+    {
+        $data = [];
+        $this->setDatosError($data);
+        $this->presenter->show('login', $data);
     }
 
     public function mostrarRegisterView()

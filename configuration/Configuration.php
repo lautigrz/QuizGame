@@ -58,7 +58,8 @@ class Configuration
 
     public function getRouter()
     {
-        return new Router($this, "getUsuarioController", "mostrarRegisterView");
+        return new Router($this, "getUsuarioController", "login");
+
     }
 
     private function getUsuarioModel()

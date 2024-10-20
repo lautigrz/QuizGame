@@ -1,0 +1,71 @@
+<!-- Section: Design Block -->
+<section class=" bg-dark">
+
+  <!-- Background image -->
+  <div class="p-5 bg-image" style="
+        background-image: url('https://th.bing.com/th/id/R.a9b43019faa05e77eee142859d328f97?rik=TCnkwAe0niPaXQ&pid=ImgRaw&r=0&sres=1&sresct=1');
+        height: 300px;
+        "></div>
+  <!-- Background image -->
+
+
+  <div class="card mx-auto shadow-5-strong bg-body-tertiary " style="
+        margin-top: -100px;
+        backdrop-filter: blur(30px);
+         width:70%">
+    <div class="card-body py-5 px-md-9 bg-dark text-light ">
+
+      <div class="row d-flex justify-content-center">
+        <div class="col-lg-5">
+               {{#error}}
+            <div class="alert alert-danger p-2" role="alert">
+                <span>{{error}}</span>
+            </div>
+        {{/error}}
+          <h2 class="fw-bold mb-3">Iniciar session</h2>
+
+          <form action="/quizgame/usuario/auth" method="post" >
+            <!-- Email input -->
+       
+            <div class="form-outline" data-mdb-input-init>
+            <input type="email" id="typeEmail" name="email" class="form-control" />
+            <label class="form-label text-white" for="typeEmail">Email</label>
+          </div>
+
+            <!-- Password input -->
+            <div data-mdb-input-init class="form-outline mb-2 mt-4">
+          <input type="password" id="form2Example2" name="password" class="form-control" />
+          <label class="form-label text-white" for="form2Example2">Contraseña</label>
+        </div>
+            <a href="" class="text-white">Registrarme</a>
+            <!-- Submit button -->
+            <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-2 w-100">
+             Ingresar
+            </button>
+       
+            <!-- Register buttons -->
+            <div class="text-center">
+              <p>or sign up with:</p>
+              <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-link btn-floating mx-1">
+                <i class="fab fa-facebook-f"></i>
+              </button>
+
+              <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-link btn-floating mx-1">
+                <i class="fab fa-google"></i>
+              </button>
+
+              <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-link btn-floating mx-1">
+                <i class="fab fa-twitter"></i>
+              </button>
+
+              <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-link btn-floating mx-1">
+                <i class="fab fa-github"></i>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Section: Design Block -->

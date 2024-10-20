@@ -17,7 +17,7 @@ class PokedexController
         if (isset($_SESSION['user'])) {
             $data['user'] = $_SESSION['user'];
         }
-        $data['pokemons'] = $this->model->getPokemons();
+        $data = [];
         $this->presenter->show('pokemon', $data);
     }
 
