@@ -3,31 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokedex</title>
-     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.0/mdb.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/quizgame/public/css/style.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-   
+    <title>quizgame</title>
+    </head>
 </body>
-</head>
-<body>
-
 <!-- Header -->
 <header class="w3-container w3-teal w3-padding">
- <!--   <h1 class="w3-left">Pokedex</h1>
->>>>>>> feauture/login
-    {{#user}}
-    Hola {{user}}!
-    {{/user}}
-    {{^user}}
-    <form class="w3-right w3-margin-top" method="POST" action="/usuario/auth">
-        <input class="w3-input w3-border w3-margin-right" type="text" name="username" placeholder="Usuario" required>
-        <input class="w3-input w3-border w3-margin-right" type="password" name="password" placeholder="Contraseña" required>
-        <button class="w3-button w3-black" type="submit">Login</button>
-    </form>
-    {{/user}} -->
+ <div class="header">
+        <!-- Logo de la página -->
+        <!-- <img src="{{pageLogoUrl}}" alt="Logo de la página" class="header-logo"> -->
+
+        <!-- Enlace al perfil de usuario con el texto "Usuario" -->
+        <a href="/quizgame/usuario/mostrarUserView" class="user-link">Usuario</a>
+    </div>
 </header>
+
+<body>
+
+
 
  
 

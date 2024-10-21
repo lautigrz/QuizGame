@@ -12,13 +12,31 @@ class UsuarioController
     }
     public function login()
     {
+        echo "<script>console.log('pasa por controller/UsuarioController.php/login');</script>";
+
         $data = [];
         $this->setDatosError($data);
         $this->presenter->show('login', $data);
     }
 
+    public function mostrarUserView()
+    {
+        echo "<script>console.log('pasa por controller/UsuarioController.php/mostrarUserView);</script>";
+
+        $this->presenter->show('user', "");
+        
+    }
+
+    public function mostrarLobbyView()
+    {
+        $this->presenter->show('lobby', "");
+
+    }
+
     public function mostrarRegisterView()
     {
+        echo "<script>console.log('pasa por controller/UsuarioController.php/mostrarRegisterView');</script>";
+
         $this->presenter->show('register', "");
     }
     public function register(){
@@ -73,7 +91,7 @@ class UsuarioController
         if ($usuario) {
             if($usuario[0]['estado'] == 1){
                 $_SESSION['user'] = $usuario;
-                header('Location: /quizgame/pokedex/list');
+                header('Location: /quizgame/usuario/mostrarUserView');
                 exit();
             } else {
                 $_SESSION['error'] = "Verifica tu bandeja de correo y verifica tu cuenta";
