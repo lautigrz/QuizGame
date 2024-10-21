@@ -1,17 +1,98 @@
+<!--
+<body>
+<style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        font-family: Arial, sans-serif;
+    }
+    .user-profile {
+        text-align: center;
+        max-width: 400px;
+        width: 100%;
+        border: 1px solid #ccc;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: #f9f9f9;
+    }
+    .user-logo {
+        display: block;
+        margin: 0 auto 20px;
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+    h2, p {
+        margin: 10px 0;
+    }
+    .label {
+        font-weight: bold;
+    }
+</style>
+
+    <div class="user-profile">
+    -->
+        <!--
+        {{#user}}
+         Logo del usuario
+        <img src="/quizgame/public/imagenes/perfil/{{id}}" alt="{{user}}" class="user-logo">
+-->
+        <!-- Username -->
+        <h2>{{user}}</h2>
+
+                <!-- Nombre y Apellido
+        <p><span class="label">Nombre y Apellido:</span></p>
+        <p>{{nombre}}</p>
+-->
+        <!-- Sexo
+        <p><span class="label">Sexo:</span></p>
+        <p>{{sexo}}</p>
+-->
+        <!-- Año de nacimiento
+        <p><span class="label">Año de Nacimiento:</span></p>
+        <p>{{anoNacimiento}}</p>
+-->
+        <!-- Email
+        <p><span class="label">Email:</span></p>
+        <p>{{email}}</p>
+-->
+        <!-- Tipo de Usuario
+        <p><span class="label">Tipo de Usuario:</span></p>
+        <p>{{tipoUsuario}}</p>
+-->
+        <!-- Cantidad de Partidas Jugadas
+        <p><span class="label">Cantidad de Partidas Jugadas:</span></p>
+        <p>{{cantidadPartidas}}</p>
+-->
+        <!-- Puntaje Total
+        <p><span class="label">Puntaje Total:</span></p>
+        <p>{{puntajeTotal}}</p>
+        {{/user}}
+    </div>
+
+</body>
+-->
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pantalla de Usuario</title>
+    <title>Perfil de Usuario</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
+            background-image: url('https://th.bing.com/th/id/R.a9b43019faa05e77eee142859d328f97?rik=TCnkwAe0niPaXQ&pid=ImgRaw&r=0&sres=1&sresct=1'); /* Cambia esta URL por tu imagen de fondo */
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
             margin: 0;
-            font-family: Arial, sans-serif;
         }
         .user-profile {
             text-align: center;
@@ -20,7 +101,8 @@
             border: 1px solid #ccc;
             padding: 20px;
             border-radius: 10px;
-            background-color: #f9f9f9;
+            background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco semi-transparente */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         .user-logo {
             display: block;
@@ -39,17 +121,17 @@
     </style>
 </head>
 <body>
-
-    <div class="user-profile">
+<div class="user-profile">
+    {{#user}}
         <!-- Logo del usuario -->
-        <img src="{{logoUrl}}" alt="Logo del usuario" class="user-logo">
+        <img src="/quizgame/public/imagenes/perfil/{{id}}" alt="{{user}}" class="user-logo">
 
         <!-- Username -->
-        <h2>{{username}}</h2>
+        <h2>{{user}}</h2>
 
         <!-- Nombre y Apellido -->
         <p><span class="label">Nombre y Apellido:</span></p>
-        <p>{{nombreApellido}}</p>
+        <p>{{nombre}}</p>
 
         <!-- Sexo -->
         <p><span class="label">Sexo:</span></p>
@@ -74,7 +156,13 @@
         <!-- Puntaje Total -->
         <p><span class="label">Puntaje Total:</span></p>
         <p>{{puntajeTotal}}</p>
-    </div>
+    {{/user}}
+</div>
 
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
+
+

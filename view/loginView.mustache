@@ -1,4 +1,7 @@
 <!-- Section: Design Block -->
+<style>
+
+</style>
 <section class=" bg-dark">
 
   <!-- Background image -->
@@ -22,27 +25,27 @@
                 <span>{{error}}</span>
             </div>
         {{/error}}
-          <h2 class="fw-bold mb-3">Iniciar session</h2>
+          <h2 class="fw-bold mb-3">Iniciar sesion</h2>
 
           <form action="/quizgame/usuario/procesarUsuario" method="post" >
-            <!-- Email input -->
+
        
             <div class="form-outline" data-mdb-input-init>
             <input type="email" id="typeEmail" name="email" class="form-control" />
             <label class="form-label text-white" for="typeEmail">Email</label>
           </div>
 
-            <!-- Password input -->
+
             <div data-mdb-input-init class="form-outline mb-2 mt-4">
           <input type="password" id="form2Example2" name="password" class="form-control" />
           <label class="form-label text-white" for="form2Example2">Contraseña</label>
         </div>
             <a href="/quizgame/usuario/mostrarRegisterView" class="text-white">Registrarme</a>
-            <!-- Submit button -->
+
             <button type="submit"  data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-2 w-100">
              Ingresar
             </button>
-            <!-- Register buttons -->
+
             <div class="text-center">
               <p>or sign up with:</p>
               <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-link btn-floating mx-1">

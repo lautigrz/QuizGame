@@ -12,7 +12,7 @@ class UsuarioController
     }
     public function login()
     {
-        echo "<script>console.log('pasa por controller/UsuarioController.php/login');</script>";
+
 
         $data = [];
         $this->setDatosError($data);
@@ -21,10 +21,12 @@ class UsuarioController
 
     public function mostrarUserView()
     {
-        echo "<script>console.log('pasa por controller/UsuarioController.php/mostrarUserView);</script>";
+        $data = [];
+        $this->setDatosError($data);
 
-        $this->presenter->show('user', "");
-        
+        $this->presenter->show('user', $data);
+
+
     }
 
     public function mostrarLobbyView()
@@ -47,14 +49,22 @@ class UsuarioController
         $genero = $_POST['genero'];
         $email = $_POST['email'];
         $pass = $_POST['password'];
+        $fotoPerfil = $_POST['fotoPerfil'];
 
-        $usurioExistente = $this->model->buscarUsuario($usuario);
+        $uploadFileDir = '/quizgame/public/imagenes/perfil/';
+        $dest_path = $uploadFileDir . $fotoPerfil;
+
+        // Mueve el archivo a la carpeta de destino
+        move_uploaded_file($fotoPerfil, $dest_path);
+        $urlFotoPerfil = $uploadFileDir . $fotoPerfil;
+
+        $usuarioExistente = $this->model->buscarUsuario($usuario);
         
         if($usuarioExistente){
             $_SESSION['error'] = "Usuario existente";
         }
         else{
-            $seRegistro = $this->model->registrarUsuario($nombre, $apellido, $usuario, $genero, $email, $pass, 0,0);
+            $seRegistro = $this->model->registrarUsuario($nombre, $apellido, $usuario, $genero, $email, $pass, 0,0, $urlFotoPerfil);
             $this->model->enviarCorreoVerificacion($email,$nombre,$usuario);
             $_SESSION['error'] = "Te hemos enviado un correo para verificar tu cuenta";
             header('Location: /quizgame/login');
@@ -91,7 +101,7 @@ class UsuarioController
         if ($usuario) {
             if($usuario[0]['estado'] == 1){
                 $_SESSION['user'] = $usuario;
-                header('Location: /quizgame/usuario/mostrarUserView');
+                header('Location: /quizgame/usuario/mostrarLobbyView');
                 exit();
             } else {
                 $_SESSION['error'] = "Verifica tu bandeja de correo y verifica tu cuenta";
@@ -107,11 +117,15 @@ class UsuarioController
     
     public function setDatosError(&$data){
         if(!empty($_SESSION['error'])){
-            $data["error"] = $_SESSION['error'];
+            $data['error'] = $_SESSION['error'];
             unset( $_SESSION['error']);
+        }
+        if(!empty($_SESSION['user'])){
+            $data['user'] = $_SESSION['user'];
+            unset( $_SESSION['user']);
         }
     }
   
-    }
+}
 
 

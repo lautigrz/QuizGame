@@ -20,7 +20,7 @@ class MustachePresenter{
     }
 
     public function generateHtml($contentFile, $data = array()) {
-        echo "<script>console.log('pasa por helper/mustachePresenter.php/generateHtml');</script>";
+
 
         $contentAsString = file_get_contents(  $this->partialsPathLoader .'/header.mustache');
         $contentAsString = file_get_contents( $contentFile );

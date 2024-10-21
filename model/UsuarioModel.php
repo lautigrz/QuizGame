@@ -19,7 +19,7 @@ class UsuarioModel
 
         return $this->database->query($sql);
     }
-    public function registrarUsuario($nombre, $apellido, $usuario, $genero, $email, $pass, $estadoCuenta, $token){
+    public function registrarUsuario($nombre, $apellido, $usuario, $genero, $email, $pass, $estadoCuenta, $token, $fotoPerfil){
 
             $sql = "INSERT INTO usuario(nombre, apellido, usuario, genero, email, password , estado, token) VALUES ('" . $nombre . "', '" . $apellido . "', '" . $usuario . "', '" . $genero . "', '" . $email . "', '" . $pass . "', '" . $estadoCuenta . "', " . $token . ")";
             
@@ -28,6 +28,9 @@ class UsuarioModel
 
     public function enviarCorreoVerificacion($mail, $nombre, $usuario){
         $codigoVerificacion = rand(100000, 999999);
+        $archivo = fopen("token.txt", "a");
+        fwrite($archivo," - " . $codigoVerificacion);
+        fclose($archivo);
        $this->guardarCodigoVerificacion($usuario, $codigoVerificacion);
 
         try{
