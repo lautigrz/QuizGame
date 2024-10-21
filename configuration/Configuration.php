@@ -24,8 +24,7 @@ class Configuration
     }
 
     public function getUsuarioController(){
-        echo "<script>console.log('pasa por configuration/getUserController');</script>";
-
+    
         $model = new UsuarioModel($this->getDatabase(), $this->getMailer());
         return new UsuarioController($model, $this->getPresenter());
     }
@@ -33,8 +32,6 @@ class Configuration
 
     private function getPresenter()
     {
-        echo "<script>console.log('pasa por configuration/getPresenter');</script>";
-
         return new MustachePresenter("view");
     }
 
@@ -53,7 +50,7 @@ class Configuration
 
     public function getRouter()
     {
-        echo "<script>console.log('pasa por configuration/configuration/login');</script>";
+      
 
         return new Router($this, "getUsuarioController", "login");
 
@@ -61,7 +58,7 @@ class Configuration
 
     private function getUsuarioModel()
     {
-        echo "<script>console.log('pasa por configuration/configuration/getDatabase');</script>";
+      
 
         return new UsuarioModel($this->getDatabase(), $this->getMailer());
     }

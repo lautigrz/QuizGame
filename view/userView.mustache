@@ -1,59 +1,19 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pantalla de Usuario</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            font-family: Arial, sans-serif;
-        }
-        .user-profile {
-            text-align: center;
-            max-width: 400px;
-            width: 100%;
-            border: 1px solid #ccc;
-            padding: 20px;
-            border-radius: 10px;
-            background-color: #f9f9f9;
-        }
-        .user-logo {
-            display: block;
-            margin: 0 auto 20px;
-            width: 100px;
-            height: 100px;
-            object-fit: cover;
-            border-radius: 50%;
-        }
-        h2, p {
-            margin: 10px 0;
-        }
-        .label {
-            font-weight: bold;
-        }
-    </style>
-</head>
-<body>
 
     <div class="user-profile">
         <!-- Logo del usuario -->
         <img src="{{logoUrl}}" alt="Logo del usuario" class="user-logo">
 
         <!-- Username -->
-        <h2>{{username}}</h2>
-
         <!-- Nombre y Apellido -->
+        {{#user}}
+         <p><span class="label">Usuario</span></p>
+        <p>{{usuario}}</p>
         <p><span class="label">Nombre y Apellido:</span></p>
-        <p>{{nombreApellido}}</p>
-
+        <p>{{nombre}} {{apellido}}</p>
+       
         <!-- Sexo -->
-        <p><span class="label">Sexo:</span></p>
-        <p>{{sexo}}</p>
+        <p><span class="label">Genero:</span></p>
+        <p>{{genero}}</p>
 
         <!-- Año de nacimiento -->
         <p><span class="label">Año de Nacimiento:</span></p>
@@ -74,7 +34,5 @@
         <!-- Puntaje Total -->
         <p><span class="label">Puntaje Total:</span></p>
         <p>{{puntajeTotal}}</p>
+         {{/user}}
     </div>
-
-</body>
-</html>

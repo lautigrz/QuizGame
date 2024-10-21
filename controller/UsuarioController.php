@@ -12,18 +12,17 @@ class UsuarioController
     }
     public function login()
     {
-        echo "<script>console.log('pasa por controller/UsuarioController.php/login');</script>";
-
+    
         $data = [];
-        $this->setDatosError($data);
+        $this->setDatos($data);
         $this->presenter->show('login', $data);
     }
 
     public function mostrarUserView()
     {
-        echo "<script>console.log('pasa por controller/UsuarioController.php/mostrarUserView);</script>";
-
-        $this->presenter->show('user', "");
+        $data = [];
+        $this->setDatos($data);
+        $this->presenter->show('user', $data);
         
     }
 
@@ -35,8 +34,6 @@ class UsuarioController
 
     public function mostrarRegisterView()
     {
-        echo "<script>console.log('pasa por controller/UsuarioController.php/mostrarRegisterView');</script>";
-
         $this->presenter->show('register', "");
     }
     public function register(){
@@ -90,7 +87,7 @@ class UsuarioController
         $usuario = $this->model->validate($user, $pass);
         if ($usuario) {
             if($usuario[0]['estado'] == 1){
-                $_SESSION['user'] = $usuario;
+                $_SESSION['user'] = $usuario[0];
                 header('Location: /quizgame/usuario/mostrarUserView');
                 exit();
             } else {
@@ -105,10 +102,12 @@ class UsuarioController
         }
     }
     
-    public function setDatosError(&$data){
+    public function setDatos(&$data){
         if(!empty($_SESSION['error'])){
             $data["error"] = $_SESSION['error'];
             unset( $_SESSION['error']);
+        }if(!empty($_SESSION['user'])){
+            $data["user"] = $_SESSION['user'];
         }
     }
   
