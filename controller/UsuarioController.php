@@ -36,7 +36,9 @@ class UsuarioController
 
     public function mostrarRegisterView()
     {
-        $this->presenter->show('register', "");
+        $data = [];
+        $this->setDatos($data);
+        $this->presenter->show('register', $data);
     }
     public function register(){
 
@@ -46,14 +48,24 @@ class UsuarioController
         $genero = $_POST['genero'];
         $email = $_POST['email'];
         $pass = $_POST['password'];
+        $repeatPass = $_POST['repeatPassword'];
+        $fechaNacimiento = $_POST['fechaNacimiento'];
+
+
+        if ($pass !== $repeatPass) {
+            $_SESSION['error'] = 'Las contraseñas no coinciden';
+            header('location: /quizgame/usuario/mostrarRegisterView');
+            exit();
+        }
 
         $usuarioExistente = $this->model->buscarUsuario($usuario);
-        
+
+
         if($usuarioExistente){
             $_SESSION['error'] = "Usuario existente";
         }
         else{
-            $seRegistro = $this->model->registrarUsuario($nombre, $apellido, $usuario, $genero, $email, $pass, 0,0);
+            $seRegistro = $this->model->registrarUsuario($nombre, $apellido, $usuario, $genero, $email, $pass, 0,0, '', $fechaNacimiento);
             $this->model->enviarCorreoVerificacion($email,$nombre,$usuario);
             $_SESSION['error'] = "Te hemos enviado un correo para verificar tu cuenta";
             header('Location: /quizgame/login');

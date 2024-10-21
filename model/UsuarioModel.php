@@ -19,9 +19,9 @@ class UsuarioModel
 
         return $this->database->query($sql);
     }
-    public function registrarUsuario($nombre, $apellido, $usuario, $genero, $email, $pass, $estadoCuenta, $token){
+    public function registrarUsuario($nombre, $apellido, $usuario, $genero, $email, $pass, $estadoCuenta, $token, $urlFotoPerfil, $fechaNacimiento){
 
-            $sql = "INSERT INTO usuario(nombre, apellido, usuario, genero, email, password , estado, token) VALUES ('" . $nombre . "', '" . $apellido . "', '" . $usuario . "', '" . $genero . "', '" . $email . "', '" . $pass . "', '" . $estadoCuenta . "', " . $token . ")";
+            $sql = "INSERT INTO usuario(nombre, apellido, usuario, genero, email, password , estado, token, fotoPerfil, fechaNacimiento) VALUES ('" . $nombre . "', '" . $apellido . "', '" . $usuario . "', '" . $genero . "', '" . $email . "', '" . $pass . "', '" . $estadoCuenta . "', " . $token . " , '" . $urlFotoPerfil . "', " . $fechaNacimiento . ")";
             
             return $this->database->query($sql);
     }
