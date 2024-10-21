@@ -14,16 +14,16 @@ class MustachePresenter{
     }
 
     public function show($contentFile , $data = array() ){
-        echo "<script>console.log('pasa por helper/mustachePresenter.php/show contentFile: {$contentFile}');</script>";
+      
 
         echo  $this->generateHtml(  $this->partialsPathLoader . '/' . $contentFile . "View.mustache" , $data);
     }
 
     public function generateHtml($contentFile, $data = array()) {
-        echo "<script>console.log('pasa por helper/mustachePresenter.php/generateHtml');</script>";
+  
 
-        $contentAsString = file_get_contents(  $this->partialsPathLoader .'/header.mustache');
-        $contentAsString = file_get_contents( $contentFile );
+        $contentAsString = file_get_contents($this->partialsPathLoader .'/header.mustache');
+        $contentAsString .= file_get_contents($contentFile );
         $contentAsString .= file_get_contents($this->partialsPathLoader . '/footer.mustache');
         return $this->mustache->render($contentAsString, $data);
     }

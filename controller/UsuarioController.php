@@ -28,7 +28,9 @@ class UsuarioController
 
     public function mostrarLobbyView()
     {
-        $this->presenter->show('lobby', "");
+        $data = [];
+        $this->setDatos($data);
+        $this->presenter->show('lobby', $data);
 
     }
 
@@ -59,9 +61,13 @@ class UsuarioController
         }
       
     }
+    public function cerrarSesion(){
+        session_destroy();
+        header('Location: /quizgame/login');
+        exit();
 
-
-    private function crearArchivoConToken(int $token)
+    }
+    private function crearArchivoConToken($token)
     {
         $archivo = fopen("token.txt", "a");
         fwrite($archivo," - " . $token);

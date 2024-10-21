@@ -1,32 +1,44 @@
-
+<!DOCTYPE html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>quizgame</title>
+    <title>QuizGame</title>
+    <!-- Bootstrap CSS -->
+     <link href="../public/css/style.css" rel="stylesheet">
+    
+</head>
+{{#user}}
+<header class="bg-teal w3-padding">
 
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    </head>
-</body>
-<!-- Header -->
-<header class="w3-container w3-teal w3-padding">
- <div class="header">
-        <!-- Logo de la página -->
-        <!-- <img src="{{pageLogoUrl}}" alt="Logo de la página" class="header-logo"> -->
+        <nav class="navbar navbar-expand-lg p-3 ">
+            <div class="container-fluid">
+                <a class="navbar-brand text-white" href="/quizgame/usuario/mostrarLobbyView">QuizGame</a>
 
-        <!-- Enlace al perfil de usuario con el texto "Usuario" -->
-        <a href="/quizgame/usuario/mostrarUserView" class="user-link">Usuario</a>
-    </div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                               {{#user}} Bienvenido {{nombre}}{{/user}}
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="/quizgame/usuario/mostrarUserView">Perfil</a></li>
+                                <li><a class="dropdown-item" href="/quizgame/usuario/cerrarSesion">Cerrar sesión</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
 </header>
-
-<body>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-
-
- 
-
-
+{{/user}}
+<!-- Bootstrap JS (con jQuery para Bootstrap 4, si es necesario) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Solo si usas Bootstrap 4 -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 
 

@@ -58,7 +58,6 @@ class Configuration
 
     private function getUsuarioModel()
     {
-      
 
         return new UsuarioModel($this->getDatabase(), $this->getMailer());
     }

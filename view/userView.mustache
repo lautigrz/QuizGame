@@ -1,82 +1,91 @@
+{{#user}}
+<section class="section about-section gray-bg py-5" id="about">
+    <div class="container">
+        <div class="row align-items-center flex-row-reverse">
+            <!-- Columna de texto -->
+            <div class="col-lg-6">
+                <div class="about-text go-to">
+                    <h3 class="dark-color">{{usuario}}</h3>
+                    
+                    <div class="row about-list bg-light">
+                        <div class="col-md-6">
+                            <div class="media">
+                                <label>Nombre</label>
+                                <p>{{nombre}}</p>
+                            </div>
+                          
+                            <div class="media">
+                                <label>Edad</label>
+                                <p>22 Yr</p>
+                            </div>
+                            <div class="media">
+                                <label>Residencia</label>
+                                <p>Canada</p>
+                            </div>
+                            <div class="media">
+                                <label>Address</label>
+                                <p>California, USA</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="media">
+                                <label>Apellido</label>
+                                <p>{{apellido}}</p>
+                            </div>
+                            <div class="media">
+                                <label>E-mail</label>
+                                <p>{{email}}</p>
+                            </div>
+                            <div class="media">
+                                <label>Phone</label>
+                                <p>820-885-3321</p>
+                            </div>
+                        
+                            <div class="media">
+                                <label>Genero</label>
+                                <p>{{genero}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Columna de imagen -->
+            <div class="col-lg-6">
+                <div class="about-avatar text-left">
+                    <img src="https://th.bing.com/th/id/R.36ddab8a092189b9094056f651659282?rik=8eL5YRLEFuLKpw&pid=ImgRaw&r=0" class="rounded-circle shadow-sm" alt="Profile Image" width="220" height="200">
+                </div>
+            </div>
+        </div>
 
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-image: url('https://th.bing.com/th/id/R.a9b43019faa05e77eee142859d328f97?rik=TCnkwAe0niPaXQ&pid=ImgRaw&r=0&sres=1&sresct=1'); /* Cambia esta URL por tu imagen de fondo */
-            background-size: cover;
-            background-position: center;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0;
-        }
-        .user-profile {
-            text-align: center;
-            max-width: 400px;
-            width: 100%;
-            border: 1px solid #ccc;
-            padding: 20px;
-            border-radius: 10px;
-            background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco semi-transparente */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        .user-logo {
-            display: block;
-            margin: 0 auto 20px;
-            width: 100px;
-            height: 100px;
-            object-fit: cover;
-            border-radius: 50%;
-        }
-        h2, p {
-            margin: 10px 0;
-        }
-        .label {
-            font-weight: bold;
-        }
-    </style>
-
-
-<div class="user-profile">
-    {{#user}}
-        <!-- Logo del usuario -->
-        <img src="/quizgame/public/imagenes/perfil/{{id}}" alt="{{usuario}}" class="user-logo">
-
-        <!-- Username -->
-        <h2>{{usuario}}</h2>
-
-        <!-- Nombre y Apellido -->
-        <p><span class="label">Nombre y Apellido:</span></p>
-        <p>{{nombre}}</p>
-
-        <!-- Sexo -->
-        <p><span class="label">Sexo:</span></p>
-        <p>{{sexo}}</p>
-
-        <!-- Año de nacimiento -->
-        <p><span class="label">Año de Nacimiento:</span></p>
-        <p>{{anoNacimiento}}</p>
-
-        <!-- Email -->
-        <p><span class="label">Email:</span></p>
-        <p>{{email}}</p>
-
-        <!-- Tipo de Usuario -->
-        <p><span class="label">Tipo de Usuario:</span></p>
-        <p>{{tipoUsuario}}</p>
-
-        <!-- Cantidad de Partidas Jugadas -->
-        <p><span class="label">Cantidad de Partidas Jugadas:</span></p>
-        <p>{{cantidadPartidas}}</p>
-
-        <!-- Puntaje Total -->
-        <p><span class="label">Puntaje Total:</span></p>
-        <p>{{puntajeTotal}}</p>
-    {{/user}}
-</div>
-
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+        <!-- Contador de estadísticas -->
+        <div class="counter bg-light mt-5 py-4">
+            <div class="row">
+                <div class="col-6 col-lg-3">
+                    <div class="count-data text-center">
+                        <h6 class="count h2 text-dark" data-to="500" data-speed="500">500</h6>
+                        <p class="m-0 font-w-600">Happy Clients</p>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <div class="count-data text-center">
+                        <h6 class="count h2 text-dark" data-to="150" data-speed="150">150</h6>
+                        <p class="m-0 font-w-600">Projects Completed</p>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <div class="count-data text-center">
+                        <h6 class="count h2 text-dark" data-to="850" data-speed="850">850</h6>
+                        <p class="m-0 font-w-600">Photos Captured</p>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <div class="count-data text-center">
+                        <h6 class="count h2 text-dark" data-to="190" data-speed="190">190</h6>
+                        <p class="m-0 font-w-600">Telephonic Talks</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{{/user}}
