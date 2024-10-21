@@ -45,7 +45,7 @@ class UsuarioController
         $email = $_POST['email'];
         $pass = $_POST['password'];
 
-        $usurioExistente = $this->model->buscarUsuario($usuario);
+        $usuarioExistente = $this->model->buscarUsuario($usuario);
         
         if($usuarioExistente){
             $_SESSION['error'] = "Usuario existente";
@@ -88,7 +88,7 @@ class UsuarioController
         if ($usuario) {
             if($usuario[0]['estado'] == 1){
                 $_SESSION['user'] = $usuario[0];
-                header('Location: /quizgame/usuario/mostrarUserView');
+                header('Location: /quizgame/usuario/mostrarLobbyView');
                 exit();
             } else {
                 $_SESSION['error'] = "Verifica tu bandeja de correo y verifica tu cuenta";
@@ -108,6 +108,7 @@ class UsuarioController
             unset( $_SESSION['error']);
         }if(!empty($_SESSION['user'])){
             $data["user"] = $_SESSION['user'];
+
         }
     }
   
