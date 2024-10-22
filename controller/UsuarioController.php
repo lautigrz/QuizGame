@@ -107,7 +107,7 @@ class UsuarioController
     }
 
     public function procesarUsuario(){
-        $user = $_POST['email'];
+        $user = $_POST['user'];
         $pass = $_POST['password'];
     
         $usuario = $this->model->validate($user, $pass);

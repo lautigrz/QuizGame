@@ -13,7 +13,7 @@ class UsuarioModel
     {
         $sql = "SELECT *
                 FROM usuario 
-                WHERE email = '" . $user. "' 
+                WHERE usuario = '" . $user. "' 
                 AND password = '" . $pass . "'";
 
         return $this->database->query($sql);
