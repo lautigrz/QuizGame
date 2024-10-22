@@ -1,14 +1,15 @@
 <?php
-
 class UsuarioController
 {
     private $model;
     private $presenter;
+    private $mailer;
 
-    public function __construct($model, $presenter)
+    public function __construct($model, $presenter, $mailer)
     {
         $this->model = $model;
         $this->presenter = $presenter;
+        $this->mailer = $mailer;
     }
     public function login()
     {
@@ -40,39 +41,46 @@ class UsuarioController
         $this->setDatos($data);
         $this->presenter->show('register', $data);
     }
-    public function register(){
-
-        $nombre = $_POST['nombre'];
-        $apellido = $_POST['apellido'];
-        $usuario = $_POST['usuario'];
-        $genero = $_POST['genero'];
-        $email = $_POST['email'];
-        $pass = $_POST['password'];
-        $repeatPass = $_POST['repeatPassword'];
-        $fechaNacimiento = $_POST['fechaNacimiento'];
-
-
-        if ($pass !== $repeatPass) {
-            $_SESSION['error'] = 'Las contraseñas no coinciden';
-            header('location: /quizgame/usuario/mostrarRegisterView');
-            exit();
-        }
-
-        $usuarioExistente = $this->model->buscarUsuario($usuario);
-
-
-        if($usuarioExistente){
-            $_SESSION['error'] = "Usuario existente";
-        }
-        else{
-            $seRegistro = $this->model->registrarUsuario($nombre, $apellido, $usuario, $genero, $email, $pass, 0,0, '', $fechaNacimiento);
-            $this->model->enviarCorreoVerificacion($email,$nombre,$usuario);
-            $_SESSION['error'] = "Te hemos enviado un correo para verificar tu cuenta";
+    public function register() {
+        try {
+            $data = $_POST;
+            $this->validateRegisterInput($data);
+            
+            $usuario = $this->registerUser($data);
+    
+            $this->sendVerificationEmail($data['email'], $data['nombre'], $data['usuario']);
+            
+            $_SESSION['error'] = 'Te hemos enviado un correo para verificar tu cuenta';
             header('Location: /quizgame/login');
             exit();
+            
+        } catch (Exception $e) {
+            $_SESSION['error'] = $e->getMessage();
+            header('Location: /quizgame/usuario/mostrarRegisterView');
+            exit();
         }
-      
     }
+    
+
+    public function validateRegisterInput($data) {
+        if ($data['password'] !== $data['repeatPassword']) {
+            throw new Exception('Las contraseñas no coinciden');
+        }
+    }
+    public function registerUser($data) {
+        $usuarioExistente = $this->model->buscarUsuario($data['usuario']);
+        if ($usuarioExistente) {
+            throw new Exception('Usuario existente');
+        }
+        
+        return $this->model->registrarUsuario($data);
+    }
+    
+    public function sendVerificationEmail($email, $nombre, $usuario) {
+        $token = $this->getVerificationToken($usuario);
+        $this->mailer->sendVerificationEmail($email, $nombre, $usuario, $token);
+    }
+
     public function cerrarSesion(){
         session_destroy();
         header('Location: /quizgame/login');
@@ -126,8 +134,12 @@ class UsuarioController
             unset( $_SESSION['error']);
         }if(!empty($_SESSION['user'])){
             $data["user"] = $_SESSION['user'];
-
         }
+    }
+
+    private function getVerificationToken($usuario) {
+        $usuarioData = $this->model->buscarUsuario($usuario);
+        return $usuarioData[0]['token'] ?? null;
     }
   
     }
