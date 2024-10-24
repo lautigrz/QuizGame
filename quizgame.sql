@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-10-2024 a las 19:13:51
+-- Tiempo de generación: 25-10-2024 a las 01:18:46
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -141,9 +141,19 @@ INSERT INTO `opciones` (`id`, `preguntaID`, `opcion`) VALUES
 CREATE TABLE `partida` (
   `id` int(11) NOT NULL,
   `puntaje_obtenido` int(11) DEFAULT NULL,
-  `fecha_partida` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `fecha_partida` datetime DEFAULT NULL,
   `idUsuario` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `partida`
+--
+
+INSERT INTO `partida` (`id`, `puntaje_obtenido`, `fecha_partida`, `idUsuario`) VALUES
+(51, 2, '0000-00-00 00:00:00', 68),
+(52, 0, '0000-00-00 00:00:00', 68),
+(53, 3, '0000-00-00 00:00:00', 68),
+(54, 0, '0000-00-00 00:00:00', 68);
 
 -- --------------------------------------------------------
 
@@ -234,17 +244,18 @@ CREATE TABLE `usuario` (
   `email` varchar(60) NOT NULL,
   `password` varchar(20) NOT NULL,
   `estado` tinyint(1) NOT NULL,
-  `token` int(6) NOT NULL
+  `token` int(6) NOT NULL,
+  `puntaje` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`id`, `nombre`, `apellido`, `usuario`, `genero`, `email`, `password`, `estado`, `token`) VALUES
-(65, 'dddd', 'dasdasd', 'dsadwe', 'masculino', 'laati@mail.3a88.dev', '123', 1, 794238),
-(67, 'ads', 'sddsa', 'asddsa', 'M', 'ggg@gmail.com', '123', 0, 859813),
-(68, 'Lautaro', 'Gerez', 'lautigrz', 'M', 'lautarogerezz12@gmail.com', '123', 1, 681159);
+INSERT INTO `usuario` (`id`, `nombre`, `apellido`, `usuario`, `genero`, `email`, `password`, `estado`, `token`, `puntaje`) VALUES
+(65, 'dddd', 'dasdasd', 'dsadwe', 'masculino', 'laati@mail.3a88.dev', '123', 1, 794238, 0),
+(67, 'ads', 'sddsa', 'asddsa', 'M', 'ggg@gmail.com', '123', 0, 859813, 0),
+(68, 'Lautaro', 'Gerez', 'lautigrz', 'M', 'lautarogerezz12@gmail.com', '123', 1, 681159, 5);
 
 --
 -- Índices para tablas volcadas
@@ -314,7 +325,7 @@ ALTER TABLE `opciones`
 -- AUTO_INCREMENT de la tabla `partida`
 --
 ALTER TABLE `partida`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT de la tabla `preguntas`
@@ -332,7 +343,7 @@ ALTER TABLE `respuesta`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- Restricciones para tablas volcadas
