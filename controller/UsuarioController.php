@@ -13,7 +13,7 @@ class UsuarioController
     }
     public function login()
     {
-    
+
         $data = [];
         $this->setDatos($data);
         $this->presenter->show('login', $data);
@@ -41,6 +41,7 @@ class UsuarioController
         $this->setDatos($data);
         $this->presenter->show('register', $data);
     }
+
     public function register() {
         try {
             $data = $_POST;
@@ -50,18 +51,14 @@ class UsuarioController
     
             $this->sendVerificationEmail($data['email'], $data['nombre'], $data['usuario']);
             
-            $_SESSION['error'] = 'Te hemos enviado un correo para verificar tu cuenta';
-            header('Location: /quizgame/login');
-            exit();
+            $this->manejarError("Te hemos enviado un correo para verificar tu cuenta", '/quizgame/login');
+
             
         } catch (Exception $e) {
-            $_SESSION['error'] = $e->getMessage();
-            header('Location: /quizgame/usuario/mostrarRegisterView');
-            exit();
+            $this->manejarError($e->getMessaje(), '/quizgame/usuario/mostrarRegisterView');
         }
     }
     
-
     public function validateRegisterInput($data) {
         if ($data['password'] !== $data['repeatPassword']) {
             throw new Exception('Las contraseñas no coinciden');
@@ -106,28 +103,24 @@ class UsuarioController
         }
     }
 
-    public function procesarUsuario(){
+    public function procesarUsuario() {
         $user = $_POST['user'];
         $pass = $_POST['password'];
     
         $usuario = $this->model->validate($user, $pass);
+        
         if ($usuario) {
-            if($usuario[0]['estado'] == 1){
-                $_SESSION['user'] = $usuario[0];
-                header('Location: /quizgame/usuario/mostrarLobbyView');
-                exit();
+            if ($usuario[0]['estado'] == 1) {
+                $this->manejarSesion($usuario);
+                $this->redirigirUsuarioLogeado();
             } else {
-                $_SESSION['error'] = "Verifica tu bandeja de correo y verifica tu cuenta";
-                header('Location: /quizgame/login');
-                exit();
+                $this->manejarError("Verifica tu bandeja de correo y activa tu cuenta", '/quizgame/login');
             }
         } else {
-            $_SESSION['error'] = "Usuario o contraseña no encontrado";
-            header('Location: /quizgame/login');
-            exit();  
+            $this->manejarError("Usuario o contraseña incorrectos", '/quizgame/login');
         }
     }
-    
+
     public function setDatos(&$data){
         if(!empty($_SESSION['error'])){
             $data["error"] = $_SESSION['error'];
@@ -137,6 +130,18 @@ class UsuarioController
         }
     }
 
+    private function manejarSesion($usuario) {
+        $_SESSION['user'] = $usuario[0];
+    }
+    private function manejarError($mensaje,$redirectUrl) {
+        $_SESSION['error'] = $mensaje;
+        header("Location: $redirectUrl");
+        exit();
+    }
+    private function redirigirUsuarioLogeado() {
+        header('Location: /quizgame/usuario/mostrarLobbyView');
+        exit();
+    }
     private function getVerificationToken($usuario) {
         $usuarioData = $this->model->buscarUsuario($usuario);
         return $usuarioData[0]['token'] ?? null;

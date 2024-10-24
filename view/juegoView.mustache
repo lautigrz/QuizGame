@@ -1,0 +1,92 @@
+
+<div class="container d-flex justify-content-center align-items-center" style="height: 85vh;">
+    <div class="card text-center" style="width: 80%; max-width: 600px; border-radius: 20px; box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);">
+        <div class="card-header bg-success text-white" style="border-radius: 20px 20px 0 0;">
+            <h3 class="card-title">Pregunta</h3>
+        </div>
+        
+        <div class="card-body" style="padding: 30px;">
+      
+            {{#preguntas}}
+            <p class="card-text h5 mb-4" style="font-weight: bold;">{{pregunta}}</p>
+   
+            <div class="d-grid gap-2 mx-auto" style="width: 100%;">
+                {{#opciones}}
+                <form action="/quizgame/juego/esCorrecta" method="GET">
+                    <button type="submit" name="respuesta" class="btn btn-lg mt-2 boton-respuesta"
+                            value="{{opcion}}"
+                            style="background-color: #15a00a; color: white; border: none; border-radius: 10px; padding: 15px; width: 100%; white-space: nowrap;">
+                        {{opcion}}
+                    </button>
+                </form>
+                {{/opciones}}
+            </div>
+            {{/preguntas}}
+
+            <!-- Botón de Reportar que abre el modal -->
+            <button type="button" class="btn btn-danger mt-4" style="width: 100%; padding: 10px; border-radius: 10px;" data-bs-toggle="modal" data-bs-target="#reportModal">
+                Reportar Pregunta
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="respuestaIncorrectaModal" tabindex="-1" aria-labelledby="respuestaIncorrectaLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="respuestaIncorrectaLabel">Respuesta Incorrecta</h5>
+      </div>
+      <div class="modal-body text-center">
+        <p class="text-danger h5">Lo siento, tu respuesta es incorrecta.</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#" class="btn btn-secondary" onclick="cerrarYRedirigir('/quizgame/usuario/mostrarLobbyView')">Cerrar<a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para reportar la pregunta -->
+<div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="reportModalLabel">Reportar Pregunta</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="/quizgame/juego/reportarPregunta" method="POST">
+          <div class="mb-3">
+            <label for="motivo" class="form-label">Motivo del Reporte</label>
+            <textarea class="form-control" id="motivo" name="motivo" rows="3" required></textarea>
+          </div>
+          <input type="hidden" name="pregunta_id" value="{{pregunta_id}}"> <!-- ID de la pregunta si es necesario -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-danger">Enviar Reporte</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        {{#respuesta_incorrecta}}
+            var respuestaIncorrectaModal = new bootstrap.Modal(document.getElementById('respuestaIncorrectaModal'), {
+                keyboard: false,
+                backdrop: 'static' 
+            });
+            respuestaIncorrectaModal.show();
+        {{/respuesta_incorrecta}}
+    });
+
+    function cerrarYRedirigir(url) {
+        var modal = bootstrap.Modal.getInstance(document.getElementById('respuestaIncorrectaModal'));
+        modal.hide();
+
+        window.location.href = url;
+    }
+</script>
+

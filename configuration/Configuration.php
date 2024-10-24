@@ -7,7 +7,9 @@ include_once("helper/MustachePresenter.php");
 include_once("helper/SendEmail.php");
 
 include_once("controller/UsuarioController.php");
+include_once("controller/JuegoController.php");
 include_once("model/UsuarioModel.php");
+include_once("model/JuegoModel.php");
 
 include_once('vendor/mustache/src/Mustache/Autoloader.php');
 class Configuration
@@ -19,6 +21,14 @@ class Configuration
     public function getUsuarioController(){
 
         return new UsuarioController($this->getUsuarioModel(), $this->getPresenter(), $this->getSendEmail());
+    }
+
+    public function getJuegoController(){
+        return new JuegoController($this->getJuegoModel(), $this->getPresenter());
+    }
+
+    public function getJuegoModel(){
+        return new JuegoModel($this->getDatabase());
     }
   
     private function getPresenter()
@@ -46,7 +56,6 @@ class Configuration
     {
         return new UsuarioModel($this->getDatabase());
     }
-
     public function getSendEmail(){
         return new SendEmail();
     }
