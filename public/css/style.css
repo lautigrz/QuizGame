@@ -13,6 +13,16 @@
     background-color:rgba(0, 0, 0, 0.411);
 }
 
+.login{
+  background-color: #23233b;
+}
+
+.registro{
+  background-color: #23233b;
+  box-shadow: 0 4px 15px rgba(232, 232, 232, 0.2); /* Sombra */
+  border-radius: 50%; 
+}
+
 .full-height {
   height: 75vh; 
   display: flex;
@@ -35,6 +45,32 @@ body {
     
    
 }
+.registro {
+  background-color: #23233b;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Sombra */
+  border-radius: 10px; /* Bordes redondeados */
+}
+
+/* Estilos para hacer los labels blancos */
+.text-white {
+  color: white !important;
+}
+
+/* Evitar que los input cambien a blanco al hover */
+.form-control {
+  background-color: #f8f9fa; /* Color base del input */
+  border: 1px solid #ced4da;
+  color: #495057;
+  transition: background-color 0.3s ease;
+}
+
+.form-control:hover, 
+.form-control:focus {
+  background-color: #f8f9fa; /* Sin cambios en hover o focus */
+  box-shadow: none; /* Evitar sombra en focus */
+  border-color: #80bdff; /* Color del borde en focus */
+}
+
 .boton-respuesta {
   transition: transform 0.3s ease; /* Suaviza la animación */
 }

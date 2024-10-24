@@ -55,7 +55,7 @@ class UsuarioController
 
             
         } catch (Exception $e) {
-            $this->manejarError($e->getMessaje(), '/quizgame/usuario/mostrarRegisterView');
+            $this->manejarError($e->getMessage(), '/quizgame/usuario/mostrarRegisterView');
         }
     }
     

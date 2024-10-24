@@ -1,18 +1,41 @@
 
 
 <div class="full-height">
-    <h1 class="text-center text-light">Bienvenido al Lobby</h1>
-    
-    <div class="row justify-content-center mt-4">
-        <div class="col-md-4 text-center">
-            <a href="/quizgame/juego/obtenerPreguntas" class="btn btn-primary btn-lg mb-3">Partida</a>
-        </div>
-        <div class="col-md-4 text-center">
-            <a href="/quizgame/ranking" class="btn btn-secondary btn-lg mb-3">Ranking</a>
-        </div>
-        <div class="col-md-4 text-center">
-            <a href="/quizgame/puntaje" class="btn btn-success btn-lg mb-3">Puntaje</a>
-        </div>
+ <h1 class="text-center text-light">Bienvenido al Lobby</h1>
+
+<div class="row justify-content-center mt-4">
+    <div class="col-md-4 text-center">
+        <!-- Botón que activa el modal -->
+        <button type="button" class="btn btn-primary btn-lg mb-3" data-bs-toggle="modal" data-bs-target="#modalPartida">
+            Partida
+        </button>
     </div>
+    <div class="col-md-4 text-center">
+        <a href="/quizgame/ranking" class="btn btn-secondary btn-lg mb-3">Ranking</a>
+    </div>
+    <div class="col-md-4 text-center">
+        <a href="/quizgame/puntaje" class="btn btn-success btn-lg mb-3">Puntaje</a>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modalPartida" tabindex="-1" aria-labelledby="modalPartidaLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalPartidaLabel">Iniciar Nueva Partida</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Estás a punto de comenzar una nueva partida. ¿Estás listo?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <a href="/quizgame/juego/partida" class="btn btn-primary">Comenzar</a>
+      </div>
+    </div>
+  </div>
+</div>
+
 </div>
 

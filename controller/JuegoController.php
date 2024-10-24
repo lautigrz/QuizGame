@@ -14,12 +14,28 @@ class JuegoController{
         $data = [];
         $this->setData($data);
         $this->presenter->show("juego",$data);
+
+        
     }
     
-    public function obtenerPreguntas(){
-        $this->preguntaAlazar();
+    public function partida(){
+
+        if($this->existeUsuario()){
+
+            if(!$this->preguntasEnCurso()){
+            $this->nuevaPartida();
+            $this->preguntaAlazar();
+        }else{
+            $this->preguntaAlazar();
+        }
+        }
         header('Location: /quizgame/juego/preguntas');
         exit();
+    }
+
+    public function nuevaPartida(){
+        $_SESSION['puntaje'] = 0;
+        $_SESSION['fecha_partida'] = date('Y-m-d H:i:s');       
     }
 
 public function preguntaAlazar() {
@@ -34,7 +50,7 @@ public function preguntaAlazar() {
            $this->guardarPregunta($preguntaActual);
         
         }else{
-            $this->obtenerPreguntas();
+            $this->partida();
         }
     }
 
@@ -43,13 +59,13 @@ public function preguntaAlazar() {
 
 public function guardarPreguntasDeLaPartida($preguntas) {
 
-    if (!isset($_SESSION['preguntas_total'])) {
-        $_SESSION['preguntas_total'] = [];
+    if (!isset($_SESSION['preguntas_data'])) {
+        $_SESSION['preguntas_data'] = [];
     }
 
     if (!$this->verificarQueNoSeaPreguntaRepetida($preguntas['pregunta'])) {
      
-        $_SESSION['preguntas_total'][] = ['pregunta' => $preguntas['pregunta']];
+        $_SESSION['preguntas_data'][] = ['pregunta' => $preguntas['pregunta']];
    
         return true;
     }
@@ -59,7 +75,7 @@ public function guardarPreguntasDeLaPartida($preguntas) {
     public function verificarQueNoSeaPreguntaRepetida($pregunta) {
 
     $hayRepetida = false;
-    foreach ($_SESSION['preguntas_total'] as $preguntaExistente) {
+    foreach ($_SESSION['preguntas_data'] as $preguntaExistente) {
         if ($preguntaExistente['pregunta'] === $pregunta) {
             $hayRepetida = true;
             break;
@@ -72,17 +88,35 @@ public function guardarPreguntasDeLaPartida($preguntas) {
         $pregunta = $_SESSION['preguntas']['id'];
         $respuesta = $_GET['respuesta'];
 
-        $dt = $this->model->verificar($pregunta);
-        if($respuesta == $dt[0]['opcion']){
-            header('Location: /quizgame/juego/obtenerPreguntas');
+        $opcion = $this->obtenerRespuestaCorrecta($pregunta);
+        if($respuesta == $opcion){
+            $_SESSION['puntaje'] +=1;
+            header('Location: /quizgame/juego/partida');
             exit();
         }else{
             $_SESSION['respuesta_incorrecta'] = true;
-            unset($_SESSION['preguntas_total']);
-            header('Location: /quizgame/juego/obtenerPreguntas');
+           # unset($_SESSION['preguntas_data']);
+            $this->finalizarPartida();
+            header('Location: /quizgame/juego/partida');
         exit();
         }
        
+    }
+
+    public function obtenerRespuestaCorrecta($id){
+        $dt = $this->model->verificar($id);
+        return $dt[0]['opcion'];
+    }
+
+    public function finalizarPartida(){
+
+        $data = [
+            "puntaje" => $_SESSION['puntaje'],
+            "fecha" => $_SESSION['fecha_partida'],
+            "user" => $_SESSION['user']['id']
+        ];
+
+        $this->model->guardarPartida($data);
     }
 
     public function setData(&$data){
@@ -91,12 +125,21 @@ public function guardarPreguntasDeLaPartida($preguntas) {
             unset( $_SESSION['error']);
         }if(!empty($_SESSION['preguntas'])){
             $data["preguntas"] = $_SESSION['preguntas'];
-          
         }if(!empty( $_SESSION['respuesta_incorrecta'])){
-            $data['respuesta_incorrecta'] =  $_SESSION['respuesta_incorrecta'];
-            unset($_SESSION['respuesta_incorrecta']);
+
+            $id = $_SESSION['preguntas']['id'];
+            $respuestaCorrecta = $this->obtenerRespuestaCorrecta($id);
+            $data = [
+                "preguntas" => $_SESSION['preguntas'],
+                "respuesta_incorrecta" => $_SESSION['respuesta_incorrecta'],
+                "puntaje" => $_SESSION['puntaje'],
+                "respuesta" =>  $respuestaCorrecta
+
+            ];
+            unset($_SESSION['preguntas_data'],$_SESSION['respuesta_incorrecta']);
         }
     }
+
 
     private function guardarPregunta($pregunta){
         $_SESSION['preguntas'] = $pregunta;
@@ -104,5 +147,13 @@ public function guardarPreguntasDeLaPartida($preguntas) {
     private function hayRespuestaIncorrecta() {
         return isset($_SESSION['respuesta_incorrecta']);
     }
+    private function existeUsuario() {
+        return isset($_SESSION['user']);
+    }
+    private function preguntasEnCurso() {
+        return isset($_SESSION['preguntas_data']);
+    }
+
+
 
 }

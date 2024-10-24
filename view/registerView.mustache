@@ -1,54 +1,29 @@
+<div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="p-5 rounded registro" style="width: 100%; max-width: 800px;">
+        <h2 class="text-center mb-4 text-white">Registro</h2>
 
-<style>
-    body {
-        background-image: url('https://th.bing.com/th/id/R.a9b43019faa05e77eee142859d328f97?rik=TCnkwAe0niPaXQ&pid=ImgRaw&r=0&sres=1&sresct=1'); /* Cambia esta URL por la imagen que desees */
-        background-size: cover;
-        background-position: center;
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .form-container {
-        background-color: black;
-        padding: 2rem;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        width: 500px; /* Ancho del formulario */
-        height: 100%;
-    }
-    label{
-        color:white;
-    }
-</style>
-<body>
-<div class="form-container bg-dark text-light h-100">
-    <h2 class="text-center">Registro</h2>
-    {{#error}}
-        <div class="alert alert-danger h-5 w-5" role="alert">
+        {{#error}}
+        <div class="alert alert-danger" role="alert">
             {{error}}
         </div>
-    {{/error}}
-    <form action="/quizgame/usuario/register" method="post">
-        <div class="form-group">
-            <label for="nombre">Nombre</label>
-            <input type="text" class="form-control" id="nombre" name="nombre" required>
-        </div>
-        <div class="form-group">
-            <label for="apellido">Apellido</label>
-            <input type="text" class="form-control" id="apellido" name="apellido" required>
-        </div>
-        <div class="form-group">
-            <label for="usuario">Usuario</label>
-            <input type="text" class="form-control" id="usuario" name="usuario" required>
-        </div>
+        {{/error}}
 
-        <div class="container">
+        <form action="/quizgame/usuario/register" method="post" enctype="multipart/form-data">
             <div class="row">
-
+                <!-- Primera columna -->
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="genero">Género</label>
+                        <label for="nombre" class="text-white">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="usuario" class="text-white">Usuario</label>
+                        <input type="text" class="form-control" id="usuario" name="usuario" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="genero" class="text-white">Género</label>
                         <select class="form-control" id="genero" name="genero" required>
                             <option value="">Selecciona tu género</option>
                             <option value="M">Masculino</option>
@@ -56,35 +31,45 @@
                             <option value="O">Otro</option>
                         </select>
                     </div>
+
+                    <div class="form-group">
+                        <label for="email" class="text-white">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fotoPerfil" class="text-white">Foto de perfil</label>
+                        <input type="file" class="form-control-file" id="fotoPerfil" name="fotoPerfil" accept="image/*">
+                    </div>
                 </div>
 
+                <!-- Segunda columna -->
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="fechaNacimiento">Fecha de Nacimiento</label>
+                        <label for="apellido" class="text-white">Apellido</label>
+                        <input type="text" class="form-control" id="apellido" name="apellido" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fechaNacimiento" class="text-white">Fecha de Nacimiento</label>
                         <input type="date" class="form-control" id="fechaNacimiento" name="fechaNacimiento" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password" class="text-white">Contraseña</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="repeatPassword" class="text-white">Repetir Contraseña</label>
+                        <input type="password" class="form-control" id="repeatPassword" name="repeatPassword" required>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" class="form-control" id="email" name="email" required>
-        </div>
-        <div class="form-group">
-            <label for="fotoPerfil">Foto de perfil</label>
-            <input type="file" class="form-control-file" id="fotoPerfil" name="fotoPerfil" accept="image/*">
-        </div>
-        <div class="form-group">
-            <label for="contraseña">Contraseña</label>
-            <input type="password" class="form-control" id="password" name="password" required>
-        </div>
-        <div class="form-group">
-            <label for="contraseña">Repetir Contraseña</label>
-            <input type="password" class="form-control" id="repeatPassword" name="repeatPassword" required>
-        </div>
-        <br>
-        <button type="submit" class="btn btn-primary btn-block">Registrar</button>
-    </form>
-    <p class="mt-3 text-center">¿Ya tiene una cuenta? <a href="/quizgame/usuario/login">Inicie sesión</a></p>
+
+            <button type="submit" class="btn btn-primary btn-block mt-3">Registrar</button>
+        </form>
+
+        <p class="mt-3 text-center text-white">¿Ya tienes una cuenta? <a href="/quizgame/usuario/login" class="text-info">Inicia sesión</a></p>
+    </div>
 </div>
-</body>

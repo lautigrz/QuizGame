@@ -1,5 +1,5 @@
 
-<div class="container d-flex justify-content-center align-items-center" style="height: 85vh;">
+<div class="container d-flex justify-content-center align-items-center" style="height: 90vh;">
     <div class="card text-center" style="width: 80%; max-width: 600px; border-radius: 20px; box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);">
         <div class="card-header bg-success text-white" style="border-radius: 20px 20px 0 0;">
             <h3 class="card-title">Pregunta</h3>
@@ -35,10 +35,10 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="respuestaIncorrectaLabel">Respuesta Incorrecta</h5>
+        <h5 class="modal-title" id="respuestaIncorrectaLabel">Puntaje final:{{puntaje}}</h5>
       </div>
       <div class="modal-body text-center">
-        <p class="text-danger h5">Lo siento, tu respuesta es incorrecta.</p>
+        <p class="text-danger h5">Respuesta incorrecta. La respuesta es {{respuesta}}</p>
       </div>
       <div class="modal-footer">
         <a href="#" class="btn btn-secondary" onclick="cerrarYRedirigir('/quizgame/usuario/mostrarLobbyView')">Cerrar<a>
@@ -46,6 +46,7 @@
     </div>
   </div>
 </div>
+
 
 <!-- Modal para reportar la pregunta -->
 <div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">

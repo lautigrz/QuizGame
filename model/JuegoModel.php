@@ -46,5 +46,21 @@ class JuegoModel{
         return $respuesta;
     }
 
+    public function guardarPartida($data){
+        var_dump($data['fecha_partida']);
+        $sql = "INSERT INTO partida (puntaje_obtenido,fecha_partida,idUsuario) values ('". $data['puntaje'] . "' , '". $data['fecha_partida'] . "' , '" . $data['user'] . "')";
+
+        $this->database->query($sql);
+
+        $this->actualizarPuntajeDeUsuario($data);
+    }
+
+    public function actualizarPuntajeDeUsuario($data){
+        $sql = "UPDATE usuario 
+        SET puntaje = puntaje + " . $data['puntaje'] . " 
+        WHERE id = " . $data['user'];
+        $this->database->query($sql);
+
+    }
 
 }
