@@ -49,6 +49,11 @@ body {
   background-color: #23233b;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Sombra */
   border-radius: 10px; /* Bordes redondeados */
+ 
+}
+
+.text-correcto {
+  color: green; /* O el color que prefieras */
 }
 
 /* Estilos para hacer los labels blancos */

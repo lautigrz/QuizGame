@@ -10,8 +10,9 @@ class JuegoModel{
 
     public function obtenerPregunta(){
 
-                    $queryPregunta = "SELECT id, pregunta
-                    FROM preguntas
+                    $queryPregunta = "SELECT p.id, p.pregunta, c.color, c.icono
+                    FROM preguntas p
+                    JOIN categoria c on c.id = p.idCategoria
                     ORDER BY RAND()
                     LIMIT 1
                     "; 
@@ -27,7 +28,9 @@ class JuegoModel{
                     $result = [
                      'id' => $pregunta[0]['id'],
                     'pregunta' => $pregunta[0]['pregunta'],
-                    'opciones' => $opciones
+                    'opciones' => $opciones,
+                    'color' => $pregunta[0]['color'],
+                    'icono' => $pregunta[0]['icono']
                     ];
                     return $result;
 

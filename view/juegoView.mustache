@@ -1,13 +1,17 @@
 
-<div class="container d-flex justify-content-center align-items-center" style="height: 90gvh;">
+{{#preguntas}}
+<div class="container d-flex justify-content-center align-items-center" style="height: 90vh;">
     <div class="card text-center" style="width: 80%; max-width: 600px; border-radius: 20px; box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);">
-        <div class="card-header bg-success text-white" style="border-radius: 20px 20px 0 0;">
-            <h3 class="card-title">Pregunta</h3>
-        </div>
-        
+       <div class="card-header text-white d-flex justify-content-between align-items-center" style="background-color:{{color}}; border-radius: 20px 20px 0 0;">
+     <img src="{{icono}}" style="width: 45px; height: auto;">
+    <h3 class="card-title"style="margin-right:38%;">Pregunta</h3>
+</div>
+
+
+       
         <div class="card-body" style="padding: 30px;">
       
-            {{#preguntas}}
+            
             <p class="card-text h5 mb-4" style="font-weight: bold;">{{pregunta}}</p>
    
             <div class="d-grid gap-2 mx-auto" style="width: 100%;">
@@ -15,7 +19,7 @@
                 <form action="/quizgame/juego/esCorrecta" method="GET">
                     <button type="submit" name="respuesta" class="btn btn-lg mt-2 boton-respuesta"
                             value="{{opcion}}"
-                            style="background-color: #15a00a; color: white; border: none; border-radius: 10px; padding: 15px; width: 100%; white-space: nowrap;">
+                            style="background-color:{{color}}; color: white; border: none; border-radius: 10px; padding: 15px; width: 100%; white-space: nowrap; font-weight: bold;">
                         {{opcion}}
                     </button>
                 </form>
@@ -38,7 +42,8 @@
         <h5 class="modal-title" id="respuestaIncorrectaLabel">Puntaje final:{{puntaje}}</h5>
       </div>
       <div class="modal-body text-center">
-        <p class="text-danger h5">Respuesta incorrecta. La respuesta es {{respuesta}}</p>
+        <p class="text-danger h5">Respuesta incorrecta</p>
+        <p class="h5">Respuesta correcta: <span class="text-success">{{respuesta}}<span></p>
       </div>
       <div class="modal-footer">
         <a href="#" class="btn btn-secondary" onclick="cerrarYRedirigir('/quizgame/usuario/mostrarLobbyView')">Cerrar<a>
