@@ -36,7 +36,7 @@ class SendEmail{
             $this->mailer->setFrom('quizgame088@gmail.com', 'QuizGame');
             $this->mailer->addAddress($email); 
             $this->mailer->isHTML(true);        
-            $this->mailer->Subject = "Hola, $nombre!";
+            $this->mailer->Subject = "Hola $nombre!";
             $body = '
             <html>
             <head>
@@ -73,8 +73,6 @@ class SendEmail{
             
             $this->mailer->Body = $body;
             $this->mailer->send();
-
-            echo "Correo de verificación enviado a $email";
         } catch (Exception $e) {
             echo "El mensaje no pudo ser enviado: {$this->mailer->ErrorInfo}";
         }

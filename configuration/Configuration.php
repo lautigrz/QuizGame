@@ -5,7 +5,7 @@ include_once("helper/IncludeFilePresenter.php");
 include_once("helper/Router.php");
 include_once("helper/MustachePresenter.php");
 include_once("helper/SendEmail.php");
-
+include_once("helper/ImagenUploader.php");
 include_once("controller/UsuarioController.php");
 include_once("controller/JuegoController.php");
 include_once("model/UsuarioModel.php");
@@ -20,7 +20,7 @@ class Configuration
 
     public function getUsuarioController(){
 
-        return new UsuarioController($this->getUsuarioModel(), $this->getPresenter(), $this->getSendEmail());
+        return new UsuarioController($this->getUsuarioModel(), $this->getPresenter(), $this->getSendEmail(), $this->getImagenUploader());
     }
 
     public function getJuegoController(){
@@ -58,5 +58,8 @@ class Configuration
     }
     public function getSendEmail(){
         return new SendEmail();
+    }
+    public function getImagenUploader(){
+        return new ImagenUploader();
     }
 }

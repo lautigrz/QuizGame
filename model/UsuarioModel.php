@@ -20,8 +20,9 @@ class UsuarioModel
     }
     public function registrarUsuario($data){
             $token = rand(100000, 999999);
-            $sql = "INSERT INTO usuario(nombre, apellido, usuario, genero, email, password , estado, token) VALUES ('" . $data['nombre'] . "', '" . $data['apellido'] . "', '" . $data['usuario']  . "', '" . $data['genero']  . "', '" . $data['email']  . "', '" . $data['password']  . "', '" . 0 . "', " . $token . ")";
-            
+            $sql = "INSERT INTO usuario (nombre, apellido, usuario, genero, email, password, estado, token, fotoPerfil) 
+            VALUES ('" . $data['nombre'] . "', '" . $data['apellido'] . "', '" . $data['usuario'] . "', '" . $data['genero'] . "', '" . $data['email'] . "', '" . $data['password'] . "', 0, '" . $token . "', '" . $data['fotoPerfil'] . "')";
+                
             return $this->database->query($sql);
     }
 

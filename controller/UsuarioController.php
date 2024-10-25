@@ -4,12 +4,14 @@ class UsuarioController
     private $model;
     private $presenter;
     private $mailer;
+    private $img;
 
-    public function __construct($model, $presenter, $mailer)
+    public function __construct($model, $presenter, $mailer, $img)
     {
         $this->model = $model;
         $this->presenter = $presenter;
         $this->mailer = $mailer;
+        $this->img = $img;
     }
     public function login()
     {
@@ -49,11 +51,10 @@ class UsuarioController
             
             $usuario = $this->registerUser($data);
     
-            $this->sendVerificationEmail($data['email'], $data['nombre'], $data['usuario']);
+           $this->sendVerificationEmail($data['email'], $data['nombre'], $data['usuario']);
             
-            $this->manejarError("Te hemos enviado un correo para verificar tu cuenta", '/quizgame/login');
+           $this->manejarError("Te hemos enviado un correo para verificar tu cuenta", '/quizgame/login');
 
-            
         } catch (Exception $e) {
             $this->manejarError($e->getMessage(), '/quizgame/usuario/mostrarRegisterView');
         }
@@ -69,7 +70,8 @@ class UsuarioController
         if ($usuarioExistente) {
             throw new Exception('Usuario existente');
         }
-        
+        $ruta = $this->img->guardarImagen($data['usuario']);
+        $data['fotoPerfil'] = $ruta;
         return $this->model->registrarUsuario($data);
     }
     
@@ -84,6 +86,7 @@ class UsuarioController
         exit();
 
     }
+
     private function crearArchivoConToken($token)
     {
         $archivo = fopen("token.txt", "a");
