@@ -140,6 +140,12 @@ public function guardarPreguntasDeLaPartida($preguntas) {
         }
     }
 
+    public function reportePregunta()
+    {
+        $data = $_POST;
+        $this->model->reportePregunta($data);
+        header('Location: /quizgame/usuario/mostrarLobbyView');
+    }
 
     private function guardarPregunta($pregunta){
         $_SESSION['preguntas'] = $pregunta;

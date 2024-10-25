@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-10-2024 a las 22:02:56
+-- Tiempo de generación: 26-10-2024 a las 01:22:41
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -173,7 +173,11 @@ INSERT INTO `partida` (`id`, `puntaje_obtenido`, `fecha_partida`, `idUsuario`) V
 (68, 0, '0000-00-00 00:00:00', 68),
 (69, 0, '0000-00-00 00:00:00', 68),
 (70, 11, '0000-00-00 00:00:00', 68),
-(71, 4, '0000-00-00 00:00:00', 68);
+(71, 4, '0000-00-00 00:00:00', 68),
+(72, 0, '0000-00-00 00:00:00', 74),
+(73, 1, '0000-00-00 00:00:00', 68),
+(74, 1, '0000-00-00 00:00:00', 68),
+(75, 0, '0000-00-00 00:00:00', 68);
 
 -- --------------------------------------------------------
 
@@ -212,6 +216,26 @@ INSERT INTO `preguntas` (`id`, `pregunta`, `estado`, `idUsuario`, `idCategoria`)
 (46, '¿Qué es el \"Big Bang\"?', 1, 68, 3),
 (47, '¿En qué país se encuentra la Torre Eiffel?', 1, 68, 1),
 (48, '¿Qué es la fuerza de gravedad?', 1, 68, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `reporte`
+--
+
+CREATE TABLE `reporte` (
+  `id` int(11) NOT NULL,
+  `idPregunta` int(11) DEFAULT NULL,
+  `idUsuarioReporte` int(11) DEFAULT NULL,
+  `detalleReporte` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `reporte`
+--
+
+INSERT INTO `reporte` (`id`, `idPregunta`, `idUsuarioReporte`, `detalleReporte`) VALUES
+(3, 46, 68, 'asd');
 
 -- --------------------------------------------------------
 
@@ -266,19 +290,21 @@ CREATE TABLE `usuario` (
   `estado` tinyint(1) NOT NULL,
   `token` int(6) NOT NULL,
   `puntaje` int(11) NOT NULL,
-  `fotoPerfil` varchar(255) NOT NULL
+  `fotoPerfil` varchar(255) NOT NULL,
+  `admin` tinyint(1) NOT NULL,
+  `editor` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`id`, `nombre`, `apellido`, `usuario`, `genero`, `email`, `password`, `estado`, `token`, `puntaje`, `fotoPerfil`) VALUES
-(68, 'Lautaro', 'Gerez', 'lautigrz', 'M', 'lautarogerezz12@gmail.com', '123', 1, 681159, 53, ''),
-(70, '', '', '', '', '', '', 0, 432768, 0, ''),
-(73, 'chad', 'chad', 'chad123', 'M', 'chad12@gmial.com', '123', 1, 300048, 0, './public/image/perfil/chad123.jpg'),
-(74, 'messi12', 'messi', 'messi', 'F', 'messi12@gmail.com', '123', 1, 369750, 0, './public/image/perfil/messi.jpg'),
-(75, 'Lautaro', 'ddd', 'lautigrz2', 'M', 'gerez.lautaro12@gmail.com', '123', 1, 489772, 0, './public/image/perfil/lautigrz2.jpg');
+INSERT INTO `usuario` (`id`, `nombre`, `apellido`, `usuario`, `genero`, `email`, `password`, `estado`, `token`, `puntaje`, `fotoPerfil`, `admin`, `editor`) VALUES
+(68, 'Lautaro', 'Gerez', 'lautigrz', 'M', 'lautarogerezz12@gmail.com', '123', 1, 681159, 55, '', 0, 0),
+(70, '', '', '', '', '', '', 0, 432768, 0, '', 0, 0),
+(73, 'admin', 'admin', 'admin', 'M', 'admin@gmail.com', 'admin', 1, 300048, 0, './public/image/perfil/chad123.jpg', 1, 0),
+(74, 'editor', 'editor', 'editor', 'F', 'editor@gmail.com', 'editor', 1, 369750, 0, './public/image/perfil/messi.jpg', 0, 1),
+(75, 'Lautaro', 'ddd', 'lautigrz2', 'M', 'gerez.lautaro12@gmail.com', '123', 1, 489772, 0, './public/image/perfil/lautigrz2.jpg', 0, 0);
 
 --
 -- Índices para tablas volcadas
@@ -311,6 +337,14 @@ ALTER TABLE `preguntas`
   ADD PRIMARY KEY (`id`),
   ADD KEY `idUsuario` (`idUsuario`),
   ADD KEY `idCategoria` (`idCategoria`);
+
+--
+-- Indices de la tabla `reporte`
+--
+ALTER TABLE `reporte`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idPregunta` (`idPregunta`),
+  ADD KEY `idUsuarioReporte` (`idUsuarioReporte`);
 
 --
 -- Indices de la tabla `respuesta`
@@ -348,13 +382,19 @@ ALTER TABLE `opciones`
 -- AUTO_INCREMENT de la tabla `partida`
 --
 ALTER TABLE `partida`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- AUTO_INCREMENT de la tabla `preguntas`
 --
 ALTER TABLE `preguntas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+
+--
+-- AUTO_INCREMENT de la tabla `reporte`
+--
+ALTER TABLE `reporte`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `respuesta`
@@ -390,6 +430,13 @@ ALTER TABLE `partida`
 ALTER TABLE `preguntas`
   ADD CONSTRAINT `preguntas_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`id`),
   ADD CONSTRAINT `preguntas_ibfk_2` FOREIGN KEY (`idCategoria`) REFERENCES `categoria` (`id`);
+
+--
+-- Filtros para la tabla `reporte`
+--
+ALTER TABLE `reporte`
+  ADD CONSTRAINT `reporte_ibfk_1` FOREIGN KEY (`idPregunta`) REFERENCES `preguntas` (`id`),
+  ADD CONSTRAINT `reporte_ibfk_2` FOREIGN KEY (`idUsuarioReporte`) REFERENCES `usuario` (`id`);
 
 --
 -- Filtros para la tabla `respuesta`

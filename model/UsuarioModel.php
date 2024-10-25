@@ -51,7 +51,13 @@ class UsuarioModel
         }
         $this->cambiarEstado($usuarioResult[0]['id']);
     }
-    
+
+    public function obtenerTodasLasPreguntas()
+    {
+        $sql = "SELECT p.pregunta, p.estado, c.descripcion AS categoria, c.color, GROUP_CONCAT(o.opcion ORDER BY o.id SEPARATOR ', ') AS opciones, MAX(CASE WHEN r.opcionID = o.id THEN o.opcion ELSE NULL END) AS es_correcta FROM preguntas p JOIN categoria c ON p.idCategoria = c.id JOIN opciones o ON p.id = o.preguntaID LEFT JOIN respuesta r ON r.preguntaID = p.id GROUP BY p.id, p.pregunta, p.estado, c.descripcion, c.color ORDER BY p.id;";
+        return $this->database->query($sql);
+    }
+
     private function cambiarEstado($id) {
         $estado = 1;
         $this->database->query("UPDATE usuario SET estado = '$estado' WHERE id = '$id'");

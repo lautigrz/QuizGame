@@ -26,11 +26,6 @@
                 {{/opciones}}
             </div>
             {{/preguntas}}
-
-            <!-- Botón de Reportar que abre el modal -->
-            <button type="button" class="btn btn-danger mt-4" style="width: 100%; padding: 10px; border-radius: 10px;" data-bs-toggle="modal" data-bs-target="#reportModal">
-                Reportar Pregunta
-            </button>
         </div>
     </div>
 </div>
@@ -44,6 +39,10 @@
       <div class="modal-body text-center">
         <p class="text-danger h5">Respuesta incorrecta</p>
         <p class="h5">Respuesta correcta: <span class="text-success">{{respuesta}}<span></p>
+          <!-- Botón de Reportar que abre el modal -->
+          <button type="button" class="btn btn-danger mt-4" style="width: 100%; padding: 10px; border-radius: 10px;" data-bs-toggle="modal" data-bs-target="#reportModal">
+              Reportar Pregunta
+          </button>
       </div>
       <div class="modal-footer">
         <a href="#" class="btn btn-secondary" onclick="cerrarYRedirigir('/quizgame/usuario/mostrarLobbyView')">Cerrar<a>
@@ -62,7 +61,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="/quizgame/juego/reportarPregunta" method="POST">
+        <form action="/quizgame/juego/reportePregunta" method="POST">
           <div class="mb-3">
             <label for="motivo" class="form-label">Motivo del Reporte</label>
             <textarea class="form-control" id="motivo" name="motivo" rows="3" required></textarea>

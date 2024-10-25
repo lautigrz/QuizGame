@@ -43,6 +43,18 @@ class UsuarioController
         $this->setDatos($data);
         $this->presenter->show('register', $data);
     }
+    public function mostrarAdminView()
+    {
+        $data = [];
+        $this->setDatos($data);
+        $this->presenter->show('admin', $data);
+    }
+    public function mostrarEditorView()
+    {
+        $data = [];
+        $this->setDatos($data);
+        $this->presenter->show('editor', $data);
+    }
 
     public function register() {
         try {
@@ -113,7 +125,14 @@ class UsuarioController
         $usuario = $this->model->validate($user, $pass);
         
         if ($usuario) {
-            if ($usuario[0]['estado'] == 1) {
+            if ($usuario[0]['admin'] == 1){
+                $this->manejarSesion($usuario);
+                header('Location: /quizgame/usuario/mostrarAdminView');
+            }else if($usuario[0]['editor'] == 1){
+                $this->manejarSesion($usuario);
+                $_SESSION['editorPreguntas'] = $this->model->obtenerTodasLasPreguntas();
+                header('Location: /quizgame/usuario/mostrarEditorView');
+            }else if ($usuario[0]['estado'] == 1) {
                 $this->manejarSesion($usuario);
                 $this->redirigirUsuarioLogeado();
             } else {
@@ -130,8 +149,11 @@ class UsuarioController
             unset( $_SESSION['error']);
         }if(!empty($_SESSION['user'])){
             $data["user"] = $_SESSION['user'];
+        }if(!empty($_SESSION['editorPreguntas'])){
+            $data["editorPreguntas"] = $_SESSION['editorPreguntas'];
         }
     }
+
 
     private function manejarSesion($usuario) {
         $_SESSION['user'] = $usuario[0];
@@ -145,6 +167,7 @@ class UsuarioController
         header('Location: /quizgame/usuario/mostrarLobbyView');
         exit();
     }
+
     private function getVerificationToken($usuario) {
         $usuarioData = $this->model->buscarUsuario($usuario);
         return $usuarioData[0]['token'] ?? null;
