@@ -23,20 +23,7 @@ class AuthController {
         $data = [];
         $this->setDatos($data);
         $this->presenter->show('register', $data);
-    }
-   
-    public function mostrarAdminView()
-    {
-        $data = [];
-        $this->setDatos($data);
-        $this->presenter->show('admin', $data);
-    }
-    public function mostrarEditorView()
-    {
-        $data = [];
-        $this->setDatos($data);
-        $this->presenter->show('editor', $data);
-    }
+    }   
     
     public function register() {
         try {
@@ -59,12 +46,14 @@ class AuthController {
         if ($usuarioExistente) {
             throw new Exception('Usuario existente');
         }
-        $ruta = $this->img->guardarImagen($data['usuario']);
-        $data['fotoPerfil'] = $ruta;
+      
+        $this->saveImage($data);
         return $this->model->registrarUsuario($data);
     }
 
-    
+    public function saveImage(&$data){
+        $data['fotoPerfil'] = $this->img->guardarImagen($data['usuario']);
+    }
     
     public function validateRegisterInput($data) {
         if ($data['password'] !== $data['repeatPassword']) {
@@ -103,11 +92,11 @@ class AuthController {
         if ($usuario) {
             if ($usuario[0]['admin'] == 1){
                 $this->manejarSesion($usuario);
-                header('Location: /quizgame/usuario/mostrarAdminView');
+                header('Location: /quizgame/admin/mostrarAdminView');
             }else if($usuario[0]['editor'] == 1){
                 $this->manejarSesion($usuario);
                 $_SESSION['editorPreguntas'] = $this->model->obtenerTodasLasPreguntas();
-                header('Location: /quizgame/usuario/mostrarEditorView');
+                header('Location: /quizgame/editor/mostrarEditorView');
             }else if ($usuario[0]['estado'] == 1) {
                 $this->manejarSesion($usuario);
                 $this->redirigirUsuarioLogeado();
@@ -139,7 +128,7 @@ class AuthController {
         exit();
     }
     private function redirigirUsuarioLogeado() {
-        header('Location: /quizgame/usuario/mostrarLobbyView');
+        header('Location: /quizgame/home/lobby');
         exit();
     }
 

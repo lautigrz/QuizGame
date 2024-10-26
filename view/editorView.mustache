@@ -7,21 +7,21 @@
             <p class="card-text"><strong>Es correcta:</strong> {{es_correcta}}</p>
             <div class="d-flex justify-content-end gap-2">
                 <!-- Formulario para deshabilitar la pregunta -->
-                <form action="/quizgame/usuario/alterarPregunta" method="POST" style="display: inline;">
+                <form action="/quizgame/editor/alterarPregunta" method="POST" style="display: inline;">
                     <input type="hidden" name="accion" value="deshabilitar">
                     <input type="hidden" name="pregunta" value="{{pregunta}}">
                     <button type="submit" class="btn btn-secondary btn-sm">Deshabilitar</button>
                 </form>
 
                 <!-- Formulario para activar la pregunta -->
-                <form action="/quizgame/usuario/alterarPregunta" method="POST" style="display: inline;">
+                <form action="/quizgame/editor/alterarPregunta" method="POST" style="display: inline;">
                     <input type="hidden" name="accion" value="activar">
                     <input type="hidden" name="pregunta" value="{{pregunta}}">
                     <button type="submit" class="btn btn-success btn-sm">Activar</button>
                 </form>
 
                 <!-- Formulario para desactivar la pregunta -->
-                <form action="/quizgame/usuario/alterarPregunta" method="POST" style="display: inline;">
+                <form action="/quizgame/editor/alterarPregunta" method="POST" style="display: inline;">
                     <input type="hidden" name="accion" value="desactivar">
                     <input type="hidden" name="pregunta" value="{{pregunta}}">
                     <button type="submit" class="btn btn-warning btn-sm">Desactivar</button>
@@ -43,7 +43,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="/quizgame/usuario/alterarPregunta" method="POST">
+                    <form action="/quizgame/editor/alterarPregunta" method="POST">
                         <div class="mb-3">
                             <label for="pregunta" class="form-label">Pregunta</label>
                             <input type="text" name="preguntaModificada" class="form-control" value="{{pregunta}}" required>
