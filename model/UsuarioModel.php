@@ -58,9 +58,53 @@ class UsuarioModel
         return $this->database->query($sql);
     }
 
+    private function buscarPregunta($pregunta)
+    {
+        $sql = "SELECT 1 FROM preguntas WHERE pregunta = '$pregunta'";
+        return $this->database->query($sql);
+    }
+    private function insertarOpcionesPorPregunta($pregunta, $opciones)
+    {
+
+    }
+    private function borrarTodoRelacionadoPreguntaParaInsertarLaModificada($pregunta_id)
+    {
+        /*-- 1. Eliminar respuestas relacionadas con la pregunta
+        DELETE FROM respuesta WHERE pregunta_id = :'.$pregunta_id.';
+
+        -- 2. Eliminar opciones relacionadas con la pregunta
+        DELETE FROM opciones WHERE pregunta_id = :'.$pregunta_id.';
+
+        -- 3. Eliminar la pregunta
+        DELETE FROM preguntas WHERE id = :'.$pregunta_id.';
+        */
+    }
     private function cambiarEstado($id) {
         $estado = 1;
         $this->database->query("UPDATE usuario SET estado = '$estado' WHERE id = '$id'");
     }
-    
+
+    //------------------------------------editor----------------------------------------------
+
+    public function desactivarPregunta($pregunta)
+    {
+        //$sql = "UPDATE preguntas SET estado = 'desactiva' WHERE pregunta = '$pregunta'";
+        //$this->database->query($sql);
+    }
+    public function activarPregunta($pregunta)
+    {
+        //$sql = "UPDATE preguntas SET estado = 'activa' WHERE pregunta = '$pregunta'";
+        //$this->database->query($sql);
+    }
+    public function deshabilitarPregunta($pregunta)
+    {
+        /*$sql = "UPDATE preguntas SET estado = 'deshabilitada' WHERE pregunta = '$pregunta'";
+        $this->database->query($sql);*/
+    }
+    public function modificarPregunta($pregunta, $preguntaModificada, $opciones, $es_correcta)
+    {
+        //$preguntaObtenida = $this->buscarPregunta($pregunta);
+
+    }
+
 }

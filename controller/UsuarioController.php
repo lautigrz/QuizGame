@@ -35,10 +35,6 @@ class UsuarioController
         fwrite($archivo," - " . $token);
         fclose($archivo);
     }
-
-
-    
-
     public function setDatos(&$data){
         if(!empty($_SESSION['error'])){
             $data["error"] = $_SESSION['error'];
@@ -49,7 +45,31 @@ class UsuarioController
             $data["editorPreguntas"] = $_SESSION['editorPreguntas'];
         }
     }
-  
+
+      //---------------------------editor-----------------------------------------------
+    public function alterarPregunta(){
+        switch ($_POST['accion']){
+            case 'deshabilitar':
+                $this->model->deshabilitarPregunta($_POST['pregunta']);
+                break;
+            case 'activar':
+                $this->model->activarPregunta($_POST['pregunta']);
+                    break;
+            case 'desactivar':
+                $this->model->desactivarPregunta($_POST['pregunta']);
+                break;
+            case 'modificar':
+                $this->model->modificarPregunta($_POST['pregunta'], $_POST['preguntaModificada'], $_POST['opciones'], $_POST['es_correcta']);
+                break;
+
+        }
+    }
 }
+  
+
+   
+
+
+
 
 

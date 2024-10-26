@@ -1,18 +1,95 @@
 {{#editorPreguntas}}
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">{{pregunta}}</h5>
+            <p class="card-text"><strong>Estado:</strong> {{estado}}</p>
+            <p class="card-text"><strong>Opción:</strong> {{opciones}}</p>
+            <p class="card-text"><strong>Es correcta:</strong> {{es_correcta}}</p>
+            <div class="d-flex justify-content-end gap-2">
+                <!-- Formulario para deshabilitar la pregunta -->
+                <form action="/quizgame/usuario/alterarPregunta" method="POST" style="display: inline;">
+                    <input type="hidden" name="accion" value="deshabilitar">
+                    <input type="hidden" name="pregunta" value="{{pregunta}}">
+                    <button type="submit" class="btn btn-secondary btn-sm">Deshabilitar</button>
+                </form>
 
-        <div class="card mb-3">
-            <div class="card-body">
-                <h5 class="card-title">{{pregunta}}</h5>
-                <p class="card-text"><strong>Estado:</strong> {{estado}}</p>
-                <p class="card-text"><strong>Opción:</strong> {{opciones}}</p>
-                <p class="card-text"><strong>Es correcta:</strong> {{es_correcta}}</p>
-                <div class="d-flex justify-content-end gap-2">
-                    <button class="btn btn-secondary btn-sm" onclick="deshabilitarPregunta('{{pregunta}}')">Deshabilitar</button>
-                    <button class="btn btn-success btn-sm" onclick="activarPregunta('{{pregunta}}')">Activar</button>
-                    <button class="btn btn-warning btn-sm" onclick="desactivarPregunta('{{pregunta}}')">Desactivar</button>
-                    <button class="btn btn-primary btn-sm" onclick="modificarPregunta('{{pregunta}}')">Modificar</button>
+                <!-- Formulario para activar la pregunta -->
+                <form action="/quizgame/usuario/alterarPregunta" method="POST" style="display: inline;">
+                    <input type="hidden" name="accion" value="activar">
+                    <input type="hidden" name="pregunta" value="{{pregunta}}">
+                    <button type="submit" class="btn btn-success btn-sm">Activar</button>
+                </form>
+
+                <!-- Formulario para desactivar la pregunta -->
+                <form action="/quizgame/usuario/alterarPregunta" method="POST" style="display: inline;">
+                    <input type="hidden" name="accion" value="desactivar">
+                    <input type="hidden" name="pregunta" value="{{pregunta}}">
+                    <button type="submit" class="btn btn-warning btn-sm">Desactivar</button>
+                </form>
+
+                <!-- Botón de modificar que abre el modal -->
+                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#reportModal">
+                    Modificar
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- Modal para modificar la pregunta -->
+    <div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="reportModalLabel">Modificar Pregunta</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="/quizgame/usuario/alterarPregunta" method="POST">
+                        <div class="mb-3">
+                            <label for="pregunta" class="form-label">Pregunta</label>
+                            <input type="text" name="preguntaModificada" class="form-control" value="{{pregunta}}" required>
+                        </div>
+
+                        <label class="form-label">Opciones:</label>
+                        <div class="mb-3">
+                            <input type="text" name="opciones[]" class="form-control mb-2" value="{{texto}}" required>
+                            <label>
+                                <input type="checkbox" name="es_correcta[]" value="{{id}}" {{#es_correcta}}checked{{/es_correcta}} />
+                                Correcta
+                            </label>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" name="opciones[]" class="form-control mb-2" value="{{texto}}" required>
+                            <label>
+                                <input type="checkbox" name="es_correcta[]" value="{{id}}" {{#es_correcta}}checked{{/es_correcta}} />
+                                Correcta
+                            </label>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" name="opciones[]" class="form-control mb-2" value="{{texto}}" required>
+                            <label>
+                                <input type="checkbox" name="es_correcta[]" value="{{id}}" {{#es_correcta}}checked{{/es_correcta}} />
+                                Correcta
+                            </label>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" name="opciones[]" class="form-control mb-2" value="{{texto}}" required>
+                            <label>
+                                <input type="checkbox" name="es_correcta[]" value="{{id}}" {{#es_correcta}}checked{{/es_correcta}} />
+                                Correcta
+                            </label>
+                        </div>
+                        <input type="hidden" name="pregunta" value="{{pregunta}}">
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-danger">Modificar</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
+    </div>
 {{/editorPreguntas}}
+
+
+
 
