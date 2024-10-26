@@ -29,7 +29,7 @@
 
                 <!-- Botón de modificar que abre el modal -->
                 <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#reportModal">
-                    modificar
+                    Modificar
                 </button>
             </div>
         </div>
@@ -45,37 +45,38 @@
                 <div class="modal-body">
                     <form action="/quizgame/usuario/alterarPregunta" method="POST">
                         <div class="mb-3">
-                            <label for="pregunta" class="form-label">Pregunta</label><br>
-                            <input type="text" name="preguntaModificada" value="{{pregunta}}"><br>
+                            <label for="pregunta" class="form-label">Pregunta</label>
+                            <input type="text" name="preguntaModificada" class="form-control" value="{{pregunta}}" required>
+                        </div>
 
-                            <div>
-                                <input type="text" name="opciones[]" value="{{texto}}" required />
-                                <label>
-                                    <input type="checkbox" name="es_correcta[]" value="{{id}}" {{#es_correcta}}checked{{/es_correcta}} />
-                                    Correcta
-                                </label>
-                            </div>
-                            <div>
-                                <input type="text" name="opciones[]" value="{{texto}}" required />
-                                <label>
-                                    <input type="checkbox" name="es_correcta[]" value="{{id}}" {{#es_correcta}}checked{{/es_correcta}} />
-                                    Correcta
-                                </label>
-                            </div>
-                            <div>
-                                <input type="text" name="opciones[]" value="{{texto}}" required />
-                                <label>
-                                    <input type="checkbox" name="es_correcta[]" value="{{id}}" {{#es_correcta}}checked{{/es_correcta}} />
-                                    Correcta
-                                </label>
-                            </div>
-                            <div>
-                                <input type="text" name="opciones[]" value="{{texto}}" required />
-                                <label>
-                                    <input type="checkbox" name="es_correcta[]" value="{{id}}" {{#es_correcta}}checked{{/es_correcta}} />
-                                    Correcta
-                                </label>
-                            </div>
+                        <label class="form-label">Opciones:</label>
+                        <div class="mb-3">
+                            <input type="text" name="opciones[]" class="form-control mb-2" value="{{texto}}" required>
+                            <label>
+                                <input type="checkbox" name="es_correcta[]" value="{{id}}" {{#es_correcta}}checked{{/es_correcta}} />
+                                Correcta
+                            </label>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" name="opciones[]" class="form-control mb-2" value="{{texto}}" required>
+                            <label>
+                                <input type="checkbox" name="es_correcta[]" value="{{id}}" {{#es_correcta}}checked{{/es_correcta}} />
+                                Correcta
+                            </label>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" name="opciones[]" class="form-control mb-2" value="{{texto}}" required>
+                            <label>
+                                <input type="checkbox" name="es_correcta[]" value="{{id}}" {{#es_correcta}}checked{{/es_correcta}} />
+                                Correcta
+                            </label>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" name="opciones[]" class="form-control mb-2" value="{{texto}}" required>
+                            <label>
+                                <input type="checkbox" name="es_correcta[]" value="{{id}}" {{#es_correcta}}checked{{/es_correcta}} />
+                                Correcta
+                            </label>
                         </div>
                         <input type="hidden" name="pregunta" value="{{pregunta}}">
                         <div class="modal-footer">
@@ -88,6 +89,7 @@
         </div>
     </div>
 {{/editorPreguntas}}
+
 
 
 
