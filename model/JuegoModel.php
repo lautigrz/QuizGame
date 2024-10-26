@@ -10,21 +10,9 @@ class JuegoModel{
 
     public function obtenerPregunta(){
 
-                    $queryPregunta = "SELECT p.id, p.pregunta, c.color, c.icono
-                    FROM preguntas p
-                    JOIN categoria c on c.id = p.idCategoria
-                    ORDER BY RAND()
-                    LIMIT 1
-                    "; 
-                    $pregunta = $this->database->query($queryPregunta);
-
-                    $queryOpciones = "SELECT opcion
-                    FROM opciones
-                    WHERE preguntaID = " . $pregunta[0]['id'] . "
-                    ";
- 
-                    $opciones = $this->database->query($queryOpciones);
-       
+           $pregunta = $this->pregunta();
+           $opciones = $this->opciones($pregunta[0]['id']);
+                    
                     $result = [
                      'id' => $pregunta[0]['id'],
                     'pregunta' => $pregunta[0]['pregunta'],
@@ -34,6 +22,40 @@ class JuegoModel{
                     ];
                     return $result;
 
+    }
+
+    public function obtenerPreguntasVistasPorElUsuario($id){
+
+        $sql = "SELECT idPregunta FROM historico WHERE idUsuario = " . $id ." ";
+        $preguntas = $this->database->query($sql);
+        return $preguntas;
+    } 
+    
+    public function guardarPreguntaVista($idUsuario,$idPregunta){
+        $sql = "INSERT INTO historico (idUsuario,idPregunta) values ('". $idUsuario . "' , '". $idPregunta . "')";
+        $this->database->query($sql);
+    }
+
+    private function opciones($id){
+        
+        $queryOpciones = "SELECT opcion
+        FROM opciones
+        WHERE preguntaID = " . $id . "
+        ";
+
+        $opciones = $this->database->query($queryOpciones);
+        return $opciones;
+    }
+
+    private function pregunta(){
+        $queryPregunta = "SELECT p.id, p.pregunta, c.color, c.icono
+                    FROM preguntas p
+                    JOIN categoria c on c.id = p.idCategoria
+                    ORDER BY RAND()
+                    LIMIT 1
+                    "; 
+                    $pregunta = $this->database->query($queryPregunta);
+      return $pregunta;
     }
 
     public function verificar($preguntaID){

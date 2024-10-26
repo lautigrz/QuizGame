@@ -62,15 +62,32 @@ public function guardarPreguntasDeLaPartida($preguntas) {
     if (!isset($_SESSION['preguntas_data'])) {
         $_SESSION['preguntas_data'] = [];
     }
+        $id = $this->idUsuario();
+    
 
-    if (!$this->verificarQueNoSeaPreguntaRepetida($preguntas['pregunta'])) {
-     
+    if (!$this->preguntaDisponibleParaElUsuario($preguntas, $id)) {
+       # !$this->verificarQueNoSeaPreguntaRepetida($preguntas['pregunta'])
         $_SESSION['preguntas_data'][] = ['pregunta' => $preguntas['pregunta']];
-   
+        $this->model->guardarPreguntaVista($id,$preguntas['id']);
         return true;
     }
     return false;
-}
+}   
+
+    public function preguntaDisponibleParaElUsuario($pregunta, $id){
+
+        $preguntas = $this->model->obtenerPreguntasVistasPorElUsuario($id);
+        
+        foreach($preguntas as $preg){
+            if($preg == $pregunta[0]['id']){
+                return true;
+                break;
+            }
+        }
+
+        return false;
+
+    }
 
     public function verificarQueNoSeaPreguntaRepetida($pregunta) {
 
@@ -144,11 +161,17 @@ public function guardarPreguntasDeLaPartida($preguntas) {
     private function guardarPregunta($pregunta){
         $_SESSION['preguntas'] = $pregunta;
     }
-    private function hayRespuestaIncorrecta() {
-        return isset($_SESSION['respuesta_incorrecta']);
+
+    private function idUsuario(){
+      return $this->existeUsuario() && isset($_SESSION['user']['id']) ? $_SESSION['user']['id'] : null;
     }
+    
+
     private function existeUsuario() {
         return isset($_SESSION['user']);
+    }
+    private function hayRespuestaIncorrecta() {
+        return isset($_SESSION['respuesta_incorrecta']);
     }
     private function preguntasEnCurso() {
         return isset($_SESSION['preguntas_data']);
