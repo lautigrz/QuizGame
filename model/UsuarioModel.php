@@ -51,10 +51,60 @@ class UsuarioModel
         }
         $this->cambiarEstado($usuarioResult[0]['id']);
     }
-    
+
+    public function obtenerTodasLasPreguntas()
+    {
+        $sql = "SELECT p.pregunta, p.estado, c.descripcion AS categoria, c.color, GROUP_CONCAT(o.opcion ORDER BY o.id SEPARATOR ', ') AS opciones, MAX(CASE WHEN r.opcionID = o.id THEN o.opcion ELSE NULL END) AS es_correcta FROM preguntas p JOIN categoria c ON p.idCategoria = c.id JOIN opciones o ON p.id = o.preguntaID LEFT JOIN respuesta r ON r.preguntaID = p.id GROUP BY p.id, p.pregunta, p.estado, c.descripcion, c.color ORDER BY p.id;";
+        return $this->database->query($sql);
+    }
+
+    private function buscarPregunta($pregunta)
+    {
+        $sql = "SELECT 1 FROM preguntas WHERE pregunta = '$pregunta'";
+        return $this->database->query($sql);
+    }
+    private function insertarOpcionesPorPregunta($pregunta, $opciones)
+    {
+
+    }
+    private function borrarTodoRelacionadoPreguntaParaInsertarLaModificada($pregunta_id)
+    {
+        /*-- 1. Eliminar respuestas relacionadas con la pregunta
+        DELETE FROM respuesta WHERE pregunta_id = :'.$pregunta_id.';
+
+        -- 2. Eliminar opciones relacionadas con la pregunta
+        DELETE FROM opciones WHERE pregunta_id = :'.$pregunta_id.';
+
+        -- 3. Eliminar la pregunta
+        DELETE FROM preguntas WHERE id = :'.$pregunta_id.';
+        */
+    }
     private function cambiarEstado($id) {
         $estado = 1;
         $this->database->query("UPDATE usuario SET estado = '$estado' WHERE id = '$id'");
     }
-    
+
+    //------------------------------------editor----------------------------------------------
+
+    public function desactivarPregunta($pregunta)
+    {
+        //$sql = "UPDATE preguntas SET estado = 'desactiva' WHERE pregunta = '$pregunta'";
+        //$this->database->query($sql);
+    }
+    public function activarPregunta($pregunta)
+    {
+        //$sql = "UPDATE preguntas SET estado = 'activa' WHERE pregunta = '$pregunta'";
+        //$this->database->query($sql);
+    }
+    public function deshabilitarPregunta($pregunta)
+    {
+        /*$sql = "UPDATE preguntas SET estado = 'deshabilitada' WHERE pregunta = '$pregunta'";
+        $this->database->query($sql);*/
+    }
+    public function modificarPregunta($pregunta, $preguntaModificada, $opciones, $es_correcta)
+    {
+        //$preguntaObtenida = $this->buscarPregunta($pregunta);
+
+    }
+
 }

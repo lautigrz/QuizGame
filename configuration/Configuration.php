@@ -8,6 +8,10 @@ include_once("helper/SendEmail.php");
 include_once("helper/ImagenUploader.php");
 include_once("controller/UsuarioController.php");
 include_once("controller/JuegoController.php");
+include_once("controller/AuthController.php");
+include_once("controller/EditorController.php");
+include_once("controller/AdminController.php");
+include_once("controller/HomeController.php");
 include_once("model/UsuarioModel.php");
 include_once("model/JuegoModel.php");
 
@@ -20,11 +24,27 @@ class Configuration
 
     public function getUsuarioController(){
 
-        return new UsuarioController($this->getUsuarioModel(), $this->getPresenter(), $this->getSendEmail(), $this->getImagenUploader());
+        return new UsuarioController($this->getUsuarioModel(), $this->getPresenter());
     }
 
     public function getJuegoController(){
         return new JuegoController($this->getJuegoModel(), $this->getPresenter());
+    }
+
+    public function getEditorController(){
+        return new EditorController($this->getUsuarioModel(), $this->getPresenter());
+    }
+
+    public function getHomeController(){
+        return new HomeController($this->getUsuarioModel(),$this->getPresenter());
+    }
+    public function getAdminController(){
+        return new AdminController($this->getUsuarioModel(),$this->getPresenter());
+    }
+
+
+    public function getAuthController(){
+        return new AuthController($this->getUsuarioModel(), $this->getPresenter(), $this->getSendEmail(), $this->getImagenUploader());
     }
 
     public function getJuegoModel(){
@@ -49,7 +69,7 @@ class Configuration
 
     public function getRouter()
     {
-        return new Router($this, "getUsuarioController", "login");
+        return new Router($this, "getAuthController", "login");
     }
 
     private function getUsuarioModel()

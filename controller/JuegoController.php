@@ -14,12 +14,10 @@ class JuegoController{
         $data = [];
         $this->setData($data);
         $this->presenter->show("juego",$data);
-
-        
     }
     
     public function partida(){
-
+ 
         if($this->existeUsuario()){
 
             if(!$this->preguntasEnCurso()){
@@ -157,6 +155,12 @@ public function guardarPreguntasDeLaPartida($preguntas) {
         }
     }
 
+    public function reportePregunta()
+    {
+        $data = $_POST;
+        $this->model->reportePregunta($data);
+        header('Location: /quizgame/home/lobby');
+    }
 
     private function guardarPregunta($pregunta){
         $_SESSION['preguntas'] = $pregunta;

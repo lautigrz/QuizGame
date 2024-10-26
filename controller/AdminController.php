@@ -1,29 +1,20 @@
 <?php
-class UsuarioController
-{
+
+class AdminController{
     private $model;
     private $presenter;
-
-    public function __construct($model, $presenter)
-    {
+    public function __construct($model, $presenter){
         $this->model = $model;
         $this->presenter = $presenter;
     }
 
-    public function mostrarUserView()
+    public function mostrarAdminView()
     {
         $data = [];
         $this->setDatos($data);
-        $this->presenter->show('user', $data);
-        
+        $this->presenter->show('admin', $data);
     }
 
-    private function crearArchivoConToken($token)
-    {
-        $archivo = fopen("token.txt", "a");
-        fwrite($archivo," - " . $token);
-        fclose($archivo);
-    }
     public function setDatos(&$data){
         if(!empty($_SESSION['error'])){
             $data["error"] = $_SESSION['error'];
@@ -36,11 +27,3 @@ class UsuarioController
     }
 
 }
-  
-
-   
-
-
-
-
-
