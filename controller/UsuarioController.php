@@ -172,7 +172,26 @@ class UsuarioController
         $usuarioData = $this->model->buscarUsuario($usuario);
         return $usuarioData[0]['token'] ?? null;
     }
-  
+    //---------------------------editor-----------------------------------------------
+
+    public function alterarPregunta(){
+        switch ($_POST['accion']){
+            case 'deshabilitar':
+                $this->model->deshabilitarPregunta($_POST['pregunta']);
+                break;
+            case 'activar':
+                $this->model->activarPregunta($_POST['pregunta']);
+                    break;
+            case 'desactivar':
+                $this->model->desactivarPregunta($_POST['pregunta']);
+                break;
+            case 'modificar':
+                $this->model->modificarPregunta($_POST['pregunta'], $_POST['preguntaModificada'], $_POST['opciones'], $_POST['es_correcta']);
+                break;
+
+        }
     }
+
+}
 
 
