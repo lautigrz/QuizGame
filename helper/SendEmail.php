@@ -63,9 +63,9 @@ class SendEmail{
                 <h2>¡Verifique su cuenta!</h2>
                 <p>Estimado/a ' . $usuario . ',</p>
                 <p>Gracias por registrarse a QuizGame. Para poder activar su cuenta, necesitamos que haga clic en el botón a continuación para completar el proceso de verificación:</p>
-                <a href="http://localhost/quizgame/usuario/auth/token=' . $codigoVerificacion . '&usuario=' . $usuario . '" class="button">Verificar Cuenta</a>
+                <a href="http://localhost/quizgame/auth/authenticate/token=' . $codigoVerificacion . '&usuario=' . $usuario . '" class="button">Verificar Cuenta</a>
                 <p>Si no puede hacer clic en el botón, copie y pegue el siguiente enlace en su navegador:</p>
-                <p class="link"><a href="http://localhost/quizgame/usuario/auth/token=' . $codigoVerificacion . '&usuario=' . $usuario . '">http://localhost/quizgame/usuario/auth/token=' . $codigoVerificacion . '&usuario=' . $usuario . '</a></p>
+                <p class="link"><a href="http://localhost/quizgame/auth/authenticate/token=' . $codigoVerificacion . '&usuario=' . $usuario . '">http://localhost/quizgame/auth/authenticate/token=' . $codigoVerificacion . '&usuario=' . $usuario . '</a></p>
                 <p>¡Esperamos verle pronto!</p>
                 <p>Atentamente,<br>El equipo de QuizGame</p>
             </body>
