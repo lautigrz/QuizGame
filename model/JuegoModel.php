@@ -26,22 +26,85 @@ class JuegoModel{
 
     public function obtenerPreguntasVistasPorElUsuario($id){
 
-        $sql = "SELECT idPregunta FROM historico WHERE idUsuario = " . $id ." ";
+        $sql = "SELECT * FROM historico WHERE idUsuario = " . $id ." ";
         $preguntas = $this->database->query($sql);
         return $preguntas;
     } 
+    public function obtenerCantidadDePreguntasVistasPorElUsuario($id){
+
+        $sql = "SELECT COUNT(*) FROM historico WHERE idUsuario = " . $id ." ";
+        $preguntas = $this->database->query($sql);
+        return $preguntas;
+    } 
+
+    public function obtenerCantidadDePreguntas(){
+        
+        $sql = "SELECT COUNT(*) FROM preguntas";
+        $preguntas = $this->database->query($sql);
+        return $preguntas;
+    }
+
+    public function limpiarPreguntasVistas($id){
+        $sql = "DELETE FROM historico WHERE idUsuario = " . $id . " ";
+        $this->database->query($sql);
+
+    }
     
     public function guardarPreguntaVista($idUsuario,$idPregunta){
+
+        $this->registrarRespuestaUsuario($idUsuario, $idPregunta);
+        $this->guardarTemporalmente($idUsuario,$idPregunta);
+      
+    }
+
+    public function respuestaDelUsuario($idUsuario,$idPregunta, $sumaCorrecta){
+        $query = $this->preguntaYaRegistradaParaUsuario($idUsuario,$idPregunta);
+
+        if(!empty($query)){
+
+            $this->updateDificultad($idUsuario,$idPregunta, $sumaCorrecta);
+        }
+    }
+
+    private function updateDificultad($idUsuario, $idPregunta, $sumaCorrecta){
+        $sql = "UPDATE dificultad 
+        SET veces_correctas = veces_correctas + " . $sumaCorrecta . ", 
+            veces_vista = veces_vista + 1 
+        WHERE idUsuario = " . $idUsuario . " AND idPregunta = " . $idPregunta;
+
+        $this->database->query($sql);
+
+    }
+
+    private function guardarTemporalmente($idUsuario,$idPregunta){
         $sql = "INSERT INTO historico (idUsuario,idPregunta) values ('". $idUsuario . "' , '". $idPregunta . "')";
         $this->database->query($sql);
     }
+
+    private function registrarRespuestaUsuario($idUsuario,$idPregunta){
+         $registrada = $this->preguntaYaRegistradaParaUsuario($idUsuario, $idPregunta);
+
+         if(empty($registrada)){
+         $sql = "INSERT INTO dificultad (idUsuario,idPregunta,veces_correctas, veces_vista) values ('". $idUsuario . "' , '". $idPregunta . "', '". 0 . "' , '". 0 . "')";
+        $this->database->query($sql);
+         }
+
+    }
+
+    private function preguntaYaRegistradaParaUsuario($idUsuario, $idPregunta){
+
+        $sql = "SELECT * FROM dificultad WHERE idUsuario = " . $idUsuario ." AND idPregunta = " . $idPregunta . " ";
+        
+       return $this->database->query($sql);
+    }
+
 
     private function opciones($id){
         
         $queryOpciones = "SELECT opcion
         FROM opciones
         WHERE preguntaID = " . $id . "
-        ";
+        ORDER BY RAND()";    
 
         $opciones = $this->database->query($queryOpciones);
         return $opciones;

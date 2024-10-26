@@ -52,7 +52,7 @@ public function preguntaAlazar() {
         }
     }
 
-    return $preguntaActual;
+   return $preguntaActual;
 }
 
 public function guardarPreguntasDeLaPartida($preguntas) {
@@ -64,58 +64,56 @@ public function guardarPreguntasDeLaPartida($preguntas) {
     
 
     if (!$this->preguntaDisponibleParaElUsuario($preguntas, $id)) {
-       # !$this->verificarQueNoSeaPreguntaRepetida($preguntas['pregunta'])
+  
         $_SESSION['preguntas_data'][] = ['pregunta' => $preguntas['pregunta']];
         $this->model->guardarPreguntaVista($id,$preguntas['id']);
         return true;
     }
     return false;
 }   
-
     public function preguntaDisponibleParaElUsuario($pregunta, $id){
 
-        $preguntas = $this->model->obtenerPreguntasVistasPorElUsuario($id);
-        
-        foreach($preguntas as $preg){
-            if($preg == $pregunta[0]['id']){
-                return true;
-                break;
-            }
+    $preguntas = $this->model->obtenerPreguntasVistasPorElUsuario($id);
+
+    foreach ($preguntas as $preg) {
+        if ($preg['idPregunta'] === $pregunta['id']) {
+            $this->verificarSiYaVioTodasLasPreguntas();
+            return true;
         }
-
-        return false;
-
     }
 
-    public function verificarQueNoSeaPreguntaRepetida($pregunta) {
 
-    $hayRepetida = false;
-    foreach ($_SESSION['preguntas_data'] as $preguntaExistente) {
-        if ($preguntaExistente['pregunta'] === $pregunta) {
-            $hayRepetida = true;
-            break;
-        }
-        
-    }
-    return $hayRepetida;
+    return false;
 }
+
+    public function verificarSiYaVioTodasLasPreguntas(){
+
+        $totalVista = $this->model->obtenerCantidadDePreguntasVistasPorElUsuario($this->idUsuario());
+        $preguntasTotales = $this->model->obtenerCantidadDePreguntas();
+        
+        if ($preguntasTotales === $totalVista) {
+            $this->model->limpiarPreguntasVistas($this->idUsuario());
+        }
+        
+    }
+
     public function esCorrecta(){
         $pregunta = $_SESSION['preguntas']['id'];
         $respuesta = $_GET['respuesta'];
-
+        $correcta = 0;
         $opcion = $this->obtenerRespuestaCorrecta($pregunta);
         if($respuesta == $opcion){
             $_SESSION['puntaje'] +=1;
-            header('Location: /quizgame/juego/partida');
-            exit();
+            $correcta = 1;
         }else{
             $_SESSION['respuesta_incorrecta'] = true;
            # unset($_SESSION['preguntas_data']);
             $this->finalizarPartida();
-            header('Location: /quizgame/juego/partida');
-        exit();
+         
         }
-       
+        $this->model->respuestaDelUsuario($this->idUsuario(), $pregunta, $correcta);
+        header('Location: /quizgame/juego/partida');
+        exit();
     }
 
     public function obtenerRespuestaCorrecta($id){
