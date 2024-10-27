@@ -32,8 +32,7 @@ class JuegoController{
     }
 
     public function nuevaPartida(){
-        $_SESSION['puntaje'] = 0;
-        $_SESSION['fecha_partida'] = date('Y-m-d H:i:s');       
+        $_SESSION['puntaje'] = 0;     
     }
 
 public function preguntaAlazar() {
@@ -107,7 +106,6 @@ public function guardarPreguntasDeLaPartida($preguntas) {
             $correcta = 1;
         }else{
             $_SESSION['respuesta_incorrecta'] = true;
-           # unset($_SESSION['preguntas_data']);
             $this->finalizarPartida();
          
         }
@@ -125,7 +123,6 @@ public function guardarPreguntasDeLaPartida($preguntas) {
 
         $data = [
             "puntaje" => $_SESSION['puntaje'],
-            "fecha" => $_SESSION['fecha_partida'],
             "user" => $_SESSION['user']['id']
         ];
 
@@ -168,7 +165,6 @@ public function guardarPreguntasDeLaPartida($preguntas) {
       return $this->existeUsuario() && isset($_SESSION['user']['id']) ? $_SESSION['user']['id'] : null;
     }
     
-
     private function existeUsuario() {
         return isset($_SESSION['user']);
     }

@@ -69,13 +69,30 @@ class JuegoModel{
     private function updateDificultad($idUsuario, $idPregunta, $sumaCorrecta){
         $sql = "UPDATE dificultad 
         SET veces_correctas = veces_correctas + " . $sumaCorrecta . ", 
-            veces_vista = veces_vista + 1 
+            veces_vista = veces_vista + 1 , 
+            porcentaje_acierto = " . $this->porcentajeDeAcierto($idUsuario,$idPregunta,$sumaCorrecta) . " 
         WHERE idUsuario = " . $idUsuario . " AND idPregunta = " . $idPregunta;
 
         $this->database->query($sql);
 
     }
 
+    private function porcentajeDeAcierto($idUsuario, $idPregunta, $sumaCorrecta){
+        $pregunta = $this->obtenerPreguntaDeDificultad($idUsuario, $idPregunta);
+
+        $resultado = (($pregunta[0]['veces_correctas'] + $sumaCorrecta) / ($pregunta[0]['veces_vista'] + 1)) * 100;
+
+        return $resultado;
+    }
+
+    private function obtenerPreguntaDeDificultad($idUsuario, $idPregunta){
+
+        $sql = "SELECT veces_correctas, veces_vista FROM dificultad WHERE idUsuario = " . $idUsuario ." AND idPregunta = " . $idPregunta . " ";
+
+        $query = $this->database->query($sql);
+
+        return $query;
+    }
     private function guardarTemporalmente($idUsuario,$idPregunta){
         $sql = "INSERT INTO historico (idUsuario,idPregunta) values ('". $idUsuario . "' , '". $idPregunta . "')";
         $this->database->query($sql);
@@ -136,7 +153,7 @@ class JuegoModel{
 
     public function guardarPartida($data){
         var_dump($data['fecha_partida']);
-        $sql = "INSERT INTO partida (puntaje_obtenido,fecha_partida,idUsuario) values ('". $data['puntaje'] . "' , '". $data['fecha_partida'] . "' , '" . $data['user'] . "')";
+        $sql = "INSERT INTO partida (puntaje_obtenido,fecha_partida,idUsuario) values ('". $data['puntaje'] . "' , '". date('Y-m-d H:i:s') . "' , '" . $data['user'] . "')";
 
         $this->database->query($sql);
 
