@@ -14,13 +14,28 @@ include_once("controller/AdminController.php");
 include_once("controller/HomeController.php");
 include_once("model/UsuarioModel.php");
 include_once("model/JuegoModel.php");
-
+include_once("model/RankingModel.php");
 include_once('vendor/mustache/src/Mustache/Autoloader.php');
 class Configuration
 {
     public function __construct()
     {
     }
+
+//     //Ranking
+    public function getRankingController(){
+        return new RankingController($this->getRankingModel(), $this->getPresenter());
+    }
+
+
+public function getRankingModel(){
+        return new RankingModel($this->getDatabase());
+    }
+
+//  public function getRanking(){
+//         return new RankingModel($this->getDatabase());
+//     }
+
 
     public function getUsuarioController(){
 
@@ -36,7 +51,7 @@ class Configuration
     }
 
     public function getHomeController(){
-        return new HomeController($this->getUsuarioModel(),$this->getPresenter());
+        return new HomeController($this->getUsuarioModel(),$this->getPresenter(), $this->getRankingModel());
     }
     public function getAdminController(){
         return new AdminController($this->getUsuarioModel(),$this->getPresenter());
@@ -82,4 +97,6 @@ class Configuration
     public function getImagenUploader(){
         return new ImagenUploader();
     }
+
+
 }

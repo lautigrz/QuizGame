@@ -17,6 +17,28 @@
         <a href="/quizgame/puntaje" class="btn btn-success btn-lg mb-3">Puntaje</a>
     </div>
 </div>
+ <!-- Tabla de ranking -->
+    <div class="mt-5">
+        <h2 class="text-center text-light">Ranking de Usuarios</h2>
+        <table class="table table-dark table-striped">
+            <thead>
+                <tr>
+                    <th>Posición</th>
+                    <th>Usuario</th>
+                    <th>Puntaje</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#ranking}}
+                <tr>
+                    <td>{{posicion}}</td>
+                    <td>{{usuario}}</td>
+                    <td>{{puntaje}}</td>
+                </tr>
+                {{/ranking}}
+            </tbody>
+        </table>
+    </div>
 
 <!-- Modal -->
 <div class="modal fade" id="modalPartida" tabindex="-1" aria-labelledby="modalPartidaLabel" aria-hidden="true">

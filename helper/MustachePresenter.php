@@ -14,14 +14,13 @@ class MustachePresenter{
     }
 
     public function show($contentFile , $data = array() ){
-      
+
 
         echo  $this->generateHtml(  $this->partialsPathLoader . '/' . $contentFile . "View.mustache" , $data);
     }
 
     public function generateHtml($contentFile, $data = array()) {
   
-
         $contentAsString = file_get_contents($this->partialsPathLoader .'/header.mustache');
         $contentAsString .= file_get_contents($contentFile );
         $contentAsString .= file_get_contents($this->partialsPathLoader . '/footer.mustache');
