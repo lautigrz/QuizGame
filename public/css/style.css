@@ -10,7 +10,7 @@
 }
 
 .navbar{
-    background-color:rgba(0, 0, 0, 0.411);
+  background-color: #23233b;
 }
 
 .login{
@@ -24,7 +24,7 @@
 }
 
 .full-height {
-  height: 75vh; 
+  height: 90vh; 
   display: flex;
   flex-direction: column;
   justify-content: center; 
@@ -86,7 +86,7 @@ body {
 
 .footer-custom{
   height: 15vh;
-  background-color: rgba(0, 0, 0, 0.836);
+  background-color: #23233b;
 }
 .profile{
     display: flex;
