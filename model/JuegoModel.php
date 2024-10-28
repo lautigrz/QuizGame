@@ -24,6 +24,33 @@ class JuegoModel{
 
     }
 
+    public function preguntaConDifcultad($idUsuario){
+        $pregunta = $this->preguntaConDificultadMediaYDificil($idUsuario);
+        $opciones = $this->opciones($pregunta[0]['id']);
+         
+        $result = [
+            'id' => $pregunta[0]['id'],
+           'pregunta' => $pregunta[0]['pregunta'],
+           'opciones' => $opciones,
+           'color' => $pregunta[0]['color'],
+           'icono' => $pregunta[0]['icono']
+           ];
+           return $result;
+    }
+
+    public function preguntaConDificultadMediaYDificil($idUsuario){
+        $sql = "SELECT p.id, c.color, c.icono, p.pregunta, d.porcentaje_acierto 
+        FROM preguntas p 
+        JOIN dificultad d ON d.idPregunta = p.id 
+        JOIN categoria c ON c.id = p.idCategoria 
+        WHERE d.idUsuario = " . $idUsuario . " 
+        AND d.porcentaje_acierto BETWEEN 0 AND 70  -- Cambié 70 AND 0 por 0 AND 70
+        ORDER BY RAND() 
+        LIMIT 1";
+
+      $query = $this->database->query($sql);
+      return $query;
+    }
     public function obtenerPreguntasVistasPorElUsuario($id){
 
         $sql = "SELECT * FROM historico WHERE idUsuario = " . $id ." ";
@@ -65,6 +92,7 @@ class JuegoModel{
             $this->updateDificultad($idUsuario,$idPregunta, $sumaCorrecta);
         }
     }
+
 
     private function updateDificultad($idUsuario, $idPregunta, $sumaCorrecta){
         $sql = "UPDATE dificultad 
@@ -120,8 +148,8 @@ class JuegoModel{
         
         $queryOpciones = "SELECT opcion
         FROM opciones
-        WHERE preguntaID = " . $id . "
-        ORDER BY RAND()";    
+        WHERE preguntaID = " .$id . " 
+        ORDER BY RAND() ";    
 
         $opciones = $this->database->query($queryOpciones);
         return $opciones;

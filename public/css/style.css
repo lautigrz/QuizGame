@@ -22,6 +22,12 @@
   box-shadow: 0 4px 15px rgba(232, 232, 232, 0.2); /* Sombra */
   border-radius: 50%; 
 }
+#number {
+  width: 10%;
+  font-size:1.5em;
+  color:#ffffff;
+  font-weight: bold;
+}
 
 .full-height {
   height: 90vh; 

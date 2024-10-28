@@ -12,12 +12,13 @@ class JuegoController{
 
     public function preguntas(){
         $data = [];
+        var_dump(count($this->preguntasDeLaPartida()));
         $this->setData($data);
         $this->presenter->show("juego",$data);
     }
     
     public function partida(){
- 
+        
         if($this->existeUsuario()){
 
             if(!$this->preguntasEnCurso()){
@@ -32,29 +33,43 @@ class JuegoController{
     }
 
     public function nuevaPartida(){
+        
         $_SESSION['puntaje'] = 0;     
     }
 
 public function preguntaAlazar() {
-         $preguntaActual = "";
 
     if (!$this->hayRespuestaIncorrecta()) {
        
-        $preguntaActual = $this->model->obtenerPregunta();
+        $preguntaActual = $this->obtenerPreguntas();
 
-        if($this->guardarPreguntasDeLaPartida($preguntaActual)){
+        if($this->guardarPreguntasDeLaPartidaEnCurso($preguntaActual)){
 
-           $this->guardarPregunta($preguntaActual);
+           $this->preguntaActualDeLaPartida($preguntaActual);
         
         }else{
             $this->partida();
         }
     }
 
-   return $preguntaActual;
 }
 
-public function guardarPreguntasDeLaPartida($preguntas) {
+public function obtenerPreguntas(){
+    $pregunta = "";
+    if(count($this->preguntasDeLaPartida()) >= 2){
+
+    $pregunta = $this->model->preguntaConDifcultad($this->idUsuario());
+
+    }else{
+
+     $pregunta = $this->model->obtenerPregunta();
+    }
+    return  $pregunta;
+
+
+}
+
+public function guardarPreguntasDeLaPartidaEnCurso($preguntas) {
 
     if (!isset($_SESSION['preguntas_data'])) {
         $_SESSION['preguntas_data'] = [];
@@ -157,12 +172,12 @@ public function guardarPreguntasDeLaPartida($preguntas) {
         header('Location: /quizgame/home/lobby');
     }
 
-    private function guardarPregunta($pregunta){
+    private function preguntaActualDeLaPartida($pregunta){
         $_SESSION['preguntas'] = $pregunta;
     }
 
     private function idUsuario(){
-      return $this->existeUsuario() && isset($_SESSION['user']['id']) ? $_SESSION['user']['id'] : null;
+      return $this->existeUsuario() ? $_SESSION['user']['id'] : null;
     }
     
     private function existeUsuario() {
@@ -174,6 +189,10 @@ public function guardarPreguntasDeLaPartida($preguntas) {
     private function preguntasEnCurso() {
         return isset($_SESSION['preguntas_data']);
     }
+    private function preguntasDeLaPartida() {
+        return isset($_SESSION['preguntas_data']) ? $_SESSION['preguntas_data'] : []; // Retornar un array vacío en lugar de 0
+    }
+    
 
 
 
