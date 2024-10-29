@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-10-2024 a las 01:22:41
+-- Tiempo de generación: 29-10-2024 a las 16:49:24
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -44,6 +44,88 @@ INSERT INTO `categoria` (`id`, `descripcion`, `color`, `icono`) VALUES
 (3, 'Ciencia', '#2fcf22', 'https://media.tenor.com/V9-CgNCwFBYAAAAi/experience-green-liquid.gif'),
 (4, 'Deporte', '#e98f30 ', 'https://media.tenor.com/nX-zTFSiAZwAAAAi/soccer-sports.gif'),
 (5, 'Arte', '#e93030 ', 'https://media.tenor.com/P3gTeupuuW4AAAAi/grandmother-granny.gif');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `dificultad`
+--
+
+CREATE TABLE `dificultad` (
+  `id` int(11) NOT NULL,
+  `idUsuario` int(11) NOT NULL,
+  `idPregunta` int(11) NOT NULL,
+  `veces_correctas` int(11) NOT NULL,
+  `veces_vista` int(11) NOT NULL,
+  `porcentaje_acierto` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `dificultad`
+--
+
+INSERT INTO `dificultad` (`id`, `idUsuario`, `idPregunta`, `veces_correctas`, `veces_vista`, `porcentaje_acierto`) VALUES
+(27, 68, 42, 8, 14, 57.142857142857),
+(28, 68, 34, 7, 9, 77.777777777778),
+(29, 68, 44, 5, 7, 71.428571428571),
+(30, 68, 39, 6, 8, 75),
+(31, 68, 41, 7, 10, 70),
+(32, 68, 1, 7, 9, 77.777777777778),
+(33, 68, 40, 7, 10, 70),
+(34, 68, 2, 7, 9, 77.777777777778),
+(35, 68, 45, 6, 7, 85.714285714286),
+(36, 68, 38, 7, 9, 77.777777777778),
+(37, 68, 46, 8, 9, 88.888888888889),
+(38, 68, 47, 6, 10, 60),
+(39, 68, 37, 6, 8, 75),
+(40, 68, 48, 7, 9, 77.777777777778),
+(41, 68, 36, 7, 8, 87.5),
+(42, 68, 3, 6, 8, 75),
+(43, 68, 35, 5, 7, 71.428571428571),
+(44, 68, 43, 6, 8, 75),
+(45, 76, 39, 2, 3, 66.666666666667),
+(46, 76, 1, 2, 2, 100),
+(47, 76, 3, 2, 7, 28.571428571429),
+(48, 76, 37, 2, 5, 40),
+(49, 76, 2, 2, 2, 100),
+(50, 76, 42, 1, 3, 33.333333333333),
+(51, 76, 48, 3, 3, 100),
+(52, 76, 40, 1, 2, 50),
+(53, 76, 38, 2, 2, 100),
+(54, 76, 47, 1, 2, 50),
+(55, 76, 35, 2, 2, 100),
+(56, 76, 43, 3, 3, 100),
+(57, 76, 46, 5, 5, 100),
+(58, 76, 44, 1, 2, 50),
+(59, 76, 41, 1, 3, 33.333333333333),
+(60, 76, 45, 2, 2, 100),
+(61, 76, 34, 1, 2, 50),
+(62, 76, 36, 2, 3, 66.666666666667);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `historico`
+--
+
+CREATE TABLE `historico` (
+  `id` int(11) NOT NULL,
+  `idUsuario` int(11) NOT NULL,
+  `idPregunta` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `historico`
+--
+
+INSERT INTO `historico` (`id`, `idUsuario`, `idPregunta`) VALUES
+(687, 68, 34),
+(688, 68, 48),
+(689, 68, 40),
+(690, 68, 47),
+(691, 68, 42),
+(692, 68, 46),
+(693, 68, 3);
 
 -- --------------------------------------------------------
 
@@ -177,7 +259,82 @@ INSERT INTO `partida` (`id`, `puntaje_obtenido`, `fecha_partida`, `idUsuario`) V
 (72, 0, '0000-00-00 00:00:00', 74),
 (73, 1, '0000-00-00 00:00:00', 68),
 (74, 1, '0000-00-00 00:00:00', 68),
-(75, 0, '0000-00-00 00:00:00', 68);
+(75, 0, '0000-00-00 00:00:00', 68),
+(76, 4, '0000-00-00 00:00:00', 68),
+(77, 4, '0000-00-00 00:00:00', 68),
+(78, 18, '0000-00-00 00:00:00', 68),
+(79, 0, '0000-00-00 00:00:00', 68),
+(80, 0, '0000-00-00 00:00:00', 68),
+(81, 2, '0000-00-00 00:00:00', 68),
+(82, 6, '0000-00-00 00:00:00', 68),
+(83, 2, '0000-00-00 00:00:00', 68),
+(84, 36, '0000-00-00 00:00:00', 68),
+(85, 9, '0000-00-00 00:00:00', 68),
+(86, 1, '0000-00-00 00:00:00', 68),
+(87, 4, '0000-00-00 00:00:00', 68),
+(88, 5, '0000-00-00 00:00:00', 68),
+(89, 19, '0000-00-00 00:00:00', 68),
+(90, 13, '0000-00-00 00:00:00', 68),
+(91, 1, '0000-00-00 00:00:00', 68),
+(92, 2, '0000-00-00 00:00:00', 68),
+(93, 0, '0000-00-00 00:00:00', 68),
+(94, 10, '0000-00-00 00:00:00', 68),
+(95, 2, '0000-00-00 00:00:00', 68),
+(96, 1, '0000-00-00 00:00:00', 68),
+(97, 1, '0000-00-00 00:00:00', 68),
+(98, 8, '0000-00-00 00:00:00', 68),
+(99, 0, '0000-00-00 00:00:00', 68),
+(100, 1, '0000-00-00 00:00:00', 68),
+(101, 4, '0000-00-00 00:00:00', 68),
+(102, 0, '0000-00-00 00:00:00', 68),
+(103, 2, '0000-00-00 00:00:00', 68),
+(104, 5, '0000-00-00 00:00:00', 68),
+(105, 3, '0000-00-00 00:00:00', 68),
+(106, 4, '0000-00-00 00:00:00', 68),
+(107, 3, '0000-00-00 00:00:00', 68),
+(108, 3, '0000-00-00 00:00:00', 68),
+(109, 3, '0000-00-00 00:00:00', 68),
+(110, 1, '0000-00-00 00:00:00', 68),
+(111, 0, '2024-10-27 20:24:42', 68),
+(112, 0, '2024-10-27 20:33:26', 68),
+(113, 0, '2024-10-27 20:36:23', 68),
+(114, 0, '2024-10-27 16:47:21', 68),
+(115, 18, '2024-10-28 15:07:08', 76),
+(116, 0, '2024-10-28 15:26:40', 76),
+(117, 1, '2024-10-28 15:30:56', 76),
+(118, 0, '2024-10-28 15:32:54', 76),
+(119, 2, '2024-10-28 15:56:00', 76),
+(120, 4, '2024-10-28 15:56:37', 76),
+(121, 6, '2024-10-28 15:59:33', 76),
+(122, 0, '2024-10-28 16:00:25', 76),
+(123, 0, '2024-10-28 16:02:04', 76),
+(124, 0, '2024-10-28 16:02:09', 76),
+(125, 0, '2024-10-28 16:02:54', 76),
+(126, 0, '2024-10-28 16:03:00', 76),
+(127, 0, '2024-10-28 16:03:18', 76),
+(128, 0, '2024-10-28 16:03:46', 76),
+(129, 0, '2024-10-28 16:04:29', 76),
+(130, 0, '2024-10-28 16:04:38', 76),
+(131, 2, '2024-10-28 16:04:51', 76),
+(132, 2, '2024-10-28 16:21:14', 76),
+(133, 0, '2024-10-28 16:25:06', 76),
+(134, 5, '2024-10-28 16:59:03', 76),
+(135, 5, '2024-10-28 17:14:42', 68),
+(136, 1, '2024-10-28 17:32:35', 68),
+(137, 3, '2024-10-28 17:32:52', 68),
+(138, 1, '2024-10-28 17:33:24', 68),
+(139, 6, '2024-10-28 17:39:19', 68),
+(140, 5, '2024-10-28 17:48:42', 68),
+(141, 0, '2024-10-28 17:49:36', 68),
+(142, 15, '2024-10-28 18:09:29', 68),
+(143, 15, '2024-10-28 18:09:30', 68),
+(144, 0, '2024-10-28 18:10:20', 68),
+(145, 10, '2024-10-28 18:15:33', 68),
+(146, 0, '2024-10-28 18:15:45', 68),
+(147, 2, '2024-10-28 18:17:04', 68),
+(148, 4, '2024-10-28 18:22:07', 68),
+(149, 4, '2024-10-28 18:26:31', 68),
+(150, 1, '2024-10-29 16:43:24', 68);
 
 -- --------------------------------------------------------
 
@@ -235,7 +392,8 @@ CREATE TABLE `reporte` (
 --
 
 INSERT INTO `reporte` (`id`, `idPregunta`, `idUsuarioReporte`, `detalleReporte`) VALUES
-(3, 46, 68, 'asd');
+(3, 46, 68, 'asd'),
+(4, 39, 68, 'nose');
 
 -- --------------------------------------------------------
 
@@ -300,11 +458,11 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `nombre`, `apellido`, `usuario`, `genero`, `email`, `password`, `estado`, `token`, `puntaje`, `fotoPerfil`, `admin`, `editor`) VALUES
-(68, 'Lautaro', 'Gerez', 'lautigrz', 'M', 'lautarogerezz12@gmail.com', '123', 1, 681159, 55, '', 0, 0),
+(68, 'Lautaro', 'Gerez', 'lautigrz', 'M', 'lautarogerezz12@gmail.com', '123', 1, 681159, 304, '', 0, 0),
 (70, '', '', '', '', '', '', 0, 432768, 0, '', 0, 0),
 (73, 'admin', 'admin', 'admin', 'M', 'admin@gmail.com', 'admin', 1, 300048, 0, './public/image/perfil/chad123.jpg', 1, 0),
 (74, 'editor', 'editor', 'editor', 'F', 'editor@gmail.com', 'editor', 1, 369750, 0, './public/image/perfil/messi.jpg', 0, 1),
-(75, 'Lautaro', 'ddd', 'lautigrz2', 'M', 'gerez.lautaro12@gmail.com', '123', 1, 489772, 0, './public/image/perfil/lautigrz2.jpg', 0, 0);
+(76, 'melany', 'sidero', 'melany122', 'F', 'gerez.lautaro12@gmail.com', '123', 1, 144803, 40, './public/image/perfil/melany122.jpg', 0, 0);
 
 --
 -- Índices para tablas volcadas
@@ -314,6 +472,18 @@ INSERT INTO `usuario` (`id`, `nombre`, `apellido`, `usuario`, `genero`, `email`,
 -- Indices de la tabla `categoria`
 --
 ALTER TABLE `categoria`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `dificultad`
+--
+ALTER TABLE `dificultad`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `historico`
+--
+ALTER TABLE `historico`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -373,6 +543,18 @@ ALTER TABLE `categoria`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT de la tabla `dificultad`
+--
+ALTER TABLE `dificultad`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+
+--
+-- AUTO_INCREMENT de la tabla `historico`
+--
+ALTER TABLE `historico`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=694;
+
+--
 -- AUTO_INCREMENT de la tabla `opciones`
 --
 ALTER TABLE `opciones`
@@ -382,7 +564,7 @@ ALTER TABLE `opciones`
 -- AUTO_INCREMENT de la tabla `partida`
 --
 ALTER TABLE `partida`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=151;
 
 --
 -- AUTO_INCREMENT de la tabla `preguntas`
@@ -394,7 +576,7 @@ ALTER TABLE `preguntas`
 -- AUTO_INCREMENT de la tabla `reporte`
 --
 ALTER TABLE `reporte`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `respuesta`
@@ -406,7 +588,7 @@ ALTER TABLE `respuesta`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- Restricciones para tablas volcadas
