@@ -179,19 +179,65 @@ class JuegoModel{
         return $respuesta;
     }
 
-    public function guardarPartida($data){
-        var_dump($data['fecha_partida']);
-        $sql = "INSERT INTO partida (puntaje_obtenido,fecha_partida,idUsuario) values ('". $data['puntaje'] . "' , '". date('Y-m-d H:i:s') . "' , '" . $data['user'] . "')";
+    public function guardarPartida($id){
+       
+        $sql = "INSERT INTO partida (puntaje_obtenido, fecha_partida, idUsuario, estado) 
+        VALUES ('0', '" . date('Y-m-d H:i:s') . "', '" . $id . "', '1')";
 
         $this->database->query($sql);
 
+        
+    }
+
+    public function obtenerPartidaActivaDelUsuario($id){
+
+        $sql = "SELECT id FROM partida WHERE idUsuario = " . $id . " AND estado = 1 ORDER BY id DESC LIMIT 1";
+
+        $query = $this->database->query($sql);
+
+        return $query;
+    }
+
+    public function actualizarPartida($data){
+
+        $idPartida = $this->obtenerPartidaActivaDelUsuario($data['id']);
+        var_dump($idPartida);
+
+        $sql = "UPDATE partida SET puntaje_obtenido = " . $data['puntaje'] . ", idUsuario = " . $data['id'] . ", 
+        estado = 0 
+        WHERE id = " . $idPartida[0]['id'] . " ";
+
+        
+        $this->database->query($sql);
         $this->actualizarPuntajeDeUsuario($data);
+         
+    }
+
+    public function obtenerCantidadDePreguntasConDificultadVistasPorElUsuario($id){
+      $sql = "SELECT COUNT(*)
+              FROM historico h
+              JOIN dificultad d on d.idUsuario = h.idUsuario AND d.idPregunta = h.idPregunta
+              WHERE h.idUsuario = " . $id . " AND d.porcentaje_acierto < 70";
+
+
+        $query = $this->database->query($sql);
+
+        return $query;
+    }
+
+    public function obtenerCantidadDePreguntasConDificultadDelUsuario($id){
+        $sql = "SELECT COUNT(*) FROM dificultad  WHERE idUsuario = " . $id . " 
+        AND porcentaje_acierto BETWEEN 0 AND 70";
+
+        $query = $this->database->query($sql);
+
+        return $query;
     }
 
     public function actualizarPuntajeDeUsuario($data){
         $sql = "UPDATE usuario 
         SET puntaje = puntaje + " . $data['puntaje'] . " 
-        WHERE id = " . $data['user'];
+        WHERE id = " . $data['id'];
         $this->database->query($sql);
 
     }

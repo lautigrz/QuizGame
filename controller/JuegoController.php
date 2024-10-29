@@ -13,6 +13,10 @@ class JuegoController{
     public function preguntas(){
         $data = [];
         var_dump(count($this->preguntasDeLaPartida()));
+        echo "";
+        var_dump($this->model->obtenerCantidadDePreguntasConDificultadDelUsuario($this->idUsuario()));
+        echo "";
+        var_dump($this->model->obtenerCantidadDePreguntasConDificultadVistasPorElUsuario($this->idUsuario()));
         $this->setData($data);
         $this->presenter->show("juego",$data);
     }
@@ -33,7 +37,7 @@ class JuegoController{
     }
 
     public function nuevaPartida(){
-        
+        $this->model->guardarPartida($this->idUsuario());
         $_SESSION['puntaje'] = 0;     
     }
 
@@ -59,14 +63,30 @@ public function obtenerPreguntas(){
     if(count($this->preguntasDeLaPartida()) >= 2){
 
     $pregunta = $this->model->preguntaConDifcultad($this->idUsuario());
+    
+        if($this->yaVioTodasLasPreguntasConDificultad()){
 
+            $pregunta = $this->model->obtenerPregunta();
+        }
     }else{
 
      $pregunta = $this->model->obtenerPregunta();
     }
-    return  $pregunta;
+    return $pregunta;
 
 
+}
+
+public function yaVioTodasLasPreguntasConDificultad(){
+
+    $cantidad = $this->model->obtenerCantidadDePreguntasConDificultadDelUsuario($this->idUsuario());
+    $total = $this->model->obtenerCantidadDePreguntasConDificultadVistasPorElUsuario($this->idUsuario());
+
+    if($cantidad === $total){
+        return true;
+    }
+
+    return false;
 }
 
 public function guardarPreguntasDeLaPartidaEnCurso($preguntas) {
@@ -111,6 +131,8 @@ public function guardarPreguntasDeLaPartidaEnCurso($preguntas) {
         
     }
 
+
+
     public function esCorrecta(){
         $pregunta = $_SESSION['preguntas']['id'];
         $respuesta = $_GET['respuesta'];
@@ -138,10 +160,10 @@ public function guardarPreguntasDeLaPartidaEnCurso($preguntas) {
 
         $data = [
             "puntaje" => $_SESSION['puntaje'],
-            "user" => $_SESSION['user']['id']
+            "id" => $this->idUsuario()
         ];
 
-        $this->model->guardarPartida($data);
+        $this->model->actualizarPartida($data);
     }
 
     public function setData(&$data){
