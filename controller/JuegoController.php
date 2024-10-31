@@ -12,11 +12,6 @@ class JuegoController{
 
     public function preguntas(){
         $data = [];
-        var_dump(count($this->preguntasDeLaPartida()));
-        echo "";
-        var_dump($this->model->obtenerCantidadDePreguntasConDificultadDelUsuario($this->idUsuario()));
-        echo "";
-        var_dump($this->model->obtenerCantidadDePreguntasConDificultadVistasPorElUsuario($this->idUsuario()));
         $this->setData($data);
         $this->presenter->show("juego",$data);
     }
@@ -60,7 +55,7 @@ public function preguntaAlazar() {
 
 public function obtenerPreguntas(){
     $pregunta = "";
-    if(count($this->preguntasDeLaPartida()) >= 2){
+    if(count($this->preguntasDeLaPartida()) >= 10){
 
     $pregunta = $this->model->preguntaConDifcultad($this->idUsuario());
     

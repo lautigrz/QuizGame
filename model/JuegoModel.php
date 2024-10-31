@@ -92,7 +92,81 @@ class JuegoModel{
             $this->updateDificultad($idUsuario,$idPregunta, $sumaCorrecta);
         }
     }
+    public function verificar($preguntaID){
 
+        $sql = "SELECT p.pregunta,o.opcion
+        FROM opciones o
+        JOIN preguntas p ON p.id = o.preguntaID
+        JOIN respuesta r on r.opcionID = o.id
+        WHERE r.preguntaID = " . $preguntaID . " ";
+
+        $respuesta = $this->database->query($sql);
+
+        return $respuesta;
+    }
+
+    public function guardarPartida($id){
+       
+        $sql = "INSERT INTO partida (puntaje_obtenido, fecha_partida, idUsuario, estado) 
+        VALUES ('0', '" . date('Y-m-d H:i:s') . "', '" . $id . "', '1')";
+
+        $this->database->query($sql);
+
+        
+    }
+
+    public function obtenerPartidaActivaDelUsuario($id){
+
+        $sql = "SELECT id FROM partida WHERE idUsuario = " . $id . " AND estado = 1 ORDER BY id DESC LIMIT 1";
+
+        $query = $this->database->query($sql);
+
+        return $query;
+    }
+
+    public function actualizarPartida($data){
+
+        $idPartida = $this->obtenerPartidaActivaDelUsuario($data['id']);
+        var_dump($idPartida);
+
+        $sql = "UPDATE partida SET puntaje_obtenido = " . $data['puntaje'] . ", idUsuario = " . $data['id'] . ", 
+        estado = 0 
+        WHERE id = " . $idPartida[0]['id'] . " ";
+
+        
+        $this->database->query($sql);
+        $this->actualizarPuntajeDeUsuario($data);
+         
+    }
+
+    public function obtenerCantidadDePreguntasConDificultadVistasPorElUsuario($id){
+      $sql = "SELECT COUNT(*)
+              FROM historico h
+              JOIN dificultad d on d.idUsuario = h.idUsuario AND d.idPregunta = h.idPregunta
+              WHERE h.idUsuario = " . $id . " AND d.porcentaje_acierto < 70";
+
+
+        $query = $this->database->query($sql);
+
+        return $query;
+    }
+
+    public function obtenerCantidadDePreguntasConDificultadDelUsuario($id){
+        $sql = "SELECT COUNT(*) FROM dificultad  WHERE idUsuario = " . $id . " 
+        AND porcentaje_acierto < 70";
+
+        $query = $this->database->query($sql);
+
+        return $query;
+    }
+
+    private function actualizarPuntajeDeUsuario($data){
+        $sql = "UPDATE usuario 
+        SET puntaje = puntaje + " . $data['puntaje'] . " 
+        WHERE id = " . $data['id'];
+        $this->database->query($sql);
+
+    }
 
     private function updateDificultad($idUsuario, $idPregunta, $sumaCorrecta){
         $sql = "UPDATE dificultad 
@@ -166,82 +240,7 @@ class JuegoModel{
       return $pregunta;
     }
 
-    public function verificar($preguntaID){
-
-        $sql = "SELECT p.pregunta,o.opcion
-        FROM opciones o
-        JOIN preguntas p ON p.id = o.preguntaID
-        JOIN respuesta r on r.opcionID = o.id
-        WHERE r.preguntaID = " . $preguntaID . " ";
-
-        $respuesta = $this->database->query($sql);
-
-        return $respuesta;
-    }
-
-    public function guardarPartida($id){
-       
-        $sql = "INSERT INTO partida (puntaje_obtenido, fecha_partida, idUsuario, estado) 
-        VALUES ('0', '" . date('Y-m-d H:i:s') . "', '" . $id . "', '1')";
-
-        $this->database->query($sql);
-
-        
-    }
-
-    public function obtenerPartidaActivaDelUsuario($id){
-
-        $sql = "SELECT id FROM partida WHERE idUsuario = " . $id . " AND estado = 1 ORDER BY id DESC LIMIT 1";
-
-        $query = $this->database->query($sql);
-
-        return $query;
-    }
-
-    public function actualizarPartida($data){
-
-        $idPartida = $this->obtenerPartidaActivaDelUsuario($data['id']);
-        var_dump($idPartida);
-
-        $sql = "UPDATE partida SET puntaje_obtenido = " . $data['puntaje'] . ", idUsuario = " . $data['id'] . ", 
-        estado = 0 
-        WHERE id = " . $idPartida[0]['id'] . " ";
-
-        
-        $this->database->query($sql);
-        $this->actualizarPuntajeDeUsuario($data);
-         
-    }
-
-    public function obtenerCantidadDePreguntasConDificultadVistasPorElUsuario($id){
-      $sql = "SELECT COUNT(*)
-              FROM historico h
-              JOIN dificultad d on d.idUsuario = h.idUsuario AND d.idPregunta = h.idPregunta
-              WHERE h.idUsuario = " . $id . " AND d.porcentaje_acierto < 70";
-
-
-        $query = $this->database->query($sql);
-
-        return $query;
-    }
-
-    public function obtenerCantidadDePreguntasConDificultadDelUsuario($id){
-        $sql = "SELECT COUNT(*) FROM dificultad  WHERE idUsuario = " . $id . " 
-        AND porcentaje_acierto BETWEEN 0 AND 70";
-
-        $query = $this->database->query($sql);
-
-        return $query;
-    }
-
-    public function actualizarPuntajeDeUsuario($data){
-        $sql = "UPDATE usuario 
-        SET puntaje = puntaje + " . $data['puntaje'] . " 
-        WHERE id = " . $data['id'];
-        $this->database->query($sql);
-
-    }
-
+    
     public function reportePregunta($data)
     {
         $sql = "INSERT INTO reporte(idPregunta, idUsuarioReporte, detalleReporte) VALUES (". $_SESSION['preguntas']['id'].", " . $_SESSION['user']['id'] . ", '" . $data['motivo'] . "')";
