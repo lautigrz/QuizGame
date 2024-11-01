@@ -14,10 +14,26 @@ class HomeController{
     {
         $data = [];
         $this->setDatos($data);
-
-        $data['ranking'] = $this->rankingModel->obtenerRankingUsuarios();
+    
+        $rank = $this->rankingModel->obtenerRankingUsuarios();
+        $fecha = $this->model->ultimaPartida($_SESSION['user']['id']);
+    
+        // Obtener el nombre de usuario logueado
+        $usuarioLogueado = $_SESSION['user']['usuario'];
+    
+        // Agregar propiedad isUserLogged a cada entrada del ranking
+        foreach ($rank as &$usuario) {
+            $usuario['isUserLogged'] = ($usuario['usuario'] === $usuarioLogueado);
+        }
+    
+        $data = [
+            "ranking" => $rank,
+            "user" => $_SESSION['user'],
+            "fecha" => $fecha
+        ];
         $this->presenter->show('lobby', $data);
     }
+    
     
     public function setDatos(&$data){
         if(!empty($_SESSION['error'])){

@@ -31,6 +31,16 @@ class UsuarioModel
        $this->guardarToken($usuario, $codigoVerificacion);
 
     }
+
+    public function ultimaPartida($id){
+        $sql = "SELECT fecha_partida FROM partida WHERE idUsuario = $id ORDER BY fecha_partida DESC LIMIT 1";
+
+
+        $query = $this->database->query($sql);
+
+        $query1 = isset($query[0]['fecha_partida']) ? $query[0]['fecha_partida'] : "";
+        return $query1;
+    }
     public function buscarUsuario($nombreUsuario) {
         return $this->database->query("SELECT * FROM `usuario` WHERE usuario = '$nombreUsuario'");
     }

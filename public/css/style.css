@@ -29,6 +29,7 @@
   font-weight: bold;
 }
 
+
 .full-height {
   height: 90vh; 
   display: flex;
@@ -48,7 +49,8 @@ body {
     background-image: url('https://th.bing.com/th/id/R.a9b43019faa05e77eee142859d328f97?rik=TCnkwAe0niPaXQ&pid=ImgRaw&r=0&sres=1&sresct=1'); /* Cambia esta URL por tu imagen de fondo */
     background-size:auto;
     background-position: center;
-    
+    overflow-x: hidden;
+    height: 100vh;
    
 }
 .registro {
@@ -247,3 +249,95 @@ mark {
 .dark-color {
     color: #ffffff;
 }
+
+.custom-container {
+  max-width: 100%; 
+  width: 65%;
+  overflow: visible;
+  height: auto; 
+  background-color: #23233b;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
+}
+
+/* Efecto de hover en los botones */
+.animated-button {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.animated-button:hover {
+  transform: scale(1.05); /* Agranda ligeramente el botón al hacer hover */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+}
+
+.animated-button:active {
+  transform: scale(0.98); /* Reducción rápida al hacer clic */
+}
+
+/* Animación de entrada para el mensaje de bienvenida */
+.animate__animated.animate__fadeInDown {
+  animation: fadeInDown 1s ease forwards;
+}
+
+@keyframes fadeInDown {
+  0% {
+      opacity: 0;
+      transform: translateY(-20px);
+  }
+  100% {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+.highlight {
+  background-color: #ffeb3b; /* Color de fondo amarillo claro para la fila del usuario logueado */
+  color: #000; /* Color del texto negro */
+}
+
+.table-row {
+  background-color: rgb(252, 252, 252);
+  transition: background-color 0.3s ease;
+}
+
+.table-row:hover {
+  background-color: rgba(255, 255, 255, 0.76); /* Cambio de color al pasar el mouse */
+}
+
+.table th {
+  text-align: center; /* Centrar texto en los encabezados */
+}
+
+.table td {
+  text-align: center; /* Centrar texto en las celdas */
+}
+
+/* Estilo de bordes */
+.table {
+  font-size: 1em;
+  border-radius: 8px; /* Bordes redondeados */
+  overflow: hidden; /* Asegura que los bordes redondeados se mantengan */
+}
+
+.table th {
+  background-color: #104f8d; /* Color de fondo para encabezados */
+  color: #ffffff; /* Color de texto para encabezados */
+}
+
+.table td {
+  color: #000000; /* Color de texto para las celdas */
+}
+
+/* Animación al cargar */
+.table {
+  animation: colorChange 0.5s ease forwards; /* Cambiar a color */
+}
+
+@keyframes colorChange {
+  from {
+    background-color: transparent; /* Color inicial transparente */
+  }
+  to {
+    background-color: rgb(255, 255, 255); /* Color final (ajustable) */
+  }
+}
+

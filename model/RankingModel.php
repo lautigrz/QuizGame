@@ -34,11 +34,11 @@ class RankingModel{
 
     public function obtenerRankingUsuarios() {
         // Consulta para obtener los 50 usuarios con mayor puntaje que no son administradores ni editores
-        $queryUsuarios = "SELECT usuario, puntaje 
-                          FROM usuario 
-                          WHERE admin = 0 AND editor = 0 
-                          ORDER BY puntaje DESC 
-                          LIMIT 50";
+        $queryUsuarios = "SELECT u.usuario, u.id, u.fotoPerfil, MAX(p.puntaje_obtenido) AS puntaje, p.fecha_partida AS fecha
+                          FROM partida p
+                          JOIN usuario u on u.id = p.idUsuario
+                          GROUP BY u.id
+                       ";
         
         // Ejecutar la consulta
         $usuarios = $this->database->query($queryUsuarios);
@@ -51,7 +51,9 @@ class RankingModel{
             $rankingUsuarios[] = [
                 'posicion' => $index + 1, // El índice empieza en 0, por eso sumamos 1
                 'usuario' => $usuario['usuario'],
-                'puntaje' => $usuario['puntaje']
+                'puntaje' => $usuario['puntaje'],
+                'fecha' => $usuario['fecha'],
+                'fotoPerfil' => $usuario['fotoPerfil']
             ];
         }
         return $rankingUsuarios; // Devolver el array con el ranking
