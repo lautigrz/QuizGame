@@ -36,8 +36,9 @@ class RankingModel{
         // Consulta para obtener los 50 usuarios con mayor puntaje que no son administradores ni editores
         $queryUsuarios = "SELECT u.usuario, u.id, u.fotoPerfil, MAX(p.puntaje_obtenido) AS puntaje, p.fecha_partida AS fecha
                           FROM partida p
-                          JOIN usuario u on u.id = p.idUsuario
+                          JOIN usuario u ON u.id = p.idUsuario
                           GROUP BY u.id
+                          ORDER BY puntaje DESC
                        ";
         
         // Ejecutar la consulta
@@ -51,6 +52,7 @@ class RankingModel{
             $rankingUsuarios[] = [
                 'posicion' => $index + 1, // El índice empieza en 0, por eso sumamos 1
                 'usuario' => $usuario['usuario'],
+                'id' => $usuario['id'],
                 'puntaje' => $usuario['puntaje'],
                 'fecha' => $usuario['fecha'],
                 'fotoPerfil' => $usuario['fotoPerfil']

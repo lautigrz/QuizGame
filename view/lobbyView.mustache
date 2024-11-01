@@ -36,9 +36,13 @@
     {{#ranking}}
     <tr class="{{#isUserLogged}}highlight{{/isUserLogged}}">
         <td>{{posicion}}</td>
-        <td class="text-start">
-            <img src=".{{fotoPerfil}}" alt="Foto de perfil" class="rounded-circle me-2" width="30" height="30">{{usuario}}
-        </td>
+       <td class="text-start">
+    <a href="/quizgame/usuario/perfil?id={{id}}" class="text-decoration-none text-dark">
+        <img src=".{{fotoPerfil}}" alt="Foto de perfil" class="rounded-circle me-2" width="30" height="30">
+        {{usuario}}
+    </a>
+</td>
+
         <td>{{puntaje}}</td>
         <td>{{fecha}}</td>
     </tr>

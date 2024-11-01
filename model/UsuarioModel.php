@@ -22,7 +22,7 @@ class UsuarioModel
             $token = rand(100000, 999999);
             $sql = "INSERT INTO usuario (nombre, apellido, usuario, genero, email, password, estado, token, fotoPerfil) 
             VALUES ('" . $data['nombre'] . "', '" . $data['apellido'] . "', '" . $data['usuario'] . "', '" . $data['genero'] . "', '" . $data['email'] . "', '" . $data['password'] . "', 0, '" . $token . "', '" . $data['fotoPerfil'] . "')";
-                
+            
             return $this->database->query($sql);
     }
 
@@ -30,6 +30,12 @@ class UsuarioModel
         
        $this->guardarToken($usuario, $codigoVerificacion);
 
+    }
+
+    public function partidasJugadas($id){
+        $sql = "SELECT COUNT(*) FROM partida WHERE idUsuario = ". $id . "";
+        $query = $this->database->query($sql);
+        return $query[0];
     }
 
     public function ultimaPartida($id){
@@ -62,17 +68,24 @@ class UsuarioModel
         $this->cambiarEstado($usuarioResult[0]['id']);
     }
 
+    public function puntajeTotal($id){
+        $sql = "SELECT puntaje FROM usuario WHERE id = " . $id . " ";
+
+        return $this->query($sql);
+    }
+
     public function obtenerTodasLasPreguntas()
     {
         $sql = "SELECT p.pregunta, p.estado, c.descripcion AS categoria, c.color, GROUP_CONCAT(o.opcion ORDER BY o.id SEPARATOR ', ') AS opciones, MAX(CASE WHEN r.opcionID = o.id THEN o.opcion ELSE NULL END) AS es_correcta FROM preguntas p JOIN categoria c ON p.idCategoria = c.id JOIN opciones o ON p.id = o.preguntaID LEFT JOIN respuesta r ON r.preguntaID = p.id GROUP BY p.id, p.pregunta, p.estado, c.descripcion, c.color ORDER BY p.id;";
         return $this->database->query($sql);
     }
 
-    private function buscarPregunta($pregunta)
-    {
-        $sql = "SELECT 1 FROM preguntas WHERE pregunta = '$pregunta'";
+    public function getUser($id){
+        $sql = "SELECT * FROM usuario WHERE id = " . $id ." ";
+
         return $this->database->query($sql);
     }
+
     private function insertarOpcionesPorPregunta($pregunta, $opciones)
     {
 
