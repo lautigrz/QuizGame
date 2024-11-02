@@ -12,9 +12,23 @@ class UsuarioController
 
     public function mostrarUserView()
     {
-        $data = [];
-        $this->setDatos($data);
-        $this->presenter->show('user', $data);
+        //$data = [];
+        // $this->setDatos($data);
+        // $this->presenter->show('user', $data);
+        
+            $usuario = $_GET['usuario'] ?? null;
+        
+            if ($usuario) {
+                $userData = $this->model->buscarUsuario($usuario);
+                if ($userData) {
+                    $data = ['user' => $userData[0]]; // Asumiendo que `buscarUsuario` devuelve un array con la información del usuario
+                    $this->presenter->show('user', $data);
+                } else {
+                    echo "Usuario no encontrado.";
+                }
+            } else {
+                echo "Usuario no especificado.";
+            }
         
     }
 
@@ -34,6 +48,7 @@ class UsuarioController
         } 
     }
 }
+
 
 
     private function crearArchivoConToken($token)
