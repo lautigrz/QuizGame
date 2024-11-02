@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-10-2024 a las 17:02:16
+-- Tiempo de generación: 02-11-2024 a las 15:26:26
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -83,24 +83,55 @@ INSERT INTO `dificultad` (`id`, `idUsuario`, `idPregunta`, `veces_correctas`, `v
 (42, 68, 3, 11, 15, 73.333333333333),
 (43, 68, 35, 10, 14, 71.428571428571),
 (44, 68, 43, 12, 15, 80),
-(45, 76, 39, 2, 3, 66.666666666667),
-(46, 76, 1, 2, 2, 100),
-(47, 76, 3, 2, 7, 28.571428571429),
-(48, 76, 37, 2, 5, 40),
-(49, 76, 2, 2, 2, 100),
-(50, 76, 42, 1, 3, 33.333333333333),
-(51, 76, 48, 3, 3, 100),
-(52, 76, 40, 1, 2, 50),
-(53, 76, 38, 2, 2, 100),
-(54, 76, 47, 1, 2, 50),
-(55, 76, 35, 2, 2, 100),
-(56, 76, 43, 3, 3, 100),
-(57, 76, 46, 5, 5, 100),
-(58, 76, 44, 1, 2, 50),
-(59, 76, 41, 1, 3, 33.333333333333),
-(60, 76, 45, 2, 2, 100),
-(61, 76, 34, 1, 2, 50),
-(62, 76, 36, 2, 3, 66.666666666667);
+(45, 76, 39, 3, 4, 75),
+(46, 76, 1, 3, 3, 100),
+(47, 76, 3, 3, 8, 37.5),
+(48, 76, 37, 3, 6, 50),
+(49, 76, 2, 3, 4, 75),
+(50, 76, 42, 2, 4, 50),
+(51, 76, 48, 4, 4, 100),
+(52, 76, 40, 2, 3, 66.666666666667),
+(53, 76, 38, 3, 3, 100),
+(54, 76, 47, 2, 4, 50),
+(55, 76, 35, 3, 3, 100),
+(56, 76, 43, 4, 4, 100),
+(57, 76, 46, 6, 6, 100),
+(58, 76, 44, 2, 3, 66.666666666667),
+(59, 76, 41, 2, 4, 50),
+(60, 76, 45, 3, 3, 100),
+(61, 76, 34, 2, 3, 66.666666666667),
+(62, 76, 36, 3, 4, 75),
+(63, 78, 3, 1, 1, 100),
+(64, 78, 35, 1, 1, 100),
+(65, 78, 37, 1, 1, 100),
+(66, 78, 38, 1, 1, 100),
+(67, 78, 36, 1, 1, 100),
+(68, 78, 41, 1, 1, 100),
+(69, 78, 40, 1, 1, 100),
+(70, 78, 47, 0, 1, 0),
+(71, 77, 3, 1, 1, 100),
+(72, 77, 2, 1, 1, 100),
+(73, 77, 41, 0, 1, 0),
+(74, 70, 35, 1, 1, 100),
+(75, 70, 45, 1, 1, 100),
+(76, 70, 47, 1, 1, 100),
+(77, 70, 41, 1, 1, 100),
+(78, 70, 3, 0, 1, 0),
+(79, 79, 1, 1, 1, 100),
+(80, 79, 36, 1, 1, 100),
+(81, 79, 38, 1, 1, 100),
+(82, 79, 41, 0, 1, 0),
+(83, 80, 41, 1, 1, 100),
+(84, 80, 35, 1, 1, 100),
+(85, 80, 36, 1, 1, 100),
+(86, 80, 1, 1, 1, 100),
+(87, 80, 34, 0, 1, 0),
+(88, 77, 43, 1, 1, 100),
+(89, 77, 1, 1, 1, 100),
+(90, 77, 39, 1, 1, 100),
+(91, 77, 44, 1, 1, 100),
+(92, 77, 42, 1, 1, 100),
+(93, 77, 38, 0, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -124,7 +155,40 @@ INSERT INTO `historico` (`id`, `idUsuario`, `idPregunta`) VALUES
 (846, 68, 41),
 (847, 68, 44),
 (848, 68, 45),
-(849, 68, 1);
+(849, 68, 1),
+(868, 76, 2),
+(869, 76, 47),
+(870, 78, 3),
+(871, 78, 35),
+(872, 78, 37),
+(873, 78, 38),
+(874, 78, 36),
+(875, 78, 41),
+(876, 78, 40),
+(877, 78, 47),
+(878, 77, 3),
+(879, 77, 2),
+(880, 77, 41),
+(881, 70, 35),
+(882, 70, 45),
+(883, 70, 47),
+(884, 70, 41),
+(885, 70, 3),
+(886, 79, 1),
+(887, 79, 36),
+(888, 79, 38),
+(889, 79, 41),
+(890, 80, 41),
+(891, 80, 35),
+(892, 80, 36),
+(893, 80, 1),
+(894, 80, 34),
+(895, 77, 43),
+(896, 77, 1),
+(897, 77, 39),
+(898, 77, 44),
+(899, 77, 42),
+(900, 77, 38);
 
 -- --------------------------------------------------------
 
@@ -276,7 +340,15 @@ INSERT INTO `partida` (`id`, `puntaje_obtenido`, `fecha_partida`, `idUsuario`, `
 (197, 2, '2024-10-31 16:43:11', 68, 0),
 (198, 6, '2024-10-31 16:49:50', 68, 0),
 (199, 2, '2024-10-31 16:57:16', 68, 0),
-(200, 5, '2024-10-31 16:59:39', 68, 0);
+(200, 5, '2024-10-31 16:59:39', 68, 0),
+(201, 7, '2024-10-31 19:22:18', 76, 0),
+(202, 11, '2024-10-31 19:30:32', 76, 0),
+(203, 7, '2024-10-31 20:11:38', 78, 0),
+(204, 2, '2024-10-31 20:15:44', 77, 0),
+(205, 4, '2024-11-02 13:52:16', 70, 0),
+(206, 3, '2024-11-02 13:55:07', 79, 0),
+(207, 4, '2024-11-02 14:00:40', 80, 0),
+(208, 5, '2024-11-02 14:26:18', 77, 0);
 
 -- --------------------------------------------------------
 
@@ -400,11 +472,15 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `nombre`, `apellido`, `usuario`, `genero`, `email`, `password`, `estado`, `token`, `puntaje`, `fotoPerfil`, `admin`, `editor`) VALUES
-(68, 'Lautaro', 'Gerez', 'lautigrz', 'M', 'lautarogerezz12@gmail.com', '123', 1, 681159, 97, '', 0, 0),
-(70, '', '', '', '', '', '', 0, 432768, 0, '', 0, 0),
+(68, 'Lautaro', 'Gerez', 'lautigrz', 'M', 'lautarogerezz12@gmail.com', '123', 1, 681159, 97, './public/image/perfil/lautigrz.jpg', 0, 0),
+(70, 'lionel', 'scaloni', 'scaloni10', 'H', 'sca@gmial.com', '123', 1, 432768, 4, './public/image/perfil/scaloni10.jpg', 0, 0),
 (73, 'admin', 'admin', 'admin', 'M', 'admin@gmail.com', 'admin', 1, 300048, 0, './public/image/perfil/chad123.jpg', 1, 0),
 (74, 'editor', 'editor', 'editor', 'F', 'editor@gmail.com', 'editor', 1, 369750, 0, './public/image/perfil/messi.jpg', 0, 1),
-(76, 'melany', 'sidero', 'melany122', 'F', 'gerez.lautaro12@gmail.com', '123', 1, 144803, 0, './public/image/perfil/melany122.jpg', 0, 0);
+(76, 'melany', 'sidero', 'melany122', 'F', 'gerez.lautaro12@gmail.com', '123', 1, 144803, 18, './public/image/perfil/melany122.jpg', 0, 0),
+(77, 'messi', 'messi', 'lionelmessi', 'M', 'messi@gmail.com', '123', 1, 865539, 7, './public/image/perfil/lionelmessi.jpg', 0, 0),
+(78, 'chad', 'chad', 'chad09', 'F', 'chade@gmail.com', '123', 1, 850298, 7, './public/image/perfil/chad09.jpg', 0, 0),
+(79, 'bixsor', 'bix', 'bixx12', 'M', 'bix@gmail.com', '123', 1, 759712, 3, './public/image/perfil/bixx12.jpg', 0, 0),
+(80, 'diss', 'cot', 'cot23', 'F', 'cot@gmail.com', '123', 1, 222121, 4, './public/image/perfil/cot23.jpg', 0, 0);
 
 --
 -- Índices para tablas volcadas
@@ -488,13 +564,13 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de la tabla `dificultad`
 --
 ALTER TABLE `dificultad`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
 
 --
 -- AUTO_INCREMENT de la tabla `historico`
 --
 ALTER TABLE `historico`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=850;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=901;
 
 --
 -- AUTO_INCREMENT de la tabla `opciones`
@@ -506,7 +582,7 @@ ALTER TABLE `opciones`
 -- AUTO_INCREMENT de la tabla `partida`
 --
 ALTER TABLE `partida`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=201;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=209;
 
 --
 -- AUTO_INCREMENT de la tabla `preguntas`
@@ -530,7 +606,7 @@ ALTER TABLE `respuesta`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
 -- Restricciones para tablas volcadas

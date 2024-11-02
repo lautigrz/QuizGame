@@ -33,9 +33,9 @@ class UsuarioModel
     }
 
     public function partidasJugadas($id){
-        $sql = "SELECT COUNT(*) FROM partida WHERE idUsuario = ". $id . "";
+        $sql = "SELECT COUNT(*) AS total FROM partida WHERE idUsuario = ". $id . "";
         $query = $this->database->query($sql);
-        return $query[0];
+        return $query[0]['total'];
     }
 
     public function ultimaPartida($id){
@@ -85,6 +85,35 @@ class UsuarioModel
 
         return $this->database->query($sql);
     }
+    public function obtenerRankingUsuarios() {
+     
+        $queryUsuarios = "SELECT u.usuario, u.id, u.fotoPerfil, MAX(p.puntaje_obtenido) AS puntaje, p.fecha_partida AS fecha
+                          FROM partida p
+                          JOIN usuario u ON u.id = p.idUsuario
+                          GROUP BY u.id
+                          ORDER BY puntaje DESC
+                       ";
+        
+      
+        $usuarios = $this->database->query($queryUsuarios);
+        
+       
+        $rankingUsuarios = [];
+        
+        
+        foreach ($usuarios as $index => $usuario) {
+            $rankingUsuarios[] = [
+                'posicion' => $index + 1,
+                'usuario' => $usuario['usuario'],
+                'id' => $usuario['id'],
+                'puntaje' => $usuario['puntaje'],
+                'fecha' => $usuario['fecha'],
+                'fotoPerfil' => $usuario['fotoPerfil']
+            ];
+        }
+        return $rankingUsuarios; 
+    }
+
 
     private function insertarOpcionesPorPregunta($pregunta, $opciones)
     {

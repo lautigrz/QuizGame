@@ -14,7 +14,6 @@ include_once("controller/AdminController.php");
 include_once("controller/HomeController.php");
 include_once("model/UsuarioModel.php");
 include_once("model/JuegoModel.php");
-include_once("model/RankingModel.php");
 include_once('vendor/mustache/src/Mustache/Autoloader.php');
 class Configuration
 {
@@ -51,7 +50,7 @@ public function getRankingModel(){
     }
 
     public function getHomeController(){
-        return new HomeController($this->getUsuarioModel(),$this->getPresenter(), $this->getRankingModel());
+        return new HomeController($this->getUsuarioModel(),$this->getPresenter());
     }
     public function getAdminController(){
         return new AdminController($this->getUsuarioModel(),$this->getPresenter());

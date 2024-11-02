@@ -250,6 +250,24 @@ mark {
     color: #ffffff;
 }
 
+.rank{
+  font-size: 1.3em;
+  font-weight: 500;
+}
+.custom-table {
+  width: 80%; 
+  margin: 0 auto; 
+  text-align: center; 
+}
+
+.custom-table > h4{
+  background-color: #23233b;
+  padding: 15px;
+  border-radius: 20px;
+  color: white;
+  display: inline-block;
+}
+
 .custom-container {
   max-width: 100%; 
   width: 65%;

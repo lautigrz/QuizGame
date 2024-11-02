@@ -21,12 +21,14 @@ class UsuarioController
   public function perfil(){
     if (isset($_GET['id'])) {
         $userId = $_GET['id'];
+        $partidas = $this->model->partidasJugadas($userId);
         $userData = $this->model->getUser($userId);
 
         if ($userData) {
             $data = [
-                'userVist' => $userData, // Datos del usuario a ver
-                'user' => $_SESSION['user'] // Datos del usuario logueado
+                'userVist' => $userData,
+                'user' => $_SESSION['user'],
+                "partidas" => $partidas 
             ];
             $this->presenter->show('user', $data);
         } 
@@ -40,15 +42,24 @@ class UsuarioController
         fwrite($archivo," - " . $token);
         fclose($archivo);
     }
-    public function setDatos(&$data){
+    private function idUsuario(){
+        return $this->existeUsuario() ? $_SESSION['user']['id'] : null;
+      }
+      private function existeUsuario() {
+        return isset($_SESSION['user']);
+    }
+      
+    private function setDatos(&$data){
         if(!empty($_SESSION['error'])){
             $data["error"] = $_SESSION['error'];
             unset( $_SESSION['error']);
         }if(!empty($_SESSION['user'])){
-            $partidas = $this->model->partidasJugadas(68);
+
+            $partidas = $this->model->partidasJugadas($this->idUsuario());
 
             $data = [
-                "userVist" => $_SESSION['user'],
+                "user" => $_SESSION['user'],
+                "userVist" =>$_SESSION['user'],
                 "partidas" => $partidas
             ];
 
