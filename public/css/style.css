@@ -173,6 +173,15 @@ label{
   font-weight: 600;
   color: #000000;
 }
+.custom-card {
+  max-width: 850px !important;
+}
+.username-display {
+  margin-top: 20px;
+  color: #000; /* Negro */
+  font-size: 2rem; /* Tamaño de fuente más grande */
+  font-weight: bold; /* Negrita */
+}
 
 .about-list {
   padding-top: 10px;
@@ -266,6 +275,35 @@ mark {
   border-radius: 20px;
   color: white;
   display: inline-block;
+}
+.profile-section {
+
+  border-radius: 15px;
+  margin-top: 10px;
+}
+.card {
+  max-width: 800px;
+  margin: auto;
+}
+.profile-info {
+  margin-top: -50px;
+  position: relative;
+}
+.profile-img {
+  width: 100px;
+  height: 100px;
+  border: 3px solid white;
+  position: absolute;
+  top: -75px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.count-data {
+  padding: 15px;
+}
+.count-data h6 {
+  font-size: 24px;
+  margin-bottom: 5px;
 }
 
 .custom-container {

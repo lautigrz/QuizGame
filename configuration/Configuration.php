@@ -22,22 +22,9 @@ class Configuration
     {
     }
 
-//     //Ranking
-    public function getRankingController(){
-        return new RankingController($this->getRankingModel(), $this->getPresenter());
-    }
-
-
-public function getRankingModel(){
+    public function getRankingModel(){
         return new RankingModel($this->getDatabase());
     }
-
-//  public function getRanking(){
-//         return new RankingModel($this->getDatabase());
-//     }
-
-   
-
 
     public function getUsuarioController(){
 
