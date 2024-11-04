@@ -54,7 +54,13 @@ class UsuarioModel
 
     public function obtenerTodasLasPreguntas()
     {
-        $sql = "SELECT p.pregunta, p.estado, c.descripcion AS categoria, c.color, GROUP_CONCAT(o.opcion ORDER BY o.id SEPARATOR ', ') AS opciones, MAX(CASE WHEN r.opcionID = o.id THEN o.opcion ELSE NULL END) AS es_correcta FROM preguntas p JOIN categoria c ON p.idCategoria = c.id JOIN opciones o ON p.id = o.preguntaID LEFT JOIN respuesta r ON r.preguntaID = p.id GROUP BY p.id, p.pregunta, p.estado, c.descripcion, c.color ORDER BY p.id;";
+        $sql = "SELECT p.pregunta, p.estado, c.descripcion AS categoria, c.color, 
+       GROUP_CONCAT(o.opcion ORDER BY o.id SEPARATOR ', ') AS opciones, 
+       MAX(CASE WHEN r.opcionID = o.id THEN o.opcion ELSE NULL END) AS es_correcta 
+FROM preguntas p JOIN categoria c ON p.idCategoria = c.id 
+    JOIN opciones o ON p.id = o.preguntaID 
+    LEFT JOIN respuesta r ON r.preguntaID = p.id 
+GROUP BY p.id, p.pregunta, p.estado, c.descripcion, c.color ORDER BY p.id;";
         return $this->database->query($sql);
     }
 
@@ -86,25 +92,33 @@ class UsuarioModel
 
     //------------------------------------editor----------------------------------------------
 
-    public function desactivarPregunta($pregunta)
+    public function cambiarEstadoPregunta($pregunta_id, $estado)
     {
-        //$sql = "UPDATE preguntas SET estado = 'desactiva' WHERE pregunta = '$pregunta'";
-        //$this->database->query($sql);
+        switch ($estado){
+            case 'pendiente':
+                $this->database->query("UPDATE pregunta SET estado = ". 'pendiente' . "WHERE id = '$pregunta_id'");
+                break;
+            case 'aprobada':
+                $this->database->query("UPDATE pregunta SET estado = ". 'aprobada' . "WHERE id = '$pregunta_id'");
+                break;
+            case 'rechazada':
+                $this->database->query("UPDATE pregunta SET estado = ". 'rechazada' . "WHERE id = '$pregunta_id'");
+                break;
+            case 'desactivada':
+                $this->database->query("UPDATE pregunta SET estado = ". 'desactivada' . "WHERE id = '$pregunta_id'");
+                break;
+        }
     }
-    public function activarPregunta($pregunta)
+    private function modificarPreguntaDB($pregunta, $opcion1, $opcion2, $opcion3, $opcion4, $opcionCorrecta)
     {
-        //$sql = "UPDATE preguntas SET estado = 'activa' WHERE pregunta = '$pregunta'";
-        //$this->database->query($sql);
+        $sql = "UPDATE preguntas SET pregunta = $pregunta";
     }
-    public function deshabilitarPregunta($pregunta)
+    public function obtenerPreguntasReportadas()
     {
-        /*$sql = "UPDATE preguntas SET estado = 'deshabilitada' WHERE pregunta = '$pregunta'";
-        $this->database->query($sql);*/
+        $sql="SELECT r.id, u.usuario, p.pregunta, r.detalleReporte, p.estado from reporte r
+JOIN preguntas p ON p.id = r.idPregunta
+JOIN usuario u ON u.id = r.idUsuarioReporte
+WHERE p.estado LIKE 0";
+        return $this->database->query($sql);
     }
-    public function modificarPregunta($pregunta, $preguntaModificada, $opciones, $es_correcta)
-    {
-        //$preguntaObtenida = $this->buscarPregunta($pregunta);
-
-    }
-
 }
