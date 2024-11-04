@@ -55,23 +55,23 @@ body {
 }
 .registro {
   background-color: #23233b;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Sombra */
-  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
+  border-radius: 10px; 
  
 }
 
 .text-correcto {
-  color: green; /* O el color que prefieras */
+  color: green; 
 }
 
-/* Estilos para hacer los labels blancos */
+
 .text-white {
   color: white !important;
 }
 
-/* Evitar que los input cambien a blanco al hover */
+
 .form-control {
-  background-color: #f8f9fa; /* Color base del input */
+  background-color: #f8f9fa; 
   border: 1px solid #ced4da;
   color: #495057;
   transition: background-color 0.3s ease;
@@ -79,17 +79,17 @@ body {
 
 .form-control:hover, 
 .form-control:focus {
-  background-color: #f8f9fa; /* Sin cambios en hover o focus */
-  box-shadow: none; /* Evitar sombra en focus */
-  border-color: #80bdff; /* Color del borde en focus */
+  background-color: #f8f9fa; 
+  box-shadow: none; 
+  border-color: #80bdff;
 }
 
 .boton-respuesta {
-  transition: transform 0.3s ease; /* Suaviza la animación */
+  transition: transform 0.3s ease; 
 }
 
 .boton-respuesta:hover {
-  transform: scale(1.1); /* Hace el botón 10% más grande */
+  transform: scale(1.1); 
 }
 
 .footer-custom{
@@ -107,7 +107,7 @@ body {
     color: white;
     padding: 20px;
     border-radius: 10px;
-    background-color: rgba(63, 59, 59, 0.9); /* Fondo blanco semi-transparente */
+    background-color: rgba(63, 59, 59, 0.9); 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 .datos{
@@ -122,8 +122,14 @@ body {
     object-fit: cover;
     border-radius: 50%;
 }
+.date{
+  width:35% !important;
+}
 h2, p {
     margin: 10px 0;
+}
+.bi{
+  border-radius: 50px;
 }
 .label {
     font-size: 10px;
@@ -141,122 +147,19 @@ img {
     vertical-align: middle;
     border-style: none;
 }
-/* About Me 
----------------------*/
-.about-text h3 {
-  font-size: 45px;
-  font-weight: 700;
-  margin: 0 0 6px;
-}
-@media (max-width: 767px) {
-  .about-text h3 {
-    font-size: 35px;
-  }
-}
-.about-text h6 {
-  font-weight: 600;
-  margin-bottom: 15px;
-}
-@media (max-width: 767px) {
-  .about-text h6 {
-    font-size: 18px;
-  }
-}
+
 label{
     color: #000000;
 }
-.about-text p {
-  font-size: 18px;
-  max-width: 450px;
-}
-.about-text p mark {
-  font-weight: 600;
-  color: #000000;
-}
+
 .custom-card {
   max-width: 850px !important;
 }
 .username-display {
-  margin-top: 20px;
-  color: #000; /* Negro */
-  font-size: 2rem; /* Tamaño de fuente más grande */
-  font-weight: bold; /* Negrita */
-}
-
-.about-list {
-  padding-top: 10px;
-}
-.about-list .media {
-  padding: 5px 0;
-}
-.about-list label {
-  color: #000000;
-  font-weight: 600;
-  width: 88px;
-  margin: 0;
-  position: relative;
-}
-.about-list label:after {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 11px;
-  width: 1px;
-  height: 12px;
-  background: #ffffff;
-  -moz-transform: rotate(15deg);
-  -o-transform: rotate(15deg);
-  -ms-transform: rotate(15deg);
-  -webkit-transform: rotate(15deg);
-  transform: rotate(15deg);
-  margin: auto;
-  opacity: 0.5;
-}
-.about-list p {
-  margin: 0;
-  font-size: 15px;
-}
-
-@media (max-width: 991px) {
-  .about-avatar {
-    margin-top: 30px;
-  }
-}
-
-.about-section .counter {
-  padding: 22px 20px;
-  background: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 0 30px rgba(31, 45, 61, 0.125);
-}
-.about-section .counter .count-data {
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-.about-section .counter .count {
-  font-weight: 700;
-  color: #ffffff;
-  margin: 0 0 5px;
-}
-.about-section .counter p {
-  font-weight: 600;
-  margin: 0;
-}
-mark {
-    background-image: linear-gradient(rgba(252, 83, 86, 0.6), rgba(252, 83, 86, 0.6));
-    background-size: 100% 3px;
-    background-repeat: no-repeat;
-    background-position: 0 bottom;
-    background-color: transparent;
-    padding: 0;
-    color: currentColor;
-}
-.theme-color {
-    color: #fc5356;
-}
-.dark-color {
-    color: #ffffff;
+  margin-top: 60px;
+  color: #3a3a3a; 
+  font-size: 1.3rem; 
+  font-weight: 600; 
 }
 
 .rank{
@@ -286,7 +189,7 @@ mark {
   margin: auto;
 }
 .profile-info {
-  margin-top: -50px;
+  margin-top: -45px;
   position: relative;
 }
 .profile-img {
@@ -294,7 +197,7 @@ mark {
   height: 100px;
   border: 3px solid white;
   position: absolute;
-  top: -75px;
+  top: -35px;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -315,21 +218,21 @@ mark {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
 }
 
-/* Efecto de hover en los botones */
+
 .animated-button {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .animated-button:hover {
-  transform: scale(1.05); /* Agranda ligeramente el botón al hacer hover */
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+  transform: scale(1.05); 
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .animated-button:active {
-  transform: scale(0.98); /* Reducción rápida al hacer clic */
+  transform: scale(0.98);
 }
 
-/* Animación de entrada para el mensaje de bienvenida */
+
 .animate__animated.animate__fadeInDown {
   animation: fadeInDown 1s ease forwards;
 }
@@ -346,8 +249,8 @@ mark {
 }
 
 .highlight {
-  background-color: #ffeb3b; /* Color de fondo amarillo claro para la fila del usuario logueado */
-  color: #000; /* Color del texto negro */
+  background-color: #ffeb3b; 
+  color: #000; 
 }
 
 .table-row {
@@ -356,44 +259,44 @@ mark {
 }
 
 .table-row:hover {
-  background-color: rgba(255, 255, 255, 0.76); /* Cambio de color al pasar el mouse */
+  background-color: rgba(255, 255, 255, 0.76); 
 }
 
 .table th {
-  text-align: center; /* Centrar texto en los encabezados */
+  text-align: center; 
 }
 
 .table td {
-  text-align: center; /* Centrar texto en las celdas */
+  text-align: center;
 }
 
-/* Estilo de bordes */
+
 .table {
   font-size: 1em;
-  border-radius: 8px; /* Bordes redondeados */
-  overflow: hidden; /* Asegura que los bordes redondeados se mantengan */
+  border-radius: 8px; 
+  overflow: hidden; 
 }
 
 .table th {
-  background-color: #104f8d; /* Color de fondo para encabezados */
-  color: #ffffff; /* Color de texto para encabezados */
+  background-color: #104f8d; 
+  color: #ffffff;
 }
 
 .table td {
-  color: #000000; /* Color de texto para las celdas */
+  color: #000000; 
 }
 
-/* Animación al cargar */
+
 .table {
-  animation: colorChange 0.5s ease forwards; /* Cambiar a color */
+  animation: colorChange 0.5s ease forwards; 
 }
 
 @keyframes colorChange {
   from {
-    background-color: transparent; /* Color inicial transparente */
+    background-color: transparent; 
   }
   to {
-    background-color: rgb(255, 255, 255); /* Color final (ajustable) */
+    background-color: rgb(255, 255, 255); 
   }
 }
 

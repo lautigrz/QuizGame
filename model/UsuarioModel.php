@@ -91,7 +91,7 @@ class UsuarioModel
                           FROM partida p
                           JOIN usuario u ON u.id = p.idUsuario
                           GROUP BY u.id
-                          ORDER BY puntaje DESC
+                          ORDER BY puntaje DESC, p.fecha_partida DESC
                        ";
         
       

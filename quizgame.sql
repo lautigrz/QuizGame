@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-11-2024 a las 15:26:26
+-- Tiempo de generación: 04-11-2024 a las 15:45:13
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -65,24 +65,24 @@ CREATE TABLE `dificultad` (
 --
 
 INSERT INTO `dificultad` (`id`, `idUsuario`, `idPregunta`, `veces_correctas`, `veces_vista`, `porcentaje_acierto`) VALUES
-(27, 68, 42, 16, 22, 72.727272727273),
-(28, 68, 34, 12, 15, 80),
-(29, 68, 44, 14, 20, 70),
-(30, 68, 39, 10, 14, 71.428571428571),
-(31, 68, 41, 16, 23, 69.565217391304),
-(32, 68, 1, 15, 22, 68.181818181818),
-(33, 68, 40, 15, 21, 71.428571428571),
-(34, 68, 2, 11, 15, 73.333333333333),
-(35, 68, 45, 11, 17, 64.705882352941),
-(36, 68, 38, 14, 19, 73.684210526316),
-(37, 68, 46, 11, 15, 73.333333333333),
-(38, 68, 47, 14, 18, 77.777777777778),
-(39, 68, 37, 11, 15, 73.333333333333),
-(40, 68, 48, 13, 16, 81.25),
-(41, 68, 36, 13, 18, 72.222222222222),
-(42, 68, 3, 11, 15, 73.333333333333),
-(43, 68, 35, 10, 14, 71.428571428571),
-(44, 68, 43, 12, 15, 80),
+(27, 68, 42, 19, 26, 73.076923076923),
+(28, 68, 34, 17, 20, 85),
+(29, 68, 44, 18, 24, 75),
+(30, 68, 39, 14, 18, 77.777777777778),
+(31, 68, 41, 20, 27, 74.074074074074),
+(32, 68, 1, 19, 26, 73.076923076923),
+(33, 68, 40, 20, 26, 76.923076923077),
+(34, 68, 2, 16, 20, 80),
+(35, 68, 45, 15, 22, 68.181818181818),
+(36, 68, 38, 19, 24, 79.166666666667),
+(37, 68, 46, 17, 21, 80.952380952381),
+(38, 68, 47, 19, 24, 79.166666666667),
+(39, 68, 37, 17, 21, 80.952380952381),
+(40, 68, 48, 15, 20, 75),
+(41, 68, 36, 17, 23, 73.913043478261),
+(42, 68, 3, 16, 20, 80),
+(43, 68, 35, 13, 20, 65),
+(44, 68, 43, 15, 18, 83.333333333333),
 (45, 76, 39, 3, 4, 75),
 (46, 76, 1, 3, 3, 100),
 (47, 76, 3, 3, 8, 37.5),
@@ -131,7 +131,19 @@ INSERT INTO `dificultad` (`id`, `idUsuario`, `idPregunta`, `veces_correctas`, `v
 (90, 77, 39, 1, 1, 100),
 (91, 77, 44, 1, 1, 100),
 (92, 77, 42, 1, 1, 100),
-(93, 77, 38, 0, 1, 0);
+(93, 77, 38, 0, 1, 0),
+(94, 79, 2, 1, 1, 100),
+(95, 79, 34, 1, 1, 100),
+(96, 79, 46, 1, 1, 100),
+(97, 79, 48, 1, 1, 100),
+(98, 79, 35, 1, 1, 100),
+(99, 79, 44, 0, 1, 0),
+(100, 79, 40, 1, 1, 100),
+(101, 79, 39, 1, 1, 100),
+(102, 79, 45, 1, 1, 100),
+(103, 79, 47, 1, 1, 100),
+(104, 79, 37, 1, 1, 100),
+(105, 79, 3, 2, 3, 66.666666666667);
 
 -- --------------------------------------------------------
 
@@ -150,45 +162,16 @@ CREATE TABLE `historico` (
 --
 
 INSERT INTO `historico` (`id`, `idUsuario`, `idPregunta`) VALUES
-(844, 68, 36),
-(845, 68, 38),
-(846, 68, 41),
-(847, 68, 44),
-(848, 68, 45),
-(849, 68, 1),
-(868, 76, 2),
-(869, 76, 47),
-(870, 78, 3),
-(871, 78, 35),
-(872, 78, 37),
-(873, 78, 38),
-(874, 78, 36),
-(875, 78, 41),
-(876, 78, 40),
-(877, 78, 47),
-(878, 77, 3),
-(879, 77, 2),
-(880, 77, 41),
-(881, 70, 35),
-(882, 70, 45),
-(883, 70, 47),
-(884, 70, 41),
-(885, 70, 3),
-(886, 79, 1),
-(887, 79, 36),
-(888, 79, 38),
-(889, 79, 41),
-(890, 80, 41),
-(891, 80, 35),
-(892, 80, 36),
-(893, 80, 1),
-(894, 80, 34),
-(895, 77, 43),
-(896, 77, 1),
-(897, 77, 39),
-(898, 77, 44),
-(899, 77, 42),
-(900, 77, 38);
+(988, 68, 35),
+(989, 68, 37),
+(990, 68, 46),
+(991, 68, 45),
+(992, 68, 44),
+(993, 68, 36),
+(994, 68, 40),
+(995, 68, 38),
+(996, 68, 34),
+(997, 68, 48);
 
 -- --------------------------------------------------------
 
@@ -348,7 +331,18 @@ INSERT INTO `partida` (`id`, `puntaje_obtenido`, `fecha_partida`, `idUsuario`, `
 (205, 4, '2024-11-02 13:52:16', 70, 0),
 (206, 3, '2024-11-02 13:55:07', 79, 0),
 (207, 4, '2024-11-02 14:00:40', 80, 0),
-(208, 5, '2024-11-02 14:26:18', 77, 0);
+(208, 5, '2024-11-02 14:26:18', 77, 0),
+(209, 1, '2024-11-03 18:30:25', 68, 0),
+(210, 5, '2024-11-04 14:08:10', 79, 0),
+(211, 7, '2024-11-04 14:50:34', 79, 0),
+(212, 0, '2024-11-04 14:53:50', 68, 0),
+(213, 7, '2024-11-04 14:54:14', 68, 0),
+(9387, 0, '2024-11-04 15:18:22', 68, 0),
+(9388, 10, '2024-11-04 15:25:47', 68, 0),
+(9389, 12, '2024-11-04 15:29:10', 68, 0),
+(9390, 18, '2024-11-04 15:32:28', 68, 0),
+(9391, 15, '2024-11-04 15:37:21', 68, 0),
+(9392, 8, '2024-11-04 15:43:32', 68, 0);
 
 -- --------------------------------------------------------
 
@@ -380,8 +374,8 @@ INSERT INTO `preguntas` (`id`, `pregunta`, `estado`, `idUsuario`, `idCategoria`)
 (39, '¿Qué país ganó la Copa Mundial de Fútbol 2018?', 1, 68, 4),
 (40, '¿Quién pintó la \"Mona Lisa\"?', 1, 68, 5),
 (41, '¿Qué idioma se habla en Brasil?', 1, 68, 1),
-(42, '¿Qué número romano representa el 100?', 1, 68, 3),
-(43, '¿Qué gas es esencial para la respiración humana?', 1, 68, 3),
+(42, '¿Qué número romano representa el 100?', 0, 68, 3),
+(43, '¿Qué gas es esencial para la respiración humana?', 0, 68, 3),
 (44, '¿Cuál es el río más largo del mundo?', 1, 68, 1),
 (45, '¿Quién desarrolló la teoría de la relatividad?', 1, 68, 3),
 (46, '¿Qué es el \"Big Bang\"?', 1, 68, 3),
@@ -472,14 +466,14 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `nombre`, `apellido`, `usuario`, `genero`, `email`, `password`, `estado`, `token`, `puntaje`, `fotoPerfil`, `admin`, `editor`) VALUES
-(68, 'Lautaro', 'Gerez', 'lautigrz', 'M', 'lautarogerezz12@gmail.com', '123', 1, 681159, 97, './public/image/perfil/lautigrz.jpg', 0, 0),
+(68, 'Lautaro', 'Gerez', 'lautigrz', 'M', 'lautarogerezz12@gmail.com', '123', 1, 681159, 168, './public/image/perfil/lautigrz.jpg', 0, 0),
 (70, 'lionel', 'scaloni', 'scaloni10', 'H', 'sca@gmial.com', '123', 1, 432768, 4, './public/image/perfil/scaloni10.jpg', 0, 0),
 (73, 'admin', 'admin', 'admin', 'M', 'admin@gmail.com', 'admin', 1, 300048, 0, './public/image/perfil/chad123.jpg', 1, 0),
 (74, 'editor', 'editor', 'editor', 'F', 'editor@gmail.com', 'editor', 1, 369750, 0, './public/image/perfil/messi.jpg', 0, 1),
 (76, 'melany', 'sidero', 'melany122', 'F', 'gerez.lautaro12@gmail.com', '123', 1, 144803, 18, './public/image/perfil/melany122.jpg', 0, 0),
 (77, 'messi', 'messi', 'lionelmessi', 'M', 'messi@gmail.com', '123', 1, 865539, 7, './public/image/perfil/lionelmessi.jpg', 0, 0),
 (78, 'chad', 'chad', 'chad09', 'F', 'chade@gmail.com', '123', 1, 850298, 7, './public/image/perfil/chad09.jpg', 0, 0),
-(79, 'bixsor', 'bix', 'bixx12', 'M', 'bix@gmail.com', '123', 1, 759712, 3, './public/image/perfil/bixx12.jpg', 0, 0),
+(79, 'bixsor', 'bix', 'bixx12', 'M', 'bix@gmail.com', '123', 1, 759712, 15, './public/image/perfil/bixx12.jpg', 0, 0),
 (80, 'diss', 'cot', 'cot23', 'F', 'cot@gmail.com', '123', 1, 222121, 4, './public/image/perfil/cot23.jpg', 0, 0);
 
 --
@@ -564,13 +558,13 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de la tabla `dificultad`
 --
 ALTER TABLE `dificultad`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
 
 --
 -- AUTO_INCREMENT de la tabla `historico`
 --
 ALTER TABLE `historico`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=901;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=998;
 
 --
 -- AUTO_INCREMENT de la tabla `opciones`
@@ -582,7 +576,7 @@ ALTER TABLE `opciones`
 -- AUTO_INCREMENT de la tabla `partida`
 --
 ALTER TABLE `partida`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=209;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9393;
 
 --
 -- AUTO_INCREMENT de la tabla `preguntas`
