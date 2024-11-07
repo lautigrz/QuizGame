@@ -22,7 +22,7 @@ class UsuarioModel
             $token = rand(100000, 999999);
             $sql = "INSERT INTO usuario (nombre, apellido, usuario, genero, email, password, estado, token, fotoPerfil) 
             VALUES ('" . $data['nombre'] . "', '" . $data['apellido'] . "', '" . $data['usuario'] . "', '" . $data['genero'] . "', '" . $data['email'] . "', '" . $data['password'] . "', 0, '" . $token . "', '" . $data['fotoPerfil'] . "')";
-                
+            
             return $this->database->query($sql);
     }
 
@@ -30,6 +30,22 @@ class UsuarioModel
         
        $this->guardarToken($usuario, $codigoVerificacion);
 
+    }
+
+    public function partidasJugadas($id){
+        $sql = "SELECT COUNT(*) AS total FROM partida WHERE idUsuario = ". $id . "";
+        $query = $this->database->query($sql);
+        return $query[0]['total'];
+    }
+
+    public function ultimaPartida($id){
+        $sql = "SELECT fecha_partida FROM partida WHERE idUsuario = $id ORDER BY fecha_partida DESC LIMIT 1";
+
+
+        $query = $this->database->query($sql);
+
+        $query1 = isset($query[0]['fecha_partida']) ? $query[0]['fecha_partida'] : "";
+        return $query1;
     }
     public function buscarUsuario($nombreUsuario) {
         return $this->database->query("SELECT * FROM `usuario` WHERE usuario = '$nombreUsuario'");
@@ -52,6 +68,12 @@ class UsuarioModel
         $this->cambiarEstado($usuarioResult[0]['id']);
     }
 
+    public function puntajeTotal($id){
+        $sql = "SELECT puntaje FROM usuario WHERE id = " . $id . " ";
+
+        return $this->query($sql);
+    }
+
     public function obtenerTodasLasPreguntas()
     {
         $sql = "SELECT p.pregunta, p.estado, c.descripcion AS categoria, c.color, 
@@ -64,11 +86,41 @@ GROUP BY p.id, p.pregunta, p.estado, c.descripcion, c.color ORDER BY p.id;";
         return $this->database->query($sql);
     }
 
-    private function buscarPregunta($pregunta)
-    {
-        $sql = "SELECT 1 FROM preguntas WHERE pregunta = '$pregunta'";
+    public function getUser($id){
+        $sql = "SELECT * FROM usuario WHERE id = " . $id ." ";
+
         return $this->database->query($sql);
     }
+    public function obtenerRankingUsuarios() {
+     
+        $queryUsuarios = "SELECT u.usuario, u.id, u.fotoPerfil, MAX(p.puntaje_obtenido) AS puntaje, p.fecha_partida AS fecha
+                          FROM partida p
+                          JOIN usuario u ON u.id = p.idUsuario
+                          GROUP BY u.id
+                          ORDER BY puntaje DESC, p.fecha_partida DESC
+                       ";
+        
+      
+        $usuarios = $this->database->query($queryUsuarios);
+        
+       
+        $rankingUsuarios = [];
+        
+        
+        foreach ($usuarios as $index => $usuario) {
+            $rankingUsuarios[] = [
+                'posicion' => $index + 1,
+                'usuario' => $usuario['usuario'],
+                'id' => $usuario['id'],
+                'puntaje' => $usuario['puntaje'],
+                'fecha' => $usuario['fecha'],
+                'fotoPerfil' => $usuario['fotoPerfil']
+            ];
+        }
+        return $rankingUsuarios; 
+    }
+
+
     private function insertarOpcionesPorPregunta($pregunta, $opciones)
     {
 

@@ -12,12 +12,13 @@ class JuegoController{
 
     public function preguntas(){
         $data = [];
+        var_dump(count($this->preguntasDeLaPartida()));
         $this->setData($data);
+       
         $this->presenter->show("juego",$data);
     }
     
     public function partida(){
-        
         if($this->existeUsuario()){
 
             if(!$this->preguntasEnCurso()){

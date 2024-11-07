@@ -44,7 +44,7 @@ class JuegoModel{
         JOIN dificultad d ON d.idPregunta = p.id 
         JOIN categoria c ON c.id = p.idCategoria 
         WHERE d.idUsuario = " . $idUsuario . " 
-        AND d.porcentaje_acierto BETWEEN 0 AND 70  -- Cambié 70 AND 0 por 0 AND 70
+        AND d.porcentaje_acierto BETWEEN 0 AND 70 AND p.estado = 1
         ORDER BY RAND() 
         LIMIT 1";
 
@@ -66,7 +66,7 @@ class JuegoModel{
 
     public function obtenerCantidadDePreguntas(){
         
-        $sql = "SELECT COUNT(*) FROM preguntas";
+        $sql = "SELECT COUNT(*) FROM preguntas WHERE estado = 1";
         $preguntas = $this->database->query($sql);
         return $preguntas;
     }
@@ -233,6 +233,7 @@ class JuegoModel{
         $queryPregunta = "SELECT p.id, p.pregunta, c.color, c.icono
                     FROM preguntas p
                     JOIN categoria c on c.id = p.idCategoria
+                    WHERE p.estado = 1
                     ORDER BY RAND()
                     LIMIT 1
                     "; 
