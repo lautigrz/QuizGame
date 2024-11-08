@@ -92,6 +92,12 @@ class JuegoModel{
             $this->updateDificultad($idUsuario,$idPregunta, $sumaCorrecta);
         }
     }
+
+    public function preguntaEntregada($idUsuario){
+        $sql = "SELECT * FROM historico WHERE idUsuario = $idUsuario ORDER BY hora DESC LIMIT 1";
+
+        return $this->database->query($sql);
+    }
     public function verificar($preguntaID){
 
         $sql = "SELECT p.pregunta,o.opcion
@@ -196,7 +202,8 @@ class JuegoModel{
         return $query;
     }
     private function guardarTemporalmente($idUsuario,$idPregunta){
-        $sql = "INSERT INTO historico (idUsuario,idPregunta) values ('". $idUsuario . "' , '". $idPregunta . "')";
+        $sql = "INSERT INTO historico (idUsuario, idPregunta, hora) VALUES ('" . $idUsuario . "', '" . $idPregunta . "', '" . date('Y-m-d H:i:s') . "')";
+
         $this->database->query($sql);
     }
 

@@ -12,6 +12,7 @@ class HomeController{
 
     public function ranking(){
         $data = [];
+      
         $this->dataRanking($data);
     
         $this->presenter->show('ranking', $data);
@@ -38,7 +39,8 @@ class HomeController{
     {
         $data = [];
         $this->data($data);
-    
+        unset($_SESSION['preguntas_data'],$_SESSION['respuesta_incorrecta']);
+     
         $this->presenter->show('lobby', $data);
     }
 
@@ -61,6 +63,7 @@ class HomeController{
         ];
 
     }
+
 
     public function queAparezcaElUsuarioEnElRankingSinImportarLaPosicion($rank, $usuarioLogueado) {
         $newRank = [];

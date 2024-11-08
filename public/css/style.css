@@ -147,7 +147,9 @@ img {
     vertical-align: middle;
     border-style: none;
 }
-
+h3.card-title.preg {
+  margin-left: 25px !important;
+}
 label{
     color: #000000;
 }

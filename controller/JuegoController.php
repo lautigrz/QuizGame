@@ -13,8 +13,9 @@ class JuegoController{
     public function preguntas(){
         $data = [];
         var_dump(count($this->preguntasDeLaPartida()));
+    
         $this->setData($data);
-       
+      
         $this->presenter->show("juego",$data);
     }
     
@@ -33,11 +34,12 @@ class JuegoController{
     }
 
     public function nuevaPartida(){
+        unset($_SESSION['preguntas_data']);
         $this->model->guardarPartida($this->idUsuario());
         $_SESSION['puntaje'] = 0;     
     }
 
-public function preguntaAlazar() {
+    public function preguntaAlazar() {
 
     if (!$this->hayRespuestaIncorrecta()) {
        
@@ -126,23 +128,24 @@ public function guardarPreguntasDeLaPartidaEnCurso($preguntas) {
         }
         
     }
-
-
-
     public function esCorrecta(){
-        $pregunta = $_SESSION['preguntas']['id'];
+
+        $pregunta = $this->model->preguntaEntregada($this->idUsuario());
         $respuesta = $_GET['respuesta'];
+        $hora_entrega = $pregunta[0]['hora']; 
+
+        $tiempo_respuesta = $this->tiempo($hora_entrega);
+        
         $correcta = 0;
-        $opcion = $this->obtenerRespuestaCorrecta($pregunta);
-        if($respuesta == $opcion){
+        $opcion = $this->obtenerRespuestaCorrecta($pregunta[0]['idPregunta']);
+        if($respuesta == $opcion && $tiempo_respuesta < 12){
             $_SESSION['puntaje'] +=1;
             $correcta = 1;
         }else{
             $_SESSION['respuesta_incorrecta'] = true;
             $this->finalizarPartida();
-         
         }
-        $this->model->respuestaDelUsuario($this->idUsuario(), $pregunta, $correcta);
+        $this->model->respuestaDelUsuario($this->idUsuario(), $pregunta[0]['idPregunta'], $correcta);
         header('Location: /quizgame/juego/partida');
         exit();
     }
@@ -167,7 +170,13 @@ public function guardarPreguntasDeLaPartidaEnCurso($preguntas) {
             $data["error"] = $_SESSION['error'];
             unset( $_SESSION['error']);
         }if(!empty($_SESSION['preguntas'])){
-            $data["preguntas"] = $_SESSION['preguntas'];
+            $horaDeLaPregunta = time();
+            $tiempoRestante = ($horaDeLaPregunta + 10) - time();
+            
+            $data = [ 
+                "preguntas" =>  $_SESSION['preguntas'],
+                "tiempo" =>  $tiempoRestante
+        ];
         }if(!empty( $_SESSION['respuesta_incorrecta'])){
 
             $id = $_SESSION['preguntas']['id'];
@@ -176,11 +185,13 @@ public function guardarPreguntasDeLaPartidaEnCurso($preguntas) {
                 "preguntas" => $_SESSION['preguntas'],
                 "respuesta_incorrecta" => $_SESSION['respuesta_incorrecta'],
                 "puntaje" => $_SESSION['puntaje'],
-                "respuesta" =>  $respuestaCorrecta
+                "respuesta" => $respuestaCorrecta
 
             ];
-            unset($_SESSION['preguntas_data'],$_SESSION['respuesta_incorrecta']);
+            #unset($_SESSION['preguntas_data'],$_SESSION['respuesta_incorrecta']);
+          
         }
+       
     }
 
     public function reportePregunta()
@@ -188,6 +199,15 @@ public function guardarPreguntasDeLaPartidaEnCurso($preguntas) {
         $data = $_POST;
         $this->model->reportePregunta($data);
         header('Location: /quizgame/home/lobby');
+    }
+    private function limpiarSessiones(){
+        unset($_SESSION['preguntas_data'],$_SESSION['respuesta_incorrecta']);
+    }
+    
+    
+    private function tiempo($hora_entrega){
+        $timestamp_entrega = strtotime($hora_entrega);
+        return $tiempo_respuesta = time() - $timestamp_entrega;
     }
 
     private function preguntaActualDeLaPartida($pregunta){
@@ -211,7 +231,4 @@ public function guardarPreguntasDeLaPartidaEnCurso($preguntas) {
         return isset($_SESSION['preguntas_data']) ? $_SESSION['preguntas_data'] : []; // Retornar un array vacío en lugar de 0
     }
     
-
-
-
 }
