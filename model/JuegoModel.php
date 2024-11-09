@@ -39,17 +39,33 @@ class JuegoModel{
     }
 
     public function preguntaConDificultadMediaYDificil($idUsuario){
-        $sql = "SELECT p.id, c.color, c.icono, p.pregunta, d.porcentaje_acierto 
+        $query = "";
+        do{
+        $sql = "SELECT p.id, c.color, c.icono, p.pregunta, d.veces_correctas, d.veces_vista
         FROM preguntas p 
         JOIN dificultad d ON d.idPregunta = p.id 
         JOIN categoria c ON c.id = p.idCategoria 
-        WHERE d.idUsuario = " . $idUsuario . " 
-        AND d.porcentaje_acierto BETWEEN 0 AND 70 AND p.estado = 1
+        WHERE d.idUsuario = " . $idUsuario . " AND p.estado = 1
         ORDER BY RAND() 
         LIMIT 1";
 
-      $query = $this->database->query($sql);
+        $query = $this->database->query($sql);
+            
+        }while(!$this->porcentaje($query[0]['veces_correctas'], $query[0]['veces_vista']));
+
       return $query;
+    }
+
+    private function porcentaje($veces_correctas, $veces_vista){
+
+        $calculo = (($veces_correctas / $veces_vista) * 100);
+
+        if($calculo < 70){
+            return true;
+        }
+
+        return false;
+
     }
     public function obtenerPreguntasVistasPorElUsuario($id){
 
@@ -146,25 +162,47 @@ class JuegoModel{
     }
 
     public function obtenerCantidadDePreguntasConDificultadVistasPorElUsuario($id){
-      $sql = "SELECT COUNT(*)
+      $sql = "SELECT d.veces_vista, d.veces_correctas
               FROM historico h
               JOIN dificultad d on d.idUsuario = h.idUsuario AND d.idPregunta = h.idPregunta
-              WHERE h.idUsuario = " . $id . " AND d.porcentaje_acierto < 70";
+              WHERE h.idUsuario = " . $id . " ";
 
-
+        
         $query = $this->database->query($sql);
-
-        return $query;
+        $contador = 0;
+        foreach ($query as $fila) {
+    
+            $veces_correctas = $fila['veces_correctas'];
+            $veces_vista = $fila['veces_vista'];
+            
+            if($this->porcentaje($veces_correctas,$veces_vista)){
+            $contador++;
+        }
+    
+        }
+    
+         return $contador;
     }
 
     public function obtenerCantidadDePreguntasConDificultadDelUsuario($id){
-        $sql = "SELECT COUNT(*) FROM dificultad  WHERE idUsuario = " . $id . " 
-        AND porcentaje_acierto < 70";
-
+        $sql = "SELECT veces_correctas, veces_vista  FROM dificultad  WHERE idUsuario = " . $id . " ";
         $query = $this->database->query($sql);
 
-        return $query;
+        $contador = 0;
+
+        foreach ($query as $fila) {
+    
+        $veces_correctas = $fila['veces_correctas'];
+        $veces_vista = $fila['veces_vista'];
+        
+        if($this->porcentaje($veces_correctas,$veces_vista)){
+        $contador++;
     }
+
+    }
+
+     return $contador;
+}
 
     private function actualizarPuntajeDeUsuario($data){
         $sql = "UPDATE usuario 
@@ -177,22 +215,12 @@ class JuegoModel{
     private function updateDificultad($idUsuario, $idPregunta, $sumaCorrecta){
         $sql = "UPDATE dificultad 
         SET veces_correctas = veces_correctas + " . $sumaCorrecta . ", 
-            veces_vista = veces_vista + 1 , 
-            porcentaje_acierto = " . $this->porcentajeDeAcierto($idUsuario,$idPregunta,$sumaCorrecta) . " 
+            veces_vista = veces_vista + 1
         WHERE idUsuario = " . $idUsuario . " AND idPregunta = " . $idPregunta;
 
         $this->database->query($sql);
 
     }
-
-    private function porcentajeDeAcierto($idUsuario, $idPregunta, $sumaCorrecta){
-        $pregunta = $this->obtenerPreguntaDeDificultad($idUsuario, $idPregunta);
-
-        $resultado = (($pregunta[0]['veces_correctas'] + $sumaCorrecta) / ($pregunta[0]['veces_vista'] + 1)) * 100;
-
-        return $resultado;
-    }
-
     private function obtenerPreguntaDeDificultad($idUsuario, $idPregunta){
 
         $sql = "SELECT veces_correctas, veces_vista FROM dificultad WHERE idUsuario = " . $idUsuario ." AND idPregunta = " . $idPregunta . " ";

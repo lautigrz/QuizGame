@@ -13,7 +13,6 @@ class JuegoController{
     public function preguntas(){
         $data = [];
         var_dump(count($this->preguntasDeLaPartida()));
-    
         $this->setData($data);
       
         $this->presenter->show("juego",$data);
@@ -58,7 +57,7 @@ class JuegoController{
 
 public function obtenerPreguntas(){
     $pregunta = "";
-    if(count($this->preguntasDeLaPartida()) >= 10){
+    if(count($this->preguntasDeLaPartida()) >= 2){
 
     $pregunta = $this->model->preguntaConDifcultad($this->idUsuario());
     
@@ -169,13 +168,9 @@ public function guardarPreguntasDeLaPartidaEnCurso($preguntas) {
         if(!empty($_SESSION['error'])){
             $data["error"] = $_SESSION['error'];
             unset( $_SESSION['error']);
-        }if(!empty($_SESSION['preguntas'])){
-            $horaDeLaPregunta = time();
-            $tiempoRestante = ($horaDeLaPregunta + 10) - time();
-            
+        }if(!empty($_SESSION['preguntas'])){        
             $data = [ 
                 "preguntas" =>  $_SESSION['preguntas'],
-                "tiempo" =>  $tiempoRestante
         ];
         }if(!empty( $_SESSION['respuesta_incorrecta'])){
 

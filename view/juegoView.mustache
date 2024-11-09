@@ -7,10 +7,7 @@
     <h3 class="card-title preg">Pregunta</h3>
     <div id="number"></div>
 </div>
-       
         <div class="card-body" style="padding: 30px;">
-      
-            
             <p class="card-text h5 mb-4" style="font-weight: bold;">{{pregunta}}</p>
    
             <div class="d-grid gap-2 mx-auto" style="width: 100%;">
@@ -52,9 +49,6 @@
 </div>
 
 
-
-
-<!-- Modal para reportar la pregunta -->
 <div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -78,73 +72,17 @@
     </div>
   </div>
 </div>
+
+<script src="../public/js/tiempo.js"></script>
+
 <script>
-var tiempo = parseInt(sessionStorage.getItem('tiempoRestante')) || 11; // Recupera el tiempo de sessionStorage o establece el valor inicial de 11.
-
-document.addEventListener('DOMContentLoaded', function() {
-    if (sessionStorage.getItem('mostrarModal') === 'true') {
-        var respuestaIncorrectaModal = new bootstrap.Modal(document.getElementById('respuestaIncorrectaModal'), {
-            keyboard: false,
-            backdrop: 'static'
-        });
-        respuestaIncorrectaModal.show();
-
-        actualizarTiempoEnModal(tiempo);
-
-        sessionStorage.removeItem('mostrarModal');
-    }
-
-    // Iniciar el contador solo si no se ha indicado detenerlo
-    if (sessionStorage.getItem('detenerContador') !== 'true') {
-        iniciarContador();
-    }
-});
-
-{{#respuesta_incorrecta}}
-    sessionStorage.setItem('mostrarModal', 'true');
-    sessionStorage.setItem('detenerContador', 'true');
-{{/respuesta_incorrecta}}
-
-function cerrarYRedirigir(url) {
-    var modal = bootstrap.Modal.getInstance(document.getElementById('respuestaIncorrectaModal'));
-    modal.hide();
-
-    sessionStorage.removeItem('detenerContador');
-    sessionStorage.removeItem('mostrarModal');
-    window.location.href = url;
-}
-
-// Función para iniciar el contador
-function iniciarContador() {
-    var contadorElemento = document.getElementById('number');
-    
-    // Intervalo para actualizar el contador
-    var intervalo = setInterval(function() {
-        if (sessionStorage.getItem('detenerContador') === 'true') {
-            clearInterval(intervalo);
-            return;
-        }
-
-        tiempo--; // Disminuir el tiempo
-        sessionStorage.setItem('tiempoRestante', tiempo); // Guardar el tiempo restante en sessionStorage
-        contadorElemento.textContent = tiempo;
-        actualizarTiempoEnModal(tiempo); // Actualizar el tiempo en el modal
-
-        // Detener el contador si llega a 0
-        if (tiempo === 0) {
-            clearInterval(intervalo);
-        }
-    }, 1000);
-}
-
-// Función para actualizar el tiempo en el modal
-function actualizarTiempoEnModal(tiempo) {
-    var contadorModal = document.getElementById('number-modal');
-    if (contadorModal) {
-        contadorModal.textContent = tiempo;
-    }
-}
+    {{#respuesta_incorrecta}}
+        sessionStorage.setItem('mostrarModal', 'true');
+        sessionStorage.setItem('detenerContador', 'true');
+    {{/respuesta_incorrecta}}
 </script>
+
+
 
 
 
