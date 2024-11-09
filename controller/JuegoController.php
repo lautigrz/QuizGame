@@ -57,7 +57,7 @@ class JuegoController{
 
 public function obtenerPreguntas(){
     $pregunta = "";
-    if(count($this->preguntasDeLaPartida()) >= 2){
+    if(count($this->preguntasDeLaPartida()) >= 10){
 
     $pregunta = $this->model->preguntaConDifcultad($this->idUsuario());
     
@@ -70,8 +70,6 @@ public function obtenerPreguntas(){
      $pregunta = $this->model->obtenerPregunta();
     }
     return $pregunta;
-
-
 }
 
 public function yaVioTodasLasPreguntasConDificultad(){
@@ -183,7 +181,6 @@ public function guardarPreguntasDeLaPartidaEnCurso($preguntas) {
                 "respuesta" => $respuestaCorrecta
 
             ];
-            #unset($_SESSION['preguntas_data'],$_SESSION['respuesta_incorrecta']);
           
         }
        
@@ -195,10 +192,6 @@ public function guardarPreguntasDeLaPartidaEnCurso($preguntas) {
         $this->model->reportePregunta($data);
         header('Location: /quizgame/home/lobby');
     }
-    private function limpiarSessiones(){
-        unset($_SESSION['preguntas_data'],$_SESSION['respuesta_incorrecta']);
-    }
-    
     
     private function tiempo($hora_entrega){
         $timestamp_entrega = strtotime($hora_entrega);
