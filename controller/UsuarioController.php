@@ -38,8 +38,6 @@ class UsuarioController
     }
 }
 
-
-
     private function crearArchivoConToken($token)
     {
         $archivo = fopen("token.txt", "a");

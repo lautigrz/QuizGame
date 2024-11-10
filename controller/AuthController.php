@@ -95,7 +95,7 @@ class AuthController {
                 header('Location: /quizgame/admin/mostrarAdminView');
             }else if($usuario[0]['editor'] == 1){
                 $this->manejarSesion($usuario);
-                $_SESSION['editorPreguntas'] = $this->model->obtenerTodasLasPreguntas();
+                #$_SESSION['editorPreguntas'] = $this->model->obtenerTodasLasPreguntas();
                 header('Location: /quizgame/editor/mostrarEditorView');
             }else if ($usuario[0]['estado'] == 1) {
                 $this->manejarSesion($usuario);

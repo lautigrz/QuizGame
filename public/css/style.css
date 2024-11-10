@@ -153,6 +153,21 @@ h3.card-title.preg {
 label{
     color: #000000;
 }
+.nav-tabs .nav-link {
+  background-color: white;
+  color: black;
+  border: 1px solid #23233b;
+  border-radius: 10px;
+
+}
+.nav-tabs .nav-link.active {
+  background-color: #23233b;
+
+  color: white;
+}
+.pestañas{
+  margin-left:14%;
+}
 
 .custom-card {
   max-width: 850px !important;
