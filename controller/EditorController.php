@@ -16,21 +16,36 @@ class EditorController{
 
           //---------------------------editor-----------------------------------------------
           public function alterarPregunta(){
-            switch ($_POST['accion']){
-                case 'deshabilitar':
-                    $this->model->deshabilitarPregunta($_POST['pregunta']);
+            $pregunta_id = $_POST['pregunta_id'];
+        }
+        public function modificarPregunta()
+        {
+            $pregunta = $_POST['preguntaNombre'];
+            $preguntaModificada = $_POST['preguntaModificada'];
+            $opcion1 = $_POST['opciones'][0];
+            $opcion2 = $_POST['opciones'][1];
+            $opcion3 = $_POST['opciones'][2];
+            $opcion4 = $_POST['opciones'][3];
+            $correcta = $_POST['es_correcta'];
+            $opcionCorrecta = '';
+            switch ($correcta) {
+                case 'opcion1':
+                    $opcionCorrecta = $opcion1;
                     break;
-                case 'activar':
-                    $this->model->activarPregunta($_POST['pregunta']);
+                    case 'opcion2':
+                        $opcionCorrecta = $opcion2;
                         break;
-                case 'desactivar':
-                    $this->model->desactivarPregunta($_POST['pregunta']);
-                    break;
-                case 'modificar':
-                    $this->model->modificarPregunta($_POST['pregunta'], $_POST['preguntaModificada'], $_POST['opciones'], $_POST['es_correcta']);
-                    break;
-    
+                        case 'opcion3':
+                            $opcionCorrecta = $opcion3;
+                            break;
+                            case 'opcion4':
+                                $opcionCorrecta = $opcion4;
+                                break;
+
             }
+
+            echo $pregunta;
+            //$this->model->modificarPreguntaDB($pregunta, $opcion1, $opcion2, $opcion3, $opcion4, $opcionCorrecta);
         }
 
     public function setDatos(&$data){
@@ -40,7 +55,16 @@ class EditorController{
         }if(!empty($_SESSION['user'])){
             $data["user"] = $_SESSION['user'];
         }if(!empty($_SESSION['editorPreguntas'])){
-            $data["editorPreguntas"] = $_SESSION['editorPreguntas'];
+
+            $data = [
+
+            "editorPreguntas" => $_SESSION['editorPreguntas'],
+
+            "reportadas" => $this->model->obtenerPreguntasReportadas()
+
+
+
+                ];
         }
     }
 
