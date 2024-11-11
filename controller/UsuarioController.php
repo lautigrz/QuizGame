@@ -38,6 +38,32 @@ class UsuarioController
     }
 }
 
+    public function sugerirPregunta(){
+
+        $correcta = $_POST['es_correcta'];
+        $opciones = [];
+             
+            $respuesta = "";
+            foreach($_POST['opciones'] as $index => $opcion){
+                $opciones[] = $opcion;
+                if($index == $correcta){
+                    $respuesta = $opcion;
+                }
+            }
+        
+        $data = [
+            'pregunta' => $_POST['pregunta'],
+            'opciones' => $opciones,
+            'idUsuario' => $this->idUsuario(),
+            'categoria' => $_POST['categoria'],
+            'respuesta' => $respuesta
+        ];
+
+
+        $this->model->sugerencia($data);
+        header('Location: /quizgame/home/lobby');
+    }
+
     private function crearArchivoConToken($token)
     {
         $archivo = fopen("token.txt", "a");
@@ -50,7 +76,7 @@ class UsuarioController
       private function existeUsuario() {
         return isset($_SESSION['user']);
     }
-      
+  
     private function setDatos(&$data){
         if(!empty($_SESSION['error'])){
             $data["error"] = $_SESSION['error'];

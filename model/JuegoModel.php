@@ -283,8 +283,9 @@ class JuegoModel{
         $this->database->query($sql);
         $this->estadoReportada();
     }
-    public function estadoReportada()
+    
+   /* public function estadoReportada()
     {
         $this->database->query('UPDATE preguntas SET estado =' . 0 . ' WHERE id = ' . $_SESSION['preguntas']['id']);
-    }
+    }*/
 }

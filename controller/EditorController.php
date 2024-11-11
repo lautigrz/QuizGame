@@ -11,7 +11,6 @@ class EditorController{
     {
         $data = [];
         $this->setDatos($data);
-        #var_dump($this->model->obtenerTodasLasPreguntas());
         $this->presenter->show('editor', $data);
     }
 
@@ -19,9 +18,17 @@ class EditorController{
           public function alterarPregunta(){
             $pregunta_id = $_POST['pregunta'];
 
-            $this->model->cambiarEstado($pregunta_id);
+            $this->model->cambiarEstadoPregunta($pregunta_id);
             header('Location: /quizgame/editor/mostrarEditorView');
 
+        }
+
+        public function rechazarReporte(){
+            $pregunta_id = $_POST['pregunta'];
+
+            $this->model->eliminarReporte($pregunta_id);
+            header('Location: /quizgame/editor/mostrarEditorView');
+            
         }
         public function modificarPregunta(){
     
@@ -62,8 +69,8 @@ class EditorController{
             $data = [
 
             "editorPreguntas" => $this->model->obtenerTodasLasPreguntas(),
-            "reportadas" => $this->model->obtenerPreguntasReportadas()
-
+            "reportadas" => $this->model->obtenerPreguntasReportadas(),
+             "sugeridas" => $this->model->preguntasPendientes()       
                 ];
         }
     }

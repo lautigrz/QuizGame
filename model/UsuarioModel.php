@@ -65,7 +65,7 @@ class UsuarioModel
         if (!$usuarioResult || $usuarioResult[0]['token'] !== $token) {
             throw new Exception("Token inválido o usuario no encontrado.");
         }
-        $this->cambiarEstado($usuarioResult[0]['id']);
+        $this->cambiarEstadoUsuario($usuarioResult[0]['id']);
     }
 
     public function puntajeTotal($id){
@@ -130,11 +130,21 @@ class UsuarioModel
 }
         return $preguntas;
     }
+
+    public function eliminarReporte($pregunta_id){
+
+        $sql = "DELETE FROM reporte 
+        WHERE idPregunta = {$pregunta_id}";
+
     
-    
-    public function cambiarEstado($pregunta_id) {
+        $this->database->query($sql);
+    }
+    public function cambiarEstadoPregunta($pregunta_id) {
         
-        $sql = "UPDATE preguntas SET estado = NOT estado WHERE id = {$pregunta_id}";
+       $sql = "UPDATE preguntas 
+        SET estado = NOT estado, verificado = 'aprobado'
+        WHERE id = {$pregunta_id}";
+
     
         $this->database->query($sql);
     }
@@ -173,6 +183,85 @@ class UsuarioModel
         return $rankingUsuarios; 
     }
 
+    public function sugerencia($data){
+
+        $sql = "INSERT INTO preguntas (pregunta, estado, idUsuario, idCategoria, verificado) 
+        VALUES ('" . $data['pregunta'] . "', '0', '" . $data['idUsuario'] . "', '" . $data['categoria'] . "', 'pendiente')";
+
+         $pregunta = $this->database->query($sql);
+       
+         $this->agregarOpciones($pregunta, $data['opciones']);
+         $this->agregarRespuestaCorrecta($pregunta,$data['respuesta']);
+    }
+
+    private function agregarOpciones($id,$opciones){
+
+        for($i = 0; $i < 4; $i++){
+            $sql = "INSERT INTO opciones (preguntaID, opcion) 
+        VALUES ('" . $id . "', '" . $opciones[$i] ."')";
+            $this->database->query($sql);
+        }
+
+    }
+
+    private function agregarRespuestaCorrecta($id,$respuesta){
+
+        $sql = "SELECT * FROM opciones WHERE preguntaID = " . $id . "";
+
+        $query = $this->database->query($sql);
+
+        foreach($query as $opciones){
+            
+            if($opciones['opcion'] == $respuesta){
+                $this->agregar($id,$opciones['id']);
+                break;
+            }
+        }
+    }
+
+    public function preguntasPendientes(){
+        $sql = "SELECT p.id AS preguntaId, p.pregunta, p.estado, c.descripcion AS categoria, c.color, 
+        GROUP_CONCAT(o.opcion ORDER BY o.id SEPARATOR ', ') AS opciones, 
+        MAX(CASE WHEN r.opcionID = o.id THEN o.opcion ELSE NULL END) AS es_correcta 
+     FROM preguntas p 
+     JOIN categoria c ON p.idCategoria = c.id 
+     JOIN opciones o ON p.id = o.preguntaID 
+     LEFT JOIN respuesta r ON r.preguntaID = p.id 
+     WHERE p.verificado = 'pendiente'
+     GROUP BY p.id, p.pregunta, p.estado, c.descripcion, c.color 
+     ORDER BY p.id;";
+ 
+
+     $resultado = $this->database->query($sql);
+
+
+     $preguntas = [];
+     foreach ($resultado as $fila) {
+         $preguntas[] = [
+             'id' => $fila['preguntaId'],
+             'pregunta' => $fila['pregunta'],
+             'estado' => $fila['estado'],
+             'categoria' => $fila['categoria'],
+             'color' => $fila['color'],
+             'opciones' => explode(', ', $fila['opciones']),
+             'es_correcta' => $fila['es_correcta'],
+         ];
+       
+     }
+
+        return $preguntas;
+    }
+        private function cambiarEstadoUsuario($id) {
+        $estado = 1;
+        $this->database->query("UPDATE usuario SET estado = '$estado' WHERE id = '$id'");
+    }
+
+    private function agregar($id,$opcionID){
+
+        $sql = "INSERT INTO respuesta (preguntaID, opcionID) VALUES( '" . $id . "', '" . $opcionID ."')";
+
+        $this->database->query($sql);
+    }
     private function estadoLeible($estado){
 
         if($estado == 1){
@@ -201,24 +290,6 @@ class UsuarioModel
 
    
     //------------------------------------editor----------------------------------------------
-
-    public function cambiarEstadoPregunta($pregunta_id, $estado)
-    {
-        switch ($estado){
-            case 'pendiente':
-                $this->database->query("UPDATE pregunta SET estado = ". 'pendiente' . "WHERE id = '$pregunta_id'");
-                break;
-            case 'aprobada':
-                $this->database->query("UPDATE pregunta SET estado = ". 'aprobada' . "WHERE id = '$pregunta_id'");
-                break;
-            case 'rechazada':
-                $this->database->query("UPDATE pregunta SET estado = ". 'rechazada' . "WHERE id = '$pregunta_id'");
-                break;
-            case 'desactivada':
-                $this->database->query("UPDATE pregunta SET estado = ". 'desactivada' . "WHERE id = '$pregunta_id'");
-                break;
-        }
-    }
     public function modificarPregunta($data)
     {
         $ids = $this->idDeOpciones($data['id']);
@@ -279,11 +350,66 @@ class UsuarioModel
 
     public function obtenerPreguntasReportadas()
     {
-        $sql="SELECT r.id, u.usuario, p.pregunta, r.detalleReporte, p.estado from reporte r
-        JOIN preguntas p ON p.id = r.idPregunta
-        JOIN usuario u ON u.id = r.idUsuarioReporte
-        WHERE p.estado LIKE 0";
-        return $this->database->query($sql);
+
+        $sql = "SELECT p.id AS preguntaId, p.pregunta, p.estado, c.descripcion AS categoria, c.color, re.detalleReporte, 
+        GROUP_CONCAT(o.opcion ORDER BY o.id SEPARATOR ', ') AS opciones, 
+        MAX(CASE WHEN r.opcionID = o.id THEN o.opcion ELSE NULL END) AS es_correcta 
+ FROM preguntas p 
+ JOIN categoria c ON p.idCategoria = c.id 
+ JOIN opciones o ON p.id = o.preguntaID
+ JOIN reporte re ON p.id = re.idPregunta 
+ LEFT JOIN respuesta r ON r.preguntaID = p.id 
+ GROUP BY p.id, p.pregunta, p.estado, c.descripcion, c.color 
+ ORDER BY p.id;";
+
+    
+
+        $resultado = $this->database->query($sql);
+   
+
+        $preguntas = [];
+        foreach ($resultado as $fila) {
+            $preguntas[] = [
+                'idPreg' => $fila['preguntaId'],
+                'pregunta' => $fila['pregunta'],
+                'estado' => $fila['estado'],
+                'detalleReporte' => $fila['detalleReporte'],
+                'categoria' => $fila['categoria'],
+                'color' => $fila['color'],
+                'opciones' => explode(', ', $fila['opciones']),
+                'es_correcta' => $fila['es_correcta'],
+            ];
+          
+        }
+
+        $preguntas = [];
+        $count = 0;
+    foreach ($resultado as $fila) {
+
+    $opciones = explode(', ', $fila['opciones']);
+    $opcionesConIndex = [];
+
+    foreach ($opciones as $index => $opcion) {
+        $opcionesConIndex[] = [
+            'texto' => $opcion,
+            'index' => $index 
+        ];
+    }
+
+    $preguntas[] = [
+        'idPreg' => $fila['preguntaId'],
+        'pregunta' => $fila['pregunta'],
+        'estado' => $this->estadoLeible($fila['estado']),
+        'detalleReporte' => $fila['detalleReporte'],
+        'categoria' => $fila['categoria'],
+        'color' => $fila['color'],
+        'opciones' => $opcionesConIndex,  
+        'index' => $count,  
+        'es_correcta' => $fila['es_correcta'],
+    ];
+}
+        return $preguntas;
+
     }
     
 }

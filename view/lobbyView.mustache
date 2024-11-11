@@ -17,7 +17,9 @@
         <a href="/quizgame/home/ranking" class="btn btn-secondary btn-lg ms-1 animated-button w-100">Ver ranking</a>
     </div>
     <div class="col-md-4 pe-0">
-        <a href="/quizgame/puntaje" class="btn btn-success btn-lg ms-2 animated-button w-100">Sugerir pregunta</a>
+         <button type="button" class="btn btn-success btn-lg mb-3 animated-button w-100" data-bs-toggle="modal" data-bs-target="#sugerencia">
+            Sugerir pregunta
+        </button>
     </div>
 </div>
     <div class="mt-3 w-100 d-none d-md-block"> <!-- Ocultar en pantallas pequeñas -->
@@ -72,5 +74,73 @@
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="sugerencia" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="reportModalLabel">Sugerir pregunta</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="/quizgame/usuario/sugerirPregunta" method="POST">
+                                    <div class="mb-3">
+                                        <label for="pregunta" class="form-label">Pregunta</label>
+                                        <input type="text" name="pregunta" class="form-control" required>
+                                    </div>
+                                       
+                                            <label class="form-label">Opciones:</label>
+                                            <div class="mb-3">
+                                                <input type="text" name="opciones[]" class="form-control mb-2" required>
+                                                  <label>
+                                                    <input type="radio" name="es_correcta" value="0">
+                                                    Correcta
+                                                </label>
+                                                  <input type="text" name="opciones[]" class="form-control mb-2" required>
+                                                    <label>
+                                                    <input type="radio" name="es_correcta" value="1">
+                                                    Correcta
+                                                </label>
+                                                  <input type="text" name="opciones[]" class="form-control mb-2" required>
+                                                    <label>
+                                                    <input type="radio" name="es_correcta" value="2">
+                                                    Correcta
+                                                </label>
+                                                  <input type="text" name="opciones[]" class="form-control mb-2" required>
+                                                <label>
+                                                    <input type="radio" name="es_correcta" value="3">
+                                                    Correcta
+                                                </label>
+                                            </div>
+
+                                            <div>
+                                            <h5 class="modal-title sugerencia" id="reportModalLabel">Categoria</h5>
+                                            <label class="mb-2 d-block">
+                                                <input type="radio" name="categoria" value="1"> Geografia
+                                            </label>
+                                            <label class="mb-2 d-block">
+                                                <input type="radio" name="categoria" value="2"> Historia
+                                            </label>
+                                            <label class="mb-2 d-block">
+                                                <input type="radio" name="categoria" value="3"> Ciencia
+                                            </label>
+                                            <label class="mb-2 d-block">
+                                                <input type="radio" name="categoria" value="4"> Deporte
+                                            </label>
+                                            <label class="mb-2 d-block">
+                                                <input type="radio" name="categoria" value="5"> Arte
+                                            </label>
+                                        </div>
+                      
+                                       
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-danger">Sugerir</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 {{/user}}
