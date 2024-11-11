@@ -1,4 +1,5 @@
 <?php
+require_once 'phpqrcode/qrlib.php';
 class UsuarioController
 {
     private $model;
@@ -8,6 +9,7 @@ class UsuarioController
     {
         $this->model = $model;
         $this->presenter = $presenter;
+        //this->qrGenerator = $qr;
     }
 
     
@@ -88,14 +90,32 @@ class UsuarioController
             $data = [
                 "user" => $_SESSION['user'],
                 "userVist" =>$_SESSION['user'],
-                "partidas" => $partidas
+                "partidas" => $partidas,
+                "qr" => $this->generarQrPerfil()
             ];
 
         }if(!empty($_SESSION['editorPreguntas'])){
             $data["editorPreguntas"] = $_SESSION['editorPreguntas'];
         }
     }
-    
+
+    function generarQrPerfil()
+    {
+        if (!isset($_SESSION)) {
+            session_start();
+        }
+
+        if (!isset($_SESSION['user']['id'])) {
+            die("No se encontró el ID del usuario en la sesión.");
+        }
+
+        $url = 'http://localhost/quizgame/usuario/perfil?id=' . $_SESSION['user']['id'];
+
+        header('Content-Type: image/png');
+
+        QRcode::png($url);
+    }
+
 }
   
 
