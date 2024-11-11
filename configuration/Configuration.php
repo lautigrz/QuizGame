@@ -91,5 +91,8 @@ class Configuration
         return new ImagenUploader();
     }
 
-
+    public function getPhpQrCode()
+    {
+        return new PhpQrCode();
+    }
 }
