@@ -3,10 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
-
--- Tiempo de generación: 09-11-2024 a las 15:40:13
-
-
+-- Tiempo de generación: 11-11-2024 a las 16:23:12
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -68,21 +65,21 @@ CREATE TABLE `dificultad` (
 
 INSERT INTO `dificultad` (`id`, `idUsuario`, `idPregunta`, `veces_correctas`, `veces_vista`) VALUES
 (27, 68, 42, 19, 26),
-(28, 68, 34, 23, 35),
-(29, 68, 44, 22, 37),
-(30, 68, 39, 20, 35),
-(31, 68, 41, 26, 40),
-(32, 68, 1, 26, 37),
-(33, 68, 40, 27, 43),
-(34, 68, 2, 20, 34),
-(35, 68, 45, 22, 39),
-(36, 68, 38, 26, 37),
-(37, 68, 46, 24, 35),
-(38, 68, 47, 21, 41),
-(39, 68, 37, 24, 34),
-(40, 68, 48, 21, 33),
+(28, 68, 34, 24, 36),
+(29, 68, 44, 23, 40),
+(30, 68, 39, 22, 37),
+(31, 68, 41, 28, 42),
+(32, 68, 1, 26, 39),
+(33, 68, 40, 29, 45),
+(34, 68, 2, 20, 35),
+(35, 68, 45, 24, 41),
+(36, 68, 38, 28, 39),
+(37, 68, 46, 26, 37),
+(38, 68, 47, 22, 42),
+(39, 68, 37, 27, 37),
+(40, 68, 48, 23, 36),
 (41, 68, 36, 25, 39),
-(42, 68, 3, 20, 31),
+(42, 68, 3, 21, 32),
 (43, 68, 35, 19, 35),
 (44, 68, 43, 15, 18),
 (45, 76, 39, 3, 4),
@@ -145,7 +142,8 @@ INSERT INTO `dificultad` (`id`, `idUsuario`, `idPregunta`, `veces_correctas`, `v
 (102, 79, 45, 1, 1),
 (103, 79, 47, 1, 1),
 (104, 79, 37, 1, 1),
-(105, 79, 3, 2, 3);
+(105, 79, 3, 2, 3),
+(106, 68, 63, 0, 3);
 
 -- --------------------------------------------------------
 
@@ -165,10 +163,16 @@ CREATE TABLE `historico` (
 --
 
 INSERT INTO `historico` (`id`, `idUsuario`, `idPregunta`, `hora`) VALUES
-(1204, 68, 38, '2024-11-09 15:36:48'),
-(1205, 68, 45, '2024-11-09 15:36:52'),
-(1206, 68, 46, '2024-11-09 15:36:55'),
-(1207, 68, 41, '2024-11-09 15:36:59');
+(1228, 68, 38, '2024-11-11 15:10:52'),
+(1229, 68, 44, '2024-11-11 15:10:56'),
+(1230, 68, 37, '2024-11-11 15:13:20'),
+(1231, 68, 41, '2024-11-11 15:13:24'),
+(1232, 68, 45, '2024-11-11 15:13:27'),
+(1233, 68, 48, '2024-11-11 15:13:30'),
+(1234, 68, 39, '2024-11-11 15:14:30'),
+(1235, 68, 46, '2024-11-11 15:14:35'),
+(1236, 68, 40, '2024-11-11 15:14:38'),
+(1237, 68, 63, '2024-11-11 15:14:40');
 
 -- --------------------------------------------------------
 
@@ -187,10 +191,10 @@ CREATE TABLE `opciones` (
 --
 
 INSERT INTO `opciones` (`id`, `preguntaID`, `opcion`) VALUES
-(1, 1, 'París'),
-(2, 1, 'Madrid'),
-(3, 1, 'Roma'),
-(4, 1, 'Londres'),
+(1, 1, 'Francia'),
+(2, 1, 'Argentina'),
+(3, 1, 'Holanda'),
+(4, 1, 'Brasil'),
 (5, 2, 'George Washington'),
 (6, 2, 'Thomas Jefferson'),
 (7, 2, 'Abraham Lincoln'),
@@ -258,7 +262,19 @@ INSERT INTO `opciones` (`id`, `preguntaID`, `opcion`) VALUES
 (69, 48, 'La fuerza que impulsa el viento'),
 (70, 48, 'El campo magnético de la Tierra'),
 (71, 48, 'La atracción de los cuerpos hacia el centro de la Tierra'),
-(72, 48, 'La energía solar');
+(72, 48, 'La energía solar'),
+(97, 63, 'messi'),
+(98, 63, 'cristiano'),
+(99, 63, 'xavi'),
+(100, 63, 'iniesta'),
+(101, 64, 'asdasd'),
+(102, 64, 'dsad'),
+(103, 64, 'asdsa'),
+(104, 64, 'asddas'),
+(105, 65, 'aaa'),
+(106, 65, '332'),
+(107, 65, 'dda'),
+(108, 65, '211');
 
 -- --------------------------------------------------------
 
@@ -480,7 +496,16 @@ INSERT INTO `partida` (`id`, `puntaje_obtenido`, `fecha_partida`, `idUsuario`, `
 (9530, 0, '2024-11-09 15:28:53', 68, 0),
 (9531, 0, '2024-11-09 15:29:43', 68, 0),
 (9532, 2, '2024-11-09 15:30:09', 68, 0),
-(9533, 16, '2024-11-09 15:35:59', 68, 0);
+(9533, 16, '2024-11-09 15:35:59', 68, 0),
+(9534, 4, '2024-11-10 18:21:39', 68, 0),
+(9535, 0, '2024-11-11 14:58:22', 68, 0),
+(9536, 1, '2024-11-11 15:05:02', 68, 0),
+(9537, 2, '2024-11-11 15:05:57', 68, 0),
+(9538, 1, '2024-11-11 15:07:34', 68, 0),
+(9539, 5, '2024-11-11 15:09:23', 68, 0),
+(9540, 2, '2024-11-11 15:10:49', 68, 0),
+(9541, 3, '2024-11-11 15:13:20', 68, 0),
+(9542, 3, '2024-11-11 15:14:30', 68, 0);
 
 -- --------------------------------------------------------
 
@@ -493,32 +518,36 @@ CREATE TABLE `preguntas` (
   `pregunta` varchar(255) NOT NULL,
   `estado` tinyint(1) NOT NULL,
   `idUsuario` int(11) DEFAULT NULL,
-  `idCategoria` int(11) DEFAULT NULL
+  `idCategoria` int(11) DEFAULT NULL,
+  `verificado` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `preguntas`
 --
 
-INSERT INTO `preguntas` (`id`, `pregunta`, `estado`, `idUsuario`, `idCategoria`) VALUES
-(1, '¿Cuál es la capital de Francia?', 1, 68, 1),
-(2, '¿Quién fue el primer presidente de EE.UU?', 1, 68, 2),
-(3, '¿Qué es la fotosíntesis?', 1, 68, 3),
-(34, '¿Cuál es el planeta más grande del sistema solar?', 1, 68, 1),
-(35, '¿Quién escribió \"Don Quijote de la Mancha\"?', 1, 68, 5),
-(36, '¿Qué elemento químico tiene el símbolo \"O\"?', 1, 68, 3),
-(37, '¿Cuál es el océano más grande del mundo?', 1, 68, 1),
-(38, '¿En qué año cayó el muro de Berlín?', 1, 68, 2),
-(39, '¿Qué país ganó la Copa Mundial de Fútbol 2018?', 1, 68, 4),
-(40, '¿Quién pintó la \"Mona Lisa\"?', 1, 68, 5),
-(41, '¿Qué idioma se habla en Brasil?', 1, 68, 1),
-(42, '¿Qué número romano representa el 100?', 0, 68, 3),
-(43, '¿Qué gas es esencial para la respiración humana?', 0, 68, 3),
-(44, '¿Cuál es el río más largo del mundo?', 1, 68, 1),
-(45, '¿Quién desarrolló la teoría de la relatividad?', 1, 68, 3),
-(46, '¿Qué es el \"Big Bang\"?', 1, 68, 3),
-(47, '¿En qué país se encuentra la Torre Eiffel?', 1, 68, 1),
-(48, '¿Qué es la fuerza de gravedad?', 1, 68, 3);
+INSERT INTO `preguntas` (`id`, `pregunta`, `estado`, `idUsuario`, `idCategoria`, `verificado`) VALUES
+(1, '¿Campeon mundial 2022?', 1, 68, 1, 'aprobado'),
+(2, '¿Quién fue el primer presidente de EE.UU?', 0, 68, 2, ''),
+(3, '¿Qué es la fotosíntesis?', 0, 68, 3, 'aprobado'),
+(34, '¿Cuál es el planeta más grande del sistema solar?', 0, 68, 1, 'aprobado'),
+(35, '¿Quién escribió \"Don Quijote de la Mancha\"?', 0, 68, 5, 'aprobado'),
+(36, '¿Qué elemento químico tiene el símbolo \"O\"?', 0, 68, 3, 'aprobado'),
+(37, '¿Cuál es el océano más grande del mundo?', 1, 68, 1, ''),
+(38, '¿En qué año cayó el muro de Berlín?', 1, 68, 2, ''),
+(39, '¿Qué país ganó la Copa Mundial de Fútbol 2018?', 1, 68, 4, 'aprobado'),
+(40, '¿Quién pintó la \"Mona Lisa\"?', 1, 68, 5, ''),
+(41, '¿Qué idioma se habla en Brasil?', 1, 68, 1, ''),
+(42, '¿Qué número romano representa el 100?', 0, 68, 3, ''),
+(43, '¿Qué gas es esencial para la respiración humana?', 0, 68, 3, ''),
+(44, '¿Cuál es el río más largo del mundo?', 1, 68, 1, ''),
+(45, '¿Quién desarrolló la teoría de la relatividad?', 1, 68, 3, ''),
+(46, '¿Qué es el \"Big Bang\"?', 1, 68, 3, 'aprobado'),
+(47, '¿En qué país se encuentra la Torre Eiffel?', 1, 68, 1, ''),
+(48, '¿Qué es la fuerza de gravedad?', 1, 68, 3, ''),
+(63, 'Quien es el mejor jugador del mundo?', 1, 68, 4, 'aprobado'),
+(64, 'dsadsad', 1, 68, 2, 'aprobado'),
+(65, 'ddd', 1, 68, 5, 'aprobado');
 
 -- --------------------------------------------------------
 
@@ -538,8 +567,8 @@ CREATE TABLE `reporte` (
 --
 
 INSERT INTO `reporte` (`id`, `idPregunta`, `idUsuarioReporte`, `detalleReporte`) VALUES
-(3, 46, 68, 'asd'),
-(4, 39, 68, 'nose');
+(5, 2, 68, 'no se'),
+(6, 63, 68, 'el mejor jugador es messi');
 
 -- --------------------------------------------------------
 
@@ -575,7 +604,10 @@ INSERT INTO `respuesta` (`id`, `preguntaID`, `opcionID`) VALUES
 (15, 45, 58),
 (16, 46, 62),
 (17, 47, 66),
-(18, 48, 71);
+(18, 48, 71),
+(19, 63, 97),
+(20, 64, 102),
+(21, 65, 105);
 
 -- --------------------------------------------------------
 
@@ -606,7 +638,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `nombre`, `apellido`, `usuario`, `genero`, `email`, `password`, `estado`, `token`, `puntaje`, `fotoPerfil`, `admin`, `editor`, `ciudad`, `pais`) VALUES
-(68, 'Lautaro', 'Gerez', 'lautigrz', 'M', 'lautarogerezz12@gmail.com', '123', 1, 681159, 168, './public/image/perfil/lautigrz.jpg', 0, 0, '', ''),
+(68, 'Lautaro', 'Gerez', 'lautigrz', 'M', 'lautarogerezz12@gmail.com', '123', 1, 681159, 189, './public/image/perfil/lautigrz.jpg', 0, 0, '', ''),
 (70, 'lionel', 'scaloni', 'scaloni10', 'H', 'sca@gmial.com', '123', 1, 432768, 4, './public/image/perfil/scaloni10.jpg', 0, 0, '', ''),
 (73, 'admin', 'admin', 'admin', 'M', 'admin@gmail.com', 'admin', 1, 300048, 0, './public/image/perfil/chad123.jpg', 1, 0, '', ''),
 (74, 'editor', 'editor', 'editor', 'F', 'editor@gmail.com', 'editor', 1, 369750, 0, './public/image/perfil/messi.jpg', 0, 1, '', ''),
@@ -615,8 +647,8 @@ INSERT INTO `usuario` (`id`, `nombre`, `apellido`, `usuario`, `genero`, `email`,
 (78, 'chad', 'chad', 'chad09', 'F', 'chade@gmail.com', '123', 1, 850298, 7, './public/image/perfil/chad09.jpg', 0, 0, '', ''),
 (79, 'bixsor', 'bix', 'bixx12', 'M', 'bix@gmail.com', '123', 1, 759712, 15, './public/image/perfil/bixx12.jpg', 0, 0, '', ''),
 (80, 'diss', 'cot', 'cot23', 'F', 'cot@gmail.com', '123', 1, 222121, 4, './public/image/perfil/cot23.jpg', 0, 0, '', ''),
-(82, 'totti', 'Rugna', 'chouny1109', 'M', 'joni.rugna@gmail.com', '123', 1, 462194, 0, './public/image/perfil/chouny1109.jpeg', 0, 0, 'Isidro Casanova', 'Argentina');
-
+(82, 'totti', 'Rugna', 'chouny1109', 'M', 'joni.rugna@gmail.com', '123', 1, 462194, 0, './public/image/perfil/chouny1109.jpeg', 0, 0, 'Isidro Casanova', 'Argentina'),
+(83, 'asddas', 'asdsda', 'saddd', 'M', 'dddd@gmail.com', '221', 0, 516868, 0, '', 0, 0, 'González Catán', 'Argentina');
 
 --
 -- Índices para tablas volcadas
@@ -700,49 +732,49 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de la tabla `dificultad`
 --
 ALTER TABLE `dificultad`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
 
 --
 -- AUTO_INCREMENT de la tabla `historico`
 --
 ALTER TABLE `historico`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1208;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1238;
 
 --
 -- AUTO_INCREMENT de la tabla `opciones`
 --
 ALTER TABLE `opciones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
 
 --
 -- AUTO_INCREMENT de la tabla `partida`
 --
 ALTER TABLE `partida`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9534;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9543;
 
 --
 -- AUTO_INCREMENT de la tabla `preguntas`
 --
 ALTER TABLE `preguntas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT de la tabla `reporte`
 --
 ALTER TABLE `reporte`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `respuesta`
 --
 ALTER TABLE `respuesta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
 -- Restricciones para tablas volcadas

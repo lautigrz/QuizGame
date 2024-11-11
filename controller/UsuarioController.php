@@ -1,5 +1,5 @@
 <?php
-require_once 'phpqrcode/qrlib.php';
+
 class UsuarioController
 {
     private $model;
