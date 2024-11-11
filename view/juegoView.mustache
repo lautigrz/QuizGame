@@ -4,14 +4,10 @@
     <div class="card text-center" style="width: 80%; max-width: 600px; border-radius: 20px; box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);">
        <div class="card-header text-white d-flex justify-content-between align-items-center" style="background-color:{{color}}; border-radius: 20px 20px 0 0;">
      <img src="{{icono}}" style="width: 45px; height: auto;">
-    <h3 class="card-title"style="margin-right:38%;">Pregunta</h3>
+    <h3 class="card-title preg">Pregunta</h3>
+    <div id="number"></div>
 </div>
-
-
-       
         <div class="card-body" style="padding: 30px;">
-      
-            
             <p class="card-text h5 mb-4" style="font-weight: bold;">{{pregunta}}</p>
    
             <div class="d-grid gap-2 mx-auto" style="width: 100%;">
@@ -37,7 +33,8 @@
         <h5 class="modal-title" id="respuestaIncorrectaLabel">Puntaje final:{{puntaje}}</h5>
       </div>
       <div class="modal-body text-center">
-        <p class="text-danger h5">Respuesta incorrecta</p>
+        <p class="text-danger h5">Partina finalizada</p>
+       <span>Tiempo restante:</span> <span id="number-modal"></span> 
         <p class="h5">Respuesta correcta: <span class="text-success">{{respuesta}}<span></p>
           <!-- Botón de Reportar que abre el modal -->
           <button type="button" class="btn btn-danger mt-4" style="width: 100%; padding: 10px; border-radius: 10px;" data-bs-toggle="modal" data-bs-target="#reportModal">
@@ -52,7 +49,6 @@
 </div>
 
 
-<!-- Modal para reportar la pregunta -->
 <div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -76,22 +72,19 @@
     </div>
   </div>
 </div>
+
+<script src="../public/js/tiempo.js"></script>
+
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        {{#respuesta_incorrecta}}
-            var respuestaIncorrectaModal = new bootstrap.Modal(document.getElementById('respuestaIncorrectaModal'), {
-                keyboard: false,
-                backdrop: 'static' 
-            });
-            respuestaIncorrectaModal.show();
-        {{/respuesta_incorrecta}}
-    });
-
-    function cerrarYRedirigir(url) {
-        var modal = bootstrap.Modal.getInstance(document.getElementById('respuestaIncorrectaModal'));
-        modal.hide();
-
-        window.location.href = url;
-    }
+    {{#respuesta_incorrecta}}
+        sessionStorage.setItem('mostrarModal', 'true');
+        sessionStorage.setItem('detenerContador', 'true');
+    {{/respuesta_incorrecta}}
 </script>
+
+
+
+
+
+
 

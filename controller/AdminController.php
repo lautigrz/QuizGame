@@ -1,29 +1,30 @@
+
 <?php
 
-class AdminController{
-    private $model;
+class AdminController {
+    private $usuarioModel;
     private $presenter;
-    public function __construct($model, $presenter){
-        $this->model = $model;
+    private $adminModel;
+
+    public function __construct($usuarioModel, $presenter, $adminModel) {
+        $this->usuarioModel = $usuarioModel;
         $this->presenter = $presenter;
+        $this->adminModel = $adminModel;
     }
 
-    public function mostrarAdminView()
-    {
-        $data = [];
-        $this->setDatos($data);
+    public function mostrarAdminView() {
+        $data = [
+            'cantidad_jugadores' => $this->adminModel->obtenerCantidadJugadores(),
+            'cantidad_usuarios_nuevos' => $this->adminModel->obtenerCantidadUsuariosNuevos('month'), // Ejemplo de filtro mensual
+            'cantidad_preguntas_juego' => $this->adminModel->obtenerCantidadPreguntasEnJuego(),
+            'cantidad_preguntas_creadas' => $this->adminModel->obtenerCantidadPreguntasCreadas(),
+            'porcentaje_respuestas_correctas' => $this->adminModel->obtenerPorcentajeRespuestasCorrectas(),
+            'cantidad_partidas_jugadas' => $this->adminModel->obtenerCantidadPartidasJugadas(),
+            'usuarios_por_pais' => $this->adminModel->obtenerUsuariosPorPais(),
+            'usuarios_por_sexo' => $this->adminModel->obtenerUsuariosPorSexo(),
+            'usuarios_por_edad' => $this->adminModel->obtenerUsuariosPorGrupoEdad(),
+        ];
+
         $this->presenter->show('admin', $data);
     }
-
-    public function setDatos(&$data){
-        if(!empty($_SESSION['error'])){
-            $data["error"] = $_SESSION['error'];
-            unset( $_SESSION['error']);
-        }if(!empty($_SESSION['user'])){
-            $data["user"] = $_SESSION['user'];
-        }if(!empty($_SESSION['editorPreguntas'])){
-            $data["editorPreguntas"] = $_SESSION['editorPreguntas'];
-        }
-    }
-
 }

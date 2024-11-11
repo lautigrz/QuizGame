@@ -1,0 +1,82 @@
+<div class="container mt-5">
+    <h1 class="text-center text-primary">Panel de Administración</h1>
+
+    <!-- Filtros de tiempo -->
+    <div class="row my-4">
+        <div class="col-md-12">
+            <label for="filter-time" class="form-label">Filtrar por:</label>
+            <select id="filter-time" class="form-select">
+                <option value="day">Día</option>
+                <option value="week">Semana</option>
+                <option value="month">Mes</option>
+                <option value="year">Año</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Área con fondo gris claro -->
+    <div class="bg-light p-4 rounded mb-4">
+        <!-- Cantidad de usuarios -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <h3>Cantidad de jugadores</h3>
+                <p>{{cantidad_jugadores}}</p>
+            </div>
+            <div class="col-md-6">
+                <h3>Cantidad de usuarios nuevos</h3>
+                <p>{{cantidad_usuarios_nuevos}}</p>
+            </div>
+        </div>
+
+        <!-- Estadísticas de preguntas -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <h3>Cantidad de preguntas en el juego</h3>
+                <p>{{cantidad_preguntas_juego}}</p>
+            </div>
+            <div class="col-md-6">
+                <h3>Cantidad de preguntas creadas</h3>
+                <p>{{cantidad_preguntas_creadas}}</p>
+            </div>
+        </div>
+
+        <!-- Porcentajes y otras estadísticas -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <h3>Porcentaje de respuestas correctas</h3>
+                <p>{{porcentaje_respuestas_correctas}}</p>
+            </div>
+            <div class="col-md-6">
+                <h3>Cantidad de partidas jugadas</h3>
+                <p>{{cantidad_partidas_jugadas}}</p>
+            </div>
+        </div>
+
+        <!-- Demografía de usuarios -->
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <h3>Usuarios por país</h3>
+                {{#usuarios_por_pais}}
+                    <p>{{nombre}}: {{cantidad}}</p>
+                {{/usuarios_por_pais}}
+            </div>
+            <div class="col-md-4">
+                <h3>Usuarios por sexo</h3>
+                {{#usuarios_por_sexo}}
+                    <p>{{nombre}}: {{cantidad}}</p>
+                {{/usuarios_por_sexo}}
+            </div>
+            <div class="col-md-4">
+                <h3>Usuarios por grupo de edad</h3>
+                {{#usuarios_por_edad}}
+                    <p>{{grupo}}: {{cantidad}}</p>
+                {{/usuarios_por_edad}}
+            </div>
+        </div>
+    </div>
+
+    <!-- Botón para imprimir el reporte -->
+    <div class="text-center mt-5">
+        <button onclick="window.print()" class="btn btn-primary">Imprimir Reporte</button>
+    </div>
+</div>

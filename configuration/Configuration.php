@@ -14,7 +14,7 @@ include_once("controller/AdminController.php");
 include_once("controller/HomeController.php");
 include_once("model/UsuarioModel.php");
 include_once("model/JuegoModel.php");
-include_once("model/RankingModel.php");
+include_once("model/AdminModel.php");
 include_once('vendor/mustache/src/Mustache/Autoloader.php');
 class Configuration
 {
@@ -22,20 +22,9 @@ class Configuration
     {
     }
 
-//     //Ranking
-    public function getRankingController(){
-        return new RankingController($this->getRankingModel(), $this->getPresenter());
-    }
-
-
-public function getRankingModel(){
+    public function getRankingModel(){
         return new RankingModel($this->getDatabase());
     }
-
-//  public function getRanking(){
-//         return new RankingModel($this->getDatabase());
-//     }
-
 
     public function getUsuarioController(){
 
@@ -51,15 +40,19 @@ public function getRankingModel(){
     }
 
     public function getHomeController(){
-        return new HomeController($this->getUsuarioModel(),$this->getPresenter(), $this->getRankingModel());
+        return new HomeController($this->getUsuarioModel(),$this->getPresenter());
     }
     public function getAdminController(){
-        return new AdminController($this->getUsuarioModel(),$this->getPresenter());
+        return new AdminController($this->getUsuarioModel(),$this->getPresenter(),$this->getAdminModel());
     }
 
 
     public function getAuthController(){
         return new AuthController($this->getUsuarioModel(), $this->getPresenter(), $this->getSendEmail(), $this->getImagenUploader());
+    }
+
+    public function getAdminModel(){
+        return new AdminModel($this->getDatabase());
     }
 
     public function getJuegoModel(){
@@ -98,5 +91,8 @@ public function getRankingModel(){
         return new ImagenUploader();
     }
 
-
+    public function getPhpQrCode()
+    {
+        return new PhpQrCode();
+    }
 }

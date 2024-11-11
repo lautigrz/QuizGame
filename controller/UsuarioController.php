@@ -1,4 +1,5 @@
 <?php
+
 class UsuarioController
 {
     private $model;
@@ -8,14 +9,61 @@ class UsuarioController
     {
         $this->model = $model;
         $this->presenter = $presenter;
+        //this->qrGenerator = $qr;
     }
 
-    public function mostrarUserView()
-    {
-        $data = [];
-        $this->setDatos($data);
-        $this->presenter->show('user', $data);
+    
+        public function mostrarUserView()
+        {
+            $data = [];
+            $this->setDatos($data);
+            $this->presenter->show('user', $data);
+            
+        }
+    
+
+
+  public function perfil(){
+    if (isset($_GET['id'])) {
+        $userId = $_GET['id'];
+        $partidas = $this->model->partidasJugadas($userId);
+        $userData = $this->model->getUser($userId);
+
+        if ($userData) {
+            $data = [
+                'userVist' => $userData,
+                'user' => $_SESSION['user'],
+                "partidas" => $partidas 
+            ];
+            $this->presenter->show('user', $data);
+        } 
+    }
+}
+
+    public function sugerirPregunta(){
+
+        $correcta = $_POST['es_correcta'];
+        $opciones = [];
+             
+            $respuesta = "";
+            foreach($_POST['opciones'] as $index => $opcion){
+                $opciones[] = $opcion;
+                if($index == $correcta){
+                    $respuesta = $opcion;
+                }
+            }
         
+        $data = [
+            'pregunta' => $_POST['pregunta'],
+            'opciones' => $opciones,
+            'idUsuario' => $this->idUsuario(),
+            'categoria' => $_POST['categoria'],
+            'respuesta' => $respuesta
+        ];
+
+
+        $this->model->sugerencia($data);
+        header('Location: /quizgame/home/lobby');
     }
 
     private function crearArchivoConToken($token)
@@ -24,15 +72,48 @@ class UsuarioController
         fwrite($archivo," - " . $token);
         fclose($archivo);
     }
-    public function setDatos(&$data){
+    private function idUsuario(){
+        return $this->existeUsuario() ? $_SESSION['user']['id'] : null;
+      }
+      private function existeUsuario() {
+        return isset($_SESSION['user']);
+    }
+  
+    private function setDatos(&$data){
         if(!empty($_SESSION['error'])){
             $data["error"] = $_SESSION['error'];
             unset( $_SESSION['error']);
         }if(!empty($_SESSION['user'])){
-            $data["user"] = $_SESSION['user'];
+
+            $partidas = $this->model->partidasJugadas($this->idUsuario());
+
+            $data = [
+                "user" => $_SESSION['user'],
+                "userVist" =>$_SESSION['user'],
+                "partidas" => $partidas,
+                "qr" => $this->generarQrPerfil()
+            ];
+
         }if(!empty($_SESSION['editorPreguntas'])){
             $data["editorPreguntas"] = $_SESSION['editorPreguntas'];
         }
+    }
+
+    function generarQrPerfil()
+    {
+        if (!isset($_SESSION)) {
+            session_start();
+        }
+
+        if (!isset($_SESSION['user']['id'])) {
+            die("No se encontró el ID del usuario en la sesión.");
+        }
+
+        $url = 'http://localhost/quizgame/usuario/perfil?id=' . $_SESSION['user']['id'];
+
+        header('Content-Type: image/png');
+
+        QRcode::png($url);
     }
 
 }
