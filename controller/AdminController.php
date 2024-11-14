@@ -23,6 +23,7 @@ class AdminController {
             'usuarios_por_pais' => $this->adminModel->obtenerUsuariosPorPais(),
             'usuarios_por_sexo' => $this->adminModel->obtenerUsuariosPorSexo(),
             'usuarios_por_edad' => $this->adminModel->obtenerUsuariosPorGrupoEdad(),
+            "admin" => true,
         ];
 
         $this->presenter->show('admin', $data);

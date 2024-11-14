@@ -19,9 +19,13 @@
         <a class="navbar-brand text-white" href="/quizgame/home/lobby">QuizGame</a>
         {{/esUsuario}}
 
-        {{^esUsuario}}
-        <a class="navbar-brand text-white" href="/quizgame/editor/mostrarEditorView">QuizGame</a>
-        {{/esUsuario}}
+        {{#editor}}
+            <a class="navbar-brand text-white" href="/quizgame/editor/mostrarEditorView">QuizGame</a>
+        {{/editor}}
+
+        {{#admin}}
+            <a class="navbar-brand text-white" href="/quizgame/admin/mostrarAdminView">QuizGame</a>
+        {{/admin}}
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

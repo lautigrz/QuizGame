@@ -283,22 +283,7 @@ class UsuarioModel
         }
     }
 
-    private function insertarOpcionesPorPregunta($pregunta, $opciones)
-    {
 
-    }
-    private function borrarTodoRelacionadoPreguntaParaInsertarLaModificada($pregunta_id)
-    {
-        /*-- 1. Eliminar respuestas relacionadas con la pregunta
-        DELETE FROM respuesta WHERE pregunta_id = :'.$pregunta_id.';
-
-        -- 2. Eliminar opciones relacionadas con la pregunta
-        DELETE FROM opciones WHERE pregunta_id = :'.$pregunta_id.';
-
-        -- 3. Eliminar la pregunta
-        DELETE FROM preguntas WHERE id = :'.$pregunta_id.';
-        */
-    }
 
    
     //------------------------------------editor----------------------------------------------

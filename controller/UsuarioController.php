@@ -9,7 +9,8 @@ class UsuarioController
     {
         $this->model = $model;
         $this->presenter = $presenter;
-        //this->qrGenerator = $qr;
+
+
     }
 
     
@@ -28,12 +29,14 @@ class UsuarioController
         $userId = $_GET['id'];
         $partidas = $this->model->partidasJugadas($userId);
         $userData = $this->model->getUser($userId);
-
+        $fileName = $this->generarQrPerfil();
         if ($userData) {
             $data = [
                 'userVist' => $userData,
                 'user' => $_SESSION['user'],
-                "partidas" => $partidas 
+                "partidas" => $partidas,
+                "qr_image" => $this->generarQrPerfil()
+                
             ];
             $this->presenter->show('user', $data);
         } 
@@ -86,34 +89,25 @@ class UsuarioController
         }if(!empty($_SESSION['user'])){
 
             $partidas = $this->model->partidasJugadas($this->idUsuario());
-
             $data = [
                 "user" => $_SESSION['user'],
+                "esUsuario" => true,
                 "userVist" =>$_SESSION['user'],
-                "partidas" => $partidas
-                #"qr" => $this->generarQrPerfil()
+                "partidas" => $partidas,
+                "qr_image" => $this->generarQrPerfil()
             ];
 
-        }if(!empty($_SESSION['editorPreguntas'])){
+        }
+        if(!empty($_SESSION['editorPreguntas'])){
             $data["editorPreguntas"] = $_SESSION['editorPreguntas'];
         }
     }
 
     function generarQrPerfil()
     {
-        if (!isset($_SESSION)) {
-            session_start();
-        }
-
-        if (!isset($_SESSION['user']['id'])) {
-            die("No se encontró el ID del usuario en la sesión.");
-        }
-
-        $url = 'http://localhost/quizgame/usuario/perfil?id=' . $_SESSION['user']['id'];
-
-        header('Content-Type: image/png');
-
-        QRcode::png($url);
+        $url = "http://localhost/quizgame/usuario/perfil?id=".$_GET['id'];
+        $qrGenerator = new QRCodeGenerator();
+        return $qrGenerator->generateBase64QRCode($url);
     }
 
 }

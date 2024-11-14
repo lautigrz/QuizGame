@@ -69,7 +69,7 @@ class EditorController{
 
             $data = [
              "user" => $_SESSION['user'],
-             "esUsuario" => false,    
+             "editor" => true,
             "editorPreguntas" => $this->model->obtenerTodasLasPreguntas(),
             "reportadas" => $this->model->obtenerPreguntasReportadas(),
              "sugeridas" => $this->model->preguntasPendientes()       
