@@ -12,7 +12,7 @@ class HomeController{
 
     public function ranking(){
         $data = [];
-      
+        
         $this->dataRanking($data);
     
         $this->presenter->show('ranking', $data);
@@ -47,7 +47,7 @@ class HomeController{
     public function data(&$data){
 
         $rank = $this->model->obtenerRankingUsuarios();
-        $fecha = $this->model->ultimaPartida($_SESSION['user']['id']);
+        $fecha = $this->model->ultimaPartida($this->idUsuario());
 
         $usuarioLogueado = $_SESSION['user']['usuario'];
         $newRank = $this->queAparezcaElUsuarioEnElRankingSinImportarLaPosicion($rank, $usuarioLogueado);
@@ -59,6 +59,7 @@ class HomeController{
         $data = [
             "ranking" => $newRank,
             "user" => $_SESSION['user'],
+            "partida" => $this->model->verificarSiTieneUnaPartidaActiva($this->idUsuario()),
             "fecha" => $fecha
         ];
 
@@ -82,6 +83,9 @@ class HomeController{
     
         return $newRank; 
     }
-    
+
+    private function idUsuario(){
+        return isset($_SESSION['user']) ? $_SESSION['user']['id'] : 0;
+      }
 
 }

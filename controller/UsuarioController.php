@@ -90,8 +90,8 @@ class UsuarioController
             $data = [
                 "user" => $_SESSION['user'],
                 "userVist" =>$_SESSION['user'],
-                "partidas" => $partidas,
-                "qr" => $this->generarQrPerfil()
+                "partidas" => $partidas
+                #"qr" => $this->generarQrPerfil()
             ];
 
         }if(!empty($_SESSION['editorPreguntas'])){

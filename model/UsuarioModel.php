@@ -68,6 +68,18 @@ class UsuarioModel
         $this->cambiarEstadoUsuario($usuarioResult[0]['id']);
     }
 
+    public function verificarSiTieneUnaPartidaActiva($id){
+        $sql = "SELECT * FROM partida WHERE idUsuario =" . $id . " AND estado = 1";
+
+        $query = $this->database->query($sql);
+
+        if(!empty($query)){
+            return $query;
+        }
+
+        return false;
+    }
+
     public function puntajeTotal($id){
         $sql = "SELECT puntaje FROM usuario WHERE id = " . $id . " ";
 
@@ -306,7 +318,8 @@ class UsuarioModel
                         WHEN o.id = {$ids[2]['id']} THEN '$opciones[2]'
                         WHEN o.id = {$ids[3]['id']} THEN '$opciones[3]'
                     END,
-                    p.pregunta = '{$data['pregunta']}'
+                    p.pregunta = '{$data['pregunta']}',
+                    p.idCategoria = '{$data['categoria']}'
                 WHERE p.id = '{$data['id']}'";
     
  

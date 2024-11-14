@@ -1,29 +1,30 @@
-<div class="container mt-5">
+<div class="container mt-5 ">
 
-    <!-- Pestañas -->
- <div class="pestañas">
-    <div class="d-flex justify-content-between align-items-center">
-        <!-- Pestañas -->
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="preguntas-tab" data-bs-toggle="tab" data-bs-target="#preguntas" type="button" role="tab" aria-controls="preguntas" aria-selected="true">Preguntas</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="sugeridas-tab" data-bs-toggle="tab" data-bs-target="#sugeridas" type="button" role="tab" aria-controls="sugeridas" aria-selected="false">Sugeridas</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="reportadas-tab" data-bs-toggle="tab" data-bs-target="#reportadas" type="button" role="tab" aria-controls="reportadas" aria-selected="false">Reportadas</button>
-            </li>
-        </ul>
-        <!-- Botón de Cerrar sesión alineado a la derecha -->
-      
-            <a href="/quizgame/auth/cerrarSesion"class="btn btn-outline-danger">Cerrar sesión<a>
-        <
-    </div>
+ 
+<!-- Pestañas -->
+<div class="container mt-4">
+  <div class="pestañas">
+    <ul class="nav nav-pills nav-fill custom-tabs" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="preguntas-tab" data-bs-toggle="tab" data-bs-target="#preguntas" type="button" role="tab" aria-controls="preguntas" aria-selected="true">
+          📝 Preguntas
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="sugeridas-tab" data-bs-toggle="tab" data-bs-target="#sugeridas" type="button" role="tab" aria-controls="sugeridas" aria-selected="false">
+          💡 Sugeridas
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="reportadas-tab" data-bs-toggle="tab" data-bs-target="#reportadas" type="button" role="tab" aria-controls="reportadas" aria-selected="false">
+          🚨 Reportadas
+        </button>
+      </li>
+    </ul>
+  </div>
 </div>
 
 
-  
 
     <!-- Contenido de las pestañas -->
     <div class="tab-content" style="margin-top:15px;" id="myTabContent">
@@ -35,6 +36,7 @@
                         <h5 class="card-title">{{pregunta}}</h5>
                         <p class="card-text"><strong>Estado:</strong>  {{#estado}}Habilitado{{/estado}}  {{^estado}}Deshabilitado{{/estado}}</p>
                         <p class="card-text"><strong>Opciones:</strong> <br> {{#opciones}} {{texto}} <br> {{/opciones}}</p>
+                        <p class="car-text"><strong>Categoria:</strong> {{categoria}}</p>
                         <p class="card-text"><strong>Correcta:</strong> {{es_correcta}}</p>
                         <div class="d-flex justify-content-end gap-2">
                             <form action="/quizgame/editor/alterarPregunta" method="POST" style="display: inline;">
@@ -73,6 +75,24 @@
                                                 </label>
                                             </div>
                                         {{/opciones}}
+                                        <div>
+                                            <h5 class="modal-title sugerencia" id="reportModalLabel">Categoria</h5>
+                                            <label class="mb-2 d-block">
+                                                <input type="radio" name="categoria" value="1"> Geografia
+                                            </label>
+                                            <label class="mb-2 d-block">
+                                                <input type="radio" name="categoria" value="2"> Historia
+                                            </label>
+                                            <label class="mb-2 d-block">
+                                                <input type="radio" name="categoria" value="3"> Ciencia
+                                            </label>
+                                            <label class="mb-2 d-block">
+                                                <input type="radio" name="categoria" value="4"> Deporte
+                                            </label>
+                                            <label class="mb-2 d-block">
+                                                <input type="radio" name="categoria" value="5"> Arte
+                                            </label>
+                                        </div>
 
                                     <input type="hidden" name="preguntaId" value="{{id}}">
                                     <div class="modal-footer">
@@ -87,26 +107,28 @@
             {{/editorPreguntas}}
         </div>
         <!-- Pestaña de Sugeridas -->
-        <div class="tab-pane fade" id="sugeridas" role="tabpanel" aria-labelledby="sugeridas-tab">
-         {{#sugeridas}}
-            <p>Contenido de preguntas sugeridas.</p>
-             <div class="card mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title">{{pregunta}}</h5>
-                        <p class="card-text"><strong>Estado:</strong>  {{#estado}}Habilitado{{/estado}}  {{^estado}}Deshabilitado{{/estado}}</p>
-                        <p class="card-text"><strong>Opciones:</strong> <br> {{#opciones}} {{.}} <br> {{/opciones}}</p>
-                        <p class="card-text"><strong>Correcta:</strong> {{es_correcta}}</p>
-                        <div class="d-flex justify-content-end gap-2">
-                            <form action="/quizgame/editor/alterarPregunta" method="POST" style="display: inline;">
-                                <input type="hidden" name="pregunta" value="{{id}}">
-
-                                <button type="submit" class="btn btn-secondary btn-sm">{{#estado}}Desactivar{{/estado}}  {{^estado}}Activar{{/estado}}</button>
-                            </form>
-                        </div>
-                    </div>
+        <div class="tab-content">
+    <div class="tab-pane fade" id="sugeridas" role="tabpanel" aria-labelledby="sugeridas-tab">
+        {{#sugeridas}}
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">{{pregunta}}</h5>
+                <p class="card-text"><strong>Estado:</strong> {{#estado}}Habilitado{{/estado}} {{^estado}}Deshabilitado{{/estado}}</p>
+                <p class="card-text"><strong>Opciones:</strong> <br> {{#opciones}} {{.}} <br> {{/opciones}}</p>
+                <p class="car-text"><strong>Categoria:</strong> {{categoria}}</p>
+                <p class="card-text"><strong>Correcta:</strong> {{es_correcta}}</p>
+                <div class="d-flex justify-content-end gap-2">
+                    <form action="/quizgame/editor/alterarPregunta" method="POST" style="display: inline;">
+                        <input type="hidden" name="pregunta" value="{{id}}">
+                        <button type="submit" class="btn btn-secondary btn-sm">{{#estado}}Desactivar{{/estado}} {{^estado}}Activar{{/estado}}</button>
+                    </form>
                 </div>
-                {{/sugeridas}}
+            </div>
         </div>
+        {{/sugeridas}}
+    </div>
+</div>
+
       
         <div class="tab-pane fade" id="reportadas" role="tabpanel" aria-labelledby="reportadas-tab">
             {{#reportadas}}
@@ -156,6 +178,7 @@
                                                 </label>
                                             </div>
                                         {{/opciones}}
+                                        
 
                                     <input type="hidden" name="preguntaId" value="{{idPreg}}">
                                     <div class="modal-footer">

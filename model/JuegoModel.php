@@ -139,25 +139,32 @@ class JuegoModel{
 
     public function obtenerPartidaActivaDelUsuario($id){
 
-        $sql = "SELECT id FROM partida WHERE idUsuario = " . $id . " AND estado = 1 ORDER BY id DESC LIMIT 1";
+        $sql = "SELECT id FROM partida WHERE idUsuario = " . $id . " AND estado = 1";
 
         $query = $this->database->query($sql);
 
         return $query;
     }
 
-    public function actualizarPartida($data){
+    public function actualizarPuntaje($id){
 
-        $idPartida = $this->obtenerPartidaActivaDelUsuario($data['id']);
-        var_dump($idPartida);
-
-        $sql = "UPDATE partida SET puntaje_obtenido = " . $data['puntaje'] . ", idUsuario = " . $data['id'] . ", 
-        estado = 0 
+        $idPartida = $this->obtenerPartidaActivaDelUsuario($id);
+   
+        $sql = "UPDATE partida SET puntaje_obtenido = puntaje_obtenido + 1 , idUsuario = " . $id . "
         WHERE id = " . $idPartida[0]['id'] . " ";
 
-        
+        $this->database->query($sql); 
+    }
+    public function finalizarPartida($id){
+
+        $idPartida = $this->obtenerPartidaActivaDelUsuario($id);
+   
+        #var_dump($idPartida);
+        $sql = "UPDATE partida SET estado = 0 
+        WHERE id = " . $idPartida[0]['id'] . " ";
+
         $this->database->query($sql);
-        $this->actualizarPuntajeDeUsuario($data);
+        $this->actualizarPuntajeDeUsuario($id);
          
     }
 
@@ -203,15 +210,25 @@ class JuegoModel{
 
      return $contador;
 }
+    public function ultimaPartida($id){
+    $sql = "SELECT puntaje_obtenido FROM partida WHERE idUsuario = $id ORDER BY fecha_partida DESC LIMIT 1";
 
-    private function actualizarPuntajeDeUsuario($data){
+    $puntaje = $this->database->query($sql);
+
+    return $puntaje[0]['puntaje_obtenido'];
+}
+
+    private function actualizarPuntajeDeUsuario($id){
+        $puntaje = $this->ultimaPartida($id);
+
         $sql = "UPDATE usuario 
-        SET puntaje = puntaje + " . $data['puntaje'] . " 
-        WHERE id = " . $data['id'];
+        SET puntaje = puntaje + " . $puntaje . " 
+        WHERE id = " . $id;
         $this->database->query($sql);
 
     }
 
+  
     private function updateDificultad($idUsuario, $idPregunta, $sumaCorrecta){
         $sql = "UPDATE dificultad 
         SET veces_correctas = veces_correctas + " . $sumaCorrecta . ", 

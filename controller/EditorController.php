@@ -49,6 +49,7 @@ class EditorController{
                 "id" => $_POST['preguntaId'],
                 "pregunta" => $_POST['preguntaModificada'],
                 "opciones" => $opciones,
+                "categoria" => $_POST['categoria'],
                 "respuesta" => $respuesta
             ];
           
@@ -67,7 +68,8 @@ class EditorController{
         }if(!empty($_SESSION['user'])){
 
             $data = [
-
+             "user" => $_SESSION['user'],
+             "esUsuario" => false,    
             "editorPreguntas" => $this->model->obtenerTodasLasPreguntas(),
             "reportadas" => $this->model->obtenerPreguntasReportadas(),
              "sugeridas" => $this->model->preguntasPendientes()       

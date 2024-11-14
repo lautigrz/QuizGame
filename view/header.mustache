@@ -5,38 +5,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QuizGame</title>
     <!-- Bootstrap CSS -->
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.0/mdb.min.css" rel="stylesheet">
     <link href="../public/css/style.css" rel="stylesheet">
 </head>
 {{#user}}
 <header class="bg-teal w3-padding">
 
-        <nav class="navbar navbar-expand-lg p-3 ">
-            <div class="container-fluid">
-                <a class="navbar-brand text-white" href="/quizgame/home/lobby">QuizGame</a>
+        <nav class="navbar navbar-expand-lg p-3">
+    <div class="container-fluid">
+        {{#esUsuario}}
+        <a class="navbar-brand text-white" href="/quizgame/home/lobby">QuizGame</a>
+        {{/esUsuario}}
 
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+        {{^esUsuario}}
+        <a class="navbar-brand text-white" href="/quizgame/editor/mostrarEditorView">QuizGame</a>
+        {{/esUsuario}}
 
-              <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <ul class="navbar-nav ms-auto">
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src=".{{fotoPerfil}}" alt="Foto de perfil" class="rounded-circle me-2" width="30" height="30">
-                Mi cuenta
-            </a>
-            <ul class="dropdown-menu dropdown" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="/quizgame/usuario/mostrarUserView">Perfil</a></li>
-                <li><a class="dropdown-item" href="/quizgame/auth/cerrarSesion">Cerrar sesión</a></li>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ms-auto">
+                <!-- Notificaciones -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link text-white position-relative" href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-bell"></i> <!-- Icono de campana -->
+                        {{#notificacionesPendientes}}
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            {{cantidad}}
+                            <span class="visually-hidden">nuevas notificaciones</span>
+                        </span>
+                        {{/notificacionesPendientes}}
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="notificationDropdown">
+                        {{#notificaciones}}
+                        <li>{{mensaje}}</li>
+                        {{/notificaciones}}
+                        {{^notificaciones}}
+                        <li><span class="dropdown-item text-muted">Sin nuevas notificaciones</span></li>
+                        {{/notificaciones}}
+                    </ul>
+                </li>
+
+                <!-- Mi cuenta -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src=".{{fotoPerfil}}" alt="Foto de perfil" class="rounded-circle me-2" width="30" height="30">
+                        Mi cuenta
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="/quizgame/usuario/mostrarUserView">Perfil</a></li>
+                        <li><a class="dropdown-item" href="/quizgame/auth/cerrarSesion">Cerrar sesión</a></li>
+                    </ul>
+                </li>
             </ul>
-        </li>
-    </ul>
-</div>
+        </div>
+    </div>
+</nav>
 
-            </div>
-        </nav>
 </header>
 {{/user}}
 
