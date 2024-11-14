@@ -18,9 +18,29 @@ class EditorController{
           public function alterarPregunta(){
             $pregunta_id = $_POST['pregunta'];
 
+            $usuario = $_POST['usuario'];
+            $tipo = $_POST['tipo'];
+            $comentario = $_POST['comentario'];
+            $accion = $_POST['accion'];
+            $id = $_POST['idUsuario'];
+
+            if($accion == 'aprobada'){
             $this->model->cambiarEstadoPregunta($pregunta_id);
+            }
+
+            $this->notificarAUsuario($usuario,$tipo,$comentario, $accion,$id);
             header('Location: /quizgame/editor/mostrarEditorView');
 
+        }
+
+        private function notificarAUsuario($usuario,$tipo,$comentario, $accion, $id){
+            $mensaje = $comentario;
+            if(empty($comentario)){
+                $mensaje = "Hola ". $usuario ." tu ". $tipo . " fue " . $accion . " ";
+            }
+           # var_dump($comentario);
+            #var_dump($mensaje);
+            $this->model->notificar($id,$mensaje);
         }
 
         public function rechazarReporte(){
@@ -30,6 +50,18 @@ class EditorController{
             header('Location: /quizgame/editor/mostrarEditorView');
             
         }
+
+        public function sugerencia(){
+            $pregunta_id = $_POST['pregunta'];
+
+            $this->model->cambiarEstadoPregunta($pregunta_id);
+
+
+
+            header('Location: /quizgame/editor/mostrarEditorView');
+        }
+
+
         public function modificarPregunta(){
     
             $correcta = $_POST['es_correcta'];

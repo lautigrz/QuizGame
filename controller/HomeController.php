@@ -60,9 +60,19 @@ class HomeController{
             "ranking" => $newRank,
             "user" => $_SESSION['user'],
             "partida" => $this->model->verificarSiTieneUnaPartidaActiva($this->idUsuario()),
-            "fecha" => $fecha
+            "fecha" => $fecha,
+            "notificaciones" => $this->model->notificaciones($this->idUsuario())
+         
         ];
 
+    }
+
+    public function leer(){
+        $id = $_GET['id'];
+
+        $this->model->leer($id);
+        header('Location: /quizgame/home/lobby');
+        exit();
     }
 
 

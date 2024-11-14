@@ -110,21 +110,39 @@
         <div class="tab-content">
     <div class="tab-pane fade" id="sugeridas" role="tabpanel" aria-labelledby="sugeridas-tab">
         {{#sugeridas}}
-        <div class="card mb-3">
-            <div class="card-body">
-                <h5 class="card-title">{{pregunta}}</h5>
-                <p class="card-text"><strong>Estado:</strong> {{#estado}}Habilitado{{/estado}} {{^estado}}Deshabilitado{{/estado}}</p>
-                <p class="card-text"><strong>Opciones:</strong> <br> {{#opciones}} {{.}} <br> {{/opciones}}</p>
-                <p class="car-text"><strong>Categoria:</strong> {{categoria}}</p>
-                <p class="card-text"><strong>Correcta:</strong> {{es_correcta}}</p>
-                <div class="d-flex justify-content-end gap-2">
-                    <form action="/quizgame/editor/alterarPregunta" method="POST" style="display: inline;">
-                        <input type="hidden" name="pregunta" value="{{id}}">
-                        <button type="submit" class="btn btn-secondary btn-sm">{{#estado}}Desactivar{{/estado}} {{^estado}}Activar{{/estado}}</button>
-                    </form>
-                </div>
-            </div>
+       <div class="card mb-3">
+    <div class="card-body">
+        <h5 class="card-title">{{pregunta}}</h5>
+        <p class="card-text"><strong>Estado:</strong> {{#estado}}Habilitado{{/estado}} {{^estado}}Deshabilitado{{/estado}}</p>
+        <p class="card-text"><strong>Opciones:</strong> <br> {{#opciones}} {{.}} <br> {{/opciones}}</p>
+        <p class="card-text"><strong>Categoría:</strong> {{categoria}}</p>
+        <p class="card-text"><strong>Correcta:</strong> {{es_correcta}}</p>
+
+      <div class="d-flex justify-content-between align-items-start gap-2">
+    <form action="/quizgame/editor/alterarPregunta" method="POST" class="w-100 d-flex">
+        <input type="hidden" name="pregunta" value="{{id}}">
+
+        <!-- Contenedor del textarea -->
+        <div class="w-75 me-auto">
+            <textarea class="form-control" name="comentario" rows="3" placeholder="mensaje para {{usuario}}"></textarea>
         </div>
+
+        <!-- Contenedor del botón -->
+        <div class="d-flex justify-content-end">
+        <div class="mt-5">
+         <input type="hidden" name="tipo" value="sugerencia">
+         <input type="hidden" name="usuario" value="{{usuario}}">
+         <input type="hidden" name="idUsuario" value="{{idUsuario}}">
+        <button type="submit" name="accion" value="aprobada" class="btn btn-success btn-sm">Aprobar</button>
+        <button type="submit" name="accion" value="rechazado" class="btn btn-danger btn-sm">Rechazar</button>
+        </div>
+        </div>
+    </form>
+</div>
+
+    </div>
+</div>
+
         {{/sugeridas}}
     </div>
 </div>

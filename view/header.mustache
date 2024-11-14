@@ -30,25 +30,58 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ms-auto">
                 <!-- Notificaciones -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link text-white position-relative" href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-bell"></i> <!-- Icono de campana -->
-                        {{#notificacionesPendientes}}
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                            {{cantidad}}
-                            <span class="visually-hidden">nuevas notificaciones</span>
-                        </span>
-                        {{/notificacionesPendientes}}
+                <li class="nav-item dropdown me-2 mt-1">
+    <a class="nav-link text-white position-relative" href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="bi bi-bell"></i> <!-- Icono de campana -->
+        {{#notificaciones}} 
+        <span class="position-absolute top-2 start-100 translate-middle badge rounded-pill bg-danger fs-9">
+           
+                {{cantidad}} 
+            
+            <span class="visually-hidden">nuevas notificaciones</span>
+        </span>
+    </a>
+    <!-- Contenedor del dropdown a la izquierda -->
+<div class="dropdown-container position-relative" style="left: -30px;">
+
+    <ul class="dropdown-menu dropdown-menu-start p-0" aria-labelledby="notificationDropdown" style="max-width: 300px; max-height: 60vh; overflow-y: auto;">
+
+        {{#notificacion}}
+            <li class="dropdown-item px-3 py-3 border-bottom">
+
+                <!-- Contenedor de la notificación -->
+                <div class="d-flex align-items-center">
+                    <!-- Icono de notificación -->
+                    <div class="me-3">
+                      <i class="bi bi-bell-fill text-primary {{#leido}}read{{/leido}}"></i>
+                    </div>
+                    
+                                <div>
+                   
+                    <a href="/quizgame/home/leer/?id={{id}}" class="mb-1 fw-bold text-decoration-none  {{#leido}}read{{/leido}}">
+                        {{mensaje}}
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="notificationDropdown">
-                        {{#notificaciones}}
-                        <li>{{mensaje}}</li>
-                        {{/notificaciones}}
-                        {{^notificaciones}}
-                        <li><span class="dropdown-item text-muted">Sin nuevas notificaciones</span></li>
-                        {{/notificaciones}}
-                    </ul>
-                </li>
+                   
+                    <small class="text-muted" style="display: block;">{{fecha}}</small>
+                </div>
+
+
+                </div>
+                
+            </li>
+        {{/notificacion}}
+
+        {{^notificacion}}
+            <li class="dropdown-item text-center text-muted">
+                <span>Sin nuevas notificaciones</span>
+            </li>
+        {{/notificacion}}
+
+    </ul>
+</div>
+
+    {{/notificaciones}}
+</li>
 
                 <!-- Mi cuenta -->
                 <li class="nav-item dropdown">

@@ -232,12 +232,13 @@ class UsuarioModel
     }
 
     public function preguntasPendientes(){
-        $sql = "SELECT p.id AS preguntaId, p.pregunta, p.estado, c.descripcion AS categoria, c.color, 
+        $sql = "SELECT p.id AS preguntaId, p.pregunta, p.estado, c.descripcion AS categoria, c.color, u.usuario AS usuario, u.id AS idUsuario,
         GROUP_CONCAT(o.opcion ORDER BY o.id SEPARATOR ', ') AS opciones, 
         MAX(CASE WHEN r.opcionID = o.id THEN o.opcion ELSE NULL END) AS es_correcta 
      FROM preguntas p 
      JOIN categoria c ON p.idCategoria = c.id 
      JOIN opciones o ON p.id = o.preguntaID 
+     JOIN usuario u on u.id = p.idUsuario
      LEFT JOIN respuesta r ON r.preguntaID = p.id 
      WHERE p.verificado = 'pendiente'
      GROUP BY p.id, p.pregunta, p.estado, c.descripcion, c.color 
@@ -255,6 +256,8 @@ class UsuarioModel
              'estado' => $fila['estado'],
              'categoria' => $fila['categoria'],
              'color' => $fila['color'],
+             'usuario' => $fila['usuario'],
+             'idUsuario' => $fila['idUsuario'],
              'opciones' => explode(', ', $fila['opciones']),
              'es_correcta' => $fila['es_correcta'],
          ];
@@ -263,6 +266,46 @@ class UsuarioModel
 
         return $preguntas;
     }
+
+    public function notificaciones($idUsuario){
+        $sql = "SELECT * FROM notificacion
+        WHERE idUsuario = " . $idUsuario . "";
+
+      
+        $data = [
+            'notificacion' => $this->database->query($sql),
+            'cantidad' => $this->cantidadNoLeidas($idUsuario)
+        ];
+        return $data;
+    }
+
+    public function leer($id){
+      
+    
+        $sql = "UPDATE notificacion SET leido = 1 WHERE id = $id";
+    
+        $this->database->query($sql);
+    }
+    
+
+    private function cantidadNoLeidas($idUsuario){
+         $sql = "SELECT COUNT(*) AS cantidad FROM notificacion WHERE idUsuario = " . $idUsuario . " AND leido = 0";
+         $query =$this->database->query($sql);
+
+          return  $query[0]['cantidad'];
+        }
+
+    public function notificar($idUsuario, $mensaje) {
+    
+        $fecha = date('Y-m-d');
+    
+   
+        $sql = "INSERT INTO notificacion (idUsuario, mensaje, leido, fecha) VALUES ($idUsuario, '$mensaje', 0, '$fecha')";
+    
+    
+        $this->database->query($sql);
+    }
+    
         private function cambiarEstadoUsuario($id) {
         $estado = 1;
         $this->database->query("UPDATE usuario SET estado = '$estado' WHERE id = '$id'");
