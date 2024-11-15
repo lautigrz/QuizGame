@@ -268,8 +268,7 @@ class UsuarioModel
     }
 
     public function notificaciones($idUsuario){
-        $sql = "SELECT * FROM notificacion
-        WHERE idUsuario = " . $idUsuario . "";
+        $sql = "SELECT * FROM notificacion WHERE idUsuario = " . $idUsuario . " ORDER BY fecha DESC";
 
       
         $data = [
@@ -282,7 +281,7 @@ class UsuarioModel
     public function leer($id){
       
     
-        $sql = "UPDATE notificacion SET leido = 1 WHERE id = $id";
+        $sql = "UPDATE notificacion SET leido = 1 WHERE idUsuario = $id";
     
         $this->database->query($sql);
     }
@@ -295,12 +294,12 @@ class UsuarioModel
           return  $query[0]['cantidad'];
         }
 
-    public function notificar($idUsuario, $mensaje) {
+    public function notificar($idUsuario, $mensaje,$tipo) {
     
-        $fecha = date('Y-m-d');
-    
-   
-        $sql = "INSERT INTO notificacion (idUsuario, mensaje, leido, fecha) VALUES ($idUsuario, '$mensaje', 0, '$fecha')";
+        $fecha = date('Y-m-d H:i:s'); 
+        
+        $sql = "INSERT INTO notificacion (idUsuario, mensaje, leido, fecha, tipo) VALUES ($idUsuario, '$mensaje', 0, '$fecha', '$tipo')";
+
     
     
         $this->database->query($sql);

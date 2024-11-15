@@ -38,9 +38,8 @@ class EditorController{
             if(empty($comentario)){
                 $mensaje = "Hola ". $usuario ." tu ". $tipo . " fue " . $accion . " ";
             }
-           # var_dump($comentario);
-            #var_dump($mensaje);
-            $this->model->notificar($id,$mensaje);
+    
+            $this->model->notificar($id,$mensaje,$tipo);
         }
 
         public function rechazarReporte(){

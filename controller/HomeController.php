@@ -68,11 +68,11 @@ class HomeController{
     }
 
     public function leer(){
-        $id = $_GET['id'];
-
-        $this->model->leer($id);
-        header('Location: /quizgame/home/lobby');
-        exit();
+       # $id = $_GET['id'];
+        var_dump($this->idUsuario());
+        $this->model->leer($this->idUsuario());
+       # header('Location: /quizgame/home/lobby');
+       # exit();
     }
 
 
