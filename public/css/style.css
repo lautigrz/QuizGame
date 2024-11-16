@@ -188,6 +188,60 @@ label{
   padding: 0.35em 0.5em;
 }
 
+.dropdown-container {
+  
+  position: relative;
+}
+
+.dropdown-container > .dropdown-menu {
+  border-radius: 0.5rem;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  max-height: 60vh;
+  overflow-y: auto;
+  width: 550px; 
+  position: absolute;
+  left:-100px;
+}
+
+.dropdown-item {
+  cursor: pointer;
+}
+
+.read {
+  color: #6c757d !important; 
+}
+
+
+.bi-bell-fill {
+  color: #007bff; 
+}
+
+
+.dropdown-item:hover {
+  background-color: #f8f9fa;
+}
+
+.dropdown-item.read {
+  background-color: #e9ecef;
+}
+
+.dropdown-item .fw-bold {
+  font-size: 0.8rem;
+}
+
+.dropdown-item small {
+  font-size: 0.85rem;
+}
+
+.dropdown-menu-start {
+  min-width: 300px;
+}
+
+.dropdown-menu-start .bi {
+  font-size: 1.5rem;
+}
+
+
 .custom-tabs .nav-link.active {
   background-color: #2d2d4b; /* Azul de Bootstrap */
   font-weight: 500;

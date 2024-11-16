@@ -59,10 +59,22 @@ class HomeController{
         $data = [
             "ranking" => $newRank,
             "user" => $_SESSION['user'],
+            "esUsuario" => $this->verificarQueUsuarioEs(),
             "partida" => $this->model->verificarSiTieneUnaPartidaActiva($this->idUsuario()),
-            "fecha" => $fecha
+            "fecha" => $fecha,
+            "notificaciones" => $this->model->notificaciones($this->idUsuario())
+         
         ];
 
+    }
+
+    public function leer(){
+        $this->model->leer($this->idUsuario());
+    
+    }
+
+    public function verificarQueUsuarioEs(){
+        return $_SESSION['user']['editor'] == 0 ? true : false;
     }
 
 

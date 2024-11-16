@@ -18,15 +18,70 @@ class EditorController{
           public function alterarPregunta(){
             $pregunta_id = $_POST['pregunta'];
 
+            $usuario = $_POST['usuario'];
+            $tipo = $_POST['tipo'];
+            $comentario = $_POST['comentario'];
+            $accion = $_POST['accion'];
+            $id = $_POST['idUsuario'];
+
+            if($accion == 'aprobada'){
             $this->model->cambiarEstadoPregunta($pregunta_id);
+            }
+
+            $this->notificarAUsuario($usuario,$tipo,$comentario, $accion,$id);
             header('Location: /quizgame/editor/mostrarEditorView');
 
         }
 
-        public function rechazarReporte(){
+        public function sugerencia(){
             $pregunta_id = $_POST['pregunta'];
 
-            $this->model->eliminarReporte($pregunta_id);
+            $usuario = $_POST['usuario'];
+            $tipo = $_POST['tipo'];
+            $comentario = $_POST['comentario'];
+            $accion = $_POST['accion'];
+            $id = $_POST['idUsuario'];
+
+            if($accion == 'aprobada'){
+            $this->model->cambiarEstadoPregunta($pregunta_id);
+            }
+
+            $this->notificarAUsuario($usuario,$tipo,$comentario, $accion,$id);
+            header('Location: /quizgame/editor/mostrarEditorView');
+        }
+
+        public function eliminarPregunta(){
+            $pregunta_id = $_POST['pregunta'];
+            $this->model->eliminarPregunta($pregunta_id);
+           
+            
+            header('Location: /quizgame/editor/mostrarEditorView');
+            exit();
+        }
+      
+
+        public function verificacion(){
+            $pregunta_id = $_POST['pregunta'];
+            $accion = $_POST['accion'];
+            
+            $usuario = $_POST['usuario'];
+            $tipo = $_POST['tipo'];
+
+            $comentario = $_POST['comentario'];
+            $accion = $_POST['accion'];
+
+            $id = $_POST['idUsuario'];
+
+            if($accion == 'aprobado' || $accion == 'aprobada' ){
+                $this->model->cambiarEstadoPregunta($pregunta_id);
+            }else if($tipo == 'Sugerencia' && $accion == 'rechazada'){
+                $this->model->rechazarPregunta($pregunta_id);
+            }else{
+                $this->model->eliminarReporte($pregunta_id);
+            }
+
+            $this->notificarAUsuario($usuario,$tipo,$comentario,$accion,$id);
+            
             header('Location: /quizgame/editor/mostrarEditorView');
             
         }
@@ -75,6 +130,15 @@ class EditorController{
              "sugeridas" => $this->model->preguntasPendientes()       
                 ];
         }
+    }
+
+    private function notificarAUsuario($usuario,$tipo,$comentario, $accion, $id){
+        $mensaje = $comentario;
+        if(empty($comentario)){
+            $mensaje = "Hola ". $usuario ." tu ". $tipo . " fue " . $accion . " ";
+        }
+
+        $this->model->notificar($id,$mensaje,$tipo);
     }
 
 }

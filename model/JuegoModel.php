@@ -298,7 +298,7 @@ class JuegoModel{
     {
         $sql = "INSERT INTO reporte(idPregunta, idUsuarioReporte, detalleReporte) VALUES (". $_SESSION['preguntas']['id'].", " . $_SESSION['user']['id'] . ", '" . $data['motivo'] . "')";
         $this->database->query($sql);
-        $this->estadoReportada();
+   
     }
     
    /* public function estadoReportada()
