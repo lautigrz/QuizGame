@@ -44,6 +44,11 @@
 
                                 <button type="submit" class="btn btn-secondary btn-sm">{{#estado}}Desactivar{{/estado}}  {{^estado}}Activar{{/estado}}</button>
                             </form>
+                              <form action="/quizgame/editor/eliminarPregunta" method="POST" style="display: inline;">
+                                <input type="hidden" name="pregunta" value="{{id}}">
+
+                                <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                            </form>
                             <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#reportModal-{{id}}">
                                 Modificar
                             </button>
@@ -119,12 +124,12 @@
         <p class="card-text"><strong>Correcta:</strong> {{es_correcta}}</p>
 
       <div class="d-flex justify-content-between align-items-start gap-2">
-    <form action="/quizgame/editor/alterarPregunta" method="POST" class="w-100 d-flex">
+    <form action="/quizgame/editor/verificacion" method="POST" class="w-100 d-flex">
         <input type="hidden" name="pregunta" value="{{id}}">
 
         <!-- Contenedor del textarea -->
         <div class="w-75 me-auto">
-            <textarea class="form-control" name="comentario" rows="3" placeholder="mensaje para {{usuario}}"></textarea>
+            <textarea class="form-control" name="comentario" rows="3" placeholder="mensaje para {{usuario}} (opcional)"></textarea>
         </div>
 
         <!-- Contenedor del botón -->
@@ -156,21 +161,27 @@
                         <p class="card-text"><strong>Estado:</strong> {{#estado}}Habilitado{{/estado}}  {{^estado}}Deshabilitado{{/estado}}</p>
                         <p class="card-text"><strong>Motivo:</strong> {{detalleReporte}}</p>
                         <p class="card-text"><strong>Correcta:</strong> {{es_correcta}}</p>
-                        <div class="d-flex justify-content-end gap-2">
-                            <form action="/quizgame/editor/alterarPregunta" method="POST" style="display: inline;">
-                                <input type="hidden" name="accion" value="aprobar">
-                                <input type="hidden" name="pregunta" value="{{idPreg}}">
-                                <button type="submit" class="btn btn-success btn-sm">Aprobar</button>
-                            </form>
-                            <form action="/quizgame/editor/rechazarReporte" method="POST" style="display: inline;">
-                                <input type="hidden" name="accion" value="rechazar">
-                                <input type="hidden" name="pregunta" value="{{idPreg}}">
-                                <button type="submit" class="btn btn-warning btn-sm">Rechazar</button>
-                            </form>
-                           <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#reportModale-{{idPreg}}">
-                                                                                                                                Modificar
-                                                                                                                            </button>
-                        </div>
+                       <div class="d-flex justify-content-between align-items-start gap-2">
+    <form action="/quizgame/editor/verificacion" method="POST" class="d-flex w-100">
+        <input type="hidden" name="pregunta" value="{{idPreg}}">
+
+        <!-- Contenedor del textarea a la izquierda -->
+        <div class="w-75">
+            <textarea class="form-control" name="comentario" rows="3" placeholder="mensaje para {{usuario}} (opcional)"></textarea>
+        </div>
+
+        <!-- Contenedor de botones a la derecha -->
+        <div class="d-flex align-items-start gap-2 mt-5">
+            <input type="hidden" name="tipo" value="Reporte">
+            <input type="hidden" name="usuario" value="{{usuario}}">
+            <input type="hidden" name="idUsuario" value="{{idUsuario}}">
+            <button type="submit" name="accion" value="aprobado" class="btn btn-success btn-sm">Aprobar</button>
+            <button type="submit" name="accion" value="rechazado" class="btn btn-danger btn-sm">Rechazar</button>
+            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#reportModale-{{idPreg}}">Modificar</button>
+        </div>
+    </form>
+</div>
+
                     </div>
                 </div>
                 <div class="modal fade" id="reportModale-{{idPreg}}" tabindex="-1" aria-labelledby="reportModalLabele-{{idPreg}}" aria-hidden="true">

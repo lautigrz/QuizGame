@@ -59,6 +59,7 @@ class HomeController{
         $data = [
             "ranking" => $newRank,
             "user" => $_SESSION['user'],
+            "esUsuario" => $this->verificarQueUsuarioEs(),
             "partida" => $this->model->verificarSiTieneUnaPartidaActiva($this->idUsuario()),
             "fecha" => $fecha,
             "notificaciones" => $this->model->notificaciones($this->idUsuario())
@@ -68,11 +69,12 @@ class HomeController{
     }
 
     public function leer(){
-       # $id = $_GET['id'];
-        var_dump($this->idUsuario());
         $this->model->leer($this->idUsuario());
-       # header('Location: /quizgame/home/lobby');
-       # exit();
+    
+    }
+
+    public function verificarQueUsuarioEs(){
+        return $_SESSION['user']['editor'] == 0 ? true : false;
     }
 
 

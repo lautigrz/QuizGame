@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-11-2024 a las 16:23:12
+-- Tiempo de generación: 15-11-2024 a las 21:43:01
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -65,23 +65,23 @@ CREATE TABLE `dificultad` (
 
 INSERT INTO `dificultad` (`id`, `idUsuario`, `idPregunta`, `veces_correctas`, `veces_vista`) VALUES
 (27, 68, 42, 19, 26),
-(28, 68, 34, 24, 36),
-(29, 68, 44, 23, 40),
-(30, 68, 39, 22, 37),
-(31, 68, 41, 28, 42),
-(32, 68, 1, 26, 39),
-(33, 68, 40, 29, 45),
-(34, 68, 2, 20, 35),
-(35, 68, 45, 24, 41),
-(36, 68, 38, 28, 39),
-(37, 68, 46, 26, 37),
-(38, 68, 47, 22, 42),
-(39, 68, 37, 27, 37),
-(40, 68, 48, 23, 36),
-(41, 68, 36, 25, 39),
-(42, 68, 3, 21, 32),
-(43, 68, 35, 19, 35),
-(44, 68, 43, 15, 18),
+(28, 68, 34, 26, 39),
+(29, 68, 44, 25, 43),
+(30, 68, 39, 23, 39),
+(31, 68, 41, 29, 43),
+(32, 68, 1, 27, 42),
+(33, 68, 40, 31, 47),
+(34, 68, 2, 22, 37),
+(35, 68, 45, 26, 44),
+(36, 68, 38, 31, 42),
+(37, 68, 46, 29, 40),
+(38, 68, 47, 25, 46),
+(39, 68, 37, 28, 40),
+(40, 68, 48, 24, 37),
+(41, 68, 36, 26, 41),
+(42, 68, 3, 22, 35),
+(43, 68, 35, 22, 38),
+(44, 68, 43, 17, 20),
 (45, 76, 39, 3, 4),
 (46, 76, 1, 3, 3),
 (47, 76, 3, 3, 8),
@@ -143,7 +143,9 @@ INSERT INTO `dificultad` (`id`, `idUsuario`, `idPregunta`, `veces_correctas`, `v
 (103, 79, 47, 1, 1),
 (104, 79, 37, 1, 1),
 (105, 79, 3, 2, 3),
-(106, 68, 63, 0, 3);
+(106, 68, 63, 2, 6),
+(107, 68, 64, 0, 1),
+(108, 68, 65, 0, 2);
 
 -- --------------------------------------------------------
 
@@ -163,16 +165,49 @@ CREATE TABLE `historico` (
 --
 
 INSERT INTO `historico` (`id`, `idUsuario`, `idPregunta`, `hora`) VALUES
-(1228, 68, 38, '2024-11-11 15:10:52'),
-(1229, 68, 44, '2024-11-11 15:10:56'),
-(1230, 68, 37, '2024-11-11 15:13:20'),
-(1231, 68, 41, '2024-11-11 15:13:24'),
-(1232, 68, 45, '2024-11-11 15:13:27'),
-(1233, 68, 48, '2024-11-11 15:13:30'),
-(1234, 68, 39, '2024-11-11 15:14:30'),
-(1235, 68, 46, '2024-11-11 15:14:35'),
-(1236, 68, 40, '2024-11-11 15:14:38'),
-(1237, 68, 63, '2024-11-11 15:14:40');
+(1278, 68, 43, '2024-11-14 15:22:42'),
+(1279, 68, 35, '2024-11-14 15:22:50'),
+(1280, 68, 41, '2024-11-14 15:22:54'),
+(1281, 68, 1, '2024-11-14 15:29:14'),
+(1282, 68, 2, '2024-11-14 15:29:32'),
+(1283, 68, 47, '2024-11-14 15:29:35'),
+(1284, 68, 44, '2024-11-14 15:29:37'),
+(1285, 68, 39, '2024-11-14 15:29:39'),
+(1286, 68, 37, '2024-11-14 15:30:18'),
+(1287, 68, 63, '2024-11-14 15:30:27'),
+(1288, 68, 3, '2024-11-14 15:32:45'),
+(1289, 68, 46, '2024-11-14 15:33:00'),
+(1290, 68, 38, '2024-11-14 15:33:03'),
+(1291, 68, 36, '2024-11-14 15:33:06'),
+(1292, 68, 34, '2024-11-15 20:07:42'),
+(1293, 68, 45, '2024-11-15 21:30:58');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `notificacion`
+--
+
+CREATE TABLE `notificacion` (
+  `id` int(11) NOT NULL,
+  `idUsuario` int(11) NOT NULL,
+  `mensaje` text NOT NULL,
+  `leido` tinyint(1) NOT NULL,
+  `fecha` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `tipo` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `notificacion`
+--
+
+INSERT INTO `notificacion` (`id`, `idUsuario`, `mensaje`, `leido`, `fecha`, `tipo`) VALUES
+(7, 68, 'Hola lautigrz tu Sugerencia fue aprobada ', 1, '2024-11-15 20:00:09', 'Sugerencia'),
+(8, 68, 'Hola lautigrz tu Reporte fue rechazado ', 1, '2024-11-16 00:08:43', 'Reporte'),
+(9, 68, 'Hola lautigrz tu Sugerencia fue rechazada ', 1, '2024-11-16 00:30:19', 'Sugerencia'),
+(10, 68, 'Hola lautigrz tu Sugerencia fue aprobada ', 1, '2024-11-16 00:36:35', 'Sugerencia'),
+(11, 68, 'Hola lautigrz tu Reporte fue aprobado ', 1, '2024-11-16 00:36:35', 'Reporte'),
+(12, 68, 'Hola lautigrz tu Reporte fue aprobado ', 1, '2024-11-16 00:40:49', 'Reporte');
 
 -- --------------------------------------------------------
 
@@ -263,18 +298,18 @@ INSERT INTO `opciones` (`id`, `preguntaID`, `opcion`) VALUES
 (70, 48, 'El campo magnético de la Tierra'),
 (71, 48, 'La atracción de los cuerpos hacia el centro de la Tierra'),
 (72, 48, 'La energía solar'),
-(97, 63, 'messi'),
-(98, 63, 'cristiano'),
-(99, 63, 'xavi'),
-(100, 63, 'iniesta'),
-(101, 64, 'asdasd'),
-(102, 64, 'dsad'),
-(103, 64, 'asdsa'),
-(104, 64, 'asddas'),
-(105, 65, 'aaa'),
-(106, 65, '332'),
-(107, 65, 'dda'),
-(108, 65, '211');
+(137, 73, 'messi'),
+(138, 73, 'dasd'),
+(139, 73, 'ads'),
+(140, 73, 'asda'),
+(145, 75, 'messi'),
+(146, 75, 'dasd'),
+(147, 75, 'ads'),
+(148, 75, 'asda'),
+(149, 76, 'messi'),
+(150, 76, 'dasd'),
+(151, 76, 'ads'),
+(152, 76, 'asda');
 
 -- --------------------------------------------------------
 
@@ -409,7 +444,6 @@ INSERT INTO `partida` (`id`, `puntaje_obtenido`, `fecha_partida`, `idUsuario`, `
 (9443, 0, '2024-11-08 16:32:06', 68, 0),
 (9444, 0, '2024-11-08 16:32:14', 68, 0),
 (9445, 0, '2024-11-08 16:32:18', 68, 0),
-(9446, 0, '2024-11-08 16:32:45', 68, 1),
 (9447, 0, '2024-11-08 16:33:04', 68, 0),
 (9448, 0, '2024-11-08 16:33:08', 68, 0),
 (9449, 0, '2024-11-08 16:35:26', 68, 0),
@@ -424,12 +458,7 @@ INSERT INTO `partida` (`id`, `puntaje_obtenido`, `fecha_partida`, `idUsuario`, `
 (9458, 1, '2024-11-08 16:50:48', 68, 0),
 (9459, 1, '2024-11-08 18:08:37', 68, 0),
 (9460, 0, '2024-11-08 18:08:55', 68, 0),
-(9461, 0, '2024-11-08 18:09:08', 68, 1),
 (9462, 0, '2024-11-08 18:09:36', 68, 0),
-(9463, 0, '2024-11-08 18:14:39', 68, 1),
-(9464, 0, '2024-11-08 18:18:29', 68, 1),
-(9465, 0, '2024-11-08 18:18:39', 68, 1),
-(9466, 0, '2024-11-08 18:18:49', 68, 1),
 (9467, 1, '2024-11-08 18:19:08', 68, 0),
 (9468, 0, '2024-11-08 18:19:47', 68, 0),
 (9469, 0, '2024-11-08 18:27:03', 68, 0),
@@ -505,7 +534,30 @@ INSERT INTO `partida` (`id`, `puntaje_obtenido`, `fecha_partida`, `idUsuario`, `
 (9539, 5, '2024-11-11 15:09:23', 68, 0),
 (9540, 2, '2024-11-11 15:10:49', 68, 0),
 (9541, 3, '2024-11-11 15:13:20', 68, 0),
-(9542, 3, '2024-11-11 15:14:30', 68, 0);
+(9542, 3, '2024-11-11 15:14:30', 68, 0),
+(9543, 1, '2024-11-14 14:11:38', 68, 0),
+(9544, 0, '2024-11-14 14:21:56', 68, 0),
+(9545, 0, '2024-11-14 14:22:06', 68, 0),
+(9546, 0, '2024-11-14 14:22:16', 68, 0),
+(9547, 3, '2024-11-14 14:24:14', 68, 0),
+(9548, 2, '2024-11-14 14:58:49', 68, 0),
+(9549, 0, '2024-11-14 15:04:20', 68, 0),
+(9550, 2, '2024-11-14 15:07:06', 68, 0),
+(9551, 2, '2024-11-14 15:08:54', 68, 0),
+(9552, 0, '2024-11-14 15:09:26', 68, 0),
+(9553, 2, '2024-11-14 15:09:51', 68, 0),
+(9554, 2, '2024-11-14 15:14:31', 68, 0),
+(9555, 4, '2024-11-14 15:17:28', 68, 0),
+(9556, 3, '2024-11-14 15:17:52', 68, 0),
+(9557, 4, '2024-11-14 15:18:16', 68, 0),
+(9558, 2, '2024-11-14 15:22:42', 68, 0),
+(9559, 0, '2024-11-14 15:29:14', 68, 0),
+(9560, 3, '2024-11-14 15:29:32', 68, 0),
+(9561, 1, '2024-11-14 15:30:18', 68, 0),
+(9562, 0, '2024-11-14 15:32:45', 68, 0),
+(9563, 2, '2024-11-14 15:33:00', 68, 0),
+(9564, 0, '2024-11-15 20:07:42', 68, 0),
+(9565, 0, '2024-11-15 21:30:58', 68, 0);
 
 -- --------------------------------------------------------
 
@@ -527,27 +579,27 @@ CREATE TABLE `preguntas` (
 --
 
 INSERT INTO `preguntas` (`id`, `pregunta`, `estado`, `idUsuario`, `idCategoria`, `verificado`) VALUES
-(1, '¿Campeon mundial 2022?', 1, 68, 1, 'aprobado'),
-(2, '¿Quién fue el primer presidente de EE.UU?', 0, 68, 2, ''),
-(3, '¿Qué es la fotosíntesis?', 0, 68, 3, 'aprobado'),
-(34, '¿Cuál es el planeta más grande del sistema solar?', 0, 68, 1, 'aprobado'),
-(35, '¿Quién escribió \"Don Quijote de la Mancha\"?', 0, 68, 5, 'aprobado'),
-(36, '¿Qué elemento químico tiene el símbolo \"O\"?', 0, 68, 3, 'aprobado'),
+(1, '¿Campeon mundial 2022?', 1, 68, 4, 'aprobado'),
+(2, '¿Quién fue el primer presidente de EE.UU?', 0, 68, 2, 'aprobado'),
+(3, '¿Qué es la fotosíntesis?', 1, 68, 3, 'aprobado'),
+(34, '¿Cuál es el planeta más grande del sistema solar?', 1, 68, 1, 'aprobado'),
+(35, '¿Quién escribió \"Don Quijote de la Mancha\"?', 1, 68, 5, 'aprobado'),
+(36, '¿Qué elemento químico tiene el símbolo \"O\"?', 1, 68, 3, 'aprobado'),
 (37, '¿Cuál es el océano más grande del mundo?', 1, 68, 1, ''),
 (38, '¿En qué año cayó el muro de Berlín?', 1, 68, 2, ''),
 (39, '¿Qué país ganó la Copa Mundial de Fútbol 2018?', 1, 68, 4, 'aprobado'),
 (40, '¿Quién pintó la \"Mona Lisa\"?', 1, 68, 5, ''),
 (41, '¿Qué idioma se habla en Brasil?', 1, 68, 1, ''),
 (42, '¿Qué número romano representa el 100?', 0, 68, 3, ''),
-(43, '¿Qué gas es esencial para la respiración humana?', 0, 68, 3, ''),
+(43, '¿Qué gas es esencial para la respiración humana?', 1, 68, 3, 'aprobado'),
 (44, '¿Cuál es el río más largo del mundo?', 1, 68, 1, ''),
-(45, '¿Quién desarrolló la teoría de la relatividad?', 1, 68, 3, ''),
+(45, '¿Quién desarrolló la teoría de la relatividad?', 1, 68, 3, 'aprobada'),
 (46, '¿Qué es el \"Big Bang\"?', 1, 68, 3, 'aprobado'),
 (47, '¿En qué país se encuentra la Torre Eiffel?', 1, 68, 1, ''),
 (48, '¿Qué es la fuerza de gravedad?', 1, 68, 3, ''),
-(63, 'Quien es el mejor jugador del mundo?', 1, 68, 4, 'aprobado'),
-(64, 'dsadsad', 1, 68, 2, 'aprobado'),
-(65, 'ddd', 1, 68, 5, 'aprobado');
+(73, 'Quien es el mejor jugador del mundo?', 0, 68, 2, 'aprobado'),
+(75, 'Quien es el mejor jugador del mundo?', 0, 68, 2, 'rechazada'),
+(76, 'Quien es el mejor jugador del mundo?', 1, 68, 3, 'aprobada');
 
 -- --------------------------------------------------------
 
@@ -567,8 +619,7 @@ CREATE TABLE `reporte` (
 --
 
 INSERT INTO `reporte` (`id`, `idPregunta`, `idUsuarioReporte`, `detalleReporte`) VALUES
-(5, 2, 68, 'no se'),
-(6, 63, 68, 'el mejor jugador es messi');
+(9, 45, 68, 'puto');
 
 -- --------------------------------------------------------
 
@@ -605,9 +656,9 @@ INSERT INTO `respuesta` (`id`, `preguntaID`, `opcionID`) VALUES
 (16, 46, 62),
 (17, 47, 66),
 (18, 48, 71),
-(19, 63, 97),
-(20, 64, 102),
-(21, 65, 105);
+(29, 73, 139),
+(31, 75, 148),
+(32, 76, 149);
 
 -- --------------------------------------------------------
 
@@ -638,7 +689,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `nombre`, `apellido`, `usuario`, `genero`, `email`, `password`, `estado`, `token`, `puntaje`, `fotoPerfil`, `admin`, `editor`, `ciudad`, `pais`) VALUES
-(68, 'Lautaro', 'Gerez', 'lautigrz', 'M', 'lautarogerezz12@gmail.com', '123', 1, 681159, 189, './public/image/perfil/lautigrz.jpg', 0, 0, '', ''),
+(68, 'Lautaro', 'Gerez', 'lautigrz', 'M', 'lautarogerezz12@gmail.com', '123', 1, 681159, 220, './public/image/perfil/lautigrz.jpg', 0, 0, '', ''),
 (70, 'lionel', 'scaloni', 'scaloni10', 'H', 'sca@gmial.com', '123', 1, 432768, 4, './public/image/perfil/scaloni10.jpg', 0, 0, '', ''),
 (73, 'admin', 'admin', 'admin', 'M', 'admin@gmail.com', 'admin', 1, 300048, 0, './public/image/perfil/chad123.jpg', 1, 0, '', ''),
 (74, 'editor', 'editor', 'editor', 'F', 'editor@gmail.com', 'editor', 1, 369750, 0, './public/image/perfil/messi.jpg', 0, 1, '', ''),
@@ -671,6 +722,13 @@ ALTER TABLE `dificultad`
 --
 ALTER TABLE `historico`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `notificacion`
+--
+ALTER TABLE `notificacion`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idUsuario` (`idUsuario`);
 
 --
 -- Indices de la tabla `opciones`
@@ -732,43 +790,49 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de la tabla `dificultad`
 --
 ALTER TABLE `dificultad`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
 
 --
 -- AUTO_INCREMENT de la tabla `historico`
 --
 ALTER TABLE `historico`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1238;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1294;
+
+--
+-- AUTO_INCREMENT de la tabla `notificacion`
+--
+ALTER TABLE `notificacion`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `opciones`
 --
 ALTER TABLE `opciones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=153;
 
 --
 -- AUTO_INCREMENT de la tabla `partida`
 --
 ALTER TABLE `partida`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9543;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9566;
 
 --
 -- AUTO_INCREMENT de la tabla `preguntas`
 --
 ALTER TABLE `preguntas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT de la tabla `reporte`
 --
 ALTER TABLE `reporte`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `respuesta`
 --
 ALTER TABLE `respuesta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
@@ -779,6 +843,12 @@ ALTER TABLE `usuario`
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `notificacion`
+--
+ALTER TABLE `notificacion`
+  ADD CONSTRAINT `notificacion_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`id`);
 
 --
 -- Filtros para la tabla `opciones`

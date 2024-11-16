@@ -154,12 +154,20 @@ class UsuarioModel
     public function cambiarEstadoPregunta($pregunta_id) {
         
        $sql = "UPDATE preguntas 
-        SET estado = NOT estado, verificado = 'aprobado'
+        SET estado = NOT estado, verificado = 'aprobada'
         WHERE id = {$pregunta_id}";
 
     
         $this->database->query($sql);
     }
+    public function rechazarPregunta($pregunta_id) {
+        
+        $sql = "UPDATE preguntas 
+         SET verificado = 'rechazada'
+         WHERE id = {$pregunta_id}";
+
+         $this->database->query($sql);
+     }
     
     public function getUser($id){
         $sql = "SELECT * FROM usuario WHERE id = " . $id ." ";
@@ -329,21 +337,7 @@ class UsuarioModel
     {
 
     }
-    private function borrarTodoRelacionadoPreguntaParaInsertarLaModificada($pregunta_id)
-    {
-        /*-- 1. Eliminar respuestas relacionadas con la pregunta
-        DELETE FROM respuesta WHERE pregunta_id = :'.$pregunta_id.';
 
-        -- 2. Eliminar opciones relacionadas con la pregunta
-        DELETE FROM opciones WHERE pregunta_id = :'.$pregunta_id.';
-
-        -- 3. Eliminar la pregunta
-        DELETE FROM preguntas WHERE id = :'.$pregunta_id.';
-        */
-    }
-
-   
-    //------------------------------------editor----------------------------------------------
     public function modificarPregunta($data)
     {
         $ids = $this->idDeOpciones($data['id']);
@@ -403,16 +397,46 @@ class UsuarioModel
         return $this->database->query($sql);
     }
 
+    public function eliminarPregunta($id){
+       $this->eliminarRespuesta($id);
+       $this->eliminarOpciones($id);
+       $this->eliminar($id);
+    }
+
+    private function eliminarRespuesta($id){
+        $sql = "DELETE r
+                FROM respuesta r
+                JOIN opciones o ON r.opcionID = o.id
+                WHERE o.preguntaID = " . $id . "";
+
+        $this->database->query($sql);
+    }
+    private function eliminarOpciones($id){
+        $sql = "DELETE o
+                FROM opciones o
+                WHERE o.preguntaID = " . $id . "";
+                
+        $this->database->query($sql);
+    }
+    private function eliminar($id){
+        $sql = "DELETE p
+        FROM preguntas p
+        WHERE id = " . $id . "";
+        
+        $this->database->query($sql);
+    }
+
     public function obtenerPreguntasReportadas()
     {
 
-        $sql = "SELECT p.id AS preguntaId, p.pregunta, p.estado, c.descripcion AS categoria, c.color, re.detalleReporte, 
+        $sql = "SELECT p.id AS preguntaId, p.pregunta, p.estado, c.descripcion AS categoria, c.color, re.detalleReporte, u.usuario AS usuario, u.id AS idUsuario,
         GROUP_CONCAT(o.opcion ORDER BY o.id SEPARATOR ', ') AS opciones, 
         MAX(CASE WHEN r.opcionID = o.id THEN o.opcion ELSE NULL END) AS es_correcta 
  FROM preguntas p 
  JOIN categoria c ON p.idCategoria = c.id 
  JOIN opciones o ON p.id = o.preguntaID
  JOIN reporte re ON p.id = re.idPregunta 
+ JOIN usuario u on u.id = re.idUsuarioReporte
  LEFT JOIN respuesta r ON r.preguntaID = p.id 
  GROUP BY p.id, p.pregunta, p.estado, c.descripcion, c.color 
  ORDER BY p.id;";
@@ -457,6 +481,8 @@ class UsuarioModel
         'estado' => $this->estadoLeible($fila['estado']),
         'detalleReporte' => $fila['detalleReporte'],
         'categoria' => $fila['categoria'],
+        'usuario' => $fila['usuario'],
+        'idUsuario' => $fila['idUsuario'],
         'color' => $fila['color'],
         'opciones' => $opcionesConIndex,  
         'index' => $count,  

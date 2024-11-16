@@ -32,7 +32,7 @@
                 <!-- Notificaciones -->
                 <li class="nav-item dropdown me-2 mt-1">
     <a class="nav-link text-white position-relative" href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-        <i class="bi bi-bell"></i> <!-- Icono de campana -->
+       {{#esUsuario}} <i class="bi bi-bell"></i> {{/esUsuario}} 
         {{#notificaciones}} 
         <span class="position-absolute top-2 start-100 translate-middle badge rounded-pill bg-danger fs-9">
            
@@ -58,13 +58,7 @@
         {{tipo}}
     </p>
 </div>
-
-
-    <!-- Contenido del mensaje -->
    <div class="flex-grow-1">
-
-   
-
     <p class="mb-1 fw-bold text-wrap" style="word-break: break-word; color: #23233b;">
         {{mensaje}}
     </p>
