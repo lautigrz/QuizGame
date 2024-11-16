@@ -6,7 +6,6 @@ include_once("helper/Router.php");
 include_once("helper/MustachePresenter.php");
 include_once("helper/SendEmail.php");
 include_once("helper/ImagenUploader.php");
-include_once("helper/QRCodeGenerator.php");
 include_once("controller/UsuarioController.php");
 include_once("controller/JuegoController.php");
 include_once("controller/AuthController.php");
@@ -17,6 +16,7 @@ include_once("model/UsuarioModel.php");
 include_once("model/JuegoModel.php");
 include_once("model/AdminModel.php");
 include_once('vendor/mustache/src/Mustache/Autoloader.php');
+include_once('vendor/phpqrcode/qrlib.php');
 
 class Configuration
 {
@@ -91,9 +91,6 @@ class Configuration
     }
     public function getImagenUploader(){
         return new ImagenUploader();
-    }
-    public function getQRCodeGenerator(){
-        return new QRCodeGenerator();
     }
 
 }

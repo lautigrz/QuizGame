@@ -29,15 +29,16 @@ class UsuarioController
         $userId = $_GET['id'];
         $partidas = $this->model->partidasJugadas($userId);
         $userData = $this->model->getUser($userId);
-        $fileName = $this->generarQrPerfil();
+
         if ($userData) {
             $data = [
                 'userVist' => $userData,
                 'user' => $_SESSION['user'],
-                "partidas" => $partidas,
-                "qr_image" => $this->generarQrPerfil()
+                "partidas" => $partidas
+
                 
             ];
+            $this->generarQrPerfil();
             $this->presenter->show('user', $data);
         } 
     }
@@ -87,14 +88,13 @@ class UsuarioController
             $data["error"] = $_SESSION['error'];
             unset( $_SESSION['error']);
         }if(!empty($_SESSION['user'])){
-
+            $this->generarQrPerfil();
             $partidas = $this->model->partidasJugadas($this->idUsuario());
             $data = [
                 "user" => $_SESSION['user'],
                 "esUsuario" => true,
                 "userVist" =>$_SESSION['user'],
                 "partidas" => $partidas,
-                "qr_image" => $this->generarQrPerfil()
             ];
 
         }
@@ -105,9 +105,13 @@ class UsuarioController
 
     function generarQrPerfil()
     {
-        $url = "http://localhost/quizgame/usuario/perfil?id=".$_GET['id'];
-        $qrGenerator = new QRCodeGenerator();
-        return $qrGenerator->generateBase64QRCode($url);
+        if (isset($_GET['id'])) {
+            $url = "http://localhost/quizgame/usuario/perfil?id=".$_GET['id'];
+            QRcode::png($url, './public/image/QRUsers/'.$_GET['id'].'.png', QR_ECLEVEL_H, 2, 2);
+        }else{
+            $url = "http://localhost/quizgame/usuario/perfil?id=".$_SESSION['user']['id'];
+            QRcode::png($url, './public/image/QRUsers/'.$_SESSION['user']['id'].'.png', QR_ECLEVEL_H, 2, 2);
+        }
     }
 
 }
