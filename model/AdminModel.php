@@ -56,7 +56,7 @@ class AdminModel {
 
     // 7. Obtener usuarios por país
     public function obtenerUsuariosPorPais() {
-        $sql = "SELECT pais, COUNT(*) as total FROM usuario GROUP BY pais";
+        $sql = "SELECT pais AS nombre, COUNT(*) AS cantidad FROM usuario GROUP BY pais";
         return $this->database->query($sql);
     }
 
@@ -68,11 +68,7 @@ class AdminModel {
 
     // 9. Obtener usuarios por grupo de edad
     public function obtenerUsuariosPorGrupoEdad() {
-        $sql = "SELECT 
-                    SUM(CASE WHEN TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) < 18 THEN 1 ELSE 0 END) as menores,
-                    SUM(CASE WHEN TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) >= 65 THEN 1 ELSE 0 END) as jubilados,
-                    SUM(CASE WHEN TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) BETWEEN 18 AND 64 THEN 1 ELSE 0 END) as medio
-                FROM usuario";
+        $sql = "SELECT CASE WHEN TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) BETWEEN 0 AND 17 THEN '0-17' WHEN TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) BETWEEN 18 AND 25 THEN '18-25' WHEN TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) BETWEEN 26 AND 35 THEN '26-35' WHEN TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE()) BETWEEN 36 AND 50 THEN '36-50' ELSE '51+' END AS grupo, COUNT(*) AS cantidad FROM usuario GROUP BY grupo";
         return $this->database->query($sql);
     }
 
@@ -88,7 +84,7 @@ class AdminModel {
     }
 
     public function obtenerUsuariosPorSexo() {
-        $sql = "SELECT genero, COUNT(*) as total FROM usuario GROUP BY genero";
+        $sql = "SELECT genero AS nombre, COUNT(*) AS cantidad FROM usuario GROUP BY genero";
         return $this->database->query($sql);
     }
 }
