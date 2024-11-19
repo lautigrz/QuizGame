@@ -34,6 +34,8 @@ class UsuarioController
             $data = [
                 'userVist' => $userData,
                 'user' => $_SESSION['user'],
+                "esUsuario" => $this->verificarQueUsuarioEs(),
+                "notificaciones" => $this->model->notificaciones($this->idUsuario()),
                 "partidas" => $partidas
 
                 
@@ -92,8 +94,9 @@ class UsuarioController
             $partidas = $this->model->partidasJugadas($this->idUsuario());
             $data = [
                 "user" => $_SESSION['user'],
-                "esUsuario" => true,
                 "userVist" =>$_SESSION['user'],
+                "esUsuario" => $this->verificarQueUsuarioEs(),
+                "notificaciones" => $this->model->notificaciones($this->idUsuario()),
                 "partidas" => $partidas,
             ];
 
@@ -112,6 +115,9 @@ class UsuarioController
             $url = "http://localhost/quizgame/usuario/perfil?id=".$_SESSION['user']['id'];
             QRcode::png($url, './public/image/QRUsers/'.$_SESSION['user']['id'].'.png', QR_ECLEVEL_H, 2, 2);
         }
+    }
+    public function verificarQueUsuarioEs(){
+        return $_SESSION['user']['editor'] == 0 ? true : false;
     }
 
 }
