@@ -44,7 +44,7 @@ class AdminController {
             ];
         }, $this->adminModel->obtenerUsuariosPorSexo($filtro));
         $usuariosPorEdad = $this->adminModel->obtenerUsuariosPorGrupoEdad($filtro);
-        var_dump($usuariosPorSexo); // Verifica qué datos se están obteniendo
+
 
         // Prepara los datos para la vista
         $data = [
