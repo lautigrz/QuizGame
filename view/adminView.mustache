@@ -79,15 +79,17 @@
         <h1>Panel de Administrador</h1>
 
         <!-- Filtros -->
-        <div class="filters">
-            <label for="filter">Filtrar por:</label>
-            <select id="filter">
-                <option value="day">Día</option>
-                <option value="month">Mes</option>
-                <option value="year">Año</option>
-            </select>
-            <button onclick="applyFilter()">Aplicar Filtro</button>
-            <button onclick="window.print()">Imprimir</button>
+        <div>
+            <form method="GET" action="http://localhost/quizgame/admin/mostrarAdminView">
+             <label for="filtro">Filtrar por:</label>
+                 <select id="filtro" name="filtro">
+                 <option value="history"selected>Histórico</option>
+                    <option value="day">Día</option>
+                     <option value="month" >Mes</option>
+                    <option value="year">Año</option>
+                </select>
+                <button type="submit">Aplicar</button>
+            </form>
         </div>
 
         <!-- Sección de datos generales -->
@@ -175,7 +177,7 @@
         });
 
         // Gráfico: Usuarios por Grupo de Edad
-        const labelsEdad = usuariosPorEdad.map(item => item.grupo_edad);
+        const labelsEdad = usuariosPorEdad.map(item => item.grupo);
         const dataEdad = usuariosPorEdad.map(item => item.cantidad);
 
         new Chart(document.getElementById('chartUsuariosPorEdad'), {

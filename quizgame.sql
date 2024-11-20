@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-11-2024 a las 23:27:54
+-- Tiempo de generación: 20-11-2024 a las 03:51:15
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -691,13 +691,13 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `nombre`, `apellido`, `usuario`, `genero`, `email`, `password`, `estado`, `token`, `puntaje`, `fotoPerfil`, `admin`, `editor`, `ciudad`, `pais`, `created_at`, `fecha_nacimiento`) VALUES
-(68, 'Lautaro', 'Gerez', 'lautigrz', 'M', 'lautarogerezz12@gmail.com', '123', 1, 681159, 220, './public/image/perfil/lautigrz.jpg', 0, 0, '', 'Uruguay', '2023-11-14', '2005-07-20'),
+(68, 'Lautaro', 'Gerez', 'lautigrz', 'M', 'lautarogerezz12@gmail.com', '123', 1, 681159, 220, './public/image/perfil/lautigrz.jpg', 0, 0, '', 'Uruguay', '2024-11-14', '2005-07-20'),
 (70, 'lionel', 'scaloni', 'scaloni10', 'F', 'sca@gmial.com', '123', 1, 432768, 4, './public/image/perfil/scaloni10.jpg', 0, 0, '', 'Chile', '2024-10-15', '1998-10-15'),
 (73, 'admin', 'admin', 'admin', 'M', 'admin@gmail.com', 'admin', 1, 300048, 0, './public/image/perfil/chad123.jpg', 1, 0, '', 'Chile', '2024-07-10', '1990-05-05'),
-(74, 'editor', 'editor', 'editor', 'F', 'editor@gmail.com', 'editor', 1, 369750, 0, './public/image/perfil/messi.jpg', 0, 1, '', 'Paraguay', '2024-07-16', '1945-10-15'),
-(76, 'melany', 'sidero', 'melany122', 'F', 'gerez.lautaro12@gmail.com', '123', 1, 144803, 18, './public/image/perfil/melany122.jpg', 0, 0, '', 'Brasil', '2024-01-20', '1999-07-01'),
+(74, 'editor', 'editor', 'editor', 'F', 'editor@gmail.com', 'editor', 1, 369750, 0, './public/image/perfil/messi.jpg', 0, 1, '', 'Paraguay', '2023-07-16', '1945-10-15'),
+(76, 'melany', 'sidero', 'melany122', 'F', 'gerez.lautaro12@gmail.com', '123', 1, 144803, 18, './public/image/perfil/melany122.jpg', 0, 0, '', 'Brasil', '2022-01-20', '1999-07-01'),
 (77, 'messi', 'messi', 'lionelmessi', 'M', 'messi@gmail.com', '123', 1, 865539, 7, './public/image/perfil/lionelmessi.jpg', 0, 0, '', 'Argentina', '2024-05-22', '1994-03-02'),
-(78, 'chad', 'chad', 'chad09', 'F', 'chade@gmail.com', '123', 1, 850298, 7, './public/image/perfil/chad09.jpg', 0, 0, '', 'Uruguay', '2023-09-22', '2001-12-20'),
+(78, 'chad', 'chad', 'chad09', 'F', 'chade@gmail.com', '123', 1, 850298, 7, './public/image/perfil/chad09.jpg', 0, 0, '', 'Uruguay', '2024-09-22', '2001-12-20'),
 (79, 'bixsor', 'bix', 'bixx12', 'M', 'bix@gmail.com', '123', 1, 759712, 15, './public/image/perfil/bixx12.jpg', 0, 0, '', 'Brasil', '2024-04-02', '1993-01-20'),
 (80, 'diss', 'cot', 'cot23', 'F', 'cot@gmail.com', '123', 1, 222121, 4, './public/image/perfil/cot23.jpg', 0, 0, '', 'Brasil', '2024-01-31', '1987-05-12'),
 (82, 'totti', 'Rugna', 'chouny1109', 'M', 'joni.rugna@gmail.com', '123', 1, 462194, 0, './public/image/perfil/chouny1109.jpeg', 0, 0, 'Isidro Casanova', 'Argentina', '2024-10-18', '1997-10-10'),
