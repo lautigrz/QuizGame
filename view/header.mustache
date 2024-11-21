@@ -6,7 +6,7 @@
     <title>QuizGame</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
-
+    
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.0/mdb.min.css" rel="stylesheet">
     <link href="../public/css/style.css" rel="stylesheet">
 </head>
@@ -96,6 +96,7 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="/quizgame/usuario/mostrarUserView">Perfil</a></li>
+                         {{#editor}}<li><a class="dropdown-item" href="" class="btn btn-success btn-lg mb-3 animated-button w-100" data-bs-toggle="modal" data-bs-target="#nueva-pregunta">Crear pregunta</a></li>{{/editor}}
                         <li><a class="dropdown-item" href="/quizgame/auth/cerrarSesion">Cerrar sesión</a></li>
                     </ul>
                 </li>
@@ -105,6 +106,8 @@
 </nav>
 
 </header>
+
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script> // Cuando se despliega el dropdown de notificaciones
 $('#notificationDropdown').on('shown.bs.dropdown', function () {

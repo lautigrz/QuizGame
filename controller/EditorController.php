@@ -3,6 +3,7 @@
 class EditorController{
     private $model;
     private $presenter;
+    private $a = true;
     public function __construct($model, $presenter){
         $this->model = $model;
         $this->presenter = $presenter;
@@ -114,7 +115,32 @@ class EditorController{
         
         }
 
-    public function setDatos(&$data){
+        public function nuevaPregunta(){
+            $correcta = $_POST['es_correcta'];
+        $opciones = [];
+             
+            $respuesta = "";
+            foreach($_POST['opciones'] as $index => $opcion){
+                $opciones[] = $opcion;
+                if($index == $correcta){
+                    $respuesta = $opcion;
+                }
+            }
+        
+        $data = [
+            'pregunta' => $_POST['pregunta'],
+            'opciones' => $opciones,
+            'idUsuario' => $this->idUsuario(),
+            'categoria' => $_POST['categoria'],
+            'respuesta' => $respuesta
+        ];
+
+
+        $this->model->nuevaPregunta($data);
+        header('Location: /quizgame/editor/mostrarEditorView');
+        }
+
+    private function setDatos(&$data){
         if(!empty($_SESSION['error'])){
             $data["error"] = $_SESSION['error'];
             unset( $_SESSION['error']);
@@ -127,9 +153,19 @@ class EditorController{
              "editor" => true,
             "editorPreguntas" => $this->model->obtenerTodasLasPreguntas(),
             "reportadas" => $this->model->obtenerPreguntasReportadas(),
-             "sugeridas" => $this->model->preguntasPendientes()       
-                ];
+             "sugeridas" => $this->model->preguntasPendientes()      
+        ];
         }
+    }
+
+    public function preguntasSugeridas(){
+        $filtro = isset($_GET['filtro']) ? $_GET['filtro'] : 'pendiente';
+
+        if (!in_array($filtro, ['pendiente', 'aprobado', 'rechazada'])) {
+            $filtro = 'pendiente'; // Valor predeterminado
+        }
+    
+        return $this->model->preguntasSugeridas($filtro);
     }
 
     private function notificarAUsuario($usuario,$tipo,$comentario, $accion, $id){
@@ -140,5 +176,27 @@ class EditorController{
 
         $this->model->notificar($id,$mensaje,$tipo);
     }
+    public function preguntasSugeridasAjax() {
+        $filtro = isset($_POST['filtro']) ? $_POST['filtro'] : 'pendiente';
+    
+        if (!in_array($filtro, ['pendiente', 'rechazada', 'aprobado'])) {
+            echo json_encode(['error' => 'Filtro no válido.']);
+            exit;
+        }
+    
+        $preguntas = $this->model->preguntasSugeridas($filtro);
+    
+       
+        echo json_encode($preguntas);
+       
+    }
+    
+    
+    
+    
+
+    private function idUsuario(){
+        return isset($_SESSION['user']) ? $_SESSION['user']['id'] : 0;
+      }
 
 }

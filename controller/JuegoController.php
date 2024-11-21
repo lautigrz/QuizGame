@@ -12,7 +12,7 @@ class JuegoController{
 
     public function preguntas(){
         $data = [];
-        var_dump(count($this->preguntasDeLaPartida()));
+
         $this->setData($data);
       
         $this->presenter->show("juego",$data);
@@ -167,6 +167,7 @@ public function guardarPreguntasDeLaPartidaEnCurso($preguntas) {
         }if(!empty($_SESSION['preguntas'])){        
             $data = [ 
                 "preguntas" =>  $_SESSION['preguntas'],
+                "puntaje" => $this->model->ultimaPartida($this->idUsuario())
         ];
         }if(!empty( $_SESSION['respuesta_incorrecta'])){
 

@@ -32,6 +32,7 @@ function iniciarContador() {
     var intervalo = setInterval(function() {
         if (sessionStorage.getItem('detenerContador') === 'true') {
             clearInterval(intervalo);
+            abrilModalTiempo();
             return;
         }
 
@@ -46,6 +47,15 @@ function iniciarContador() {
     }, 1000);
 }
 
+function abrilModalTiempo() {
+    // Obtener el modal
+    var modal = new bootstrap.Modal(document.getElementById('tiempoTerminado'), {
+        keyboard: false, // No cerrar con el teclado
+        backdrop: 'static' // No cerrar haciendo clic fuera del modal
+    });
+    modal.show();
+}
+
 
 function actualizarTiempoEnModal() {
     var contadorModal = document.getElementById('number-modal');
@@ -53,5 +63,9 @@ function actualizarTiempoEnModal() {
     if (contadorModal) {
         var tiempoRestante = parseInt(sessionStorage.getItem('tiempoRestante'), 10);
         contadorModal.textContent = tiempoRestante;
+    }
+
+    if(parseInt(sessionStorage.getItem('tiempoRestante'), 10) === 5){
+        abrilModalTiempo();
     }
 }

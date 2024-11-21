@@ -36,7 +36,9 @@ class UsuarioController
                 'user' => $_SESSION['user'],
                 "esUsuario" => $this->verificarQueUsuarioEs(),
                 "notificaciones" => $this->model->notificaciones($this->idUsuario()),
-                "partidas" => $partidas
+                "partidas" => $partidas,
+                "cantidadSugeridas" => $this->model->cantidadPreguntasSugeridasPorUsuario($userId),
+                "edadQuiz" => $this->model->edadQuiz($userId)
 
                 
             ];
@@ -98,6 +100,8 @@ class UsuarioController
                 "esUsuario" => $this->verificarQueUsuarioEs(),
                 "notificaciones" => $this->model->notificaciones($this->idUsuario()),
                 "partidas" => $partidas,
+                "cantidadSugeridas" => $this->model->cantidadPreguntasSugeridasPorUsuario($this->idUsuario()),
+                "edadQuiz" => $this->model->edadQuiz($this->idUsuario())
             ];
 
         }

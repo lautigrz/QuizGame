@@ -154,7 +154,7 @@ class UsuarioModel
     public function cambiarEstadoPregunta($pregunta_id) {
         
        $sql = "UPDATE preguntas 
-        SET estado = NOT estado, verificado = 'aprobada'
+        SET estado = NOT estado, verificado = 'aprobado'
         WHERE id = {$pregunta_id}";
 
     
@@ -213,6 +213,16 @@ class UsuarioModel
          $this->agregarOpciones($pregunta, $data['opciones']);
          $this->agregarRespuestaCorrecta($pregunta,$data['respuesta']);
     }
+    public function nuevaPregunta($data){
+
+        $sql = "INSERT INTO preguntas (pregunta, estado, idUsuario, idCategoria, verificado) 
+        VALUES ('" . $data['pregunta'] . "', '1', '" . $data['idUsuario'] . "', '" . $data['categoria'] . "', 'aprobado')";
+
+         $pregunta = $this->database->query($sql);
+       
+         $this->agregarOpciones($pregunta, $data['opciones']);
+         $this->agregarRespuestaCorrecta($pregunta,$data['respuesta']);
+    }
 
     private function agregarOpciones($id,$opciones){
 
@@ -237,6 +247,32 @@ class UsuarioModel
                 break;
             }
         }
+    }
+
+    public function edadQuiz($id){
+        $sql = "SELECT created_at FROM usuario WHERE id = " . $id . " ";
+
+        $query = $this->database->query($sql);
+
+      
+            $dateCreated = new DateTime($query[0]['created_at']);
+
+           
+            $currentDate = new DateTime();
+
+          
+            $interval = $dateCreated->diff($currentDate);
+            $totalDays = ($interval->y * 365) + ($interval->m * 30) + $interval->d;
+            
+            return  $totalDays; 
+    }
+
+    public function cantidadPreguntasSugeridasPorUsuario($id){
+
+        $sql = "SELECT COUNT(*) AS cantidad FROM preguntas WHERE idUsuario = " . $id . "";
+
+        $query = $this->database->query($sql);
+        return $query[0]['cantidad'];
     }
 
     public function preguntasPendientes(){
