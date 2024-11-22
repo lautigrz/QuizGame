@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-11-2024 a las 03:51:15
+-- Tiempo de generación: 22-11-2024 a las 17:50:29
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -65,23 +65,23 @@ CREATE TABLE `dificultad` (
 
 INSERT INTO `dificultad` (`id`, `idUsuario`, `idPregunta`, `veces_correctas`, `veces_vista`) VALUES
 (27, 68, 42, 19, 26),
-(28, 68, 34, 26, 39),
-(29, 68, 44, 25, 43),
-(30, 68, 39, 23, 39),
-(31, 68, 41, 29, 43),
-(32, 68, 1, 27, 42),
-(33, 68, 40, 31, 47),
+(28, 68, 34, 30, 43),
+(29, 68, 44, 31, 49),
+(30, 68, 39, 26, 44),
+(31, 68, 41, 30, 48),
+(32, 68, 1, 29, 47),
+(33, 68, 40, 32, 51),
 (34, 68, 2, 22, 37),
-(35, 68, 45, 26, 44),
-(36, 68, 38, 31, 42),
-(37, 68, 46, 29, 40),
-(38, 68, 47, 25, 46),
-(39, 68, 37, 28, 40),
-(40, 68, 48, 24, 37),
-(41, 68, 36, 26, 41),
-(42, 68, 3, 22, 35),
-(43, 68, 35, 22, 38),
-(44, 68, 43, 17, 20),
+(35, 68, 45, 28, 50),
+(36, 68, 38, 35, 47),
+(37, 68, 46, 31, 45),
+(38, 68, 47, 27, 52),
+(39, 68, 37, 31, 45),
+(40, 68, 48, 28, 43),
+(41, 68, 36, 30, 48),
+(42, 68, 3, 23, 37),
+(43, 68, 35, 25, 43),
+(44, 68, 43, 21, 27),
 (45, 76, 39, 3, 4),
 (46, 76, 1, 3, 3),
 (47, 76, 3, 3, 8),
@@ -108,9 +108,9 @@ INSERT INTO `dificultad` (`id`, `idUsuario`, `idPregunta`, `veces_correctas`, `v
 (68, 78, 41, 1, 1),
 (69, 78, 40, 1, 1),
 (70, 78, 47, 0, 1),
-(71, 77, 3, 1, 1),
+(71, 77, 3, 1, 2),
 (72, 77, 2, 1, 1),
-(73, 77, 41, 0, 1),
+(73, 77, 41, 1, 2),
 (74, 70, 35, 1, 1),
 (75, 70, 45, 1, 1),
 (76, 70, 47, 1, 1),
@@ -130,7 +130,7 @@ INSERT INTO `dificultad` (`id`, `idUsuario`, `idPregunta`, `veces_correctas`, `v
 (90, 77, 39, 1, 1),
 (91, 77, 44, 1, 1),
 (92, 77, 42, 1, 1),
-(93, 77, 38, 0, 1),
+(93, 77, 38, 1, 2),
 (94, 79, 2, 1, 1),
 (95, 79, 34, 1, 1),
 (96, 79, 46, 1, 1),
@@ -145,7 +145,15 @@ INSERT INTO `dificultad` (`id`, `idUsuario`, `idPregunta`, `veces_correctas`, `v
 (105, 79, 3, 2, 3),
 (106, 68, 63, 2, 6),
 (107, 68, 64, 0, 1),
-(108, 68, 65, 0, 2);
+(108, 68, 65, 0, 2),
+(109, 68, 77, 3, 5),
+(110, 77, 48, 1, 1),
+(111, 77, 77, 1, 1),
+(112, 77, 46, 1, 1),
+(113, 77, 37, 1, 1),
+(114, 77, 47, 1, 1),
+(115, 77, 35, 1, 1),
+(116, 77, 40, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -165,22 +173,22 @@ CREATE TABLE `historico` (
 --
 
 INSERT INTO `historico` (`id`, `idUsuario`, `idPregunta`, `hora`) VALUES
-(1278, 68, 43, '2024-11-14 15:22:42'),
-(1279, 68, 35, '2024-11-14 15:22:50'),
-(1280, 68, 41, '2024-11-14 15:22:54'),
-(1281, 68, 1, '2024-11-14 15:29:14'),
-(1282, 68, 2, '2024-11-14 15:29:32'),
-(1283, 68, 47, '2024-11-14 15:29:35'),
-(1284, 68, 44, '2024-11-14 15:29:37'),
-(1285, 68, 39, '2024-11-14 15:29:39'),
-(1286, 68, 37, '2024-11-14 15:30:18'),
-(1287, 68, 63, '2024-11-14 15:30:27'),
-(1288, 68, 3, '2024-11-14 15:32:45'),
-(1289, 68, 46, '2024-11-14 15:33:00'),
-(1290, 68, 38, '2024-11-14 15:33:03'),
-(1291, 68, 36, '2024-11-14 15:33:06'),
-(1292, 68, 34, '2024-11-15 20:07:42'),
-(1293, 68, 45, '2024-11-15 21:30:58');
+(1430, 68, 38, '2024-11-22 16:05:12'),
+(1431, 68, 41, '2024-11-22 16:05:15'),
+(1432, 68, 44, '2024-11-22 16:13:43'),
+(1433, 68, 43, '2024-11-22 16:13:49'),
+(1434, 68, 36, '2024-11-22 16:13:52'),
+(1435, 68, 34, '2024-11-22 16:14:01'),
+(1436, 77, 48, '2024-11-22 16:25:00'),
+(1437, 77, 77, '2024-11-22 16:25:03'),
+(1438, 77, 38, '2024-11-22 16:25:08'),
+(1439, 77, 41, '2024-11-22 16:25:10'),
+(1440, 77, 46, '2024-11-22 16:25:13'),
+(1441, 77, 37, '2024-11-22 16:25:16'),
+(1442, 77, 47, '2024-11-22 16:25:22'),
+(1443, 77, 35, '2024-11-22 16:25:25'),
+(1444, 77, 40, '2024-11-22 16:25:28'),
+(1445, 77, 3, '2024-11-22 16:25:31');
 
 -- --------------------------------------------------------
 
@@ -207,7 +215,13 @@ INSERT INTO `notificacion` (`id`, `idUsuario`, `mensaje`, `leido`, `fecha`, `tip
 (9, 68, 'Hola lautigrz tu Sugerencia fue rechazada ', 1, '2024-11-16 00:30:19', 'Sugerencia'),
 (10, 68, 'Hola lautigrz tu Sugerencia fue aprobada ', 1, '2024-11-16 00:36:35', 'Sugerencia'),
 (11, 68, 'Hola lautigrz tu Reporte fue aprobado ', 1, '2024-11-16 00:36:35', 'Reporte'),
-(12, 68, 'Hola lautigrz tu Reporte fue aprobado ', 1, '2024-11-16 00:40:49', 'Reporte');
+(12, 68, 'Hola lautigrz tu Reporte fue aprobado ', 1, '2024-11-16 00:40:49', 'Reporte'),
+(13, 68, 'Hola lautigrz tu Sugerencia fue rechazada ', 1, '2024-11-22 00:51:43', 'Sugerencia'),
+(14, 68, 'Hola lautigrz tu Reporte fue rechazado ', 1, '2024-11-22 00:51:43', 'Reporte'),
+(15, 68, 'Hola lautigrz tu Reporte fue rechazado ', 1, '2024-11-22 18:08:09', 'Reporte'),
+(16, 68, 'Hola lautigrz tu Reporte fue aprobado ', 1, '2024-11-22 18:08:09', 'Reporte'),
+(17, 77, 'Hola lionelmessi tu Sugerencia fue rechazada ', 1, '2024-11-22 19:42:40', 'Sugerencia'),
+(18, 77, 'Hola lionelmessi tu sugerencia fue rechazada ', 1, '2024-11-22 19:46:20', 'Sugerencia');
 
 -- --------------------------------------------------------
 
@@ -298,18 +312,22 @@ INSERT INTO `opciones` (`id`, `preguntaID`, `opcion`) VALUES
 (70, 48, 'El campo magnético de la Tierra'),
 (71, 48, 'La atracción de los cuerpos hacia el centro de la Tierra'),
 (72, 48, 'La energía solar'),
-(137, 73, 'messi'),
-(138, 73, 'dasd'),
-(139, 73, 'ads'),
-(140, 73, 'asda'),
 (145, 75, 'messi'),
 (146, 75, 'dasd'),
 (147, 75, 'ads'),
 (148, 75, 'asda'),
-(149, 76, 'messi'),
-(150, 76, 'dasd'),
-(151, 76, 'ads'),
-(152, 76, 'asda');
+(153, 77, 'Liverpool'),
+(154, 77, 'FC Barcelona'),
+(155, 77, 'Real Madrid'),
+(156, 77, 'Chelsea'),
+(165, 80, 'messi'),
+(166, 80, 'dasd'),
+(167, 80, 'ads'),
+(168, 80, 'asda'),
+(169, 81, 'messi'),
+(170, 81, 'dasd'),
+(171, 81, 'ads'),
+(172, 81, 'asda');
 
 -- --------------------------------------------------------
 
@@ -557,7 +575,100 @@ INSERT INTO `partida` (`id`, `puntaje_obtenido`, `fecha_partida`, `idUsuario`, `
 (9562, 0, '2024-11-14 15:32:45', 68, 0),
 (9563, 2, '2024-11-14 15:33:00', 68, 0),
 (9564, 0, '2024-11-15 20:07:42', 68, 0),
-(9565, 0, '2024-11-15 21:30:58', 68, 0);
+(9565, 0, '2024-11-15 21:30:58', 68, 0),
+(9566, 0, '2024-11-21 16:23:00', 68, 0),
+(9567, 1, '2024-11-21 16:25:11', 68, 0),
+(9568, 0, '2024-11-21 16:25:57', 68, 0),
+(9569, 1, '2024-11-21 16:27:55', 68, 0),
+(9570, 2, '2024-11-21 16:29:17', 68, 0),
+(9571, 0, '2024-11-21 16:32:19', 68, 0),
+(9572, 2, '2024-11-21 16:34:12', 68, 0),
+(9573, 1, '2024-11-21 16:39:32', 68, 0),
+(9574, 1, '2024-11-21 16:40:09', 68, 0),
+(9575, 0, '2024-11-21 16:41:17', 68, 0),
+(9576, 0, '2024-11-21 16:42:47', 68, 0),
+(9577, 1, '2024-11-21 16:44:44', 68, 0),
+(9578, 0, '2024-11-21 17:18:26', 68, 0),
+(9579, 2, '2024-11-21 17:19:26', 68, 0),
+(9580, 3, '2024-11-21 17:22:15', 68, 0),
+(9581, 3, '2024-11-21 17:22:54', 68, 0),
+(9582, 0, '2024-11-21 17:30:20', 68, 0),
+(9583, 0, '2024-11-21 17:30:43', 68, 0),
+(9584, 0, '2024-11-21 17:31:56', 68, 0),
+(9585, 0, '2024-11-21 17:32:29', 68, 0),
+(9586, 0, '2024-11-21 17:34:59', 68, 0),
+(9587, 0, '2024-11-21 17:35:14', 68, 0),
+(9588, 0, '2024-11-21 17:36:48', 68, 0),
+(9589, 0, '2024-11-21 17:37:03', 68, 0),
+(9590, 0, '2024-11-21 17:38:02', 68, 0),
+(9591, 0, '2024-11-21 17:38:57', 68, 0),
+(9592, 0, '2024-11-21 17:40:43', 68, 0),
+(9593, 0, '2024-11-21 17:43:59', 68, 0),
+(9594, 0, '2024-11-21 17:44:44', 68, 0),
+(9595, 0, '2024-11-21 17:45:18', 68, 0),
+(9596, 0, '2024-11-21 17:46:51', 68, 0),
+(9597, 0, '2024-11-21 17:48:47', 68, 0),
+(9598, 0, '2024-11-21 17:49:11', 68, 0),
+(9599, 0, '2024-11-21 17:56:06', 68, 0),
+(9600, 0, '2024-11-21 17:59:49', 68, 0),
+(9601, 0, '2024-11-21 18:02:57', 68, 0),
+(9602, 0, '2024-11-21 18:04:18', 68, 0),
+(9603, 0, '2024-11-21 18:05:28', 68, 0),
+(9604, 0, '2024-11-21 18:06:12', 68, 0),
+(9605, 0, '2024-11-21 18:10:05', 68, 0),
+(9606, 0, '2024-11-21 18:10:30', 68, 0),
+(9607, 0, '2024-11-21 18:12:40', 68, 0),
+(9608, 0, '2024-11-21 18:12:57', 68, 0),
+(9609, 0, '2024-11-21 18:14:07', 68, 0),
+(9610, 0, '2024-11-21 18:14:44', 68, 0),
+(9611, 0, '2024-11-21 18:15:05', 68, 0),
+(9612, 0, '2024-11-21 20:06:26', 68, 0),
+(9613, 0, '2024-11-21 20:11:07', 68, 0),
+(9614, 0, '2024-11-21 20:11:22', 68, 0),
+(9615, 0, '2024-11-21 20:11:41', 68, 0),
+(9616, 0, '2024-11-21 20:12:01', 68, 0),
+(9617, 0, '2024-11-21 20:12:27', 68, 0),
+(9618, 0, '2024-11-21 20:12:58', 68, 0),
+(9619, 0, '2024-11-21 20:14:00', 68, 0),
+(9620, 0, '2024-11-21 20:15:43', 68, 0),
+(9621, 0, '2024-11-21 20:16:38', 68, 0),
+(9622, 0, '2024-11-21 20:21:52', 68, 0),
+(9623, 0, '2024-11-21 20:22:16', 68, 0),
+(9624, 0, '2024-11-21 20:23:05', 68, 0),
+(9625, 0, '2024-11-21 20:23:52', 68, 0),
+(9626, 0, '2024-11-21 20:24:12', 68, 0),
+(9627, 0, '2024-11-21 20:24:35', 68, 0),
+(9628, 0, '2024-11-21 20:25:32', 68, 0),
+(9629, 0, '2024-11-21 20:26:14', 68, 0),
+(9630, 0, '2024-11-21 20:26:51', 68, 0),
+(9631, 2, '2024-11-21 20:28:54', 68, 0),
+(9632, 0, '2024-11-21 20:30:00', 68, 0),
+(9633, 0, '2024-11-21 20:31:37', 68, 0),
+(9634, 0, '2024-11-21 20:33:59', 68, 0),
+(9635, 0, '2024-11-21 20:34:19', 68, 0),
+(9636, 0, '2024-11-21 20:35:05', 68, 0),
+(9637, 2, '2024-11-21 20:38:15', 68, 0),
+(9638, 0, '2024-11-21 20:43:22', 68, 0),
+(9639, 0, '2024-11-21 20:43:46', 68, 0),
+(9640, 0, '2024-11-21 20:44:23', 68, 0),
+(9641, 0, '2024-11-21 20:45:06', 68, 0),
+(9642, 0, '2024-11-21 20:45:25', 68, 0),
+(9643, 0, '2024-11-21 20:45:50', 68, 0),
+(9644, 0, '2024-11-21 20:46:23', 68, 0),
+(9645, 0, '2024-11-21 20:47:22', 68, 0),
+(9646, 5, '2024-11-21 20:47:59', 68, 0),
+(9647, 5, '2024-11-21 20:55:24', 68, 0),
+(9648, 1, '2024-11-21 20:59:57', 68, 0),
+(9649, 0, '2024-11-21 21:07:01', 68, 0),
+(9650, 2, '2024-11-21 21:09:09', 68, 0),
+(9651, 0, '2024-11-21 21:49:15', 68, 0),
+(9652, 0, '2024-11-21 21:51:52', 68, 0),
+(9653, 2, '2024-11-22 15:08:40', 68, 0),
+(9654, 2, '2024-11-22 15:44:35', 68, 0),
+(9655, 0, '2024-11-22 15:47:31', 68, 0),
+(9656, 8, '2024-11-22 16:04:45', 68, 0),
+(9657, 3, '2024-11-22 16:13:43', 68, 0),
+(9658, 9, '2024-11-22 16:25:00', 77, 0);
 
 -- --------------------------------------------------------
 
@@ -585,21 +696,22 @@ INSERT INTO `preguntas` (`id`, `pregunta`, `estado`, `idUsuario`, `idCategoria`,
 (34, '¿Cuál es el planeta más grande del sistema solar?', 1, 68, 1, 'aprobado'),
 (35, '¿Quién escribió \"Don Quijote de la Mancha\"?', 1, 68, 5, 'aprobado'),
 (36, '¿Qué elemento químico tiene el símbolo \"O\"?', 1, 68, 3, 'aprobado'),
-(37, '¿Cuál es el océano más grande del mundo?', 1, 68, 1, ''),
-(38, '¿En qué año cayó el muro de Berlín?', 1, 68, 2, ''),
+(37, '¿Cuál es el océano más grande del mundo?', 1, 68, 1, 'aprobado'),
+(38, '¿En qué año cayó el muro de Berlín?', 1, 68, 2, 'aprobado'),
 (39, '¿Qué país ganó la Copa Mundial de Fútbol 2018?', 1, 68, 4, 'aprobado'),
-(40, '¿Quién pintó la \"Mona Lisa\"?', 1, 68, 5, ''),
-(41, '¿Qué idioma se habla en Brasil?', 1, 68, 1, ''),
-(42, '¿Qué número romano representa el 100?', 0, 68, 3, ''),
+(40, '¿Quién pintó la \"Mona Lisa\"?', 1, 68, 5, 'aprobado'),
+(41, '¿Qué idioma se habla en Brasil?', 1, 68, 1, 'aprobado'),
+(42, '¿Qué número romano representa el 100?', 0, 68, 3, 'aprobado'),
 (43, '¿Qué gas es esencial para la respiración humana?', 1, 68, 3, 'aprobado'),
-(44, '¿Cuál es el río más largo del mundo?', 1, 68, 1, ''),
-(45, '¿Quién desarrolló la teoría de la relatividad?', 1, 68, 3, 'aprobada'),
+(44, '¿Cuál es el río más largo del mundo?', 1, 68, 1, 'aprobado'),
+(45, '¿Quién desarrolló la teoría de la relatividad?', 0, 68, 3, 'aprobado'),
 (46, '¿Qué es el \"Big Bang\"?', 1, 68, 3, 'aprobado'),
-(47, '¿En qué país se encuentra la Torre Eiffel?', 1, 68, 1, ''),
-(48, '¿Qué es la fuerza de gravedad?', 1, 68, 3, ''),
-(73, 'Quien es el mejor jugador del mundo?', 0, 68, 2, 'aprobado'),
-(75, 'Quien es el mejor jugador del mundo?', 0, 68, 2, 'rechazada'),
-(76, 'Quien es el mejor jugador del mundo?', 1, 68, 3, 'aprobada');
+(47, '¿En qué país se encuentra la Torre Eiffel?', 1, 68, 1, 'aprobado'),
+(48, '¿Qué es la fuerza de gravedad?', 1, 68, 3, 'aprobado'),
+(75, 'Quien es el mejor jugador del mundo?', 0, 68, 2, 'aprobado'),
+(77, 'Campeon champions 2022?', 1, 74, 4, 'aprobado'),
+(80, 'Quien es el mejor jugador del mundo?', 0, 77, 4, 'rechazada'),
+(81, 'Quien es el mejor jugador del mundo?', 0, 77, 3, 'rechazada');
 
 -- --------------------------------------------------------
 
@@ -611,15 +723,17 @@ CREATE TABLE `reporte` (
   `id` int(11) NOT NULL,
   `idPregunta` int(11) DEFAULT NULL,
   `idUsuarioReporte` int(11) DEFAULT NULL,
-  `detalleReporte` varchar(255) DEFAULT NULL
+  `detalleReporte` varchar(255) DEFAULT NULL,
+  `verificado` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `reporte`
 --
 
-INSERT INTO `reporte` (`id`, `idPregunta`, `idUsuarioReporte`, `detalleReporte`) VALUES
-(9, 45, 68, 'puto');
+INSERT INTO `reporte` (`id`, `idPregunta`, `idUsuarioReporte`, `detalleReporte`, `verificado`) VALUES
+(10, 41, 68, 'horrible', 'rechazado'),
+(11, 45, 68, 'ZZZZ', 'aprobado');
 
 -- --------------------------------------------------------
 
@@ -656,9 +770,10 @@ INSERT INTO `respuesta` (`id`, `preguntaID`, `opcionID`) VALUES
 (16, 46, 62),
 (17, 47, 66),
 (18, 48, 71),
-(29, 73, 139),
 (31, 75, 148),
-(32, 76, 149);
+(33, 77, 155),
+(36, 80, 165),
+(37, 81, 172);
 
 -- --------------------------------------------------------
 
@@ -691,12 +806,12 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `nombre`, `apellido`, `usuario`, `genero`, `email`, `password`, `estado`, `token`, `puntaje`, `fotoPerfil`, `admin`, `editor`, `ciudad`, `pais`, `created_at`, `fecha_nacimiento`) VALUES
-(68, 'Lautaro', 'Gerez', 'lautigrz', 'M', 'lautarogerezz12@gmail.com', '123', 1, 681159, 220, './public/image/perfil/lautigrz.jpg', 0, 0, '', 'Uruguay', '2024-11-14', '2005-07-20'),
+(68, 'Lautaro', 'Gerez', 'lautigrz', 'M', 'lautarogerezz12@gmail.com', '123', 1, 681159, 269, './public/image/perfil/lautigrz.jpg', 0, 0, '', 'Uruguay', '2024-11-14', '2005-07-20'),
 (70, 'lionel', 'scaloni', 'scaloni10', 'F', 'sca@gmial.com', '123', 1, 432768, 4, './public/image/perfil/scaloni10.jpg', 0, 0, '', 'Chile', '2024-10-15', '1998-10-15'),
 (73, 'admin', 'admin', 'admin', 'M', 'admin@gmail.com', 'admin', 1, 300048, 0, './public/image/perfil/chad123.jpg', 1, 0, '', 'Chile', '2024-07-10', '1990-05-05'),
 (74, 'editor', 'editor', 'editor', 'F', 'editor@gmail.com', 'editor', 1, 369750, 0, './public/image/perfil/messi.jpg', 0, 1, '', 'Paraguay', '2023-07-16', '1945-10-15'),
 (76, 'melany', 'sidero', 'melany122', 'F', 'gerez.lautaro12@gmail.com', '123', 1, 144803, 18, './public/image/perfil/melany122.jpg', 0, 0, '', 'Brasil', '2022-01-20', '1999-07-01'),
-(77, 'messi', 'messi', 'lionelmessi', 'M', 'messi@gmail.com', '123', 1, 865539, 7, './public/image/perfil/lionelmessi.jpg', 0, 0, '', 'Argentina', '2024-05-22', '1994-03-02'),
+(77, 'messi', 'messi', 'lionelmessi', 'M', 'messi@gmail.com', '123', 1, 865539, 16, './public/image/perfil/lionelmessi.jpg', 0, 0, '', 'Argentina', '2024-05-22', '1994-03-02'),
 (78, 'chad', 'chad', 'chad09', 'F', 'chade@gmail.com', '123', 1, 850298, 7, './public/image/perfil/chad09.jpg', 0, 0, '', 'Uruguay', '2024-09-22', '2001-12-20'),
 (79, 'bixsor', 'bix', 'bixx12', 'M', 'bix@gmail.com', '123', 1, 759712, 15, './public/image/perfil/bixx12.jpg', 0, 0, '', 'Brasil', '2024-04-02', '1993-01-20'),
 (80, 'diss', 'cot', 'cot23', 'F', 'cot@gmail.com', '123', 1, 222121, 4, './public/image/perfil/cot23.jpg', 0, 0, '', 'Brasil', '2024-01-31', '1987-05-12'),
@@ -792,49 +907,49 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de la tabla `dificultad`
 --
 ALTER TABLE `dificultad`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
 
 --
 -- AUTO_INCREMENT de la tabla `historico`
 --
 ALTER TABLE `historico`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1294;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1446;
 
 --
 -- AUTO_INCREMENT de la tabla `notificacion`
 --
 ALTER TABLE `notificacion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `opciones`
 --
 ALTER TABLE `opciones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=153;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=173;
 
 --
 -- AUTO_INCREMENT de la tabla `partida`
 --
 ALTER TABLE `partida`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9566;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9659;
 
 --
 -- AUTO_INCREMENT de la tabla `preguntas`
 --
 ALTER TABLE `preguntas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
 
 --
 -- AUTO_INCREMENT de la tabla `reporte`
 --
 ALTER TABLE `reporte`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `respuesta`
 --
 ALTER TABLE `respuesta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`

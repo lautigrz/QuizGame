@@ -19,16 +19,20 @@ class JuegoController{
     }
     
     public function partida(){
-        if($this->existeUsuario()){
+            $this->preguntaAlazar();
+            header('Location: /quizgame/juego/preguntas');
+            exit();
+    
+    }
 
-            if(!$this->preguntasEnCurso()){
+    public function empezarPartida(){
+        if($this->existeUsuario() && $this->verificarQueNoHayaPartidaAciva()){
+           
             $this->nuevaPartida();
-            $this->preguntaAlazar();
-        }else{
-            $this->preguntaAlazar();
+
+            $this->partida();
         }
-        }
-        header('Location: /quizgame/juego/preguntas');
+        header('Location: /quizgame/home/lobby');
         exit();
     }
 
@@ -128,7 +132,7 @@ public function guardarPreguntasDeLaPartidaEnCurso($preguntas) {
     public function esCorrecta(){
 
         $pregunta = $this->model->preguntaEntregada($this->idUsuario());
-        $respuesta = $_GET['respuesta'];
+        $respuesta = $_POST['respuesta'];
         $hora_entrega = $pregunta[0]['hora']; 
 
         $tiempo_respuesta = $this->tiempo($hora_entrega);
@@ -160,7 +164,19 @@ public function guardarPreguntasDeLaPartidaEnCurso($preguntas) {
         exit();
     }
 
-    public function setData(&$data){
+ 
+    
+
+    public function reportePregunta()
+    {
+        $data = $_POST;
+        $this->model->reportePregunta($data);
+        header('Location: /quizgame/home/lobby');
+    }
+
+
+
+    private function setData(&$data){
         if(!empty($_SESSION['error'])){
             $data["error"] = $_SESSION['error'];
             unset( $_SESSION['error']);
@@ -182,14 +198,6 @@ public function guardarPreguntasDeLaPartidaEnCurso($preguntas) {
             ];
           
         }
-       
-    }
-
-    public function reportePregunta()
-    {
-        $data = $_POST;
-        $this->model->reportePregunta($data);
-        header('Location: /quizgame/home/lobby');
     }
     
     private function tiempo($hora_entrega){
@@ -204,6 +212,12 @@ public function guardarPreguntasDeLaPartidaEnCurso($preguntas) {
     private function idUsuario(){
       return $this->existeUsuario() ? $_SESSION['user']['id'] : null;
     }
+
+    private function verificarQueNoHayaPartidaAciva() {
+        $query = $this->model->verificarSiTieneUnaPartidaActiva($this->idUsuario());
+        return empty($query); 
+    }
+    
     
     private function existeUsuario() {
         return isset($_SESSION['user']);
@@ -217,5 +231,5 @@ public function guardarPreguntasDeLaPartidaEnCurso($preguntas) {
     private function preguntasDeLaPartida() {
         return isset($_SESSION['preguntas_data']) ? $_SESSION['preguntas_data'] : [];
     }
-    
+
 }

@@ -94,6 +94,7 @@ class UsuarioModel
         JOIN categoria c ON p.idCategoria = c.id 
         JOIN opciones o ON p.id = o.preguntaID 
         LEFT JOIN respuesta r ON r.preguntaID = p.id 
+        WHERE p.verificado = 'aprobado'
         GROUP BY p.id, p.pregunta, p.estado, c.descripcion, c.color 
         ORDER BY p.id;";
     

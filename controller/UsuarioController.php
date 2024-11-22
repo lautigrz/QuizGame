@@ -9,20 +9,13 @@ class UsuarioController
     {
         $this->model = $model;
         $this->presenter = $presenter;
-
-
     }
-
-    
         public function mostrarUserView()
         {
             $data = [];
             $this->setDatos($data);
             $this->presenter->show('user', $data);
-            
         }
-    
-
 
   public function perfil(){
     if (isset($_GET['id'])) {

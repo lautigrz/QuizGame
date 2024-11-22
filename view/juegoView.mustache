@@ -12,7 +12,7 @@
    
             <div class="d-grid gap-2 mx-auto" style="width: 100%;">
                 {{#opciones}}
-                <form action="/quizgame/juego/esCorrecta" method="GET">
+                <form action="/quizgame/juego/esCorrecta" method="POST">
                     <button type="submit" name="respuesta" class="btn btn-lg mt-2 boton-respuesta"
                             value="{{opcion}}"
                             style="background-color:{{color}}; color: white; border: none; border-radius: 10px; padding: 15px; width: 100%; white-space: nowrap; font-weight: bold;">

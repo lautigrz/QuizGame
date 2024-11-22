@@ -15,51 +15,15 @@ class EditorController{
         $this->presenter->show('editor', $data);
     }
 
-          //---------------------------editor-----------------------------------------------
           public function alterarPregunta(){
             $pregunta_id = $_POST['pregunta'];
 
-            $usuario = $_POST['usuario'];
-            $tipo = $_POST['tipo'];
-            $comentario = $_POST['comentario'];
-            $accion = $_POST['accion'];
-            $id = $_POST['idUsuario'];
-
-            if($accion == 'aprobada'){
             $this->model->cambiarEstadoPregunta($pregunta_id);
-            }
-
-            $this->notificarAUsuario($usuario,$tipo,$comentario, $accion,$id);
-            header('Location: /quizgame/editor/mostrarEditorView');
-
-        }
-
-        public function sugerencia(){
-            $pregunta_id = $_POST['pregunta'];
-
-            $usuario = $_POST['usuario'];
-            $tipo = $_POST['tipo'];
-            $comentario = $_POST['comentario'];
-            $accion = $_POST['accion'];
-            $id = $_POST['idUsuario'];
-
-            if($accion == 'aprobada'){
-            $this->model->cambiarEstadoPregunta($pregunta_id);
-            }
-
-            $this->notificarAUsuario($usuario,$tipo,$comentario, $accion,$id);
-            header('Location: /quizgame/editor/mostrarEditorView');
-        }
-
-        public function eliminarPregunta(){
-            $pregunta_id = $_POST['pregunta'];
-            $this->model->eliminarPregunta($pregunta_id);
-           
             
             header('Location: /quizgame/editor/mostrarEditorView');
-            exit();
+
         }
-      
+
 
         public function verificacion(){
             $pregunta_id = $_POST['pregunta'];
@@ -123,6 +87,15 @@ class EditorController{
         
         }
 
+        public function eliminarPregunta(){
+            $pregunta_id = $_POST['pregunta'];
+            $this->model->eliminarPregunta($pregunta_id);
+           
+            
+            header('Location: /quizgame/editor/mostrarEditorView');
+            exit();
+        }
+
         public function nuevaPregunta(){
             $correcta = $_POST['es_correcta'];
         $opciones = [];
@@ -168,20 +141,10 @@ class EditorController{
         }
     }
 
-    public function preguntasSugeridas(){
-        $filtro = isset($_GET['filtro']) ? $_GET['filtro'] : 'pendiente';
-
-        if (!in_array($filtro, ['pendiente', 'aprobado', 'rechazada'])) {
-            $filtro = 'pendiente'; // Valor predeterminado
-        }
-    
-        return $this->model->preguntasSugeridas($filtro);
-    }
-
     private function notificarAUsuario($usuario,$tipo,$comentario, $accion, $id){
         $mensaje = $comentario;
         if(empty($comentario)){
-            $mensaje = "Hola ". $usuario ." tu ". $tipo . " fue " . $accion . " ";
+            $mensaje = "Hola ". $usuario ." tu ". strtolower($tipo) . " fue " . $accion . " ";
         }
 
         $this->model->notificar($id,$mensaje,$tipo);
