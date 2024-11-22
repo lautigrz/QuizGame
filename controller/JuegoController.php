@@ -92,7 +92,7 @@ public function guardarPreguntasDeLaPartidaEnCurso($preguntas) {
         $id = $this->idUsuario();
     
 
-    if (!$this->preguntaDisponibleParaElUsuario($preguntas, $id)) {
+    if (!$this->preguntaDisponibleParaElUsuario($preguntas, $id) && $preguntas['id'] != $_SESSION['preguntas']['id']) {
   
         $_SESSION['preguntas_data'][] = ['pregunta' => $preguntas['pregunta']];
         $this->model->guardarPreguntaVista($id,$preguntas['id']);
@@ -215,7 +215,7 @@ public function guardarPreguntasDeLaPartidaEnCurso($preguntas) {
         return isset($_SESSION['preguntas_data']);
     }
     private function preguntasDeLaPartida() {
-        return isset($_SESSION['preguntas_data']) ? $_SESSION['preguntas_data'] : []; // Retornar un array vacío en lugar de 0
+        return isset($_SESSION['preguntas_data']) ? $_SESSION['preguntas_data'] : [];
     }
     
 }

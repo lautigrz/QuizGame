@@ -2,28 +2,37 @@
 
  
 <!-- Pestañas -->
+<!-- Pestañas -->
 <div class="container mt-4">
   <div class="pestañas">
     <ul class="nav nav-pills nav-fill custom-tabs" id="myTab" role="tablist">
-      <li class="nav-item" role="presentation">
+      <li class="nav-item position-relative" role="presentation">
         <button class="nav-link active" id="preguntas-tab" data-bs-toggle="tab" data-bs-target="#preguntas" type="button" role="tab" aria-controls="preguntas" aria-selected="true">
           📝 Preguntas
         </button>
       </li>
-      <li class="nav-item" role="presentation">
+      <li class="nav-item position-relative" role="presentation">
         <button class="nav-link" id="sugeridas-tab" data-bs-toggle="tab" data-bs-target="#sugeridas" type="button" role="tab" aria-controls="sugeridas" aria-selected="false">
           💡 Sugeridas
         </button>
+        <!-- Indicador de notificación -->
+        <span class="badge rounded-pill bg-danger position-absolute top-0 start-0 translate-middle" id="sugeridas-badge">
+          {{cantidadSug}}
+        </span>
       </li>
-      <li class="nav-item" role="presentation">
+      <li class="nav-item position-relative" role="presentation">
         <button class="nav-link" id="reportadas-tab" data-bs-toggle="tab" data-bs-target="#reportadas" type="button" role="tab" aria-controls="reportadas" aria-selected="false">
           🚨 Reportadas
         </button>
+        <!-- Indicador de notificación -->
+        <span class="badge rounded-pill bg-danger position-absolute top-0 start-0 translate-middle" id="reportadas-badge">
+          {{cantidadReport}}
+        </span>
       </li>
-      
     </ul>
   </div>
 </div>
+
 
 
 

@@ -156,8 +156,7 @@ class UsuarioModel
        $sql = "UPDATE preguntas 
         SET estado = NOT estado, verificado = 'aprobado'
         WHERE id = {$pregunta_id}";
-
-    
+        
         $this->database->query($sql);
     }
     public function rechazarPregunta($pregunta_id) {
@@ -213,6 +212,12 @@ class UsuarioModel
          $this->agregarOpciones($pregunta, $data['opciones']);
          $this->agregarRespuestaCorrecta($pregunta,$data['respuesta']);
     }
+
+    public function estadoReporte($accion,$id,$pregunta_id){
+        $sql = "UPDATE reporte SET verificado = '{$accion}' WHERE idUsuarioReporte = {$id} AND idPregunta = {$pregunta_id}";
+
+        $this->database->query($sql);
+    }
     public function nuevaPregunta($data){
 
         $sql = "INSERT INTO preguntas (pregunta, estado, idUsuario, idCategoria, verificado) 
@@ -247,6 +252,22 @@ class UsuarioModel
                 break;
             }
         }
+    }
+
+    public function cantidadNuevosReportes(){
+        $sql = "SELECT COUNT(*) AS cantidad FROM reporte WHERE verificado = 'pendiente'";
+
+        $query = $this->database->query($sql);
+
+        return $query[0]['cantidad'];
+    }
+
+    public function cantidadNuevasSugerencias(){
+        $sql = "SELECT COUNT(*) AS cantidad FROM preguntas WHERE verificado = 'pendiente'";
+
+        $query = $this->database->query($sql);
+
+        return $query[0]['cantidad'];
     }
 
     public function edadQuiz($id){
@@ -470,6 +491,7 @@ class UsuarioModel
  JOIN reporte re ON p.id = re.idPregunta 
  JOIN usuario u on u.id = re.idUsuarioReporte
  LEFT JOIN respuesta r ON r.preguntaID = p.id 
+ WHERE re.verificado = 'pendiente'
  GROUP BY p.id, p.pregunta, p.estado, c.descripcion, c.color 
  ORDER BY p.id;";
 

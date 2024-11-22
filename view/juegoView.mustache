@@ -81,7 +81,7 @@
                     
                 </div>
                 <div class="modal-body text-center">
-                    <span style="font-size: 2rem;">😡🔥</span>
+                    <img src="https://emojiterra.com/data/animated-emoji/1f621.gif" width="40" alt="saludo">
                     <p>El juego ha finalizado porque recargaste la página. ¡Tu puntaje final es {{puntaje}}!</p>
                 </div>
                 <div class="modal-footer">
@@ -105,14 +105,13 @@
           </button>
       </div>
       <div class="modal-footer">
-        <a href="#" class="btn btn-secondary" onclick="cerrarYRedirigir('/quizgame/juego/finalizarPartida')">Cerrar</a>
+        <a href="#" class="btn btn-secondary">Cerrar</a>
       </div>
     </div>
   </div>
 </div>
 
 <script src="../public/js/tiempo.js"></script>
-
 <script>
     {{#respuesta_incorrecta}}
         sessionStorage.setItem('mostrarModal', 'true');

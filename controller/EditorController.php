@@ -75,16 +75,24 @@ class EditorController{
 
             if($accion == 'aprobado' || $accion == 'aprobada' ){
                 $this->model->cambiarEstadoPregunta($pregunta_id);
+               
             }else if($tipo == 'Sugerencia' && $accion == 'rechazada'){
                 $this->model->rechazarPregunta($pregunta_id);
-            }else{
-                $this->model->eliminarReporte($pregunta_id);
             }
 
+            $this->verifiarSiEsReporte($tipo,$accion,$pregunta_id,$id);
             $this->notificarAUsuario($usuario,$tipo,$comentario,$accion,$id);
             
             header('Location: /quizgame/editor/mostrarEditorView');
             
+        }
+
+        public function verifiarSiEsReporte($tipo,$accion, $pregunta_id,$id){
+
+            if($tipo == 'Reporte'){
+                $this->model->estadoReporte($accion,$id,$pregunta_id);
+            }
+
         }
         public function modificarPregunta(){
     
@@ -153,7 +161,9 @@ class EditorController{
              "editor" => true,
             "editorPreguntas" => $this->model->obtenerTodasLasPreguntas(),
             "reportadas" => $this->model->obtenerPreguntasReportadas(),
-             "sugeridas" => $this->model->preguntasPendientes()      
+             "sugeridas" => $this->model->preguntasPendientes(),
+             "cantidadReport" => $this->model->cantidadNuevosReportes(),
+             "cantidadSug" => $this->model->cantidadNuevasSugerencias()      
         ];
         }
     }
@@ -176,24 +186,6 @@ class EditorController{
 
         $this->model->notificar($id,$mensaje,$tipo);
     }
-    public function preguntasSugeridasAjax() {
-        $filtro = isset($_POST['filtro']) ? $_POST['filtro'] : 'pendiente';
-    
-        if (!in_array($filtro, ['pendiente', 'rechazada', 'aprobado'])) {
-            echo json_encode(['error' => 'Filtro no válido.']);
-            exit;
-        }
-    
-        $preguntas = $this->model->preguntasSugeridas($filtro);
-    
-       
-        echo json_encode($preguntas);
-       
-    }
-    
-    
-    
-    
 
     private function idUsuario(){
         return isset($_SESSION['user']) ? $_SESSION['user']['id'] : 0;
