@@ -80,8 +80,7 @@ Este proyecto es parte de una materia universitaria, enfocado en el desarrollo d
 ---
 
 ## Créditos 🏆  
-Creado y desarrollado por [lautigrz] [Chouny1109] [nahuelbiondo]
-nahuelbiondo
+Creado y desarrollado por **lautigrz**, **Chouny1109** y **nahuelbiondo**.
 Inspirado en la búsqueda de aprendizaje continuo en el marco universitario.  
 
 ---
