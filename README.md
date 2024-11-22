@@ -1,6 +1,6 @@
 # QuizGame 🎮❓  
 
-**QuizGame** es un juego de preguntas y respuestas diseñado para entretener, educar y desafiar a los jugadores mientras permite la interacción y la personalización. Este proyecto es desarrollado como parte de una materia universitaria, buscando integrar conocimientos técnicos y fomentar la creatividad en el desarrollo de aplicaciones web interactivas..
+**QuizGame** es un juego de preguntas y respuestas diseñado para entretener, educar y desafiarse asi mismo mientras permite la interacción y la personalización. Este proyecto es desarrollado como parte de una materia universitaria, buscando integrar conocimientos técnicos y fomentar la creatividad en el desarrollo de aplicaciones web interactivas.
 
 ---
 
@@ -10,7 +10,7 @@
 - **Responde Preguntas**: Participa en rondas de preguntas en diversas categorías y niveles de dificultad.  
 - **Reporta Preguntas**: Informa problemas en preguntas existentes.  
 - **Sugiere Preguntas**: Propón nuevas preguntas para enriquecer el contenido del juego.  
-- **Ranking y Estadísticas**: Consulta tu posición en el ranking global y revisa estadísticas personales como preguntas correctas, tiempo promedio de respuesta, entre otros.  
+- **Ranking y Estadísticas**: Consulta tu posición y el de otros jugadores en el ranking global y revisa estadísticas personales como preguntas correctas, partidas jugadas, entre otros.  
 
 ### Para el Editor  
 - **Gestión de Sugerencias**: Revisa las preguntas sugeridas por los jugadores y apruébalas o recházalas.  
@@ -34,11 +34,12 @@
 
 ---
 
-## Tecnología Utilizada 💻  
+## Tecnologías utilizadas 🛠️
 
-### Frontend  
-- **HTML/CSS/JavaScript**: Para la interfaz interactiva y amigable del juego.  
-- **Bootstrap**: Diseños responsivos y componentes avanzados.  
+### Frontend:
+- **HTML/CSS**: Diseño y estructura del sitio.
+- **Bootstrap**: Framework para un diseño responsivo y moderno.
+- **Mustache.js**: Motor de plantillas para renderizar dinámicamente las vistas en el cliente.
 
 ### Backend  
 - **PHP**: Manejo de la lógica del juego, gestión de usuarios y roles.  
@@ -46,7 +47,8 @@
 
 ### Librerías y Herramientas  
 - **Chart.js**: Para mostrar gráficos estadísticos.  
-- **PHPMailer**: Para notificaciones por correo electrónico (opcional).  
+- **PHPMailer**: Para notificaciones por correo electrónico.
+- **PHPQRCODE**: Cada usuario tiene un QR en su perfil.  
 
 ---
 
@@ -54,10 +56,10 @@
 
 1. Clona el repositorio:  
    ```bash
-   git clone https://github.com/tu_usuario/quizgame.git
+   git clone https://github.com/lautigrz/quizgame.git
    ```  
 2. Configura la base de datos:  
-   - Importa el archivo `quizgame.sql` desde el directorio `/database`.  
+   - Importa el archivo `quizgame.sql`.  
    - Ajusta las credenciales de conexión en `config.ini`.  
 
 3. Coloca el proyecto en tu servidor local (ejemplo: `htdocs` si usas XAMPP).  
@@ -67,11 +69,19 @@
 
 ---
 
+## Contexto Académico 🎓  
+
+Este proyecto es parte de una materia universitaria, enfocado en el desarrollo de aplicaciones web con múltiples funcionalidades. A través de **QuizGame**, se busca poner en práctica conceptos como:  
+- Gestión de roles y permisos.  
+- Implementación de interfaces dinámicas y responsivas.  
+- Manejo de bases de datos y estadísticas.  
+- Mejores prácticas en desarrollo colaborativo.  
+
 ---
 
 ## Créditos 🏆  
-Creado y desarrollado por [Tu Nombre].  
-Un agradecimiento especial a la comunidad de desarrolladores que inspira el crecimiento de este proyecto.  
+Creado y desarrollado por [lautigrz].  
+Inspirado en la búsqueda de aprendizaje continuo en el marco universitario.  
 
 ---
 
