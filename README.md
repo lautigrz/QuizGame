@@ -1,10 +1,10 @@
-# QuizGame 🎮❓  
+# QuizGame 🎮<img src="https://emojiterra.com/data/animated-emoji/2753.gif" width="25"> 
 
 **QuizGame** es un juego de preguntas y respuestas diseñado para entretener, educar y desafiarse asi mismo mientras permite la interacción y la personalización. Este proyecto es desarrollado como parte de una materia universitaria, buscando integrar conocimientos técnicos y fomentar la creatividad en el desarrollo de aplicaciones web interactivas.
 
 ---
 
-## Características Principales 🚀  
+## Características Principales <img src="https://images.emojiterra.com/google/noto-emoji/animated-emoji/1f680.gif" width="25">  
 
 ### Para el Jugador  
 - **Responde Preguntas**: Participa en rondas de preguntas en diversas categorías y niveles de dificultad.  
