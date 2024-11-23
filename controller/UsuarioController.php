@@ -26,9 +26,9 @@ class UsuarioController
         if ($userData) {
             $data = [
                 'userVist' => $userData,
-                'user' => $_SESSION['user'],
+                'user' => isset($_SESSION['user']) ? $_SESSION['user'] : 0,
                 "esUsuario" => $this->verificarQueUsuarioEs(),
-                "notificaciones" => $this->model->notificaciones($this->idUsuario()),
+                "notificaciones" =>  isset($_SESSION['user']) ? $this->model->notificaciones($this->idUsuario()) : 0,
                 "partidas" => $partidas,
                 "cantidadSugeridas" => $this->model->cantidadPreguntasSugeridasPorUsuario($userId),
                 "edadQuiz" => $this->model->edadQuiz($userId)
@@ -42,7 +42,7 @@ class UsuarioController
 }
 
     public function sugerirPregunta(){
-
+        if($this->existeUsuario()){
         $correcta = $_POST['es_correcta'];
         $opciones = [];
              
@@ -66,6 +66,7 @@ class UsuarioController
         $this->model->sugerencia($data);
         header('Location: /quizgame/home/lobby');
     }
+}
 
     private function crearArchivoConToken($token)
     {
@@ -114,7 +115,10 @@ class UsuarioController
         }
     }
     public function verificarQueUsuarioEs(){
-        return $_SESSION['user']['editor'] == 0 ? true : false;
+        if(isset($_SESSION['user']['editor'])){
+            return $_SESSION['user']['editor'] == 0 ? true : false;
+        }
+      
     }
 
 }

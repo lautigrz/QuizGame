@@ -10,9 +10,11 @@ class EditorController{
     }
     public function mostrarEditorView()
     {
+        if($this->existeUsuario()){
         $data = [];
         $this->setDatos($data);
         $this->presenter->show('editor', $data);
+        }
     }
 
           public function alterarPregunta(){
@@ -51,13 +53,6 @@ class EditorController{
             
         }
 
-        public function verifiarSiEsReporte($tipo,$accion, $pregunta_id,$id){
-
-            if($tipo == 'Reporte'){
-                $this->model->estadoReporte($accion,$id,$pregunta_id);
-            }
-
-        }
         public function modificarPregunta(){
     
             $correcta = $_POST['es_correcta'];
@@ -97,7 +92,7 @@ class EditorController{
         }
 
         public function nuevaPregunta(){
-            $correcta = $_POST['es_correcta'];
+        $correcta = $_POST['es_correcta'];
         $opciones = [];
              
             $respuesta = "";
@@ -121,6 +116,14 @@ class EditorController{
         header('Location: /quizgame/editor/mostrarEditorView');
         }
 
+        private function verifiarSiEsReporte($tipo,$accion, $pregunta_id,$id){
+
+            if($tipo == 'Reporte'){
+                $this->model->estadoReporte($accion,$id,$pregunta_id);
+            }
+
+        }
+     
     private function setDatos(&$data){
         if(!empty($_SESSION['error'])){
             $data["error"] = $_SESSION['error'];
@@ -153,5 +156,9 @@ class EditorController{
     private function idUsuario(){
         return isset($_SESSION['user']) ? $_SESSION['user']['id'] : 0;
       }
+
+      private function existeUsuario() {
+        return isset($_SESSION['user']);
+    }
 
 }

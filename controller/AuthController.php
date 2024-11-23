@@ -67,7 +67,7 @@ class AuthController {
 
     public function cerrarSesion(){
         session_destroy();
-        header('Location: /quizgame/login');
+        header('Location: /quizgame/auth/login');
         exit();
 
     }
@@ -77,7 +77,7 @@ class AuthController {
             $token = $_GET['token'];
             $usuario = $_GET['usuario'];
             $this->model->activarUsuario($usuario,$token);
-            header('Location: /quizgame/login');
+            header('Location: /quizgame/auth/login');
             exit();
         } else {  
         }

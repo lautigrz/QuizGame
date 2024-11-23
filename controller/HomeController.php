@@ -11,15 +11,24 @@ class HomeController{
     }
 
     public function ranking(){
+        if($this->existeUsuario()){
         $data = [];
         
         $this->dataRanking($data);
     
         $this->presenter->show('ranking', $data);
+        }
     }
 
-
-    public function dataRanking(&$data){
+    public function lobby()
+    {
+        $data = [];
+        $this->data($data);
+        unset($_SESSION['preguntas_data'],$_SESSION['respuesta_incorrecta']);
+     
+        $this->presenter->show('lobby', $data);
+    }
+    private function dataRanking(&$data){
         $rank = $this->model->obtenerRankingUsuarios();
 
         $usuarioLogueado = $_SESSION['user']['usuario'];
@@ -32,19 +41,12 @@ class HomeController{
         $data = [
             "ranking" => $rank,
             "user" => $_SESSION['user'],
+            "esUsuario" => $this->verificarQueUsuarioEs(),
+            "notificaciones" => $this->model->notificaciones($this->idUsuario())
         ];
     }
 
-    public function lobby()
-    {
-        $data = [];
-        $this->data($data);
-        unset($_SESSION['preguntas_data'],$_SESSION['respuesta_incorrecta']);
-     
-        $this->presenter->show('lobby', $data);
-    }
-
-    public function data(&$data){
+    private function data(&$data){
 
         $rank = $this->model->obtenerRankingUsuarios();
         $fecha = $this->model->ultimaPartida($this->idUsuario());
@@ -73,12 +75,12 @@ class HomeController{
     
     }
 
-    public function verificarQueUsuarioEs(){
+    private function verificarQueUsuarioEs(){
         return $_SESSION['user']['editor'] == 0 ? true : false;
     }
 
 
-    public function queAparezcaElUsuarioEnElRankingSinImportarLaPosicion($rank, $usuarioLogueado) {
+    private function queAparezcaElUsuarioEnElRankingSinImportarLaPosicion($rank, $usuarioLogueado) {
         $newRank = [];
         $contador = 0;
 
@@ -99,5 +101,9 @@ class HomeController{
     private function idUsuario(){
         return isset($_SESSION['user']) ? $_SESSION['user']['id'] : 0;
       }
+          
+    private function existeUsuario() {
+        return isset($_SESSION['user']);
+    }
 
 }
