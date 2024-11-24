@@ -36,7 +36,7 @@ class AdminController {
         // Obtiene los datos desde el modelo
         $cantidadJugadores = $this->adminModel->obtenerCantidadJugadores($filtro);
         $cantidadUsuariosNuevos = $this->adminModel->obtenerCantidadUsuariosNuevos($filtro); // Ejemplo de filtro mensual
-        // $usuariosPorSexo = $this->adminModel->obtenerUsuariosPorSexo();
+         $usuariosPorSexo = $this->adminModel->obtenerUsuariosPorSexo();
         $usuariosPorSexo = array_map(function($fila) {
             return [
                 'sexo' => $fila['nombre'] ?? $fila['sexo'], 
@@ -51,7 +51,6 @@ class AdminController {
             'cantidad_usuarios_nuevos' => $cantidadUsuariosNuevos,
             'cantidad_preguntas_juego' => $this->adminModel->obtenerCantidadPreguntasEnJuego(),
             'cantidad_preguntas_creadas' => $this->adminModel->obtenerCantidadPreguntasCreadas(),
-            'porcentaje_respuestas_correctas' => $this->adminModel->obtenerPorcentajeRespuestasCorrectas(),
             'cantidad_partidas_jugadas' => $this->adminModel->obtenerCantidadPartidasJugadas($filtro),
             'usuarios_por_pais' => $this->adminModel->obtenerUsuariosPorPais($filtro),
             "esUsuario" => $this->verificarQueUsuarioEs(),
@@ -59,7 +58,8 @@ class AdminController {
             'usuarios_por_edad' => json_encode($usuariosPorEdad),
             'admin' => true,
             'esUsuario' => false,
-            'user' => $_SESSION['user']
+            'user' => $_SESSION['user'],
+            'jugadores' => $this->adminModel->porcentajePorUsuario()
         ];
     
         // Renderiza la vista

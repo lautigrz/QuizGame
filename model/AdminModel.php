@@ -40,7 +40,7 @@ class AdminModel {
 
     // 3. Obtener cantidad de preguntas en el juego
     public function obtenerCantidadPreguntasEnJuego() {
-        $sql = "SELECT COUNT(*) as total FROM preguntas WHERE estado = 'activa'";
+        $sql = "SELECT COUNT(*) as total FROM preguntas WHERE estado = '1'";
         $resultado = $this->database->query($sql);
         return $resultado[0]['total'];
     }
@@ -67,6 +67,10 @@ class AdminModel {
 
     // 6. Obtener porcentaje de respuestas correctas
     public function obtenerPorcentajeRespuestasCorrectas() {
+
+        
+
+
         $sql = "SELECT 
                     (SUM(CASE WHEN o.id = r.opcionID THEN 1 ELSE 0 END) / COUNT(*)) * 100 as porcentaje
                 FROM respuesta r
@@ -75,6 +79,60 @@ class AdminModel {
         return $resultado[0]['porcentaje'];
     }
 
+    public function porcentajePorUsuario(){
+
+        $queryUsuarios = "SELECT u.usuario, u.id, u.fotoPerfil, MAX(p.puntaje_obtenido) AS puntaje, p.fecha_partida AS fecha
+                          FROM partida p
+                          JOIN usuario u ON u.id = p.idUsuario
+                          GROUP BY u.id
+                          ORDER BY puntaje DESC, p.fecha_partida ASC
+                       ";
+        
+      
+        $usuarios = $this->database->query($queryUsuarios);
+        
+        
+       
+        $rankingUsuarios = [];
+        
+        
+        foreach ($usuarios as $index => $usuario) {
+            $rankingUsuarios[] = [
+                'posicion' => $index + 1,
+                'usuario' => $usuario['usuario'],
+                'id' => $usuario['id'],
+                'porcentaje' => $this->calcularPorcentaje($usuario['id']),
+                'puntaje' => $usuario['puntaje'],
+                'fecha' => $usuario['fecha'],
+                'fotoPerfil' => $usuario['fotoPerfil']
+            ];
+        }
+        return $rankingUsuarios; 
+    }
+    
+    private function calcularPorcentaje($id){
+
+        $sql = "SELECT COUNT(*) AS cantidad FROM dificultad 
+        
+        
+         WHERE veces_correctas > 0 AND idUsuario = " . $id . "";
+
+        $query = $this->database->query($sql);
+        $porcentaje = $this->calcular($query);
+
+        return $porcentaje;
+    }
+    private function calcular($query){
+
+        $sql = "SELECT COUNT(*) AS cantidadPreguntas FROM preguntas";
+
+        $preguntas = $this->database->query($sql);  
+
+        $calculo = ($query[0]['cantidad'] / $preguntas[0]['cantidadPreguntas']) * 100;
+
+        $calculo = number_format($calculo, 2);
+        return $calculo;
+    }
     // 7. Obtener usuarios por país
     public function obtenerUsuariosPorPais($filtro = null) {
         

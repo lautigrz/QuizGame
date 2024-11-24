@@ -56,6 +56,53 @@
             color: white;
         }
 
+        /* Estilo general de la tabla */
+.custom-table {
+    width: 100%;
+    border-collapse: collapse; /* Para que las celdas compartan bordes */
+    margin-top: 20px;
+}
+
+/* Estilo de las celdas y los encabezados */
+.custom-table th, .custom-table td {
+    padding: 12px 15px;
+    text-align: left;
+
+}
+
+/* Fondo de encabezado */
+.custom-table thead {
+    background-color: #4CAF50; /* Verde claro para el encabezado */
+    color: white;
+}
+
+.custom-table td.text-light {
+    color: #333;
+}
+.custom-table tbody tr:nth-child(even) {
+    background-color: #2c2c47; /* Color de fondo más oscuro para las filas pares */
+}
+
+/* Estilo del enlace */
+.custom-table a {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    align-items: center;
+    color:white;
+}
+
+/* Estilo de la imagen de perfil */
+.custom-table img.rounded-circle {
+    margin-right: 10px;
+}
+
+/* Resaltar el texto en negrita en la primera columna */
+.custom-table td:first-child {
+    font-weight: bold;
+}
+
+
     </style>
 </head>
 <body>
@@ -105,10 +152,6 @@
                 <td>{{cantidad_preguntas_creadas}}</td>
             </tr>
             <tr style="background-color: #23233b;">
-                <td>Porcentaje de respuestas correctas</td>
-                <td>{{porcentaje_respuestas_correctas}}%</td>
-            </tr>
-            <tr style="background-color: #2c2c47;">
                 <td>Cantidad de partidas jugadas</td>
                 <td>{{cantidad_partidas_jugadas}}</td>
             </tr>
@@ -131,7 +174,45 @@
             </div>
         </div>
     </div>
+    <div class="mt-3 w-40 d-none d-md-block"> <!-- Ocultar en pantallas pequeñas -->
+    <h4 class="rank">Tabla jugadores</h4>
+    <div class="table-responsive"> <!-- Hacer que la tabla sea responsive -->
+       <table class="custom-table w-100">
+    <thead>
+        <tr>
+            <th>Posición</th>
+            <th>Usuario</th>
+            <th>Porcentaje de acierto</th>
+            <th>Última partida</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#jugadores}}
+        <tr>
+            <td>{{posicion}}</td>
+            <td class="text-light">
+                <a href="/quizgame/usuario/perfil?id={{id}}" class="text-decoration-none text-white">
+                    <img src=".{{fotoPerfil}}" alt="Foto de perfil" class="rounded-circle me-2" width="30" height="30">
+                    {{usuario}}
+                </a>
+            </td>
+            <td class="ml-1">{{porcentaje}}%</td>
+            <td>{{fecha}}</td>
+        </tr>
+        {{/jugadores}}
+    </tbody>
+</table>
+
+
+    </div>
 </div>
+
+  </div>
+</div>
+</div>
+
+
+
 
 
 <script>
