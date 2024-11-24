@@ -37,7 +37,7 @@
                 <!-- Notificaciones -->
                 <li class="nav-item dropdown me-2 mt-1">
     <a class="nav-link text-white position-relative" href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-       {{#esUsuario}} <i class="bi bi-bell"></i> {{/esUsuario}} 
+       {{#esUsuario}} <i class="bi bi-bell"></i> 
         {{#notificaciones}} 
         <span class="position-absolute top-2 start-100 translate-middle badge rounded-pill bg-danger fs-9">
            
@@ -88,7 +88,7 @@
 
     {{/notificaciones}}
 </li>
-
+{{/esUsuario}} 
                 <!-- Mi cuenta -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

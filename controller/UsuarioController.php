@@ -115,8 +115,8 @@ class UsuarioController
         }
     }
     public function verificarQueUsuarioEs(){
-        if(isset($_SESSION['user']['editor'])){
-            return $_SESSION['user']['editor'] == 0 ? true : false;
+        if(isset($_SESSION['user']['editor']) || isset($_SESSION['user']['admin'])){
+            return $_SESSION['user']['editor'] || isset($_SESSION['user']['admin']) == 0 ? true : false;
         }
       
     }

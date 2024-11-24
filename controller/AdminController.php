@@ -46,7 +46,6 @@ class AdminController {
         $usuariosPorEdad = $this->adminModel->obtenerUsuariosPorGrupoEdad($filtro);
 
 
-        // Prepara los datos para la vista
         $data = [
             'cantidad_jugadores' => $cantidadJugadores,
             'cantidad_usuarios_nuevos' => $cantidadUsuariosNuevos,
@@ -55,15 +54,27 @@ class AdminController {
             'porcentaje_respuestas_correctas' => $this->adminModel->obtenerPorcentajeRespuestasCorrectas(),
             'cantidad_partidas_jugadas' => $this->adminModel->obtenerCantidadPartidasJugadas($filtro),
             'usuarios_por_pais' => $this->adminModel->obtenerUsuariosPorPais($filtro),
-            // Se codifican como JSON los datos que se utilizarán en los gráficos
+            "esUsuario" => $this->verificarQueUsuarioEs(),
             'usuarios_por_sexo' => json_encode($usuariosPorSexo),
             'usuarios_por_edad' => json_encode($usuariosPorEdad),
             'admin' => true,
+            'esUsuario' => false,
+            'user' => $_SESSION['user']
         ];
     
         // Renderiza la vista
+        if($this->existeUsuario()){
         $this->presenter->show('admin', $data);
+        }
     }
+      private function existeUsuario() {
+        return isset($_SESSION['user']);
+    }
+    private function verificarQueUsuarioEs(){
+        return $_SESSION['user']['admin'] == 0 ? true : false;
+    }
+
+  
 
     // public function filtrar() {
     //     $filtro = $_GET['filter'] ?? 'year'; // Valor por defecto: 'month'
