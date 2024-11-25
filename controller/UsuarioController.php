@@ -90,7 +90,7 @@ class UsuarioController
             $partidas = $this->model->partidasJugadas($this->idUsuario());
             $data = [
                 "user" => $_SESSION['user'],
-                "userVist" =>$_SESSION['user'],
+                "userVist" => $_SESSION['user'],
                 "esUsuario" => $this->verificarQueUsuarioEs(),
                 "notificaciones" => $this->model->notificaciones($this->idUsuario()),
                 "partidas" => $partidas,

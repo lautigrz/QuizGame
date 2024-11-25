@@ -14,9 +14,13 @@ class AuthController {
 
     public function login()
     {
+      if(!isset($_SESSION['user'])){
         $data = [];
         $this->setDatos($data);
         $this->presenter->show('login', $data);
+      }else{
+        $this->cerrarSesion();
+      }
     }
     public function registrar()
     {
