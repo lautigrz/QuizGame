@@ -66,13 +66,15 @@ class AdminController {
     $path1 = './public/grafico/' . $_SESSION['image2'];
 
     $imageBase64 = $this->imageToBase64($path);
-    $imageBase641 = $this->imageToBase64($path1);
+    $imageBase641 = $this->imageToBase641($path1);
           
     $inputData = json_decode(file_get_contents('php://input'), true);
     $imageData = ['imageBase64' =>  $imageBase64, 'imageBase641' =>  $imageBase641];   
 
 $this->pdf->loadHtml($inputData, $imageData);
 $this->pdf->setPaper('A4', 'portrait');
+
+
 $this->pdf->renderAndStream(); 
 }
    
@@ -84,6 +86,13 @@ function imageToBase64($imagePath) {
     
     return 'data:image/png;base64,' . base64_encode($imageData);
 }
+function imageToBase641($imagePath) {
+   
+    $imageData = file_get_contents($imagePath);
+    
+    return 'data:image/png;base64,' . base64_encode($imageData);
+}
+
 
     public function guardarGraficos() {
         

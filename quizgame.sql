@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-11-2024 a las 18:29:15
+-- Tiempo de generación: 25-11-2024 a las 15:19:16
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -193,7 +193,19 @@ INSERT INTO `dificultad` (`id`, `idUsuario`, `idPregunta`, `veces_correctas`, `v
 (153, 82, 120, 1, 1),
 (154, 82, 107, 0, 1),
 (155, 82, 117, 0, 1),
-(156, 82, 123, 0, 1);
+(156, 82, 123, 0, 1),
+(157, 85, 106, 0, 1),
+(158, 85, 105, 0, 1),
+(159, 85, 108, 0, 1),
+(160, 86, 34, 1, 1),
+(161, 86, 85, 1, 1),
+(162, 86, 95, 1, 1),
+(163, 86, 43, 1, 1),
+(164, 86, 111, 1, 1),
+(165, 86, 112, 1, 1),
+(166, 86, 40, 1, 1),
+(167, 86, 104, 1, 1),
+(168, 86, 120, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -237,7 +249,19 @@ INSERT INTO `historico` (`id`, `idUsuario`, `idPregunta`, `hora`) VALUES
 (1533, 82, 107, '2024-11-25 18:01:17'),
 (1534, 82, 117, '2024-11-25 18:04:39'),
 (1535, 82, 96, '2024-11-25 18:04:59'),
-(1536, 82, 123, '2024-11-25 18:05:19');
+(1536, 82, 123, '2024-11-25 18:05:19'),
+(1537, 85, 106, '2024-11-25 14:36:34'),
+(1538, 85, 105, '2024-11-25 14:36:58'),
+(1539, 85, 108, '2024-11-25 14:37:24'),
+(1540, 86, 34, '2024-11-25 14:38:14'),
+(1541, 86, 85, '2024-11-25 14:38:20'),
+(1542, 86, 95, '2024-11-25 14:38:25'),
+(1543, 86, 43, '2024-11-25 14:38:30'),
+(1544, 86, 111, '2024-11-25 14:38:34'),
+(1545, 86, 112, '2024-11-25 14:38:40'),
+(1546, 86, 40, '2024-11-25 14:38:44'),
+(1547, 86, 104, '2024-11-25 14:38:48'),
+(1548, 86, 120, '2024-11-25 14:38:53');
 
 -- --------------------------------------------------------
 
@@ -557,7 +581,11 @@ INSERT INTO `opciones` (`id`, `preguntaID`, `opcion`) VALUES
 (353, 128, '\"El Fausto\" de Goethe'),
 (354, 128, '\"El Paraíso Perdido\" de Milton'),
 (355, 128, '\"La Divina Comedia\" de Dante'),
-(356, 128, '\"Doctor Faustus\" de Marlowe');
+(356, 128, '\"Doctor Faustus\" de Marlowe'),
+(357, 129, 'Canela'),
+(358, 129, 'Pasto'),
+(359, 129, 'Yerba'),
+(360, 129, 'Hojas');
 
 -- --------------------------------------------------------
 
@@ -913,7 +941,11 @@ INSERT INTO `partida` (`id`, `puntaje_obtenido`, `fecha_partida`, `idUsuario`, `
 (9670, 5, '2024-11-25 18:00:53', 82, 0),
 (9671, 0, '2024-11-25 18:04:39', 82, 0),
 (9672, 0, '2024-11-25 18:04:59', 82, 0),
-(9673, 0, '2024-11-25 18:05:19', 82, 0);
+(9673, 0, '2024-11-25 18:05:19', 82, 0),
+(9674, 0, '2024-11-25 14:36:33', 85, 0),
+(9675, 0, '2024-11-25 14:36:58', 85, 0),
+(9676, 0, '2024-11-25 14:37:24', 85, 0),
+(9677, 8, '2024-11-25 14:38:14', 86, 0);
 
 -- --------------------------------------------------------
 
@@ -1001,7 +1033,8 @@ INSERT INTO `preguntas` (`id`, `pregunta`, `estado`, `idUsuario`, `idCategoria`,
 (125, '¿Qué dinastía gobernó China durante la construcción de la Gran Muralla?', 0, 82, 2, 'pendiente'),
 (126, '¿Qué fenómeno óptico ocurre cuando la luz pasa a través de un prisma y se descompone en colores?', 0, 82, 3, 'pendiente'),
 (127, '¿Cuál es el único país que ha participado en todos los Juegos Olímpicos modernos desde 1896?', 0, 82, 4, 'pendiente'),
-(128, '¿Qué obra literaria incluye el famoso personaje \"Mephistopheles\"?', 0, 82, 5, 'pendiente');
+(128, '¿Qué obra literaria incluye el famoso personaje \"Mephistopheles\"?', 0, 82, 5, 'pendiente'),
+(129, 'Que lleva el Mate?', 0, 68, 2, 'pendiente');
 
 -- --------------------------------------------------------
 
@@ -1111,7 +1144,8 @@ INSERT INTO `respuesta` (`id`, `preguntaID`, `opcionID`) VALUES
 (80, 125, 343),
 (81, 126, 347),
 (82, 127, 350),
-(83, 128, 353);
+(83, 128, 353),
+(84, 129, 359);
 
 -- --------------------------------------------------------
 
@@ -1146,7 +1180,7 @@ CREATE TABLE `usuario` (
 INSERT INTO `usuario` (`id`, `nombre`, `apellido`, `usuario`, `genero`, `email`, `password`, `estado`, `token`, `puntaje`, `fotoPerfil`, `admin`, `editor`, `ciudad`, `pais`, `created_at`, `fecha_nacimiento`) VALUES
 (68, 'Lautaro', 'Gerez', 'lautigrz', 'M', 'lautarogerezz12@gmail.com', '123', 1, 681159, 278, './public/image/perfil/lautigrz.jpg', 0, 0, '', 'Uruguay', '2024-11-14', '2005-07-20'),
 (70, 'lionel', 'scaloni', 'scaloni10', 'F', 'sca@gmial.com', '123', 1, 432768, 4, './public/image/perfil/scaloni10.jpg', 0, 0, '', 'Chile', '2024-10-15', '1998-10-15'),
-(73, 'admin', 'admin', 'admin', 'M', 'admin@gmail.com', 'admin', 1, 300048, 0, './public/image/perfil/chad123.jpg', 1, 0, '', 'Chile', '2024-07-10', '1990-05-05'),
+(73, 'admin', 'admin', 'admin', 'M', 'admin@gmail.com', 'admin', 1, 300048, 0, './public/image/perfil/lautigrz.jpg', 1, 0, '', 'Chile', '2024-07-10', '1990-05-05'),
 (74, 'editor', 'editor', 'editor', 'F', 'editor@gmail.com', 'editor', 1, 369750, 0, './public/image/perfil/messi.jpg', 0, 1, '', 'Paraguay', '2023-07-16', '1945-10-15'),
 (76, 'melany', 'sidero', 'melany122', 'F', 'gerez.lautaro12@gmail.com', '123', 1, 144803, 18, './public/image/perfil/melany122.jpg', 0, 0, '', 'Brasil', '2022-01-20', '1999-07-01'),
 (77, 'messi', 'messi', 'lionelmessi', 'M', 'messi@gmail.com', '123', 1, 865539, 16, './public/image/perfil/lionelmessi.jpg', 0, 0, '', 'Argentina', '2024-05-22', '1994-03-02'),
@@ -1157,7 +1191,7 @@ INSERT INTO `usuario` (`id`, `nombre`, `apellido`, `usuario`, `genero`, `email`,
 (83, 'asddas', 'asdsda', 'saddd', 'M', 'dddd@gmail.com', '221', 0, 516868, 0, '', 0, 0, 'González Catán', 'Argentina', '2024-11-18', '2002-05-03'),
 (84, 'Sofia', 'Gomez', 'sofigmz', 'F', 'sofiagomez12@gmail.com', '123', 1, 874159, 345, './public/image/perfil/sofigmz.jpg', 0, 0, 'Buenos Aires', 'Argentina', '2023-12-15', '2002-05-18'),
 (85, 'Matias', 'Lopez', 'matilopez', 'M', 'matiaslopez23@gmail.com', '123', 1, 342981, 500, './public/image/perfil/matilopez.jpg', 0, 0, 'Santiago', 'Chile', '2024-03-22', '1999-11-30'),
-(86, 'Camila', 'Perez', 'camilapz', 'F', 'camilaperez01@gmail.com', '123', 1, 569872, 430, './public/image/perfil/camilapz.jpg', 0, 0, 'Bogotá', 'Colombia', '2023-07-10', '2001-04-15'),
+(86, 'Camila', 'Perez', 'camilapz', 'F', 'camilaperez01@gmail.com', '123', 1, 569872, 438, './public/image/perfil/camilapz.jpg', 0, 0, 'Bogotá', 'Colombia', '2023-07-10', '2001-04-15'),
 (87, 'Julian', 'Martinez', 'juliomtz', 'M', 'julianmtz99@gmail.com', '123', 1, 679823, 385, './public/image/perfil/juliomtz.jpg', 0, 0, 'Lima', 'Perú', '2023-11-05', '1995-02-28'),
 (88, 'Luciana', 'Garcia', 'luciagc', 'F', 'lucianagarcia08@gmail.com', '123', 1, 879201, 312, './public/image/perfil/luciagc.jpg', 0, 0, 'Caracas', 'Venezuela', '2024-01-17', '2000-12-10'),
 (89, 'Carlos', 'Vega', 'carlveg', 'M', 'carlosvega72@gmail.com', '123', 1, 234123, 200, './public/image/perfil/carlveg.jpg', 0, 0, 'Quito', 'Ecuador', '2023-05-29', '1988-07-03'),
@@ -1185,7 +1219,8 @@ INSERT INTO `usuario` (`id`, `nombre`, `apellido`, `usuario`, `genero`, `email`,
 (111, 'Daniela', 'Cruz', 'danicruz', 'F', 'danielacruz14@gmail.com', '123', 1, 890123, 450, './public/image/perfil/danicruz.jpg', 0, 0, 'Bogotá', 'Colombia', '2024-11-24', '2000-08-25'),
 (112, 'Esteban', 'Mejía', 'estmejia', 'M', 'estebanmejia77@gmail.com', '123', 1, 567893, 320, './public/image/perfil/estmejia.jpg', 0, 0, 'Quito', 'Ecuador', '2024-11-24', '1995-11-15'),
 (113, 'Lucia', 'González', 'luciagonz', 'F', 'luciagonzalez19@gmail.com', '123', 1, 782345, 390, './public/image/perfil/luciagonz.jpg', 0, 0, 'Montevideo', 'Uruguay', '2024-11-24', '1999-06-10'),
-(114, 'Miguel', 'Paredes', 'migparedes', 'M', 'miguelparedes88@gmail.com', '123', 1, 234981, 275, './public/image/perfil/migparedes.jpg', 0, 0, 'Caracas', 'Venezuela', '2024-11-24', '1990-01-20');
+(114, 'Miguel', 'Paredes', 'migparedes', 'M', 'miguelparedes88@gmail.com', '123', 1, 234981, 275, './public/image/perfil/migparedes.jpg', 0, 0, 'Caracas', 'Venezuela', '2024-11-24', '1990-01-20'),
+(115, 'Lautaro', 'dd', 'oenta', 'M', 'oenta465@gmail.com', '123', 0, 246132, 0, '', 0, 0, '', 'Argentina', '2024-11-25', '2024-11-25');
 
 --
 -- Índices para tablas volcadas
@@ -1276,13 +1311,13 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de la tabla `dificultad`
 --
 ALTER TABLE `dificultad`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=157;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=169;
 
 --
 -- AUTO_INCREMENT de la tabla `historico`
 --
 ALTER TABLE `historico`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1537;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1549;
 
 --
 -- AUTO_INCREMENT de la tabla `notificacion`
@@ -1294,19 +1329,19 @@ ALTER TABLE `notificacion`
 -- AUTO_INCREMENT de la tabla `opciones`
 --
 ALTER TABLE `opciones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=357;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=361;
 
 --
 -- AUTO_INCREMENT de la tabla `partida`
 --
 ALTER TABLE `partida`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9674;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9678;
 
 --
 -- AUTO_INCREMENT de la tabla `preguntas`
 --
 ALTER TABLE `preguntas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=130;
 
 --
 -- AUTO_INCREMENT de la tabla `reporte`
@@ -1318,13 +1353,13 @@ ALTER TABLE `reporte`
 -- AUTO_INCREMENT de la tabla `respuesta`
 --
 ALTER TABLE `respuesta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=115;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
 
 --
 -- Restricciones para tablas volcadas
