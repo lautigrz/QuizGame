@@ -77,13 +77,18 @@ class AuthController {
     }
     public function authenticate()
     {
-        if(isset($_GET['token']) && isset($_GET['usuario'])){
+
+        try{ 
+            if(isset($_GET['token']) && isset($_GET['usuario'])){
             $token = $_GET['token'];
             $usuario = $_GET['usuario'];
             $this->model->activarUsuario($usuario,$token);
             header('Location: /quizgame/auth/login');
             exit();
-        } else {  
+        }
+         
+        }catch (Exception $e) {
+            $this->manejarError($e->getMessage(), '/quizgame/auth/login');
         }
     }
 
@@ -99,7 +104,7 @@ class AuthController {
                 header('Location: /quizgame/admin/mostrarAdminView');
             }else if($usuario[0]['editor'] == 1){
                 $this->manejarSesion($usuario);
-                #$_SESSION['editorPreguntas'] = $this->model->obtenerTodasLasPreguntas();
+              
                 header('Location: /quizgame/editor/mostrarEditorView');
             }else if ($usuario[0]['estado'] == 1) {
                 $this->manejarSesion($usuario);
