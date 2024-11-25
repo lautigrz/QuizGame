@@ -1,55 +1,92 @@
-<!-- Section: Design Block -->
-<section class="h-100 login">
+<style>
 
-  <!-- Background image -->
-  <div class="p-5 bg-image" style="
-        background-image: url('https://th.bing.com/th/id/R.a9b43019faa05e77eee142859d328f97?rik=TCnkwAe0niPaXQ&pid=ImgRaw&r=0&sres=1&sresct=1');
-        height: 300px;
-        "></div>
-  <!-- Background image -->
+  
+    .container {
+      height: 90vh; /* Toda la ventana */
+      max-width: 100vw; /* Ancho completo de la ventana */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-image: url('https://th.bing.com/th/id/R.a9b43019faa05e77eee142859d328f97?rik=TCnkwAe0niPaXQ&pid=ImgRaw&r=0&sres=1&sresct=1');
+      background-size: cover;
+      background-position: center;
+    }
+    .login-container {
+      width: 100%; 
+      max-width: 430px; 
+      background-color: #1e2739ec;
+      
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+    .form-control {
+      border-radius: 8px;
+    }
+    .btn-primary {
+      background: #007bff;
+      border: none;
+      border-radius: 8px;
+    }
+    .btn-primary:hover {
+      background: #0056b3;
+    }
+    .login-header {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-align: center;
+      color:white;
+    }
+    .login-footer {
+      font-size: 0.9rem;
+      text-align: center;
+      margin-top: 20px;
+   
+    }
+    .login-footer a {
+      text-decoration: none;
+ 
+    }
+    .login-footer a:hover {
+      text-decoration: underline;
+    }
+    footer{
+      background-color: #23233b;
+    }
+    .regist{
+      color:yellow;
+    }
+  </style>
 
 
-  <div class="card mx-auto shadow-5-strong login " style="
-        margin-top: -100px;
-        backdrop-filter: blur(30px);
-         width:60%">
-    <div class="card-body py-5 px-md-9 bg-dark text-light p-3 ">
-
-      <div class="row d-flex justify-content-center">
-        <div class="col-lg-5 w-90   ">
-               {{#error}}
+<div class="container">
+  <div class="login-container">
+    <div class="login-header">Bienvenido a QuizGame</div>
+     {{#error}}
             <div class="alert alert-danger p-2" role="alert">
                 <span>{{error}}</span>
             </div>
         {{/error}}
-          <h2 class="fw-bold mb-3">Iniciar sesion</h2>
-
-          <form action="/quizgame/auth/procesarUsuario" method="post" >
-            <!-- Email input -->
-       
-            <div class="form-outline" data-mdb-input-init>
-            
-            <input type="text" id="typeEmail" name="user" class="form-control text-white border-custom" />
-            <label class="form-label text-white" for="typeEmail">Usuario</label>
-          </div>
-
-            <!-- Password input -->
-            <div data-mdb-input-init class="form-outline mb-2 mt-4">
-            
-          <input type="password" id="form2Example2" name="password" class="form-control text-white border-custom" />
-          <label class="form-label text-white" for="form2Example2">Contraseña</label>
-        </div>
-            <!-- Submit button -->
-            <button type="submit"  data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-2 w-100">
-             Ingresar
-            </button>
-
-            <p>No tienes una cuenta? <a href="/quizgame/auth/registrar" class="text-white">Registrarme</a></p>
-
-          </form>
-        </div>
+    <form  action="/quizgame/auth/procesarUsuario" method="post">
+      <!-- Username -->
+      <div class="mb-3">
+        <label for="email" class="form-label text-white">Usuario</label>
+        <input type="text" class="form-control" id="email" name="user" placeholder="Ingrese su usuario" required>
       </div>
-    </div>
+      <!-- Password -->
+      <div class="mb-3">
+        <label for="password" class="form-label text-white">Contraseña</label>
+        <input type="password" class="form-control" id="password" name="password" placeholder="Ingrese contraseña" required>
+      </div>
+      <!-- Login Button -->
+      <div class="d-grid">
+        <button type="submit" class="btn btn-primary">Iniciar sesion</button>
+      </div>
+      <!-- Forgot Password -->
+      <div class="text-center mt-3">
+        <p class="text-white">No tenes una cuenta? <a href="/quizgame/auth/registrar" class="regist">Registrate</a></p>
+      </div>
+    </form>
   </div>
-</section>
-<!-- Section: Design Block -->
+</div>

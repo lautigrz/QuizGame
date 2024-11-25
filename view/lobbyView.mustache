@@ -13,7 +13,7 @@
             Nueva partida
         </button>
     </div>
-    <div class="col-md-4 pe-0">
+    <div class="col-md-4 pe-2">
         <a href="/quizgame/home/ranking" class="btn btn-secondary btn-lg ms-1 animated-button w-100">Ver ranking</a>
     </div>
     <div class="col-md-4 pe-0">
@@ -59,17 +59,17 @@
 <!-- Modal -->
 <div class="modal fade" id="modalPartida" tabindex="-1" aria-labelledby="modalPartidaLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
+    <div class="modal-content" >
       <div class="modal-header">
         <h5 class="modal-title" id="modalPartidaLabel">Iniciar Nueva Partida</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <p>Estás a punto de comenzar una nueva partida. ¿Estás listo?</p>
+        <p>Estás a punto de comenzar una nueva partida. ¿Estás listo?   <img src="https://emojiterra.com/data/animated-emoji/1f9d0.gif" width="25" alt="saludo"> </p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <a href="/quizgame/juego/partida" class="btn btn-primary">Comenzar</a>
+        <a href="/quizgame/juego/empezarPartida" class="btn btn-primary">Comenzar</a>
       </div>
     </div>
   </div>
@@ -143,4 +143,28 @@
                     </div>
                 </div>
 
+ {{#partida}}
+<div class="modal fade" id="mensaje" tabindex="-1" aria-labelledby="modalPartidaLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered animate__animated animate__bounceIn">
+    <div class="modal-content">
+      <div class="modal-header bg-warning text-dark">
+        <h5 class="modal-title" id="modalPartidaLabel">😢 ¡Partida Incompleta!</h5>
+      </div>
+      <div class="modal-body text-center">
+        <p class="fs-5">Te fuiste sin terminar tu partida.</p>
+        <p class="fs-4">⚠️ Tu puntaje final: <strong>{{puntaje_obtenido}}</strong></p>
+      </div>
+      <div class="modal-footer justify-content-end">
+        <a href="/quizgame/juego/finalizarPartida" class="btn btn-primary">Finalizar partida</a>
+      </div>
+    </div>
+  </div>
+</div>
+{{/partida}}
 {{/user}}
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const modalPartida = new bootstrap.Modal(document.getElementById('mensaje'));
+    modalPartida.show();
+  });
+</script>

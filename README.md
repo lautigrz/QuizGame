@@ -52,7 +52,9 @@
 
 ---
 
-## Instalación y Configuración ⚙️  
+
+## Instalación y Configuración  <img src="https://emojiterra.com/data/animated-emoji/2699.gif" width="25">  
+
 
 1. Clona el repositorio:  
    ```bash
@@ -69,7 +71,9 @@
 
 ---
 
-## Contexto Académico 🎓  
+
+## Contexto Académico <img src="https://emojiterra.com/data/animated-emoji/1f393.gif" width="25">  
+
 
 Este proyecto es parte de una materia universitaria, enfocado en el desarrollo de aplicaciones web con múltiples funcionalidades. A través de **QuizGame**, se busca poner en práctica conceptos como:  
 - Gestión de roles y permisos.  
@@ -79,10 +83,12 @@ Este proyecto es parte de una materia universitaria, enfocado en el desarrollo d
 
 ---
 
-## Créditos 🏆  
+
+## Créditos <img src="https://emojiterra.com/data/animated-emoji/1f37b.gif" width="25">    
+
 Creado y desarrollado por **lautigrz**, **Chouny1109** y **nahuelbiondo**.
 Inspirado en la búsqueda de aprendizaje continuo en el marco universitario.  
 
 ---
 
-¡Diviértete y aprende con **QuizGame**! 🎉
+¡Diviértete y aprende con **QuizGame**! <img src="https://emojiterra.com/data/animated-emoji/1f389.gif" width="25"> 

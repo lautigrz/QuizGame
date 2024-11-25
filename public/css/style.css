@@ -1,3 +1,6 @@
+
+
+
 .link{
     margin-left: 5px;
     margin-bottom: 5px;
@@ -17,11 +20,6 @@
   background-color: #23233b;
 }
 
-.registro{
-  background-color: #23233b;
-  box-shadow: 0 4px 15px rgba(232, 232, 232, 0.2); /* Sombra */
-  border-radius: 50%; 
-}
 .sugerencia{
   margin-bottom: 14px !important;
 }
@@ -48,6 +46,9 @@
 .form-control {
   background-color: transparent; 
 }
+
+
+
 body {
     background-image: url('https://th.bing.com/th/id/R.a9b43019faa05e77eee142859d328f97?rik=TCnkwAe0niPaXQ&pid=ImgRaw&r=0&sres=1&sresct=1'); /* Cambia esta URL por tu imagen de fondo */
     background-size:auto;
@@ -57,7 +58,7 @@ body {
    
 }
 .registro {
-  background-color: #23233b;
+  background-color: #1e2739ec;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
   border-radius: 10px; 
  
@@ -98,11 +99,14 @@ body {
 .footer-custom{
   height: 15vh;
   background-color: #23233b;
+ 
 }
 .profile{
     display: flex;
     width: 100%;
 }
+
+
 .user-profile {
     display: flex;
     width: 100%;
@@ -171,6 +175,88 @@ label{
 .pestañas{
   margin-left:14%;
 }
+.custom-tabs .nav-link {
+  padding: 12px 20px;
+  font-size: 1.1rem;
+ 
+  color: #fff;
+  border-radius: 10px;
+  box-shadow: 2px 1px 1px 1px rgba(163, 159, 159, 0.769);
+  transition: background-color 0.3s ease;
+}
+.badge {
+  font-size: 0.75rem;
+  padding: 0.35em 0.5em;
+}
+
+.dropdown-container {
+  
+  position: relative;
+}
+
+.dropdown-container > .dropdown-menu {
+  border-radius: 0.5rem;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  max-height: 60vh;
+  overflow-y: auto;
+  width: 550px; 
+  position: absolute;
+  left:-100px;
+}
+
+.dropdown-item {
+  cursor: pointer;
+}
+
+.read {
+  color: #6c757d !important; 
+}
+
+
+.bi-bell-fill {
+  color: #007bff; 
+}
+
+
+.dropdown-item:hover {
+  background-color: #f8f9fa;
+}
+
+.dropdown-item.read {
+  background-color: #e9ecef;
+}
+
+.dropdown-item .fw-bold {
+  font-size: 0.8rem;
+}
+
+.dropdown-item small {
+  font-size: 0.85rem;
+}
+
+.dropdown-menu-start {
+  min-width: 300px;
+}
+
+.dropdown-menu-start .bi {
+  font-size: 1.5rem;
+}
+
+
+.custom-tabs .nav-link.active {
+  background-color: #2d2d4b; /* Azul de Bootstrap */
+  font-weight: 500;
+  color: #fff;
+}
+
+.custom-tabs .nav-link {
+  background-color: #868f98; /* Gris de Bootstrap */
+}
+
+.custom-tabs .nav-link:hover {
+  background-color: #7e878f;
+}
+
 
 .custom-card {
   max-width: 850px !important;

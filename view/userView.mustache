@@ -25,13 +25,13 @@
             <p><strong>Apellido:</strong> {{apellido}}</p>
             <p><strong>Teléfono:</strong> 820-885-3321</p>
             <p><strong>Género:</strong> {{genero}}</p>
-            <p><strong>Ciudad:</strong>{{ciudad}}</p>
+            <p><strong>Ciudad:</strong> {{ciudad}}</p>
 
         </div>
     </div>
     <div class="col-md-3">
         <div class="d-flex flex-column align-items-start mb-2">
-            <img src="{{qr}}" alt="{{usuario}}">
+            <img src="../public/image/QRUsers/{{id}}.png" alt="{{usuario}}" style="width: 200px; height: 180px">
         </div>
     </div>
 </div>
@@ -54,14 +54,14 @@
                     </div>
                     <div class="col-6 col-lg-3">
                         <div class="count-data">
-                            <h6 class="count h2 text-dark">850</h6>
-                            <p class="m-0 font-weight-bold">Estadística 3</p>
+                            <h6 class="count h2 text-dark">{{cantidadSugeridas}}</h6>
+                            <p class="m-0 font-weight-bold">Preguntas sugeridas</p>
                         </div>
                     </div>
                     <div class="col-6 col-lg-3">
                         <div class="count-data">
-                            <h6 class="count h2 text-dark">190</h6>
-                            <p class="m-0 font-weight-bold">Estadística 4</p>
+                            <h6 class="count h2 text-dark">{{edadQuiz}} d</h6>
+                            <p class="m-0 font-weight-bold">Edad QuizGame</p>
                         </div>
                     </div>
                 </div>

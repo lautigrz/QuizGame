@@ -56,17 +56,7 @@ class JuegoModel{
       return $query;
     }
 
-    private function porcentaje($veces_correctas, $veces_vista){
-
-        $calculo = (($veces_correctas / $veces_vista) * 100);
-
-        if($calculo < 70){
-            return true;
-        }
-
-        return false;
-
-    }
+  
     public function obtenerPreguntasVistasPorElUsuario($id){
 
         $sql = "SELECT * FROM historico WHERE idUsuario = " . $id ." ";
@@ -139,25 +129,32 @@ class JuegoModel{
 
     public function obtenerPartidaActivaDelUsuario($id){
 
-        $sql = "SELECT id FROM partida WHERE idUsuario = " . $id . " AND estado = 1 ORDER BY id DESC LIMIT 1";
+        $sql = "SELECT id FROM partida WHERE idUsuario = " . $id . " AND estado = 1";
 
         $query = $this->database->query($sql);
 
         return $query;
     }
 
-    public function actualizarPartida($data){
+    public function actualizarPuntaje($id){
 
-        $idPartida = $this->obtenerPartidaActivaDelUsuario($data['id']);
-        var_dump($idPartida);
-
-        $sql = "UPDATE partida SET puntaje_obtenido = " . $data['puntaje'] . ", idUsuario = " . $data['id'] . ", 
-        estado = 0 
+        $idPartida = $this->obtenerPartidaActivaDelUsuario($id);
+   
+        $sql = "UPDATE partida SET puntaje_obtenido = puntaje_obtenido + 1 , idUsuario = " . $id . "
         WHERE id = " . $idPartida[0]['id'] . " ";
 
-        
+        $this->database->query($sql); 
+    }
+    public function finalizarPartida($id){
+
+        $idPartida = $this->obtenerPartidaActivaDelUsuario($id);
+   
+     
+        $sql = "UPDATE partida SET estado = 0 
+        WHERE id = " . $idPartida[0]['id'] . " ";
+
         $this->database->query($sql);
-        $this->actualizarPuntajeDeUsuario($data);
+        $this->actualizarPuntajeDeUsuario($id);
          
     }
 
@@ -202,16 +199,60 @@ class JuegoModel{
     }
 
      return $contador;
-}
+    }
 
-    private function actualizarPuntajeDeUsuario($data){
-        $sql = "UPDATE usuario 
-        SET puntaje = puntaje + " . $data['puntaje'] . " 
-        WHERE id = " . $data['id'];
+    public function ultimaPartida($id){
+    $sql = "SELECT puntaje_obtenido FROM partida WHERE idUsuario = $id ORDER BY fecha_partida DESC LIMIT 1";
+
+    $puntaje = $this->database->query($sql);
+
+    return $puntaje[0]['puntaje_obtenido'];
+    }
+
+    public function reportePregunta($data)
+    {
+        $sql = "INSERT INTO reporte (idPregunta, idUsuarioReporte, detalleReporte, verificado) 
+        VALUES (" . $_SESSION['preguntas']['id'] . ", " . $_SESSION['user']['id'] . ", '" . $data['motivo'] . "', 'pendiente')";
+
         $this->database->query($sql);
 
     }
 
+    public function verificarSiTieneUnaPartidaActiva($id){
+        $sql = "SELECT * FROM partida WHERE idUsuario =" . $id . " AND estado = 1";
+
+        $query = $this->database->query($sql);
+
+        if(!empty($query)){
+            return $query;
+        }
+
+        return false;
+    }
+
+
+    private function actualizarPuntajeDeUsuario($id){
+        $puntaje = $this->ultimaPartida($id);
+
+        $sql = "UPDATE usuario 
+        SET puntaje = puntaje + " . $puntaje . " 
+        WHERE id = " . $id;
+        $this->database->query($sql);
+
+    }
+    private function porcentaje($veces_correctas, $veces_vista){
+
+        $calculo = (($veces_correctas / $veces_vista) * 100);
+
+        if($calculo < 70){
+            return true;
+        }
+
+        return false;
+
+    }
+
+  
     private function updateDificultad($idUsuario, $idPregunta, $sumaCorrecta){
         $sql = "UPDATE dificultad 
         SET veces_correctas = veces_correctas + " . $sumaCorrecta . ", 
@@ -277,15 +318,5 @@ class JuegoModel{
     }
 
     
-    public function reportePregunta($data)
-    {
-        $sql = "INSERT INTO reporte(idPregunta, idUsuarioReporte, detalleReporte) VALUES (". $_SESSION['preguntas']['id'].", " . $_SESSION['user']['id'] . ", '" . $data['motivo'] . "')";
-        $this->database->query($sql);
-        $this->estadoReportada();
-    }
-    
-   /* public function estadoReportada()
-    {
-        $this->database->query('UPDATE preguntas SET estado =' . 0 . ' WHERE id = ' . $_SESSION['preguntas']['id']);
-    }*/
+  
 }
