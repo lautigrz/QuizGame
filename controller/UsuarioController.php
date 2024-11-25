@@ -68,12 +68,6 @@ class UsuarioController
     }
 }
 
-    private function crearArchivoConToken($token)
-    {
-        $archivo = fopen("token.txt", "a");
-        fwrite($archivo," - " . $token);
-        fclose($archivo);
-    }
     private function idUsuario(){
         return $this->existeUsuario() ? $_SESSION['user']['id'] : null;
       }
