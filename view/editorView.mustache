@@ -143,13 +143,15 @@
         </div>
 
         <!-- Contenedor del botón -->
-        <div class="d-flex justify-content-end">
-        <div class="mt-5">
-         <input type="hidden" name="tipo" value="Sugerencia">
-         <input type="hidden" name="usuario" value="{{usuario}}">
-         <input type="hidden" name="idUsuario" value="{{idUsuario}}">
-        <button type="submit" name="accion" value="aprobada" class="btn btn-success btn-sm">Aprobar</button>
-        <button type="submit" name="accion" value="rechazada" class="btn btn-danger btn-sm">Rechazar</button>
+        <div style="padding-top: 40px; padding-left: 5px">
+        <div class="mt-3" style=" display: flex; gap: 10px;">
+            <input type="hidden" name="tipo" value="Sugerencia">
+            <input type="hidden" name="usuario" value="{{usuario}}">
+            <input type="hidden" name="idUsuario" value="{{idUsuario}}">
+
+                <button type="submit" name="accion" value="aprobada" class="btn btn-success btn-sm">Aprobar</button>
+                <button type="submit" name="accion" value="rechazada" class="btn btn-danger btn-sm">Rechazar</button>
+
         </div>
         </div>
     </form>

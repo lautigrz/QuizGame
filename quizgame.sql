@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-11-2024 a las 12:25:10
+-- Tiempo de generación: 25-11-2024 a las 18:29:15
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -153,7 +153,47 @@ INSERT INTO `dificultad` (`id`, `idUsuario`, `idPregunta`, `veces_correctas`, `v
 (113, 77, 37, 1, 1),
 (114, 77, 47, 1, 1),
 (115, 77, 35, 1, 1),
-(116, 77, 40, 1, 1);
+(116, 77, 40, 1, 1),
+(117, 82, 90, 2, 2),
+(118, 82, 95, 2, 2),
+(119, 82, 85, 2, 2),
+(120, 82, 44, 2, 2),
+(121, 82, 92, 2, 2),
+(122, 82, 88, 2, 2),
+(123, 82, 41, 2, 2),
+(124, 82, 36, 2, 2),
+(125, 82, 96, 2, 3),
+(126, 82, 99, 2, 3),
+(127, 82, 89, 2, 2),
+(128, 82, 46, 2, 2),
+(129, 82, 86, 2, 2),
+(130, 82, 43, 2, 2),
+(131, 82, 37, 1, 2),
+(132, 82, 38, 2, 2),
+(133, 82, 48, 3, 3),
+(134, 82, 97, 2, 2),
+(135, 82, 77, 2, 2),
+(136, 82, 35, 2, 3),
+(137, 82, 98, 2, 2),
+(138, 82, 94, 2, 2),
+(139, 82, 34, 2, 2),
+(140, 82, 1, 1, 3),
+(141, 82, 91, 2, 2),
+(142, 82, 39, 2, 2),
+(143, 82, 87, 2, 2),
+(144, 82, 40, 2, 2),
+(145, 82, 84, 2, 2),
+(146, 82, 93, 2, 2),
+(147, 82, 47, 1, 2),
+(148, 82, 100, 2, 2),
+(149, 82, 3, 2, 2),
+(150, 82, 108, 1, 1),
+(151, 82, 106, 1, 1),
+(152, 82, 105, 1, 1),
+(153, 82, 120, 1, 1),
+(154, 82, 107, 0, 1),
+(155, 82, 117, 0, 1),
+(156, 82, 123, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -186,7 +226,18 @@ INSERT INTO `historico` (`id`, `idUsuario`, `idPregunta`, `hora`) VALUES
 (1456, 68, 43, '2024-11-23 16:20:33'),
 (1457, 68, 34, '2024-11-23 16:20:37'),
 (1458, 68, 77, '2024-11-23 16:20:42'),
-(1459, 68, 1, '2024-11-23 16:20:49');
+(1459, 68, 1, '2024-11-23 16:20:49'),
+(1526, 82, 35, '2024-11-25 17:45:13'),
+(1527, 82, 1, '2024-11-25 17:45:15'),
+(1528, 82, 48, '2024-11-25 18:00:53'),
+(1529, 82, 108, '2024-11-25 18:00:57'),
+(1530, 82, 106, '2024-11-25 18:01:02'),
+(1531, 82, 105, '2024-11-25 18:01:07'),
+(1532, 82, 120, '2024-11-25 18:01:12'),
+(1533, 82, 107, '2024-11-25 18:01:17'),
+(1534, 82, 117, '2024-11-25 18:04:39'),
+(1535, 82, 96, '2024-11-25 18:04:59'),
+(1536, 82, 123, '2024-11-25 18:05:19');
 
 -- --------------------------------------------------------
 
@@ -330,7 +381,183 @@ INSERT INTO `opciones` (`id`, `preguntaID`, `opcion`) VALUES
 (173, 82, 'messi'),
 (174, 82, 'dasd'),
 (175, 82, 'ads'),
-(176, 82, 'asda');
+(176, 82, 'asda'),
+(177, 84, 'América'),
+(178, 84, 'Asia'),
+(179, 84, 'África'),
+(180, 84, 'Oceanía'),
+(181, 85, 'Liechtenstein'),
+(182, 85, 'Vaticano'),
+(183, 85, 'Mónaco'),
+(184, 85, 'Malta'),
+(185, 86, 'Nepal'),
+(186, 86, 'Bután'),
+(187, 86, 'India'),
+(188, 86, 'China'),
+(189, 87, '1490'),
+(190, 87, '1492'),
+(191, 87, '1500'),
+(192, 87, '1512'),
+(193, 88, 'Julio César'),
+(194, 88, 'Trajano'),
+(195, 88, 'Nerón'),
+(196, 88, 'Augusto'),
+(197, 89, 'El ataque a Pearl Harbor'),
+(198, 89, 'La invasión de Polonia'),
+(199, 89, 'El bombardeo de Hiroshima'),
+(200, 89, 'La firma del Tratado de Versalles'),
+(201, 90, 'Benjamin Franklin'),
+(202, 90, ' John Adams'),
+(203, 90, 'George Washington'),
+(204, 90, 'Thomas Jefferson'),
+(205, 91, 'Célula'),
+(206, 91, 'Átomo'),
+(207, 91, 'Molécula'),
+(208, 91, 'Orgánulo'),
+(209, 92, 'Mecánica'),
+(210, 92, 'Electromagnética'),
+(211, 92, 'Sonora'),
+(212, 92, 'Gravitacional'),
+(213, 93, 'Baloncesto'),
+(214, 93, 'Tenis'),
+(215, 93, 'Fútbol'),
+(216, 93, 'Béisbol'),
+(217, 94, '7'),
+(218, 94, '5'),
+(219, 94, '8'),
+(220, 94, '6'),
+(221, 95, 'Inglaterra'),
+(222, 95, 'Estados Unidos'),
+(223, 95, 'Japón'),
+(224, 95, 'Canadá'),
+(225, 96, 'Usain Bolt'),
+(226, 96, 'Michael Phelps'),
+(227, 96, 'Carl Lewis'),
+(228, 96, 'Mark Spitz'),
+(229, 97, '2008'),
+(230, 97, '2009'),
+(231, 97, '2010'),
+(232, 97, '2011'),
+(233, 98, 'Impresionismo'),
+(234, 98, 'Cubismo'),
+(235, 98, 'Realismo'),
+(236, 98, 'Surrealismo'),
+(237, 99, 'La Última Cena'),
+(238, 99, 'La Creación de Adán'),
+(239, 99, 'El Juicio Final'),
+(240, 99, 'La Piedad'),
+(241, 100, 'Flauta'),
+(242, 100, 'Sitar'),
+(243, 100, 'Guitarra'),
+(244, 100, 'Piano'),
+(245, 101, 'Astaná'),
+(246, 101, 'Taskent'),
+(247, 101, 'Bishkek'),
+(248, 101, 'Dushanbé'),
+(249, 102, 'Fosa de las Marianas'),
+(250, 102, 'Fosa de Tonga'),
+(251, 102, 'Fosa de Kermadec'),
+(252, 102, 'Fosa de Filipinas'),
+(253, 103, 'Canadá'),
+(254, 103, 'Islandia'),
+(255, 103, 'Estados Unidos'),
+(256, 103, 'Noruega'),
+(257, 104, 'Java'),
+(258, 104, 'Luzón'),
+(259, 104, 'Islandia'),
+(260, 104, 'Sumatra'),
+(261, 105, 'Egipcios'),
+(262, 105, 'Sumerios'),
+(263, 105, 'Mayas'),
+(264, 105, 'Fenicios'),
+(265, 106, 'Platea'),
+(266, 106, 'Maratón'),
+(267, 106, 'Termópilas'),
+(268, 106, 'Salamina'),
+(269, 107, 'Egipcios'),
+(270, 107, 'Nabateos'),
+(271, 107, 'Persas'),
+(272, 107, 'Romanos'),
+(273, 108, 'Benito Juárez'),
+(274, 108, 'Guadalupe Victoria'),
+(275, 108, 'Agustín de Iturbide'),
+(276, 108, 'Vicente Guerrero'),
+(281, 110, 'Tratado de Versalles'),
+(282, 110, 'Tratado de París'),
+(283, 110, 'Tratado de Viena'),
+(284, 110, 'Tratado de Tordesillas'),
+(285, 111, 'Diamante'),
+(286, 111, 'Grafeno'),
+(287, 111, 'Carburo de silicio'),
+(288, 111, 'Rutenio'),
+(289, 112, 'Protón'),
+(290, 112, 'Electrón'),
+(291, 112, 'Neutrón'),
+(292, 112, 'Quark'),
+(293, 113, 'J.J. Thomson'),
+(294, 113, 'Niels Bohr'),
+(295, 113, 'Ernest Rutherford'),
+(296, 113, 'Demócrito'),
+(297, 114, 'Lipasa'),
+(298, 114, 'Amilasa'),
+(299, 114, 'ADN polimerasa'),
+(300, 114, 'ARN polimerasa'),
+(301, 115, 'Gimnasia'),
+(302, 115, 'Halterofilia'),
+(303, 115, 'Lucha libre'),
+(304, 115, 'Artes marciales'),
+(305, 116, 'Judo'),
+(306, 116, 'Sumō'),
+(307, 116, 'Karate'),
+(308, 116, 'Kung Fu'),
+(309, 117, 'Brasil'),
+(310, 117, 'Argentina'),
+(311, 117, 'Uruguay'),
+(312, 117, 'Italia'),
+(313, 118, '60 minutos'),
+(314, 118, '70 minutos'),
+(315, 118, '80 minutos'),
+(316, 118, '90 minutos'),
+(317, 119, 'Pablo Picasso'),
+(318, 119, 'Georges Braque'),
+(319, 119, 'Salvador Dalí'),
+(320, 119, 'Henri Matisse'),
+(321, 120, 'Frank Gehry'),
+(322, 120, 'Zaha Hadid'),
+(323, 120, 'Norman Foster'),
+(324, 120, 'Santiago Calatrava'),
+(325, 121, 'Impresionismo'),
+(326, 121, 'Cubismo'),
+(327, 121, 'Puntillismo'),
+(328, 121, 'Surrealismo'),
+(329, 122, 'Claude Debussy'),
+(330, 122, 'Camille Saint-Saëns'),
+(331, 122, 'Johannes Brahms'),
+(332, 122, 'Richard Wagner'),
+(333, 123, 'Donatello'),
+(334, 123, 'Miguel Ángel'),
+(335, 123, 'Bernini'),
+(336, 123, 'Ghiberti'),
+(337, 124, 'Suiza'),
+(338, 124, 'Liechtenstein'),
+(339, 124, 'Mónaco'),
+(340, 124, 'Andorra'),
+(341, 125, 'Dinastía Tang'),
+(342, 125, 'Dinastía Han'),
+(343, 125, 'Dinastía Qin'),
+(344, 125, 'Dinastía Song'),
+(345, 126, 'Reflexión'),
+(346, 126, 'Refracción'),
+(347, 126, 'Dispersión'),
+(348, 126, 'Difracción'),
+(349, 127, 'Estados Unidos'),
+(350, 127, 'Grecia'),
+(351, 127, 'Reino Unido'),
+(352, 127, 'Francia'),
+(353, 128, '\"El Fausto\" de Goethe'),
+(354, 128, '\"El Paraíso Perdido\" de Milton'),
+(355, 128, '\"La Divina Comedia\" de Dante'),
+(356, 128, '\"Doctor Faustus\" de Marlowe');
 
 -- --------------------------------------------------------
 
@@ -676,7 +903,17 @@ INSERT INTO `partida` (`id`, `puntaje_obtenido`, `fecha_partida`, `idUsuario`, `
 (9660, 2, '2024-11-23 15:57:25', 68, 0),
 (9661, 0, '2024-11-23 16:04:39', 68, 0),
 (9662, 3, '2024-11-23 16:13:59', 68, 0),
-(9663, 4, '2024-11-23 16:20:29', 68, 0);
+(9663, 4, '2024-11-23 16:20:29', 68, 0),
+(9664, 10, '2024-11-25 17:38:50', 82, 0),
+(9665, 4, '2024-11-25 17:41:30', 82, 0),
+(9666, 4, '2024-11-25 17:41:54', 82, 0),
+(9667, 3, '2024-11-25 17:42:19', 82, 0),
+(9668, 6, '2024-11-25 17:42:45', 82, 0),
+(9669, 36, '2024-11-25 17:43:18', 82, 0),
+(9670, 5, '2024-11-25 18:00:53', 82, 0),
+(9671, 0, '2024-11-25 18:04:39', 82, 0),
+(9672, 0, '2024-11-25 18:04:59', 82, 0),
+(9673, 0, '2024-11-25 18:05:19', 82, 0);
 
 -- --------------------------------------------------------
 
@@ -720,7 +957,51 @@ INSERT INTO `preguntas` (`id`, `pregunta`, `estado`, `idUsuario`, `idCategoria`,
 (77, 'Campeon champions 2022?', 1, 74, 4, 'aprobado'),
 (80, 'Quien es el mejor jugador del mundo?', 0, 77, 4, 'rechazada'),
 (81, 'Quien es el mejor jugador del mundo?', 0, 77, 3, 'rechazada'),
-(82, 'Quien es el mejor jugador del mundo?', 0, 68, 3, 'rechazada');
+(82, 'Quien es el mejor jugador del mundo?', 0, 68, 3, 'rechazada'),
+(84, '¿En qué continente se encuentra el desierto del Sahara?', 1, 74, 1, 'aprobado'),
+(85, '¿Cuál es el país más pequeño del mundo?', 1, 74, 1, 'aprobado'),
+(86, '¿En qué país se encuentra el Monte Everest?', 1, 74, 1, 'aprobado'),
+(87, '¿En qué año llegó Cristóbal Colón a América?', 1, 74, 2, 'aprobado'),
+(88, '¿Quién fue el primer emperador de Roma?', 1, 74, 2, 'aprobado'),
+(89, '¿Qué evento marcó el inicio de la Segunda Guerra Mundial?', 1, 74, 2, 'aprobado'),
+(90, '¿Quién escribió la Declaración de Independencia de los Estados Unidos?', 1, 74, 2, 'aprobado'),
+(91, '¿Cómo se llama la unidad básica de la vida?', 1, 74, 3, 'aprobado'),
+(92, '¿Qué tipo de onda es la luz?', 1, 74, 3, 'aprobado'),
+(93, '¿Cuál es el deporte más practicado en el mundo?', 1, 74, 4, 'aprobado'),
+(94, '¿Cuántos jugadores tiene un equipo de voleibol?', 1, 74, 4, 'aprobado'),
+(95, '¿En qué país se originó el béisbol?', 1, 74, 4, 'aprobado'),
+(96, '¿Qué atleta ganó 8 medallas de oro en los Juegos Olímpicos de Pekín 2008?', 1, 74, 4, 'aprobado'),
+(97, '¿En qué año ganó Lionel Messi su primer Balón de Oro?', 1, 74, 4, 'aprobado'),
+(98, '¿Qué estilo artístico está asociado con Salvador Dalí?', 1, 74, 5, 'aprobado'),
+(99, '¿Cuál es la obra más famosa de Miguel Ángel en la Capilla Sixtina?', 1, 74, 5, 'aprobado'),
+(100, '¿Qué instrumento musical es clave en la música clásica india?', 1, 74, 5, 'aprobado'),
+(101, '¿Cuál es la capital de Kazajistán?', 1, 74, 1, 'aprobado'),
+(102, '¿Cuál es el punto más profundo del océano?', 1, 74, 1, 'aprobado'),
+(103, '¿En qué país se encuentra el Parque Nacional de los Fiordos de Kenai?', 1, 74, 1, 'aprobado'),
+(104, '¿Qué isla es conocida como el \"Hogar de los 100 volcanes\"?', 1, 74, 1, 'aprobado'),
+(105, '¿Cuál fue la primera civilización en usar un sistema de escritura?', 1, 74, 2, 'aprobado'),
+(106, '¿En qué batalla murió el rey Leónidas de Esparta?', 1, 74, 2, 'aprobado'),
+(107, '¿Qué civilización construyó la ciudad de Petra?', 1, 74, 2, 'aprobado'),
+(108, '¿Quién fue el primer presidente de México?', 1, 74, 2, 'aprobado'),
+(110, '¿Qué tratado puso fin a la Primera Guerra Mundial?', 1, 74, 2, 'aprobado'),
+(111, '¿Cuál es la sustancia más dura encontrada en la naturaleza?', 1, 74, 3, 'aprobado'),
+(112, '¿Qué partícula subatómica fue descubierta por James Chadwick?', 1, 74, 3, 'aprobado'),
+(113, '¿Qué científico propuso el modelo atómico que compara al átomo con un sistema solar?', 1, 74, 3, 'aprobado'),
+(114, '¿Qué enzima es esencial para copiar el ADN durante la replicación?', 1, 74, 3, 'aprobado'),
+(115, '¿En qué deporte se utiliza un \"snatch\" como movimiento técnico?', 1, 74, 4, 'aprobado'),
+(116, '¿Qué deporte es conocido como el \"rey de los deportes\" en Japón?', 1, 74, 4, 'aprobado'),
+(117, '¿Qué país ganó la primera Copa Mundial de Fútbol?', 1, 74, 4, 'aprobado'),
+(118, '¿Cuál es la duración de un partido de rugby profesional?', 1, 74, 4, 'aprobado'),
+(119, '¿Quién es conocido como el \"padre del cubismo\"?', 1, 74, 5, 'aprobado'),
+(120, '¿Qué famoso arquitecto diseñó el Museo Guggenheim de Bilbao?', 1, 74, 5, 'aprobado'),
+(121, '¿Qué técnica utilizó Seurat para crear \"Tarde de domingo en la isla de la Grande Jatte\"?', 1, 74, 5, 'aprobado'),
+(122, '¿Quién compuso \"El carnaval de los animales\"?', 1, 74, 5, 'aprobado'),
+(123, '¿Qué escultor italiano esculpió \"Éxtasis de Santa Teresa\"?', 1, 74, 5, 'aprobado'),
+(124, '¿Cuál es el único país que no tiene una capital oficial?', 0, 82, 1, 'pendiente'),
+(125, '¿Qué dinastía gobernó China durante la construcción de la Gran Muralla?', 0, 82, 2, 'pendiente'),
+(126, '¿Qué fenómeno óptico ocurre cuando la luz pasa a través de un prisma y se descompone en colores?', 0, 82, 3, 'pendiente'),
+(127, '¿Cuál es el único país que ha participado en todos los Juegos Olímpicos modernos desde 1896?', 0, 82, 4, 'pendiente'),
+(128, '¿Qué obra literaria incluye el famoso personaje \"Mephistopheles\"?', 0, 82, 5, 'pendiente');
 
 -- --------------------------------------------------------
 
@@ -742,7 +1023,10 @@ CREATE TABLE `reporte` (
 
 INSERT INTO `reporte` (`id`, `idPregunta`, `idUsuarioReporte`, `detalleReporte`, `verificado`) VALUES
 (10, 41, 68, 'horrible', 'rechazado'),
-(11, 45, 68, 'ZZZZ', 'aprobado');
+(11, 45, 68, 'ZZZZ', 'aprobado'),
+(12, 117, 82, 'Argentina es mejor que uruguay', 'pendiente'),
+(13, 96, 82, 'bolt no era la corriente electrica?', 'pendiente'),
+(14, 123, 82, 'Donatello es de las tortugas ninjas', 'pendiente');
 
 -- --------------------------------------------------------
 
@@ -783,7 +1067,51 @@ INSERT INTO `respuesta` (`id`, `preguntaID`, `opcionID`) VALUES
 (33, 77, 155),
 (36, 80, 165),
 (37, 81, 172),
-(38, 82, 174);
+(38, 82, 174),
+(39, 84, 179),
+(40, 85, 182),
+(41, 86, 185),
+(42, 87, 190),
+(43, 88, 196),
+(44, 89, 198),
+(45, 90, 204),
+(46, 91, 205),
+(47, 92, 210),
+(48, 93, 215),
+(49, 94, 220),
+(50, 95, 222),
+(51, 96, 226),
+(52, 97, 230),
+(53, 98, 236),
+(54, 99, 238),
+(55, 100, 242),
+(56, 101, 245),
+(57, 102, 249),
+(58, 103, 255),
+(59, 104, 257),
+(60, 105, 262),
+(61, 106, 267),
+(62, 107, 269),
+(63, 108, 274),
+(65, 110, 281),
+(66, 111, 285),
+(67, 112, 291),
+(68, 113, 294),
+(69, 114, 300),
+(70, 115, 302),
+(71, 116, 306),
+(72, 117, 311),
+(73, 118, 315),
+(74, 119, 318),
+(75, 120, 321),
+(76, 121, 327),
+(77, 122, 330),
+(78, 123, 335),
+(79, 124, 337),
+(80, 125, 343),
+(81, 126, 347),
+(82, 127, 350),
+(83, 128, 353);
 
 -- --------------------------------------------------------
 
@@ -825,7 +1153,7 @@ INSERT INTO `usuario` (`id`, `nombre`, `apellido`, `usuario`, `genero`, `email`,
 (78, 'chad', 'chad', 'chad09', 'F', 'chade@gmail.com', '123', 1, 850298, 7, './public/image/perfil/chad09.jpg', 0, 0, '', 'Uruguay', '2024-09-22', '2001-12-20'),
 (79, 'bixsor', 'bix', 'bixx12', 'M', 'bix@gmail.com', '123', 1, 759712, 15, './public/image/perfil/bixx12.jpg', 0, 0, '', 'Brasil', '2024-04-02', '1993-01-20'),
 (80, 'diss', 'cot', 'cot23', 'F', 'cot@gmail.com', '123', 1, 222121, 4, './public/image/perfil/cot23.jpg', 0, 0, '', 'Brasil', '2024-01-31', '1987-05-12'),
-(82, 'totti', 'Rugna', 'chouny1109', 'M', 'joni.rugna@gmail.com', '123', 1, 462194, 0, './public/image/perfil/chouny1109.jpeg', 0, 0, 'Isidro Casanova', 'Argentina', '2024-10-18', '1997-10-10'),
+(82, 'totti', 'Rugna', 'chouny1109', 'M', 'joni.rugna@gmail.com', '123', 1, 462194, 68, './public/image/perfil/chouny1109.jpeg', 0, 0, 'Isidro Casanova', 'Argentina', '2024-10-18', '1997-10-10'),
 (83, 'asddas', 'asdsda', 'saddd', 'M', 'dddd@gmail.com', '221', 0, 516868, 0, '', 0, 0, 'González Catán', 'Argentina', '2024-11-18', '2002-05-03'),
 (84, 'Sofia', 'Gomez', 'sofigmz', 'F', 'sofiagomez12@gmail.com', '123', 1, 874159, 345, './public/image/perfil/sofigmz.jpg', 0, 0, 'Buenos Aires', 'Argentina', '2023-12-15', '2002-05-18'),
 (85, 'Matias', 'Lopez', 'matilopez', 'M', 'matiaslopez23@gmail.com', '123', 1, 342981, 500, './public/image/perfil/matilopez.jpg', 0, 0, 'Santiago', 'Chile', '2024-03-22', '1999-11-30'),
@@ -948,13 +1276,13 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de la tabla `dificultad`
 --
 ALTER TABLE `dificultad`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=157;
 
 --
 -- AUTO_INCREMENT de la tabla `historico`
 --
 ALTER TABLE `historico`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1460;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1537;
 
 --
 -- AUTO_INCREMENT de la tabla `notificacion`
@@ -966,31 +1294,31 @@ ALTER TABLE `notificacion`
 -- AUTO_INCREMENT de la tabla `opciones`
 --
 ALTER TABLE `opciones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=177;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=357;
 
 --
 -- AUTO_INCREMENT de la tabla `partida`
 --
 ALTER TABLE `partida`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9664;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9674;
 
 --
 -- AUTO_INCREMENT de la tabla `preguntas`
 --
 ALTER TABLE `preguntas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
 
 --
 -- AUTO_INCREMENT de la tabla `reporte`
 --
 ALTER TABLE `reporte`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `respuesta`
 --
 ALTER TABLE `respuesta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
