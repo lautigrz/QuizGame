@@ -6,6 +6,7 @@ include_once("helper/Router.php");
 include_once("helper/MustachePresenter.php");
 include_once("helper/SendEmail.php");
 include_once("helper/ImagenUploader.php");
+include_once('helper/GenerarPdf.php');
 include_once("controller/UsuarioController.php");
 include_once("controller/JuegoController.php");
 include_once("controller/AuthController.php");
@@ -45,7 +46,7 @@ class Configuration
         return new HomeController($this->getUsuarioModel(),$this->getPresenter());
     }
     public function getAdminController(){
-        return new AdminController($this->getUsuarioModel(),$this->getPresenter(),$this->getAdminModel());
+        return new AdminController($this->getUsuarioModel(),$this->getPresenter(),$this->getAdminModel(),$this->getPdf());
     }
 
 
@@ -59,6 +60,10 @@ class Configuration
 
     public function getJuegoModel(){
         return new JuegoModel($this->getDatabase());
+    }
+
+    public function getPdf(){
+        return new GenerarPdf();
     }
   
     private function getPresenter()

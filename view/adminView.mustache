@@ -120,7 +120,7 @@
                 <option value="year">Año</option>
             </select>
             <button type="submit" class="btn btn-primary">Aplicar</button>
-            <button class="btn btn-primary" onclick="window.print()">Imprimir</button>
+            <button class="btn btn-primary" onclick="generateBase64Image()">Imprimir</button>
         </form>
     </div>
 
@@ -136,24 +136,24 @@
             </thead>
             <tbody>
             <tr style="background-color: #23233b;">
-                <td>Cantidad de jugadores</td>
-                <td>{{cantidad_jugadores}}</td>
+                <td>Cantidad de usuarios</td>
+                <td id="cantidadJugadores">{{cantidad_jugadores}}</td>
             </tr>
             <tr style="background-color: #2c2c47;">
-                <td>Cantidad de usuarios nuevos (filtro aplicado)</td>
-                <td>{{cantidad_usuarios_nuevos}}</td>
+                <td>Cantidad de usuarios nuevos autenticados</td>
+                <td id="cantidadUsuariosNuevos">{{cantidad_usuarios_nuevos}}</td>
             </tr>
             <tr style="background-color: #23233b;">
                 <td>Cantidad de preguntas en el juego</td>
-                <td>{{cantidad_preguntas_juego}}</td>
+                <td id="cantidadPreguntasJuego">{{cantidad_preguntas_juego}}</td>
             </tr>
             <tr style="background-color: #2c2c47;">
                 <td>Cantidad de preguntas creadas</td>
-                <td>{{cantidad_preguntas_creadas}}</td>
+                <td id="cantidadPreguntasCreadas">{{cantidad_preguntas_creadas}}</td>
             </tr>
             <tr style="background-color: #23233b;">
                 <td>Cantidad de partidas jugadas</td>
-                <td>{{cantidad_partidas_jugadas}}</td>
+                <td id="cantidadPartidasJugadas">{{cantidad_partidas_jugadas}}</td>
             </tr>
             </tbody>
         </table>
@@ -320,13 +320,85 @@
                     }
                 }
             }
-        });
+        }); 
 
-        // Función para aplicar filtro (pendiente de implementación en backend)
         function applyFilter() {
             const filter = document.getElementById('filter').value;
             alert(`Filtro aplicado: ${filter}. Asegúrate de implementar el backend para soportarlo.`);
         }
+    </script>
+
+  <script>
+    document.getElementById('btnGenerarPDF').addEventListener('click', function () {
+        
+    });
+
+function pdf(){
+     var cantidadJugadores = document.getElementById('cantidadJugadores').innerText;
+    var cantidadUsuariosNuevos = document.getElementById('cantidadUsuariosNuevos').innerText;
+    var cantidadPreguntasJuego = document.getElementById('cantidadPreguntasJuego').innerText;
+    var cantidadPreguntasCreadas = document.getElementById('cantidadPreguntasCreadas').innerText;
+    var cantidadPartidasJugadas = document.getElementById('cantidadPartidasJugadas').innerText;
+
+   
+    var data = {
+        cantidad_jugadores: cantidadJugadores,
+        cantidad_usuarios_nuevos: cantidadUsuariosNuevos,
+        cantidad_preguntas_juego: cantidadPreguntasJuego,
+        cantidad_preguntas_creadas: cantidadPreguntasCreadas,
+        cantidad_partidas_jugadas: cantidadPartidasJugadas,
+      
+    };
+        fetch('/quizgame/admin/generarPdf', {
+          method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.blob();
+            }
+            throw new Error('Error al generar el PDF');
+        })
+        .then(blob => {
+           
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'panel-admin.pdf'; 
+            a.click();
+            window.URL.revokeObjectURL(url); L
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
+
+function generateBase64Image() {
+
+    var imageBase64 = document.getElementById('chartUsuariosPorSexo').toDataURL('image/png');
+    var imageBase642 = document.getElementById('chartUsuariosPorEdad').toDataURL('image/png');
+    
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/quizgame/admin/guardarGraficos', true);
+
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            console.log('Imagen guardada en el servidor');
+        }
+    };
+
+    var data = 'image1=' + encodeURIComponent(imageBase64) + '&image2=' + encodeURIComponent(imageBase642);
+    xhr.send(data);
+     pdf();
+}
+
+
+
     </script>
 </body>
 </html>

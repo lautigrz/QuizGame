@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-11-2024 a las 17:50:29
+-- Tiempo de generación: 25-11-2024 a las 12:25:10
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -65,23 +65,23 @@ CREATE TABLE `dificultad` (
 
 INSERT INTO `dificultad` (`id`, `idUsuario`, `idPregunta`, `veces_correctas`, `veces_vista`) VALUES
 (27, 68, 42, 19, 26),
-(28, 68, 34, 30, 43),
+(28, 68, 34, 31, 44),
 (29, 68, 44, 31, 49),
-(30, 68, 39, 26, 44),
+(30, 68, 39, 26, 45),
 (31, 68, 41, 30, 48),
-(32, 68, 1, 29, 47),
-(33, 68, 40, 32, 51),
+(32, 68, 1, 30, 48),
+(33, 68, 40, 32, 52),
 (34, 68, 2, 22, 37),
 (35, 68, 45, 28, 50),
 (36, 68, 38, 35, 47),
 (37, 68, 46, 31, 45),
-(38, 68, 47, 27, 52),
-(39, 68, 37, 31, 45),
-(40, 68, 48, 28, 43),
+(38, 68, 47, 27, 53),
+(39, 68, 37, 32, 46),
+(40, 68, 48, 29, 44),
 (41, 68, 36, 30, 48),
-(42, 68, 3, 23, 37),
-(43, 68, 35, 25, 43),
-(44, 68, 43, 21, 27),
+(42, 68, 3, 24, 38),
+(43, 68, 35, 26, 44),
+(44, 68, 43, 22, 28),
 (45, 76, 39, 3, 4),
 (46, 76, 1, 3, 3),
 (47, 76, 3, 3, 8),
@@ -146,7 +146,7 @@ INSERT INTO `dificultad` (`id`, `idUsuario`, `idPregunta`, `veces_correctas`, `v
 (106, 68, 63, 2, 6),
 (107, 68, 64, 0, 1),
 (108, 68, 65, 0, 2),
-(109, 68, 77, 3, 5),
+(109, 68, 77, 5, 7),
 (110, 77, 48, 1, 1),
 (111, 77, 77, 1, 1),
 (112, 77, 46, 1, 1),
@@ -173,12 +173,6 @@ CREATE TABLE `historico` (
 --
 
 INSERT INTO `historico` (`id`, `idUsuario`, `idPregunta`, `hora`) VALUES
-(1430, 68, 38, '2024-11-22 16:05:12'),
-(1431, 68, 41, '2024-11-22 16:05:15'),
-(1432, 68, 44, '2024-11-22 16:13:43'),
-(1433, 68, 43, '2024-11-22 16:13:49'),
-(1434, 68, 36, '2024-11-22 16:13:52'),
-(1435, 68, 34, '2024-11-22 16:14:01'),
 (1436, 77, 48, '2024-11-22 16:25:00'),
 (1437, 77, 77, '2024-11-22 16:25:03'),
 (1438, 77, 38, '2024-11-22 16:25:08'),
@@ -188,7 +182,11 @@ INSERT INTO `historico` (`id`, `idUsuario`, `idPregunta`, `hora`) VALUES
 (1442, 77, 47, '2024-11-22 16:25:22'),
 (1443, 77, 35, '2024-11-22 16:25:25'),
 (1444, 77, 40, '2024-11-22 16:25:28'),
-(1445, 77, 3, '2024-11-22 16:25:31');
+(1445, 77, 3, '2024-11-22 16:25:31'),
+(1456, 68, 43, '2024-11-23 16:20:33'),
+(1457, 68, 34, '2024-11-23 16:20:37'),
+(1458, 68, 77, '2024-11-23 16:20:42'),
+(1459, 68, 1, '2024-11-23 16:20:49');
 
 -- --------------------------------------------------------
 
@@ -221,7 +219,8 @@ INSERT INTO `notificacion` (`id`, `idUsuario`, `mensaje`, `leido`, `fecha`, `tip
 (15, 68, 'Hola lautigrz tu Reporte fue rechazado ', 1, '2024-11-22 18:08:09', 'Reporte'),
 (16, 68, 'Hola lautigrz tu Reporte fue aprobado ', 1, '2024-11-22 18:08:09', 'Reporte'),
 (17, 77, 'Hola lionelmessi tu Sugerencia fue rechazada ', 1, '2024-11-22 19:42:40', 'Sugerencia'),
-(18, 77, 'Hola lionelmessi tu sugerencia fue rechazada ', 1, '2024-11-22 19:46:20', 'Sugerencia');
+(18, 77, 'Hola lionelmessi tu sugerencia fue rechazada ', 1, '2024-11-22 19:46:20', 'Sugerencia'),
+(19, 68, 'Hola lautigrz tu sugerencia fue rechazada ', 1, '2024-11-23 17:52:24', 'Sugerencia');
 
 -- --------------------------------------------------------
 
@@ -327,7 +326,11 @@ INSERT INTO `opciones` (`id`, `preguntaID`, `opcion`) VALUES
 (169, 81, 'messi'),
 (170, 81, 'dasd'),
 (171, 81, 'ads'),
-(172, 81, 'asda');
+(172, 81, 'asda'),
+(173, 82, 'messi'),
+(174, 82, 'dasd'),
+(175, 82, 'ads'),
+(176, 82, 'asda');
 
 -- --------------------------------------------------------
 
@@ -668,7 +671,12 @@ INSERT INTO `partida` (`id`, `puntaje_obtenido`, `fecha_partida`, `idUsuario`, `
 (9655, 0, '2024-11-22 15:47:31', 68, 0),
 (9656, 8, '2024-11-22 16:04:45', 68, 0),
 (9657, 3, '2024-11-22 16:13:43', 68, 0),
-(9658, 9, '2024-11-22 16:25:00', 77, 0);
+(9658, 9, '2024-11-22 16:25:00', 77, 0),
+(9659, 0, '2024-11-23 15:34:02', 68, 0),
+(9660, 2, '2024-11-23 15:57:25', 68, 0),
+(9661, 0, '2024-11-23 16:04:39', 68, 0),
+(9662, 3, '2024-11-23 16:13:59', 68, 0),
+(9663, 4, '2024-11-23 16:20:29', 68, 0);
 
 -- --------------------------------------------------------
 
@@ -711,7 +719,8 @@ INSERT INTO `preguntas` (`id`, `pregunta`, `estado`, `idUsuario`, `idCategoria`,
 (75, 'Quien es el mejor jugador del mundo?', 0, 68, 2, 'aprobado'),
 (77, 'Campeon champions 2022?', 1, 74, 4, 'aprobado'),
 (80, 'Quien es el mejor jugador del mundo?', 0, 77, 4, 'rechazada'),
-(81, 'Quien es el mejor jugador del mundo?', 0, 77, 3, 'rechazada');
+(81, 'Quien es el mejor jugador del mundo?', 0, 77, 3, 'rechazada'),
+(82, 'Quien es el mejor jugador del mundo?', 0, 68, 3, 'rechazada');
 
 -- --------------------------------------------------------
 
@@ -773,7 +782,8 @@ INSERT INTO `respuesta` (`id`, `preguntaID`, `opcionID`) VALUES
 (31, 75, 148),
 (33, 77, 155),
 (36, 80, 165),
-(37, 81, 172);
+(37, 81, 172),
+(38, 82, 174);
 
 -- --------------------------------------------------------
 
@@ -806,7 +816,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `nombre`, `apellido`, `usuario`, `genero`, `email`, `password`, `estado`, `token`, `puntaje`, `fotoPerfil`, `admin`, `editor`, `ciudad`, `pais`, `created_at`, `fecha_nacimiento`) VALUES
-(68, 'Lautaro', 'Gerez', 'lautigrz', 'M', 'lautarogerezz12@gmail.com', '123', 1, 681159, 269, './public/image/perfil/lautigrz.jpg', 0, 0, '', 'Uruguay', '2024-11-14', '2005-07-20'),
+(68, 'Lautaro', 'Gerez', 'lautigrz', 'M', 'lautarogerezz12@gmail.com', '123', 1, 681159, 278, './public/image/perfil/lautigrz.jpg', 0, 0, '', 'Uruguay', '2024-11-14', '2005-07-20'),
 (70, 'lionel', 'scaloni', 'scaloni10', 'F', 'sca@gmial.com', '123', 1, 432768, 4, './public/image/perfil/scaloni10.jpg', 0, 0, '', 'Chile', '2024-10-15', '1998-10-15'),
 (73, 'admin', 'admin', 'admin', 'M', 'admin@gmail.com', 'admin', 1, 300048, 0, './public/image/perfil/chad123.jpg', 1, 0, '', 'Chile', '2024-07-10', '1990-05-05'),
 (74, 'editor', 'editor', 'editor', 'F', 'editor@gmail.com', 'editor', 1, 369750, 0, './public/image/perfil/messi.jpg', 0, 1, '', 'Paraguay', '2023-07-16', '1945-10-15'),
@@ -816,7 +826,38 @@ INSERT INTO `usuario` (`id`, `nombre`, `apellido`, `usuario`, `genero`, `email`,
 (79, 'bixsor', 'bix', 'bixx12', 'M', 'bix@gmail.com', '123', 1, 759712, 15, './public/image/perfil/bixx12.jpg', 0, 0, '', 'Brasil', '2024-04-02', '1993-01-20'),
 (80, 'diss', 'cot', 'cot23', 'F', 'cot@gmail.com', '123', 1, 222121, 4, './public/image/perfil/cot23.jpg', 0, 0, '', 'Brasil', '2024-01-31', '1987-05-12'),
 (82, 'totti', 'Rugna', 'chouny1109', 'M', 'joni.rugna@gmail.com', '123', 1, 462194, 0, './public/image/perfil/chouny1109.jpeg', 0, 0, 'Isidro Casanova', 'Argentina', '2024-10-18', '1997-10-10'),
-(83, 'asddas', 'asdsda', 'saddd', 'M', 'dddd@gmail.com', '221', 0, 516868, 0, '', 0, 0, 'González Catán', 'Argentina', '2024-11-18', '2002-05-03');
+(83, 'asddas', 'asdsda', 'saddd', 'M', 'dddd@gmail.com', '221', 0, 516868, 0, '', 0, 0, 'González Catán', 'Argentina', '2024-11-18', '2002-05-03'),
+(84, 'Sofia', 'Gomez', 'sofigmz', 'F', 'sofiagomez12@gmail.com', '123', 1, 874159, 345, './public/image/perfil/sofigmz.jpg', 0, 0, 'Buenos Aires', 'Argentina', '2023-12-15', '2002-05-18'),
+(85, 'Matias', 'Lopez', 'matilopez', 'M', 'matiaslopez23@gmail.com', '123', 1, 342981, 500, './public/image/perfil/matilopez.jpg', 0, 0, 'Santiago', 'Chile', '2024-03-22', '1999-11-30'),
+(86, 'Camila', 'Perez', 'camilapz', 'F', 'camilaperez01@gmail.com', '123', 1, 569872, 430, './public/image/perfil/camilapz.jpg', 0, 0, 'Bogotá', 'Colombia', '2023-07-10', '2001-04-15'),
+(87, 'Julian', 'Martinez', 'juliomtz', 'M', 'julianmtz99@gmail.com', '123', 1, 679823, 385, './public/image/perfil/juliomtz.jpg', 0, 0, 'Lima', 'Perú', '2023-11-05', '1995-02-28'),
+(88, 'Luciana', 'Garcia', 'luciagc', 'F', 'lucianagarcia08@gmail.com', '123', 1, 879201, 312, './public/image/perfil/luciagc.jpg', 0, 0, 'Caracas', 'Venezuela', '2024-01-17', '2000-12-10'),
+(89, 'Carlos', 'Vega', 'carlveg', 'M', 'carlosvega72@gmail.com', '123', 1, 234123, 200, './public/image/perfil/carlveg.jpg', 0, 0, 'Quito', 'Ecuador', '2023-05-29', '1988-07-03'),
+(90, 'Valentina', 'Mendez', 'valmndz', 'F', 'valentinamendez01@gmail.com', '123', 1, 982314, 450, './public/image/perfil/valmndz.jpg', 0, 0, 'Asunción', 'Paraguay', '2023-09-18', '1993-08-22'),
+(91, 'Diego', 'Ortiz', 'diegortz', 'M', 'diegoortiz19@gmail.com', '123', 1, 562874, 410, './public/image/perfil/diegortz.jpg', 0, 0, 'San José', 'Costa Rica', '2024-04-03', '2004-09-15'),
+(92, 'Ana', 'Torres', 'anatorr', 'F', 'anatorres10@gmail.com', '123', 1, 672890, 395, './public/image/perfil/anatorr.jpg', 0, 0, 'Panamá', 'Panamá', '2023-06-20', '1998-03-10'),
+(93, 'Marcos', 'Fuentes', 'marcfnt', 'M', 'marcosfuentes87@gmail.com', '123', 1, 981734, 300, './public/image/perfil/marcfnt.jpg', 0, 0, 'San Salvador', 'El Salvador', '2024-01-05', '1991-05-25'),
+(94, 'Elena', 'Ramirez', 'elenarmz', 'F', 'elenaramirez16@gmail.com', '123', 1, 453981, 340, './public/image/perfil/elenarmz.jpg', 0, 0, 'La Paz', 'Bolivia', '2023-11-21', '1997-07-07'),
+(95, 'Pedro', 'Alvarez', 'pedroalv', 'M', 'pedroalvarez23@gmail.com', '123', 1, 892374, 270, './public/image/perfil/pedroalv.jpg', 0, 0, 'Guatemala City', 'Guatemala', '2023-10-14', '1984-06-30'),
+(96, 'Clara', 'Suarez', 'clarasrz', 'F', 'clarasuarez02@gmail.com', '123', 1, 671823, 390, './public/image/perfil/clarasrz.jpg', 0, 0, 'Tegucigalpa', 'Honduras', '2024-02-28', '2003-01-05'),
+(97, 'Martin', 'Diaz', 'martindz', 'M', 'martindiaz88@gmail.com', '123', 1, 562134, 405, './public/image/perfil/martindz.jpg', 0, 0, 'Managua', 'Nicaragua', '2023-08-12', '1992-12-15'),
+(98, 'Alejandro', 'Gomez', 'alegomez', 'M', 'alejandrogomez01@gmail.com', '123', 1, 435671, 450, './public/image/perfil/alegomez.jpg', 0, 0, 'Buenos Aires', 'Argentina', '2024-11-02', '2000-06-15'),
+(99, 'Mariana', 'Lopez', 'marialpz', 'F', 'marianalopez03@gmail.com', '123', 1, 673920, 390, './public/image/perfil/marialpz.jpg', 0, 0, 'Bogotá', 'Colombia', '2024-11-05', '1999-11-25'),
+(100, 'Fernando', 'Cruz', 'fercruz', 'M', 'fernandocruz12@gmail.com', '123', 1, 892134, 320, './public/image/perfil/fercruz.jpg', 0, 0, 'Santiago', 'Chile', '2024-11-07', '1995-09-18'),
+(101, 'Laura', 'Diaz', 'lauradz', 'F', 'lauradiaz22@gmail.com', '123', 1, 562903, 405, './public/image/perfil/lauradz.jpg', 0, 0, 'Quito', 'Ecuador', '2024-11-09', '2001-01-12'),
+(102, 'Gustavo', 'Martinez', 'gustmtz', 'M', 'gustavomartinez87@gmail.com', '123', 1, 238971, 310, './public/image/perfil/gustmtz.jpg', 0, 0, 'Asunción', 'Paraguay', '2024-11-10', '1987-05-20'),
+(103, 'Natalia', 'Perez', 'natpz', 'F', 'nataliaperez02@gmail.com', '123', 1, 897651, 360, './public/image/perfil/natpz.jpg', 0, 0, 'Panamá', 'Panamá', '2024-11-14', '2002-03-28'),
+(104, 'Jorge', 'Vega', 'jorgeveg', 'M', 'jorgevega91@gmail.com', '123', 1, 459120, 250, './public/image/perfil/jorgeveg.jpg', 0, 0, 'Caracas', 'Venezuela', '2024-11-18', '1991-02-04'),
+(105, 'Silvia', 'Torres', 'silvtor', 'F', 'silviatorres33@gmail.com', '123', 1, 671892, 280, './public/image/perfil/silvtor.jpg', 0, 0, 'Montevideo', 'Uruguay', '2024-11-20', '1998-12-08'),
+(106, 'Hernan', 'Fuentes', 'herfnz', 'M', 'hernanfuentes22@gmail.com', '123', 1, 980721, 400, './public/image/perfil/herfnz.jpg', 0, 0, 'San Salvador', 'El Salvador', '2024-11-22', '1994-06-18'),
+(107, 'Carolina', 'Suarez', 'carosrz', 'F', 'carolinasuarez12@gmail.com', '123', 1, 562319, 440, './public/image/perfil/carosrz.jpg', 0, 0, 'Guatemala City', 'Guatemala', '2024-11-23', '2003-07-01'),
+(108, 'Luis', 'Ortiz', 'luisortz', 'M', 'luisortiz25@gmail.com', '123', 1, 902134, 390, './public/image/perfil/luisortz.jpg', 0, 0, 'Managua', 'Nicaragua', '2024-11-24', '1992-11-05'),
+(109, 'Valeria', 'Ramirez', 'valramz', 'F', 'valeriaramirez99@gmail.com', '123', 1, 120394, 430, './public/image/perfil/valramz.jpg', 0, 0, 'La Paz', 'Bolivia', '2024-11-24', '1997-03-16'),
+(110, 'Andrés', 'Herrera', 'andreherr', 'M', 'andresherrera21@gmail.com', '123', 1, 981234, 300, './public/image/perfil/andreherr.jpg', 0, 0, 'Lima', 'Perú', '2024-11-24', '1998-02-10'),
+(111, 'Daniela', 'Cruz', 'danicruz', 'F', 'danielacruz14@gmail.com', '123', 1, 890123, 450, './public/image/perfil/danicruz.jpg', 0, 0, 'Bogotá', 'Colombia', '2024-11-24', '2000-08-25'),
+(112, 'Esteban', 'Mejía', 'estmejia', 'M', 'estebanmejia77@gmail.com', '123', 1, 567893, 320, './public/image/perfil/estmejia.jpg', 0, 0, 'Quito', 'Ecuador', '2024-11-24', '1995-11-15'),
+(113, 'Lucia', 'González', 'luciagonz', 'F', 'luciagonzalez19@gmail.com', '123', 1, 782345, 390, './public/image/perfil/luciagonz.jpg', 0, 0, 'Montevideo', 'Uruguay', '2024-11-24', '1999-06-10'),
+(114, 'Miguel', 'Paredes', 'migparedes', 'M', 'miguelparedes88@gmail.com', '123', 1, 234981, 275, './public/image/perfil/migparedes.jpg', 0, 0, 'Caracas', 'Venezuela', '2024-11-24', '1990-01-20');
 
 --
 -- Índices para tablas volcadas
@@ -913,31 +954,31 @@ ALTER TABLE `dificultad`
 -- AUTO_INCREMENT de la tabla `historico`
 --
 ALTER TABLE `historico`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1446;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1460;
 
 --
 -- AUTO_INCREMENT de la tabla `notificacion`
 --
 ALTER TABLE `notificacion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `opciones`
 --
 ALTER TABLE `opciones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=173;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=177;
 
 --
 -- AUTO_INCREMENT de la tabla `partida`
 --
 ALTER TABLE `partida`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9659;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9664;
 
 --
 -- AUTO_INCREMENT de la tabla `preguntas`
 --
 ALTER TABLE `preguntas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
 -- AUTO_INCREMENT de la tabla `reporte`
@@ -949,13 +990,13 @@ ALTER TABLE `reporte`
 -- AUTO_INCREMENT de la tabla `respuesta`
 --
 ALTER TABLE `respuesta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=115;
 
 --
 -- Restricciones para tablas volcadas

@@ -56,7 +56,7 @@ class AdminModel {
     public function obtenerCantidadUsuariosNuevos($filtro = null) {
         // $intervalo = $this->determinarIntervalo($periodo);
         
-        $sql = "SELECT COUNT(*) as total FROM usuario WHERE estado = 1";
+        $sql = "SELECT COUNT(*) as total FROM usuario WHERE estado = 1 AND admin = 0 AND editor = 0";
         if ($filtro && $filtro !== 'history') {
             $intervalo = $this->determinarIntervalo($filtro);
             $sql .= " AND created_at >= DATE_SUB(NOW(), INTERVAL $intervalo)";
@@ -67,9 +67,6 @@ class AdminModel {
 
     // 6. Obtener porcentaje de respuestas correctas
     public function obtenerPorcentajeRespuestasCorrectas() {
-
-        
-
 
         $sql = "SELECT 
                     (SUM(CASE WHEN o.id = r.opcionID THEN 1 ELSE 0 END) / COUNT(*)) * 100 as porcentaje
