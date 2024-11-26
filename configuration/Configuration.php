@@ -7,6 +7,7 @@ include_once("helper/MustachePresenter.php");
 include_once("helper/SendEmail.php");
 include_once("helper/ImagenUploader.php");
 include_once('helper/GenerarPdf.php');
+include_once('helper/Permisos.php');
 include_once("controller/UsuarioController.php");
 include_once("controller/JuegoController.php");
 include_once("controller/AuthController.php");
@@ -82,9 +83,13 @@ class Configuration
         );
     }
 
+    private function getPermisos()
+    {
+        return new Permisos();
+    }
     public function getRouter()
     {
-        return new Router($this, "getAuthController", "login");
+        return new Router($this, "getAuthController", "login", $this->getPermisos());
     }
 
     private function getUsuarioModel()
@@ -97,5 +102,4 @@ class Configuration
     public function getImagenUploader(){
         return new ImagenUploader();
     }
-
 }

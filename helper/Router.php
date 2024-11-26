@@ -5,17 +5,21 @@ class Router
     private $defaultController;
     private $defaultMethod;
     private $configuration;
-
-    public function __construct($configuration, $defaultController, $defaultMethod)
+    private $permisos;
+    public function __construct($configuration, $defaultController, $defaultMethod, $permisos)
     {
         $this->defaultController = $defaultController;
         $this->defaultMethod = $defaultMethod;
         $this->configuration = $configuration;
+        $this->permisos = $permisos;
     }
 
     public function route($controllerName, $methodName)
     {
         $controller = $this->getControllerFrom($controllerName);
+        $array = $this->permisos->procesarSolicitud($controller, $methodName, $controllerName);
+        $controller = $array[0];
+        $methodName = $array[1];
         $this->executeMethodFromController($controller, $methodName);
     }
 
@@ -32,3 +36,6 @@ class Router
         call_user_func(array($controller, $validMethod));
     }
 }
+
+?>
+
