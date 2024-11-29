@@ -16,7 +16,7 @@ class JuegoController{
         $data = [];
 
         $this->setData($data);
-      
+    
         $this->presenter->show("juego",$data);
         }
         $this->manejarError();
@@ -104,37 +104,29 @@ class JuegoController{
 
     private function preguntaAlazar() {
 
-    if (!$this->hayRespuestaIncorrecta()) {
-       
         $preguntaActual = $this->obtenerPreguntas();
-
-        if($this->guardarPreguntasDeLaPartidaEnCurso($preguntaActual)){
-
-           $this->preguntaActualDeLaPartida($preguntaActual);
-        
-        }else{
-            $this->partida();
-        }
-    }
+        $this->guardarPreguntasDeLaPartidaEnCurso($preguntaActual);
+        $this->preguntaActualDeLaPartida($preguntaActual);
 
 }
 
     private function obtenerPreguntas(){
-        $pregunta = "";
-        if(count($this->preguntasDeLaPartida()) >= 10){
+        $dificultadRand = $this->dificultad();
+        $pregunta = $this->model->obtenerPregunta($this->idUsuario(), $dificultadRand);
 
-        $pregunta = $this->model->preguntaConDifcultad($this->idUsuario());
-        
-            if($this->yaVioTodasLasPreguntasConDificultad()){
-
-                $pregunta = $this->model->obtenerPregunta();
-            }
-        }else{
-
-        $pregunta = $this->model->obtenerPregunta();
-        }
         return $pregunta;
     }
+
+
+    public function dificultad() {
+
+        if(count($this->preguntasDeLaPartida()) > 1){
+            return "< 70";
+        }
+    
+        return " < 100";
+    }
+    
 
     private function yaVioTodasLasPreguntasConDificultad(){
 
@@ -156,32 +148,19 @@ class JuegoController{
             $id = $this->idUsuario();
         
 
-        if (!$this->preguntaDisponibleParaElUsuario($preguntas, $id) && $preguntas['id'] != $_SESSION['preguntas']['id']) {
+            $this->verificarSiYaVioTodasLasPreguntas();
     
             $_SESSION['preguntas_data'][] = ['pregunta' => $preguntas['pregunta']];
             $this->model->guardarPreguntaVista($id,$preguntas['id']);
-            return true;
-        }
-        return false;
+
+            
     }   
-    private function preguntaDisponibleParaElUsuario($pregunta, $id){
 
-    $preguntas = $this->model->obtenerPreguntasVistasPorElUsuario($id);
-
-    foreach ($preguntas as $preg) {
-        if ($preg['idPregunta'] === $pregunta['id']) {
-            $this->verificarSiYaVioTodasLasPreguntas();
-            return true;
-        }
-    }
-
-
-    return false;
-}
      private function manejarError() {
         $_SESSION['error'] = "Queres acceder? Registrate a QuizGame!!!";
     }
-    private function verificarSiYaVioTodasLasPreguntas(){
+
+        private function verificarSiYaVioTodasLasPreguntas(){
 
         $totalVista = $this->model->obtenerCantidadDePreguntasVistasPorElUsuario($this->idUsuario());
         $preguntasTotales = $this->model->obtenerCantidadDePreguntas();

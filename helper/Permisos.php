@@ -11,6 +11,7 @@ class Permisos{
     private $rutasPermitidasPorRol = [
         'usuario' => [
             'home/lobby',
+            'home/ranking',
             'usuario/perfil',
             'usuario/sugerirPregunta',
             'juego/preguntas',
@@ -19,6 +20,7 @@ class Permisos{
             'juego/finalizarPartida',
             'juego/reportePregunta',
             'juego/esCorrecta',
+            
 
         ],
         'editor' => [

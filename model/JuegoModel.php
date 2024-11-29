@@ -8,9 +8,9 @@ class JuegoModel{
         $this->database = $database;
     }
 
-    public function obtenerPregunta(){
-
-           $pregunta = $this->pregunta();
+    public function obtenerPregunta($id, $dificultad){
+            
+           $pregunta = $this->pregunta($id, $dificultad);
            $opciones = $this->opciones($pregunta[0]['id']);
                     
                     $result = [
@@ -24,38 +24,7 @@ class JuegoModel{
 
     }
 
-    public function preguntaConDifcultad($idUsuario){
-        $pregunta = $this->preguntaConDificultadMediaYDificil($idUsuario);
-        $opciones = $this->opciones($pregunta[0]['id']);
-         
-        $result = [
-            'id' => $pregunta[0]['id'],
-           'pregunta' => $pregunta[0]['pregunta'],
-           'opciones' => $opciones,
-           'color' => $pregunta[0]['color'],
-           'icono' => $pregunta[0]['icono']
-           ];
-           return $result;
-    }
-
-    public function preguntaConDificultadMediaYDificil($idUsuario){
-        $query = "";
-        do{
-        $sql = "SELECT p.id, c.color, c.icono, p.pregunta, d.veces_correctas, d.veces_vista
-        FROM preguntas p 
-        JOIN dificultad d ON d.idPregunta = p.id 
-        JOIN categoria c ON c.id = p.idCategoria 
-        WHERE d.idUsuario = " . $idUsuario . " AND p.estado = 1
-        ORDER BY RAND() 
-        LIMIT 1";
-
-        $query = $this->database->query($sql);
-            
-        }while(!$this->porcentaje($query[0]['veces_correctas'], $query[0]['veces_vista']));
-
-      return $query;
-    }
-
+    
   
     public function obtenerPreguntasVistasPorElUsuario($id){
 
@@ -262,14 +231,6 @@ class JuegoModel{
         $this->database->query($sql);
 
     }
-    private function obtenerPreguntaDeDificultad($idUsuario, $idPregunta){
-
-        $sql = "SELECT veces_correctas, veces_vista FROM dificultad WHERE idUsuario = " . $idUsuario ." AND idPregunta = " . $idPregunta . " ";
-
-        $query = $this->database->query($sql);
-
-        return $query;
-    }
     private function guardarTemporalmente($idUsuario,$idPregunta){
         $sql = "INSERT INTO historico (idUsuario, idPregunta, hora) VALUES ('" . $idUsuario . "', '" . $idPregunta . "', '" . date('Y-m-d H:i:s') . "')";
 
@@ -305,18 +266,25 @@ class JuegoModel{
         return $opciones;
     }
 
-    private function pregunta(){
-        $queryPregunta = "SELECT p.id, p.pregunta, c.color, c.icono
-                    FROM preguntas p
-                    JOIN categoria c on c.id = p.idCategoria
-                    WHERE p.estado = 1
-                    ORDER BY RAND()
-                    LIMIT 1
-                    "; 
-                    $pregunta = $this->database->query($queryPregunta);
-      return $pregunta;
-    }
+    private function pregunta($id, $dificultad){
+        var_dump($id, $dificultad);
+        $query = "SELECT p.id, p.pregunta, c.color, c.icono
+        FROM preguntas p
+        LEFT JOIN dificultad d ON d.idPregunta = p.id AND d.idUsuario = " . $id . "
+        JOIN categoria c ON c.id = p.idCategoria
+        WHERE p.estado = 1
+        AND p.id NOT IN (
+            SELECT idPregunta 
+            FROM historico 
+            WHERE idUsuario = " . $id . "
+        )
+        AND COALESCE((d.veces_correctas / d.veces_vista) * 100, 0) " . $dificultad . "
+        ORDER BY RAND()
+        LIMIT 1;";
 
+       return $this->database->query($query);
+        
     
+    }    
   
 }
