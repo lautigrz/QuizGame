@@ -34,7 +34,10 @@ class Permisos{
         ],
         'admin' => [
             'admin/mostrarAdminView',
-            'usuario/generarEstadisticasPDF'
+            'usuario/generarEstadisticasPDF',
+            'admin/generarPdf',
+            'admin/guardarGraficos',
+            'usuario/perfil',
         ]
     ];
     public function procesarSolicitud($controller, $methodName, $controllerName)

@@ -11,16 +11,9 @@ class JuegoController{
     }
 
     public function preguntas(){
-
-        if($this->existeUsuario()){
         $data = [];
-
         $this->setData($data);
-    
         $this->presenter->show("juego",$data);
-        }
-        $this->manejarError();
-
     }
 
     public function empezarPartida(){
@@ -30,35 +23,23 @@ class JuegoController{
 
             $this->partida();
         }
-        $this->manejarError();
         header('Location: /quizgame/home/lobby');
         exit();
     }
 
     
     public function partida(){
-        if($this->existeUsuario()){
             $this->preguntaAlazar();
             header('Location: /quizgame/juego/preguntas');
             exit();
-        }
-        $this->manejarError();
     }
     public function finalizarPartida(){
         
-        if($this->existeUsuario()){
-
         $this->model->finalizarPartida($this->idUsuario());
         header('Location: /quizgame/home/lobby');
         exit();
-
-        }
-        $this->manejarError();
-
     }
     public function esCorrecta(){
-
-        if($this->existeUsuario()){
 
         $pregunta = $this->model->preguntaEntregada($this->idUsuario());
         $respuesta = $_POST['respuesta'];
@@ -82,19 +63,14 @@ class JuegoController{
         exit();
     }
 
-    $this->manejarError();
-    }
-
     
     public function reportePregunta()
     {
-        if($this->existeUsuario()){
         $data = $_POST;
         $this->model->reportePregunta($data);
         header('Location: /quizgame/home/lobby');
-        }
+        
     }
-
 
     private function nuevaPartida(){
         unset($_SESSION['preguntas_data']);
@@ -104,9 +80,11 @@ class JuegoController{
 
     private function preguntaAlazar() {
 
+        if(!$this->hayRespuestaIncorrecta()){
         $preguntaActual = $this->obtenerPreguntas();
         $this->guardarPreguntasDeLaPartidaEnCurso($preguntaActual);
         $this->preguntaActualDeLaPartida($preguntaActual);
+        }
 
 }
 
@@ -120,11 +98,15 @@ class JuegoController{
 
     public function dificultad() {
 
-        if(count($this->preguntasDeLaPartida()) > 1){
+        if($this->yaVioTodasLasPreguntasConDificultad()){
+            return "<= 100";
+        }
+
+        else if(count($this->preguntasDeLaPartida()) > 10){
             return "< 70";
         }
     
-        return " < 100";
+        return "<= 100";
     }
     
 
@@ -145,33 +127,12 @@ class JuegoController{
         if (!isset($_SESSION['preguntas_data'])) {
             $_SESSION['preguntas_data'] = [];
         }
-            $id = $this->idUsuario();
-        
-
-            $this->verificarSiYaVioTodasLasPreguntas();
     
             $_SESSION['preguntas_data'][] = ['pregunta' => $preguntas['pregunta']];
-            $this->model->guardarPreguntaVista($id,$preguntas['id']);
-
-            
+            $this->model->guardarPreguntaVista($this->idUsuario(),$preguntas['id']);
     }   
 
-     private function manejarError() {
-        $_SESSION['error'] = "Queres acceder? Registrate a QuizGame!!!";
-    }
-
-        private function verificarSiYaVioTodasLasPreguntas(){
-
-        $totalVista = $this->model->obtenerCantidadDePreguntasVistasPorElUsuario($this->idUsuario());
-        $preguntasTotales = $this->model->obtenerCantidadDePreguntas();
-        
-        if ($preguntasTotales === $totalVista) {
-            $this->model->limpiarPreguntasVistas($this->idUsuario());
-        }
-        
-    }
-
-
+    
     private function obtenerRespuestaCorrecta($id){
         $dt = $this->model->verificar($id);
         return $dt[0]['opcion'];
