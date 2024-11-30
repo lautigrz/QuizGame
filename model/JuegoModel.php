@@ -253,7 +253,6 @@ class JuegoModel{
 
        return $this->database->query($query);
         
-    
     }    
   
 }

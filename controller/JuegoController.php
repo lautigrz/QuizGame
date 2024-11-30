@@ -84,7 +84,8 @@ class JuegoController{
         $preguntaActual = $this->obtenerPreguntas();
         $this->guardarPreguntasDeLaPartidaEnCurso($preguntaActual);
         $this->preguntaActualDeLaPartida($preguntaActual);
-        }
+        
+    }
 
 }
 
