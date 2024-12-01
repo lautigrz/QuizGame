@@ -118,6 +118,30 @@
         sessionStorage.setItem('detenerContador', 'true');
     {{/respuesta_incorrecta}}
 </script>
+<script>
+
+ window.addEventListener('keydown', function(event) {
+    if (event.key === "F5") { 
+        event.preventDefault(); 
+        terminarJuego();
+    }
+});
+
+function terminarJuego() {
+
+    const modal = new bootstrap.Modal(document.getElementById('modalFinJuego'), {
+        backdrop: 'static', 
+        keyboard: false      
+    });
+     sessionStorage.setItem('detenerContador', 'true');
+    modal.show();
+}
+
+
+function finalizarJuego() {
+    window.location.href = '/quizgame/juego/finalizarPartida';
+}
+</script>
 
 
 
