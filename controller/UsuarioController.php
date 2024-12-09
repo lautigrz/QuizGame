@@ -42,7 +42,7 @@ class UsuarioController
 }
 
     public function sugerirPregunta(){
-        if($this->existeUsuario()){
+        
         $correcta = $_POST['es_correcta'];
         $opciones = [];
              
@@ -65,15 +65,9 @@ class UsuarioController
 
         $this->model->sugerencia($data);
         header('Location: /quizgame/home/lobby');
-    }
+    
 }
 
-    private function idUsuario(){
-        return $this->existeUsuario() ? $_SESSION['user']['id'] : null;
-      }
-      private function existeUsuario() {
-        return isset($_SESSION['user']);
-    }
   
     private function setDatos(&$data){
         if(!empty($_SESSION['error'])){
@@ -112,6 +106,14 @@ class UsuarioController
 
          return $_SESSION['user']['editor'] == 0 && $_SESSION['user']['admin'] == 0 ? true : false;
      
+    }
+
+    
+    private function idUsuario(){
+        return $this->existeUsuario() ? $_SESSION['user']['id'] : null;
+      }
+      private function existeUsuario() {
+        return isset($_SESSION['user']);
     }
 
 }
