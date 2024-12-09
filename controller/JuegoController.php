@@ -49,6 +49,7 @@ class JuegoController{
         
         $correcta = 0;
         $opcion = $this->obtenerRespuestaCorrecta($pregunta[0]['idPregunta']);
+        
         if($respuesta == $opcion && $tiempo_respuesta < 12){
 
             $this->model->actualizarPuntaje($this->idUsuario());
