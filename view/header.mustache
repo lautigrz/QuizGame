@@ -96,7 +96,7 @@
                         Mi cuenta
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="/quizgame/usuario/mostrarUserView">Perfil</a></li>
+                         {{#esUsuario}} <li><a class="dropdown-item" href="/quizgame/usuario/mostrarUserView">Perfil</a></li>  {{/esUsuario}}
                          {{#editor}}<li><a class="dropdown-item" href="" class="btn btn-success btn-lg mb-3 animated-button w-100" data-bs-toggle="modal" data-bs-target="#nueva-pregunta">Crear pregunta</a></li>{{/editor}}
                         <li><a class="dropdown-item" href="/quizgame/auth/cerrarSesion">Cerrar sesión</a></li>
                     </ul>
