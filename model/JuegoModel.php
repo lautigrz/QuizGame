@@ -249,7 +249,7 @@ class JuegoModel{
         )
         AND COALESCE((d.veces_correctas / d.veces_vista) * 100, 0) " . $dificultad . "
         ORDER BY RAND()
-        LIMIT 1;";
+        LIMIT 1";
 
        return $this->database->query($query);
         
