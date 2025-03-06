@@ -58,7 +58,7 @@
 
 1. Clona el repositorio:  
    ```bash
-   git clone https://github.com/nahuelbiondo/quizagame.git
+   git clone https://github.com/lautigrz/quizgame.git
    ```  
 2. Configura la base de datos:  
    - Importa el archivo `quizgame.sql`.  
