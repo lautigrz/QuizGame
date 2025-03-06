@@ -1,0 +1,1 @@
+La base se debe llamar quizgame y tiene que contener el archivo quizgame.sql
